@@ -1,0 +1,64 @@
+
+{
+  "multiple_choice": [
+    {
+      "question": "What is a benefit of modifying or remixing existing code?",
+      "options": ["It's always faster than writing code from scratch.", "It's not a good practice.", "It's a great trait of any good programmer.", "It only works for simple projects."],
+      "answer": "C",
+      "explanation": "The transcript states that modifying, remixing, or reusing existing code is a great trait of any good programmer."
+    },
+    {
+      "question": "What block can be used to make a sprite move slower or faster in a certain direction?",
+      "options": ["The 'move' block.", "The 'glide' block.", "The 'turn' block.", "The 'say' block."],
+      "answer": "B",
+      "explanation": "The transcript mentions changing the number of seconds in the 'glide' block to affect the character's movement speed."
+    },
+    {
+      "question": "What does Abida say identical twins are an example of?",
+      "options": ["Patterns", "Sprites", "Clones", "Functions"],
+      "answer": "C",
+      "explanation": "Abida and AI.S.H.A discuss clones, and AI.S.H.A uses identical twins as an example of clones in nature."
+    },
+    {
+      "question": "What is the purpose of the 'create clone of myself' block?",
+      "options": ["To hide the original sprite.", "To change the color of the sprite.", "To create multiple copies of a sprite.", "To move the sprite to a random location."],
+      "answer": "C",
+      "explanation": "The transcript explicitly states that this block creates clones of sprites, which are copies that look exactly the same as the original."
+    },
+    {
+      "question": "What programming structure is utilized in the karaoke project for the second stanza of the computer song?",
+      "options": ["Conditional Statement", "Repeat Block", "Nested Loop", "Function Definition"],
+      "answer": "C",
+      "explanation": "The transcript states that a nested loop is needed for the second stanza of the karaoke tune to repeat the 6 notes twice for the two lines of lyrics."
+    },
+    {
+      "question": "What is the purpose of dividing code into modules or functions?",
+      "options": ["To make the code run faster.", "To avoid the complexity of working with large blocks of code.", "To make the code shorter.", "To add comments to the code."],
+      "answer": "B",
+      "explanation": "The transcript explains that functions help to avoid the complexity of working with huge blocks of code by dividing it into smaller, manageable modules."
+    },
+    {
+      "question": "In the geometric pattern drawing project, what determines the angle of rotation for each shape?",
+      "options": ["The length of the shape's sides.", "The number of taps on the screen.", "360 degrees divided by the number of edges.", "A random number generator."],
+      "answer": "C",
+      "explanation": "The transcript states that the angle of rotation is calculated by dividing 360 degrees by the number of edges of the shape."
+    }
+  ],
+  "true_false": [
+    {
+      "question": "The 'forever' block in Scratch can create an unlimited number of clones without any restrictions.",
+      "answer": "False",
+      "explanation": "The transcript mentions that Scratch sets a limit on the number of clones that can be created at a time to prevent glitches and system hangs, even when using the 'forever' block."
+    },
+    {
+      "question": "Functions in coding can help in reusing parts of the code.",
+      "answer": "True",
+      "explanation": "The transcript emphasizes that functions are greatly helpful for modifying and reusing parts of the code."
+    },
+    {
+      "question": "In the 'face filters' project, motion detection is used to trigger automatic costume changes.",
+      "answer": "True",
+      "explanation": "The transcript explains that the 'video motion on sprite' block is used to sense motion and change costumes every 3 seconds."
+    }
+  ]
+}
