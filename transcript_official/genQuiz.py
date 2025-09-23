@@ -95,22 +95,22 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
     # For demonstration, we'll just return the prompt itself.
     return prompt
 
-# Example Usage:
-sample_transcript = """
-Photosynthesis is the process used by plants, algae, and certain bacteria to convert light energy into chemical energy. 
-During photosynthesis, these organisms take in carbon dioxide from the air and water from the soil. Using light energy
-from the sun, they convert these ingredients into glucose, which is a sugar that provides energy for the plant to grow. 
-A byproduct of this process is oxygen, which is released into the atmosphere. This process primarily occurs in the 
-chloroplasts of plant cells, which contain a pigment called chlorophyll. It is chlorophyll that absorbs the light energy
-and gives plants their green color. The overall chemical equation for photosynthesis is 6CO2 + 6H2O + Light Energy → 
-C6H12O6 + 6O2. This process is fundamental to life on Earth as it produces the oxygen we breathe and is the foundation
-of most food chains.
-"""
+# # Example Usage:
+# sample_transcript = """
+# Photosynthesis is the process used by plants, algae, and certain bacteria to convert light energy into chemical energy. 
+# During photosynthesis, these organisms take in carbon dioxide from the air and water from the soil. Using light energy
+# from the sun, they convert these ingredients into glucose, which is a sugar that provides energy for the plant to grow. 
+# A byproduct of this process is oxygen, which is released into the atmosphere. This process primarily occurs in the 
+# chloroplasts of plant cells, which contain a pigment called chlorophyll. It is chlorophyll that absorbs the light energy
+# and gives plants their green color. The overall chemical equation for photosynthesis is 6CO2 + 6H2O + Light Energy → 
+# C6H12O6 + 6O2. This process is fundamental to life on Earth as it produces the oxygen we breathe and is the foundation
+# of most food chains.
+# """
 
 # Generate a quiz for a middle schooler
-generated_prompt = generate_quiz(transcript=sample_transcript, grade="middle", no_of_mcq=2, no_of_tf=1)
+# generated_prompt = generate_quiz(transcript=sample_transcript, grade="middle", no_of_mcq=2, no_of_tf=1)
 
-print(generated_prompt)
+# print(generated_prompt)
 
 # Step 2: generate quiz
 for i in range(1,4):
