@@ -1,0 +1,75 @@
+```json
+{
+  "multiple_choice": [
+    {
+      "question": "What is the main environmental problem discussed in the conversation?",
+      "options": ["Air pollution", "Water pollution", "Global warming", "Deforestation"],
+      "answer": "C",
+      "explanation": "The conversation focuses on global warming, its effects (melting glaciers, extreme weather), and ways to mitigate it.",
+      "bloom_level": "Remembering"
+    },
+    {
+      "question": "What gas is primarily responsible for trapping heat and causing global warming?",
+      "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+      "answer": "C",
+      "explanation": "The transcript explicitly states that carbon dioxide (and other carbon gases) traps heat in the Earth's atmosphere.",
+      "bloom_level": "Remembering"
+    },
+    {
+      "question": "What does 'net-zero emissions' mean?",
+      "options": ["Producing no emissions at all", "Balancing carbon emissions with carbon removal", "Increasing carbon emissions gradually", "Decreasing carbon emissions by half"],
+      "answer": "B",
+      "explanation": "Abida explains that net-zero emissions mean balancing the amount of carbon dioxide released with the amount removed.",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "What is one simple action mentioned to help reduce the effects of climate change?",
+      "options": ["Driving more cars", "Using more electricity", "Throwing away food", "Turning off lights when not in use"],
+      "answer": "D",
+      "explanation": "Abida suggests turning off lights as a way to reduce energy consumption and, consequently, carbon emissions.",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "In the proposed game simulation, how is the 'heat' reduced?",
+      "options": ["By clicking the mouse", "By typing on the keyboard", "By blowing into the microphone", "By shaking the device"],
+      "answer": "C",
+      "explanation": "The transcript describes a game mechanic where blowing into the microphone reduces the fire sprite representing heat.",
+      "bloom_level": "Applying"
+    },
+    {
+      "question": "What is 'natural sequestration'?",
+      "options": ["Planting trees in cities", "Storing carbon underground", "Trees absorbing carbon dioxide and converting it into a stable form", "Reducing carbon emissions from vehicles"],
+      "answer": "C",
+      "explanation": "The conversation defines natural sequestration as trees absorbing carbon dioxide and converting it into a stable form of carbon stored in the ground.",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "Besides natural sequestration, what other method of carbon sequestration is mentioned?",
+      "options": ["Using solar power", "Recycling plastic", "Storing carbon underground", "Eating less meat"],
+      "answer": "C",
+      "explanation": "The transcript mentions both natural and artificial (storing carbon underground) methods of sequestration.",
+      "bloom_level": "Analyzing"
+    }
+  ],
+  "true_false": [
+    {
+      "question": "Global warming is caused solely by car emissions.",
+      "answer": "False",
+      "explanation": "While car emissions contribute, the transcript indicates that harmful gases from industries and other sources also contribute to global warming.",
+      "bloom_level": "Evaluating"
+    },
+    {
+      "question": "Planting trees can help reduce the effects of climate change.",
+      "answer": "True",
+      "explanation": "The transcript explicitly mentions planting trees as a way to absorb carbon dioxide.",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "Charcoal is a stable form of carbon that doesn't easily release into the air.",
+      "answer": "True",
+      "explanation": "The transcript states that the roots of trees can be converted into charcoal, a stable form of carbon.",
+      "bloom_level": "Remembering"
+    }
+  ]
+}
+```

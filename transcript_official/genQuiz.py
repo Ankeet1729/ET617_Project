@@ -87,13 +87,13 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
     """
 
     # Assuming 'genai' is configured elsewhere in your code
-    # model = genai.GenerativeModel("gemini-1.5-flash") # or another suitable model
-    # response = model.generate_content(prompt)
+    model = genai.GenerativeModel("gemini-1.5-flash") # or another suitable model
+    response = model.generate_content(prompt)
     
-    # return response.text
+    return response.text
     
     # For demonstration, we'll just return the prompt itself.
-    return prompt
+    # return prompt
 
 # # Example Usage:
 # sample_transcript = """
@@ -116,8 +116,10 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
 for i in range(1,4):
     with open(f"./column_B_output-{i}.txt", "r", encoding="utf-8") as f:
         combined_transcript = f.read()
+      
+    grade = '3'
 
-    quiz_json = generate_quiz(combined_transcript, no_of_mcq=7, no_of_tf=3)
+    quiz_json = generate_quiz(combined_transcript, grade, no_of_mcq=7, no_of_tf=3)
 
     # Step 3: save quiz
     with open(f"module_quiz-{i}.json", "w", encoding="utf-8") as f:

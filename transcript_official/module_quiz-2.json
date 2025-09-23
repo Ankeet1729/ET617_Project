@@ -1,0 +1,75 @@
+```json
+{
+  "multiple_choice": [
+    {
+      "question": "What is remixing in the context of coding?",
+      "options": ["Creating a completely new program.", "Modifying and reusing existing code.", "Deleting parts of a program.", "Copying code without permission."],
+      "answer": "B",
+      "explanation": "The transcript emphasizes modifying and reusing existing code as a key skill for programmers.  This is explained through the example of remixing a dance party project.",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "What is a 'clone' in Scratch?",
+      "options": ["A new Scratch account.", "An identical copy of a sprite.", "A different type of program.", "A special effect."],
+      "answer": "B",
+      "explanation": "The transcript defines clones as identical copies of sprites, using the example of creating many snowflakes in the snow dance project.",
+      "bloom_level": "Remembering"
+    },
+    {
+      "question": "What blocks in Scratch can be used to make a sprite move?",
+      "options": ["'go to' and 'glide'", "'change x' and 'change y'", "'say' and 'think'", "'wait' and 'repeat'"],
+      "answer": "A",
+      "explanation": "The transcript explicitly mentions using 'go to' and 'glide' blocks to move sprites, as well as discussing 'change y' in relation to the snowflakes.",
+      "bloom_level": "Remembering"
+    },
+    {
+      "question": "In the karaoke project, what is used to organize the code for each stanza?",
+      "options": ["Loops only.", "Nested loops only.", "Functions (or modules).", "Variables only."],
+      "answer": "C",
+      "explanation": "The transcript highlights the use of functions (or modules) to make the karaoke code more organized and easier to manage, particularly for different stanzas of the song.",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "What extension is used in the face filter project?",
+      "options": ["Pen extension.", "Music extension.", "Video sensing extension.", "Sound extension."],
+      "answer": "C",
+      "explanation": "The transcript clearly states that the video sensing extension is used to turn the video on and create the face filter effects.",
+      "bloom_level": "Remembering"
+    },
+    {
+      "question": "How is the angle of rotation calculated for drawing geometric shapes?",
+      "options": ["It's always 90 degrees.", "It's 360 degrees divided by the number of edges.", "It's determined randomly.", "It's a fixed value depending on the shape."],
+      "answer": "B",
+      "explanation": "The transcript explicitly explains the calculation of the angle of rotation as 360 degrees divided by the number of edges for different shapes (triangle, square, hexagon).",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "In the geometric pattern project, what does the 'chooseShape' function do?",
+      "options": ["Draws the shape.", "Determines the color of the pen.", "Selects which shape to draw based on the tap count.", "Plays the sound effect."],
+      "answer": "C",
+      "explanation": "The transcript describes the 'chooseShape' function as automating the selection of the shape to draw based on how many times the screen has been tapped.",
+      "bloom_level": "Applying"
+    }
+  ],
+  "true_false": [
+    {
+      "question": "Identical twins can be considered an example of clones in nature.",
+      "answer": "True",
+      "explanation": "The transcript uses identical twins as an example to illustrate the concept of clones.",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "The 'forever' block in Scratch allows for an unlimited number of clones without any system limitations.",
+      "answer": "False",
+      "explanation": "The transcript clarifies that Scratch limits the number of clones to prevent system errors, despite the 'forever' block's continuous execution.",
+      "bloom_level": "Understanding"
+    },
+    {
+      "question": "Functions make code less modular and harder to work with.",
+      "answer": "False",
+      "explanation": "The transcript argues that functions make code more modular and easier to manage, especially in complex projects like the karaoke example.",
+      "bloom_level": "Evaluating"
+    }
+  ]
+}
+```
