@@ -1,75 +1,119 @@
-```json
+
 {
   "multiple_choice": [
     {
-      "question": "What is an example of an infinite loop mentioned in the transcript?",
-      "options": ["A. Walking a specific number of steps", "B. The Earth rotating around the Sun", "C. A short story with a beginning and end", "D. A single clap"],
-      "answer": "B",
-      "explanation": "The transcript explicitly states that the Earth's rotation around the sun is an example of an infinite loop.",
-      "bloom_level": "Remembering"
+      "question": "What is an example of an 'infinite loop' in nature, as discussed in the video?",
+      "options": [
+        "A cat sleeping",
+        "The Earth rotating around the Sun",
+        "A bird building a nest",
+        "A flower blooming"
+      ],
+      "answer": "The Earth rotating around the Sun",
+      "explanation": "The video explicitly mentions the Earth's rotation around the Sun as an example of an infinite loop.",
+      "bloom_level": "Remembering",
+      "needs_image": false
     },
     {
-      "question": "What does initializing a variable mean?",
-      "options": ["A. Deleting a variable", "B. Giving a value to a variable", "C. Changing the name of a variable", "D. Copying a variable"],
-      "answer": "B",
-      "explanation": "The transcript defines initializing as giving a value to a variable, like setting 'emotion' to 'sad'.",
-      "bloom_level": "Understanding"
+      "question": "In the Scratch program, what block is used to create an infinite loop?",
+      "options": [
+        "Repeat block",
+        "Forever block",
+        "If-then block",
+        "Broadcast block"
+      ],
+      "answer": "Forever block",
+      "explanation": "The video demonstrates the use of the 'forever' block from the 'Control' palette to create an infinite loop in Scratch.",
+      "bloom_level": "Remembering",
+      "needs_image": true
     },
     {
-      "question": "In the Eshal example, what is used to make Eshal's sprite not flip upside down while moving?",
-      "options": ["A. 'move steps' block", "B. 'If on edge, bounce' block", "C. 'set rotation style' block", "D. 'forever' block"],
-      "answer": "C",
-      "explanation": "The transcript explains that the 'set rotation style' block with 'left-right' setting prevents the sprite from flipping.",
-      "bloom_level": "Understanding"
+      "question": "What is the 'emotion' variable used for in the Eshal program?",
+      "options": [
+        "To control the speed of Eshal's movement",
+        "To represent Eshal's changing emotions",
+        "To determine the background color",
+        "To change Eshal's costume"
+      ],
+      "answer": "To represent Eshal's changing emotions",
+      "explanation": "The video explains how the 'emotion' variable stores and changes Eshal's emotional state (sad, angry, balanced, compassionate).",
+      "bloom_level": "Understanding",
+      "needs_image": false
     },
     {
       "question": "What programming technique is used to break down a large problem into smaller, manageable tasks?",
-      "options": ["A. Iteration", "B. Recursion", "C. Decomposition", "D. Abstraction"],
-      "answer": "C",
-      "explanation": "The transcript specifically mentions 'decomposition' as the technique of dividing a larger coding problem into smaller, more manageable tasks.",
-      "bloom_level": "Remembering"
+      "options": [
+        "Iteration",
+        "Recursion",
+        "Decomposition",
+        "Abstraction"
+      ],
+      "answer": "Decomposition",
+      "explanation": "The video specifically mentions 'decomposition' as the technique of dividing a large problem into smaller tasks.",
+      "bloom_level": "Understanding",
+      "needs_image": false
     },
     {
-      "question": "What is a 'broadcast event' used for in the Eshal emotion example?",
-      "options": ["A. To create an infinite loop", "B. To control the speed of a sprite", "C. To communicate between different sprites", "D. To change the color of a sprite"],
-      "answer": "C",
-      "explanation": "Broadcast events are used to trigger actions in other sprites, facilitating communication between them to depict the sequence of Eshal's emotions.",
-      "bloom_level": "Applying"
+      "question": "What does initializing a variable mean?",
+      "options": [
+        "Deleting a variable",
+        "Giving a variable a starting value",
+        "Changing a variable's value",
+        "Hiding a variable"
+      ],
+      "answer": "Giving a variable a starting value",
+      "explanation": "The transcript explains that initializing means giving a starting value to a variable.",
+      "bloom_level": "Understanding",
+      "needs_image": false
     },
     {
-      "question": "Why is a variable used to represent Eshal's emotions?",
-      "options": ["A. To make the code more difficult to understand", "B. Because emotions never change", "C. To easily store and update Eshal's changing emotional state", "D. It's just a stylistic choice"],
-      "answer": "C",
-      "explanation": "The transcript highlights that using a variable simplifies the coding process by storing and updating the dynamic emotional state of Eshal.",
-      "bloom_level": "Analyzing"
+      "question": "In the 'thought-catching' program, what type of machine learning model is used?",
+      "options": [
+        "Image recognition",
+        "Speech recognition",
+        "Text recognition",
+        "Object detection"
+      ],
+      "answer": "Text recognition",
+      "explanation": "The video describes creating a project to recognize text (positive/negative thoughts) using machine learning.",
+      "bloom_level": "Applying",
+      "needs_image": false
     },
     {
-      "question": "What type of output does a boolean condition provide?",
-      "options": ["A. A number between 0 and 100", "B. A sentence", "C. True or False", "D. A color"],
-      "answer": "C",
-      "explanation": "The transcript explicitly states that boolean conditions return either 'true' or 'false'.",
-      "bloom_level": "Understanding"
+      "question": "Why is using an 'else-if' condition more efficient than multiple 'if' conditions in certain situations?",
+      "options": [
+        "It requires less code",
+        "It is faster to execute",
+        "It avoids unnecessary checks",
+        "All of the above"
+      ],
+      "answer": "All of the above",
+      "explanation": "The video explains that 'else-if' avoids redundant checks, leading to less code and faster execution.",
+      "bloom_level": "Analyzing",
+      "needs_image": false
     }
   ],
   "true_false": [
     {
-      "question": "The average person has mostly positive thoughts each day.",
+      "question": "Emotions can be represented as variables in a computer program.",
+      "answer": "True",
+      "explanation": "The video uses Eshal's emotions as a core example of how variables can represent changing states.",
+      "bloom_level": "Understanding",
+      "needs_image": false
+    },
+    {
+      "question": "The 'if on edge, bounce' block in Scratch prevents a sprite from flipping upside down.",
       "answer": "False",
-      "explanation": "The transcript states that 80% of the average person's thoughts are negative.",
-      "bloom_level": "Remembering"
+      "explanation": "The video explicitly states that this block causes the sprite to flip, requiring an additional step to fix it.",
+      "bloom_level": "Understanding",
+      "needs_image": true
     },
     {
-      "question": "Using an 'else-if' condition is more efficient than multiple independent 'if' conditions when only one condition can be true at a time.",
+      "question": "A boolean variable can only have two possible values: true or false.",
       "answer": "True",
-      "explanation": "The transcript explains that using 'else-if' avoids unnecessary checks when only one condition can be true, resulting in more efficient code.",
-      "bloom_level": "Analyzing"
-    },
-    {
-      "question": "Machine learning can be used to classify thoughts without needing to explicitly code for every possible thought.",
-      "answer": "True",
-      "explanation": "The transcript discusses using machine learning to identify patterns in thoughts, avoiding the need to code for every single thought scenario.",
-      "bloom_level": "Evaluating"
+      "explanation": "The video defines a boolean variable and its limited output as true or false.",
+      "bloom_level": "Remembering",
+      "needs_image": false
     }
   ]
 }
-```
