@@ -1,0 +1,20 @@
+[
+  {
+    "id": "module1",
+    "title": "Module 1: Coding Concepts",
+    "description": "Quiz on basic programming and Scratch concepts.",
+    "quiz_url": "/data/module_quiz-1.json"
+  },
+  {
+    "id": "module2",
+    "title": "Module 2: Remixing & Projects",
+    "description": "Quiz on remixing, Scratch projects, and modular code.",
+    "quiz_url": "/data/module_quiz-2.json"
+  },
+  {
+    "id": "module3",
+    "title": "Module 3: Environment & Coding",
+    "description": "Quiz on environmental issues and coding simulations.",
+    "quiz_url": "/data/module_quiz-3.json"
+  }
+]
