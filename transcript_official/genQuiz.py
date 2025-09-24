@@ -69,7 +69,8 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
           "options": ["A", "B", "C", "D"],
           "answer": "B",
           "explanation": "...",
-          "bloom_level": "Remembering"
+          "bloom_level": "Remembering",
+          "concept": "..."
         }}
       ],
       "true_false": [
@@ -82,6 +83,10 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
       ]
     }}
 
+    ### Important points to be noted
+    1.  Do not explicitly mention the word "transcript" in any question or answer or explanation. Think of it like a student sees the video and then directly sees the questions.
+    2.  In one or two words, mention the concept tested from the video/transcript under "concept" in json.
+    3.  Include 60% of the questions from "apply" and above from Bloom's Taxonomy. [i.e. apply, analyze, evaluate, create/synthesize]
     ### Transcript:
     {transcript}
     """
@@ -113,16 +118,33 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
 # print(generated_prompt)
 
 # Step 2: generate quiz
-for i in range(1,4):
-    with open(f"./column_B_output-{i}.txt", "r", encoding="utf-8") as f:
-        combined_transcript = f.read()
-      
-    grade = '3'
+sheet_names = ["L3.C1", "L3.C2", "L3.C3"]
+grade = "3"
 
-    quiz_json = generate_quiz(combined_transcript, grade, no_of_mcq=7, no_of_tf=3)
+for sheet_name in sheet_names:
+    folder_path = sheet_name
+    print(f"\n=== Processing videos from {sheet_name} ===\n")
 
-    # Step 3: save quiz
-    with open(f"module_quiz-{i}.json", "w", encoding="utf-8") as f:
-        f.write(quiz_json)
+    # Process each transcript file inside the folder
+    for file_name in sorted(os.listdir(folder_path)):
+        file_path = os.path.join(folder_path, file_name)
 
-    print(f"\n===== QUIZ GENERATED & SAVED TO module_quiz-{i}.json =====\n")
+        if os.path.isfile(file_path) and file_name.endswith(".txt"):
+            # Read transcript for this video
+            with open(file_path, "r", encoding="utf-8") as f:
+                combined_transcript = f.read().strip()
+
+            if not combined_transcript:
+                continue  # skip empty transcripts
+
+            # Generate quiz for this video
+            quiz_json = generate_quiz(combined_transcript, grade, no_of_mcq=3, no_of_tf=2)
+
+            # Save quiz with same video file base name
+            video_name = os.path.splitext(file_name)[0]  # remove .txt
+            quiz_file = os.path.join(folder_path, f"{video_name}_quiz.json")
+
+            with open(quiz_file, "w", encoding="utf-8") as f:
+                f.write(quiz_json)
+
+            print(f"✔ Quiz saved for {sheet_name}/{video_name} → {video_name}_quiz.json")

@@ -7,7 +7,7 @@
 {
     "multiple_choice": [
         {
-            "question": "According to the transcript, what is an 'infinite loop' in programming?",
+            "question": "According to the transcript, what is an 'infinite loop' in programming?",  # Do not use transcript
             "options": [
                 "A loop that runs a specific number of times.",
                 "B A loop that runs continuously until stopped.",
@@ -28,7 +28,7 @@
             "question": "In the Scratch program about Eshal's emotions, what programming concept is used to represent the changing emotional states?",
             "options": [
                 "A Infinite loops",
-                "B Broadcast events",
+                "B Broadcast events",  # simple language like "variables"
                 "C If-else statements",
                 "D Boolean logic"
             ],
