@@ -92,7 +92,7 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
     """
 
     # Assuming 'genai' is configured elsewhere in your code
-    model = genai.GenerativeModel("gemini-1.5-flash") # or another suitable model
+    model = genai.GenerativeModel("gemini-2.5-flash") # or another suitable model
     response = model.generate_content(prompt)
     
     return response.text
