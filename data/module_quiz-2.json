@@ -1,74 +1,120 @@
 
+
 {
   "multiple_choice": [
     {
-      "question": "What is remixing in the context of coding?",
-      "options": ["Creating a completely new program.", "Modifying and reusing existing code.", "Deleting parts of a program.", "Copying code without permission."],
-      "answer": "B",
-      "explanation": "The transcript emphasizes modifying and reusing existing code as a key skill for programmers.  This is explained through the example of remixing a dance party project.",
-      "bloom_level": "Understanding"
+      "question": "What is remixing in the context of coding, as explained in the transcript?",
+      "options": [
+        "Creating entirely new code from scratch.",
+        "Modifying and reusing existing code.",
+        "Copying code without any changes.",
+        "Deleting parts of existing code."
+      ],
+      "answer": "Modifying and reusing existing code.",
+      "explanation": "The transcript explicitly defines remixing as modifying, remixing, or re-using already existing code.",
+      "bloom_level": "Understanding",
+      "needs_image": false
     },
     {
-      "question": "What is a 'clone' in Scratch?",
-      "options": ["A new Scratch account.", "An identical copy of a sprite.", "A different type of program.", "A special effect."],
-      "answer": "B",
-      "explanation": "The transcript defines clones as identical copies of sprites, using the example of creating many snowflakes in the snow dance project.",
-      "bloom_level": "Remembering"
+      "question": "What tool is used in the transcript to create multiple identical sprites?",
+      "options": [
+        "The 'copy' command.",
+        "The 'paste' command.",
+        "The 'clone' function.",
+        "The 'duplicate' function."
+      ],
+      "answer": "The 'clone' function.",
+      "explanation": "The transcript describes using the 'create clone of myself' block to create many identical snowflakes.",
+      "bloom_level": "Remembering",
+      "needs_image": false
     },
     {
-      "question": "What blocks in Scratch can be used to make a sprite move?",
-      "options": ["'go to' and 'glide'", "'change x' and 'change y'", "'say' and 'think'", "'wait' and 'repeat'"],
-      "answer": "A",
-      "explanation": "The transcript explicitly mentions using 'go to' and 'glide' blocks to move sprites, as well as discussing 'change y' in relation to the snowflakes.",
-      "bloom_level": "Remembering"
+      "question": "What is a 'costume' in the Scratch programming environment, based on the transcript?",
+      "options": [
+        "A type of sound effect.",
+        "A type of background.",
+        "A different appearance for a sprite.",
+        "A programming block."
+      ],
+      "answer": "A different appearance for a sprite.",
+      "explanation": "The transcript mentions using pictures in the 'costumes' tab to create animation and change the appearance of sprites.",
+      "bloom_level": "Understanding",
+      "needs_image": false
     },
     {
-      "question": "In the karaoke project, what is used to organize the code for each stanza?",
-      "options": ["Loops only.", "Nested loops only.", "Functions (or modules).", "Variables only."],
-      "answer": "C",
-      "explanation": "The transcript highlights the use of functions (or modules) to make the karaoke code more organized and easier to manage, particularly for different stanzas of the song.",
-      "bloom_level": "Understanding"
+      "question": "According to Abida, what is the purpose of using functions (or modules) in coding?",
+      "options": [
+        "To make code more difficult to read.",
+        "To make the code longer and more complex.",
+        "To make the code more modular and easier to work with.",
+        "To limit the reusability of code segments."
+      ],
+      "answer": "To make the code more modular and easier to work with.",
+      "explanation": "The transcript highlights functions as a way to divide code into manageable parts, making it easier to modify and reuse.",
+      "bloom_level": "Understanding",
+      "needs_image": false
     },
     {
-      "question": "What extension is used in the face filter project?",
-      "options": ["Pen extension.", "Music extension.", "Video sensing extension.", "Sound extension."],
-      "answer": "C",
-      "explanation": "The transcript clearly states that the video sensing extension is used to turn the video on and create the face filter effects.",
-      "bloom_level": "Remembering"
+      "question": "What is one example of a project mentioned in the transcript that utilizes a phone's camera?",
+      "options": [
+        "The snow dance project.",
+        "The geometric patterns project.",
+        "The bubble bursting project.",
+        "The karaoke project."
+      ],
+      "answer": "The bubble bursting project.",
+      "explanation": "The transcript explicitly mentions a bubble bursting project that uses the phone camera to sense hand movements.",
+      "bloom_level": "Remembering",
+      "needs_image": false
     },
     {
-      "question": "How is the angle of rotation calculated for drawing geometric shapes?",
-      "options": ["It's always 90 degrees.", "It's 360 degrees divided by the number of edges.", "It's determined randomly.", "It's a fixed value depending on the shape."],
-      "answer": "B",
-      "explanation": "The transcript explicitly explains the calculation of the angle of rotation as 360 degrees divided by the number of edges for different shapes (triangle, square, hexagon).",
-      "bloom_level": "Understanding"
+      "question": "In the geometric patterns project, what determines the angle of rotation for a shape?",
+      "options": [
+        "The number of sides of the shape.",
+        "The length of the sides of the shape.",
+        "The color of the shape.",
+        "The position of the shape on the screen."
+      ],
+      "answer": "The number of sides of the shape.",
+      "explanation": "The transcript states that the angle of rotation is calculated as 360 degrees divided by the number of edges (sides) of the shape.",
+      "bloom_level": "Applying",
+      "needs_image": false
     },
     {
-      "question": "In the geometric pattern project, what does the 'chooseShape' function do?",
-      "options": ["Draws the shape.", "Determines the color of the pen.", "Selects which shape to draw based on the tap count.", "Plays the sound effect."],
-      "answer": "C",
-      "explanation": "The transcript describes the 'chooseShape' function as automating the selection of the shape to draw based on how many times the screen has been tapped.",
-      "bloom_level": "Applying"
+      "question": "In the face filter project, what Scratch extension is used to access the video feed?",
+      "options": [
+        "The sound extension.",
+        "The pen extension.",
+        "The video sensing extension.",
+        "The music extension."
+      ],
+      "answer": "The video sensing extension.",
+      "explanation": "The transcript explains that the video sensing extension is used to turn the video on and sense motion for the face filter effects.",
+      "bloom_level": "Remembering",
+      "needs_image": false
     }
   ],
   "true_false": [
     {
-      "question": "Identical twins can be considered an example of clones in nature.",
+      "question": "Identical twins can be considered as clones in a biological sense.",
       "answer": "True",
-      "explanation": "The transcript uses identical twins as an example to illustrate the concept of clones.",
-      "bloom_level": "Understanding"
+      "explanation": "The transcript uses identical twins as an example of clones in nature.",
+      "bloom_level": "Understanding",
+      "needs_image": true
     },
     {
-      "question": "The 'forever' block in Scratch allows for an unlimited number of clones without any system limitations.",
+      "question": "The 'forever' block in Scratch creates an unlimited number of clones without any limitations.",
       "answer": "False",
-      "explanation": "The transcript clarifies that Scratch limits the number of clones to prevent system errors, despite the 'forever' block's continuous execution.",
-      "bloom_level": "Understanding"
+      "explanation": "The transcript clarifies that Scratch limits the number of clones to prevent system errors.",
+      "bloom_level": "Understanding",
+      "needs_image": false
     },
     {
-      "question": "Functions make code less modular and harder to work with.",
+      "question": "The transcript suggests that functions or modules are helpful only for experienced programmers.",
       "answer": "False",
-      "explanation": "The transcript argues that functions make code more modular and easier to manage, especially in complex projects like the karaoke example.",
-      "bloom_level": "Evaluating"
+      "explanation": "The transcript emphasizes the use of functions to simplify and modularize code for anyone, even beginners.",
+      "bloom_level": "Evaluating",
+      "needs_image": false
     }
   ]
 }

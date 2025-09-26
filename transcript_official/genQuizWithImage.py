@@ -1,170 +1,119 @@
 import os
 import json
-import google.generativeai as genai
+import requests
+import time
 from dotenv import load_dotenv
 from PIL import Image
 import io
 
-# --- 1. Setup and Configuration ---
-# Load environment variables from a .env file
+# --- 1. Setup ---
 load_dotenv()
-api_key = os.getenv("api_key")
+huggingface_token = os.getenv("HF_TOKEN")
 
-# Ensure the API key is available
-if not api_key:
-    raise ValueError("API key not found. Please set the 'api_key' in your .env file.")
+if not huggingface_token:
+    raise ValueError("HF_TOKEN not found. Please set it in your .env file.")
 
-genai.configure(api_key=api_key)
+if not os.path.exists("quiz_images"):
+    os.makedirs("quiz_images")
 
-# Create a directory to save generated images
-if not os.path.exists("images"):
-    os.makedirs("images")
-
-# --- 2. Quiz Generation Function (Your Original Prompt) ---
-
-def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
+# --- 2. Updated Image Generation Function for Hugging Face API ---
+def generate_image_for_question(question_text: str, image_path: str, retries=3, delay=20):
     """
-    Generates a quiz from a transcript by calling the Gemini API.
+    Generates an image using the Hugging Face Inference API with a retry mechanism.
+    Resizes the image to 400x400 pixels for consistency.
     """
-    prompt = f"""
-    You are an expert in educational psychology and curriculum design. 
-    Your task is to generate a pedagogically sound quiz from the provided learning material,
-    keeping the learner's cognitive development in mind.
+    api_url = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
+    headers = {"Authorization": f"Bearer {huggingface_token}"}
+    prompt = (
+        "A simple, clear, educational illustration for a quiz, 400x400 pixels, "
+        f"visually representing the core concept: '{question_text}'. "
+        "Style: clean, illustrative, no text, high contrast for clarity."
+    )
+    payload = {"inputs": prompt}
 
-    ### Input Parameters
-    1. Grade Level: {grade}
-    2. Transcript: Provided at the end.
+    response = None  # Define response here to access it in the general except block
+    for i in range(retries):
+        try:
+            print(f"   -> Calling Hugging Face API... (Attempt {i+1}/{retries})")
+            response = requests.post(api_url, headers=headers, json=payload, timeout=120)
 
-    ### Instructions
-    1.  Read the entire transcript to understand the core concepts.
-    2.  Generate a quiz with exactly:
-        - {no_of_mcq} Multiple Choice Questions (4 options each, one correct).
-        - {no_of_tf} True/False Questions.
-    3.  **Grade-Level Adaptation (Based on NEP 5+3+3+4 System):**
-        - **foundational (Grades 1-2):** Use very simple language. Focus on "Remembering."
-        - **preparatory (Grades 3-5):** Use simple, clear language. Focus on "Understanding."
-        - **middle (Grades 6-8):** Use standard terminology. Focus on "Application" and "Analysis."
-        - **secondary (Grades 9-12):** Use precise, academic language. Focus on "Analysis" and "Evaluation."
-    4.  **Cognitive Diversity (Based on Bloom's Taxonomy):**
-        - Structure the quiz to have a gradual increase in cognitive demand from LOTS to HOTS.
-        - Distribute questions across these levels: Remembering, Understanding, Applying, Analyzing, Evaluating.
-    5.  **Question Quality:**
-        - Ensure questions are unambiguous and directly based on the transcript's terminology.
-    6.  Provide a concise explanation for each answer.
+            if response.status_code == 503:
+                try:
+                    estimated_time = response.json().get("estimated_time", delay)
+                    print(f"   ⚠️ Model is loading, waiting for {estimated_time:.2f} seconds...")
+                    time.sleep(estimated_time)
+                except ValueError:  # Fallback for JSON parsing failure
+                    print(f"   ⚠️ Failed to parse 503 response, waiting {delay} seconds...")
+                    time.sleep(delay)
+                continue
 
-    ### Output Format (Strict JSON)
-    {{
-      "multiple_choice": [
-        {{
-          "question": "...",
-          "options": ["A", "B", "C", "D"],
-          "answer": "B",
-          "explanation": "...",
-          "bloom_level": "Remembering"
-        }}
-      ],
-      "true_false": [
-        {{
-          "question": "...",
-          "answer": "True",
-          "explanation": "...",
-          "bloom_level": "Understanding"
-        }}
-      ]
-    }}
+            response.raise_for_status()
 
-    ### Transcript:
-    {transcript}
-    """
-    
-    # Initialize the Gemini model for text generation
-    model = genai.GenerativeModel("gemini-1.5-flash-latest")
-    response = model.generate_content(prompt)
-    
-    # Clean up the response to ensure it's valid JSON
-    cleaned_response = response.text.strip().replace("```json", "").replace("```", "")
-    return cleaned_response
+            # Check if content is empty
+            if not response.content or len(response.content) < 100:
+                raise ValueError("Empty or invalid image data received")
 
-# --- 3. Image Generation Function for Quiz Options ---
+            # Use Pillow to open, resize to 400x400, and save
+            image = Image.open(io.BytesIO(response.content)).convert("RGB")
+            # Use Image.LANCZOS for compatibility with older Pillow versions
+            image = image.resize((400, 400), Image.LANCZOS)
+            image.save(image_path, "PNG", optimize=True)
+            
+            # Verify file was saved
+            if os.path.exists(image_path) and os.path.getsize(image_path) > 0:
+                print(f"   ✅ Image saved to {image_path}")
+                return image_path
+            else:
+                raise ValueError("Failed to save image file")
 
-def generate_image_for_option(option_text: str, image_path: str):
-    """
-    Generates an image for a given text option using a dedicated image model.
-    """
+        except requests.exceptions.RequestException as req_err:
+            print(f"   ❌ Request error occurred: {req_err}")
+            if response is not None:
+                print(f"   Response: {response.text[:200]}...")
+            if i == retries - 1:
+                break
+        except Exception as e:
+            print(f"   ❌ An unexpected error occurred: {e}")
+            if response is not None:
+                print(f"   Response: {response.text[:200]}...")
+
+        # Small delay between retries (except for 503 which is handled separately)
+        if i < retries - 1:
+            time.sleep(delay)
+
+    print("   ❌ Failed to generate image after all retries.")
+    return None
+
+# --- 3. Main Workflow ---
+def add_images_to_quiz(input_json_path: str, output_json_path: str):
     try:
-        # Use the dedicated model for image generation
-        image_model = genai.GenerativeModel('gemini-2.5-flash-image-preview')
-        
-        # Create a specific prompt for the image
-        image_prompt = f"A simple, clear, small icon-style image representing the concept: '{option_text}'"
-        
-        # Generate the image content
-        response = image_model.generate_content(image_prompt)
-        
-        # Access the image data from the response
-        image_data = response.images[0]._blob
-        
-        # Save the image
-        image = Image.open(io.BytesIO(image_data))
-        image.save(image_path)
-        print(f"   -> Image saved to {image_path}")
-        return image_path
-    except Exception as e:
-        print(f"   -> Failed to generate image for '{option_text}'. Error: {e}")
-        return None
+        with open(input_json_path, "r", encoding="utf-8") as f:
+            quiz_data = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: Input file not found: {input_json_path}")
+        return
 
-# --- 4. Main Execution Flow ---
+    print(f"\nProcessing {input_json_path} to add images...")
+    for q_type in ["multiple_choice", "true_false"]:
+        for i, question in enumerate(quiz_data.get(q_type, [])):
+            if question.get("needs_image"):
+                print(f" - Generating image for: '{question['question'][:60]}...'")
+                image_filename = f"module_{input_json_path[-6]}_{q_type}_q{i+1}.png"
+                image_filepath = os.path.join("quiz_images", image_filename)
+                generated_path = generate_image_for_question(question['question'], image_filepath)
+                question['image_path'] = generated_path
+                
+                # Pause to respect HF free tier rate limits (adjust as needed; ~30-60s recommended)
+                if generated_path:
+                    print("   ...Pausing for 60 seconds to respect rate limits...")
+                    time.sleep(60)
+
+    with open(output_json_path, "w", encoding="utf-8") as f:
+        json.dump(quiz_data, f, indent=4)
+    print(f"\n✨ Success! Updated quiz saved to {output_json_path}")
 
 if __name__ == "__main__":
-    # Loop through your transcript files
-    for i in range(1, 2):
-        transcript_file = f"./column_B_output-{i}.txt"
+    for i in range(1, 4):
+        input_file = f"module_quiz-{i}.json"
         output_file = f"module_quiz_with_images-{i}.json"
-        
-        print(f"\n===== PROCESSING MODULE {i} =====\n")
-        
-        # Step 1: Read the transcript
-        try:
-            with open(transcript_file, "r", encoding="utf-8") as f:
-                combined_transcript = f.read()
-        except FileNotFoundError:
-            print(f"Error: Transcript file not found: {transcript_file}. Skipping.")
-            continue
-
-        # Step 2: Generate the initial quiz JSON
-        print(f"1. Generating quiz from {transcript_file}...")
-        quiz_json_str = generate_quiz(combined_transcript, grade="middle", no_of_mcq=7, no_of_tf=3)
-        
-        try:
-            quiz_data = json.loads(quiz_json_str)
-        except json.JSONDecodeError:
-            print(f"Error: Failed to parse the quiz JSON for module {i}. Skipping.")
-            continue
-        
-        # Step 3: Chain to image generation for each MCQ option
-        print("\n2. Generating images for MCQ options...")
-        mcq_list = quiz_data.get("multiple_choice", [])
-        
-        for q_idx, question in enumerate(mcq_list):
-            print(f" - Processing Question {q_idx + 1}: '{question['question'][:40]}...'")
-            # We will store image paths in a new key
-            question["option_images"] = {}
-            options = question.get("options", [])
-            
-            for opt_idx, option_text in enumerate(options):
-                # Create a unique, descriptive path for each image
-                image_filename = f"module-{i}_q-{q_idx+1}_opt-{opt_idx+1}.png"
-                image_filepath = os.path.join("images", image_filename)
-                
-                # Generate the image and get its path
-                generated_path = generate_image_for_option(option_text, image_filepath)
-                
-                # Add the path to our data ('None' if failed)
-                question["option_images"][option_text] = generated_path
-        
-        # Step 4: Save the final quiz with image paths
-        print(f"\n3. Saving final quiz with image paths to {output_file}...")
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(quiz_data, f, indent=4)
-            
-        print(f"\n===== MODULE {i} COMPLETE =====\n")
+        add_images_to_quiz(input_file, output_file)

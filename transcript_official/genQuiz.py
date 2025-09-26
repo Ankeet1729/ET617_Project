@@ -60,6 +60,8 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
         - Ensure questions are unambiguous and directly based on the transcript's terminology.
         - The goal is to test comprehension and critical thinking, not just rote memorization.
     6.  Provide a concise explanation for each answer, referencing the core concept from the transcript.
+    7. No need to put A., B., C., D. before options in MCQs output.
+    8. Also have a field called "needs_image" in each question object, set it to true if the question would benefit from an accompanying image, else false.
 
     ### Output Format (Strict JSON)
     {{
@@ -70,7 +72,8 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
           "answer": "B",
           "explanation": "...",
           "bloom_level": "Remembering",
-          "concept": "..."
+          "concept": "...", 
+          "needs_image": false
         }}
       ],
       "true_false": [
@@ -78,7 +81,8 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
           "question": "...",
           "answer": "True",
           "explanation": "...",
-          "bloom_level": "Understanding"
+          "bloom_level": "Understanding",
+          "needs_image": true
         }}
       ]
     }}
@@ -95,7 +99,7 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
     model = genai.GenerativeModel("gemini-2.5-flash") # or another suitable model
     response = model.generate_content(prompt)
     
-    return response.text
+    return response.text[7:-4]
     
     # For demonstration, we'll just return the prompt itself.
     # return prompt
