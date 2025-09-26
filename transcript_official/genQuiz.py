@@ -82,6 +82,7 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
           "answer": "True",
           "explanation": "...",
           "bloom_level": "Understanding",
+          "concept": "...",
           "needs_image": true
         }}
       ]
