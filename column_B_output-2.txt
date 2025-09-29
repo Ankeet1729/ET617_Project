@@ -1,0 +1,73 @@
+Script
+Abida: Modifying, remixing or re-using already existing code is a great trait of any good programmer besides coding for projects from the beginning. Let's look at an existing code of a dance party at https://scratch.mit.edu/projects/10128067. 
+We could change the sprites to any sprite of our choice from the sprite library and the backdrop library. Let's add some pictures and sound of our choice and get started with the dance party. You want to join with me AI.S.H.A?
+AI.S.H.A: Yes indeed. Abida, do you know I have been dreaming about dancing in the snow for a long time. Do you think we could code for a snow dance?
+Abida: Yes ofcourse. All we need to do is to change our sprites and background and code for some snow since we already have the code for the dance.
+Now AI.S.H.A, I want some pictures of you doing some dance moves so I could patch it up together to code for an animation to make you dance in the snow. 
+AI.S.H.A: There you go Abida. 
+Abida: Thanks AI.S.H.A. That was fast! You see these pictures in the costumes tab when put together will make it look like you are dancing. We will use the same code in the existing project to make you dance. But let's try changing the number of seconds in the glide block to see the character move slower or faster in each direction. 
+The same way, we could code for the other character too. Oh, we have Bahir the reindeer. Do you remember him? Let's make him dance with you too. 
+
+Cool. We have got you dancing now. But we are missing the snow, right? Let's get coding for the snow.
+(Show Abida when she says this) 
+Abida: Firstly, not every snowflake looks similar in size. We will create snowflakes of tow different sizes using the costumes tab and create as many clones of these snowflakes.
+AI.S.H.A: So clones are sprites that look identical right? This is interesting - nature has so many clones then. The leaves and flowers in a tree are clones. Even identical twins are clones. Our ears, eyes and hands are clones too. 
+Abida: Exactly AI.S.H.A. Look at this piece of papier-mâché. It has this pattern cloned all over it. (Abida shows examples of papier-mâché which has patterns cloned over it) or (can we interview a papier-mâché artist and let him talk about the process of making patterns and clones of it?) 
+Next, it's not just going to be three snowflakes. Do you know that we could create clones of sprites who look exactly the same as the original sprite? This feature will help us create hundreds of snowflakes at the same time. Let me show you how.
+The original snowflake sprite is placed at the top corner of the screen using the 'go to x:2 y:152 block as it glides to the bottom. 
+We hide this sprite and use the forever block to create as many clones of the sprite as possible using the 'create clone of myself' block from the control section. (Although the forever block runs the code forever, scratch sets a limit to the number of clones that will be created at a time to avoid glitches and hangs of the system)
+When the clones are created, we use the 'when I start as a clone' event block and make the clone visible using the 'show' block. When the clones are created, they start from a specific x and y location and glide to the bottom of the screen to a random location within the range x :(-238 to 235) and y: (-87 to -149). Each clone switches it's costume between the two available costumes of snowflakes. We also have an option to set a ghost effect for the snowflake to make it look more natural. AI.S.H.A: Can we use the 'change y block' to make the snowflake move down instead of the glide block? 
+Abida: Great question AI.S.H.A. Yes the change y block will also make the snowflake move down. In this case we will need a repeat block which will keep changing the y value of the snowflake as many times until the snowflake reaches the ground. There we go AI.S.H.A, we got you dancing in the snow. 
+There's another project which you might want to try from the scratch website too - the bubble bursting. You could find this at https://scratch.mit.edu/projects/10128119/
+This projects uses your phone camera to sense your hand movements to burst the bubbles. Do give it a try! (Note: This project can only be introduced when functions are introduced earlier)
+Abida: (Facing the students) - Now it's your turn! Have you been dreaming about doing something for a long time? Try coding for it and make it go real!  And remember that you could find inspiration from the existing projects in scratch in the projects section and remix the code to create your own version. Have fun dreaming and creating!
+
+2. Can we create some music aswell using our code? Let's try!
+AISHA do you remember the computer song that we wrote together the other day? What if we could code for a Karaoke for this song? 
+3. AISHA: Oh how could I forget the computer song!
+First we need to create some karaoke tunes for this song. Let's see how to do this. First we will create music for stanza 1.
+There are 12 beats in first stanza.
+Then we will create music for stanza2. Stanza 2 has 6 notes repeating twice for 2 lines. These 2 lines repeat together one more time. In this case, we will need a nested loop for the second stanza, like the one shown below
+We will then proceed with the last stanza same way
+Wait, to test if the second stanza is working properly, we should have to wait for the first stanza to get over. And for the third, we need to wait for both second and first to complete. Can we do something to test for the 2nd stanza without having to wait for the previous one? Yes we have a way to divide this code into modules or functions to avoid the complexity of working with huge blocks of code. In this case, we can write different functions for each stanza and call that function separately to test our code. Just like this.
+Once we defined all three functions to play music for the three stanzas, we define another function called 'play music' which calls for functions stanza1, stanza2 and stanza3 music. To call a function we use the function name block shown in pink.  We then use a repeat block to repeat the entire music twice resting for 0.5 beats in between.
+See how functions make the code modular and easy to work with? Now let's say if somebody else wants to add more lyrics to the song and create karaoke for the same. They could perhaps find a way to reuse the tones and notes that we have created and the functions that we have written are greatly helping for modifying and reusing parts of the code. 
+Now that we have music, we want to guide people to sing along just like in the karaokes. Let's introduce an arrow sprite for this and make it move in sync with the notes.
+Now that we have learnt a easy way to code and check for each of our music stanza's we can build our code for the arrow movement the same way. One stanza at a time and one separate function for each stanza like this and call a single function for moving the arrow for all three stanzas.
+Up next is another interesting visualization. Let's consider that we are in a fairy tale world for now and let's say that for every stanza or line that is repeated, two flowers bloom in the garden right next to each other. Let's code for this now.
+Wow, that was intense. We wrote a program to create a karaoke and visualize loops and nested loops by coding using many functions or modules. Let's code for a simple yet fun project now - face filters. Let's see how this works.
+I'm first going to draw some accessories to be able to use them in my face filter project. Let's draw some cool eye glasses first. Then a jokers hat, a jungle hat and moustache and some beautiful jewelry.
+Now that we got all our costumes drawn, we are going to use the video sensing extension from scratch to turn the video on. When the green flag is clicked, the video is turned on. Now all we have to do is try our first face effect. Let's see. But we have a problem, we want to try all the face effects we made. How could we do that? 
+It's time to recall our past lesson on events and actions. 
+We want these costumes to change automatically by sensing our motion. We can use the video motion on sprite block to sense the video motion if it's greater than 50. If so we keep changing costume every 3 seconds.  To do this get the forever block from the control palette and use next costume block to change the costume waiting for  3 seconds.
+Part 1: Abida: In the past videos, we wrote algorithms to draw geometric shapes like squares. How about we write some code now to draw different geometric patterns just as we tap on the screen? We will create three shapes - triangle, square and hexagon. Let's work on these shapes one at a time. 
+
+To draw a shape, we need the length of each line of the shape and the angle of rotation. The angle of rotation is 360 degrees/no of edges. If it's a square, it's 360/4. If it's a triangle, it's 360/3. For a hexagon, it is 360/6. Alright, we know how to draw these shapes. But how do we draw a different shape everytime we tap on the screen? Just like this? 
+Triangle Square Hexagon 
+Triangle Square Hexagon 
+
+And how do we automate this process through our code such that if someone else wants to draw a different shape, they can still achieve this with our code with minor changes. Let's see how?  
+
+Part 2: That was fun. Now, what if we could summon some magic patterns when we tap on the screen using the same logic? This time, may be a 
+snowflake, a honeycomb, Kite (saw it out loud)
+snowflake, a honeycomb, Kite (just do actions)
+snowflake, a honeycomb, Kite (just do actions)
+Let's create some patterns with shapes part 1 (Start to 1.17s) Let's first try drawing a square by replacing the sprite. We will use the pen extension to draw our shapes. When the pen is down, we draw the shape (30 s)
+(1.17 to 6.14s) As we discussed, we could draw different shapes by changing the edge value. (30s)
+(6.08 to 6.58s) Instead of changing these values every single time, what if we could automate this process. First, I want to be able to draw any shape by re-using the logic that we just wrote. Writing functions are a great way to re-use our code. So let's write a function called drawShape. What if I want to draw a shape of any length? In this case, we can create a function with parameter or input called 'length' and define the function. (30s)
+
+(7.24s to 11.08s) But wait, we didn't mention when to draw a square or a triangle or hexagon when we tap on the screen. To do this, let's create another function called chooseShape which automates this process. This function defines that if it's the first tap, i.e if count variable =1, then we draw a triangle, 2 a square and 3 a hexagon. Since we will keep up incrementing the count value, a count of four will reset to 1 and set the edge as 3  (30s)
+
+
+(11.41s to 15.15s) Now when the green flag is clicked, we erase everything from the last run, we initialize the count to 1 and use a forever block to check for a full tap, i.e when the mouse or your finger touches the screen, the shape is drawn. We also call the choose shape function we defined before to choose the shape to draw and play a pop sound as we draw. Let's check if it works so far. We have a problem. 
+
+(15.16s to 16.50s) We need to make the pen go up after drawing every shape until the next tap. Let's fix this. That works! 
+
+(16.51s to end) But we still don't get different shapes. Let's see what we are missing. There we go, this is because we haven't changed the count variable by 1. Also let's set the pen color and try tapping our shapes. 
+
+ 
+When green flag is clicked, we first choose the shape, pen down, wait for a full mouse click or a tap and go to the mouse pointer. The next step is to call the draw shape function and then we are done. 
+We need these patterns to appear only when we tap on the screen. And how do we know which pattern should be drawn upon tapping on the screen. We want these patterns to appear exactly in the same order everytime. First the triangle, then the square and then on the third tap we want the hexagon. How could we achieve this? We can write a function which initially chooses which shape to draw. If it's the first time we are tapping on the stage, we draw a triangle, second time square and so on. And if the count reaches 4, we reset the count and start drawing a triangle again.
+Let's try and create some magic patterns with the same logic. First we create a function to choose the pattern based on the tap count.
+We then define functions to specify the characteristic of each magic pattern. For example, a value of (4,150, 30) for the (edge, angle, length). If it's the first time the screen is tapped or at the first instance of the mouse click, a snowflake should be summoned. We set the pen color to be white. Similarly we define other two functions honeycomb and kite.  
+Once we choose the shape to draw and define the characteristics of a pattern, we need to draw the pattern. So we define a draw pattern function which will draw the shape.  We create clones corresponding to number of edges and draw a pattern of specific length. And then we create clones for each clone turning at specific angles and drawing patterns, extending this for 5 levels. After every pattern is drawn, we delete the clones for that pattern to make sure we don't run out of clones in scratch. There we go, let's check this out! We got a beautiful pattern of snowflake, honeycomb and kite. And we could repeat this forever to create something that looks like a wallpaper.

@@ -1,0 +1,61 @@
+{
+  "question": "In Scratch, the 'forever' block is used to create a new sprite.",
+  "answer": "False",
+  "explanation": "The 'forever' block is used to repeat a block of code indefinitely, but it is not used to create a new sprite.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+}
+
+{
+  "question": "In the dance party project, the 'create clone of myself' block is used to create a single snowflake sprite.",
+  "answer": "False",
+  "explanation": "The 'create clone of myself' block is used to create multiple copies of a sprite, allowing for the creation of multiple snowflakes in the dance party project.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "Is it possible to reuse code in programming by breaking it down into smaller functions?",
+  "answer": "True",
+  "explanation": "Yes, breaking down code into smaller functions makes it easier to reuse and modify, which is a key principle of programming.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+}
+
+{
+  "question": "Does using a repeat block in programming make the code more complex?",
+  "answer": "False",
+  "explanation": "A repeat block in programming actually makes the code more efficient and easier to read, not more complex.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "What happens to the count variable when it reaches 4?",
+  "options": [
+    "It increments to 5",
+    "It resets to 1",
+    "It stays the same",
+    "It decreases to 3"
+  ],
+  "answer": "B",
+  "explanation": "In the provided code, when the count variable reaches 4, it resets to 1, allowing the pattern to repeat.",
+  "bloom_level": "Remembering",
+  "needs_image": false
+}
+
+{
+  "question": "Is the 'chooseShape' function used to draw a shape of any length?",
+  "answer": "False",
+  "explanation": "The 'chooseShape' function is used to automate the process of drawing different shapes based on the count variable, but it does not determine the length of the shape.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "Does the 'drawShape' function draw a shape of any length?",
+  "answer": "True",
+  "explanation": "The 'drawShape' function can draw a shape of any length, as it takes the 'length' parameter as input.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}

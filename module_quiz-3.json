@@ -1,0 +1,29 @@
+{
+  "question": "What is the term for achieving net-zero emissions?",
+  "options": [
+    "A. Carbon sequestration",
+    "B. Climate change mitigation",
+    "C. Net-zero emissions",
+    "D. Sustainable development"
+  ],
+  "answer": "C",
+  "explanation": "Net-zero emissions refers to achieving a balance between the amount of greenhouse gases released into the atmosphere and the amount removed, resulting in no net increase in emissions.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+}
+
+{
+  "question": "Trees absorb carbon dioxide from the atmosphere to make their food.",
+  "answer": "True",
+  "explanation": "Trees absorb carbon dioxide from the atmosphere through photosynthesis, converting it into glucose and oxygen.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+}
+
+{
+  "question": "Carbon sequestration is an artificial way of storing carbon underground.",
+  "answer": "True",
+  "explanation": "Carbon sequestration refers to the process of capturing and storing carbon dioxide from the atmosphere, either naturally through trees and other plants or artificially through technologies like carbon capture and storage.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}

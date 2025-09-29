@@ -1,0 +1,165 @@
+{
+  "question": "What is the purpose of using the 'set rotation style' block in the Scratch code?",
+  "options": [
+    "A) To make Eshal walk faster",
+    "B) To make Eshal flip upside down",
+    "C) To correct the rotation style of Eshal",
+    "D) To change the color of Eshal"
+  ],
+  "answer": "C",
+  "explanation": "The 'set rotation style' block is used to correct the rotation style of Eshal, preventing him from flipping upside down when bouncing off the edge.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+}
+
+{
+  "question": "Infinite loops can only be used for destructive purposes.",
+  "answer": "False",
+  "explanation": "Infinite loops can be used for various purposes, including creative and constructive ones, as demonstrated by the example of Eshal walking infinitely.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+}
+
+{
+  "question": "Decomposition is a technique used to solve complex problems in a single step.",
+  "answer": "False",
+  "explanation": "Decomposition is a technique used to break down complex problems into smaller, manageable tasks, allowing for a more efficient and effective solution.",
+  "bloom_level": "Evaluating",
+  "needs_image": false
+}
+
+{
+  "question": "What is the benefit of using a variable to store emotions in Eshal's code?",
+  "options": [
+    "It makes the code more complex",
+    "It makes the code easier to understand",
+    "It allows for more flexibility in the program",
+    "It reduces the need for multiple messages"
+  ],
+  "answer": "D",
+  "explanation": "Using a variable to store emotions makes it easier to update and manage the emotions, reducing the need for multiple messages and making the code more efficient.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+}
+
+{
+  "question": "Variables are only used to store fixed values.",
+  "answer": "False",
+  "explanation": "Variables are used to store changing values, making it easier to update and manage data in a program.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+}
+
+{
+  "question": "Using a variable to store emotions makes the code more complex.",
+  "answer": "False",
+  "explanation": "Using a variable to store emotions makes it easier to update and manage the emotions, reducing the need for multiple messages and making the code more efficient.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "What is the primary purpose of using 'if-then' blocks in programming?",
+  "options": [
+    "To create loops",
+    "To make decisions based on conditions",
+    "To repeat tasks",
+    "To store data"
+  ],
+  "answer": "B",
+  "explanation": "The primary purpose of using 'if-then' blocks in programming is to make decisions based on conditions, allowing the program to execute different actions depending on the outcome.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+}
+
+{
+  "question": "Is it true that thoughts and feelings are closely connected?",
+  "answer": "True",
+  "explanation": "According to the transcript, thoughts and feelings are closely connected, and this connection is essential for understanding and managing emotions.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "Is it true that using 'if-then' blocks in programming requires writing many 'if blocks' to achieve complex conditions?",
+  "answer": "False",
+  "explanation": "According to the transcript, using 'if-then' blocks in programming can be used to create complex conditions, but it does not require writing many 'if blocks'. Instead, it can be used to simplify the code and make it more efficient.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+}
+
+{
+  "question": "What is the main reason why humans need to train machines to catch thoughts, rather than relying on their own abilities?",
+  "options": [
+    "A) Machines are more accurate",
+    "B) Humans are not good at thought-catching all the time",
+    "C) Machines are faster",
+    "D) Machines are more expensive"
+  ],
+  "answer": "B) Humans are not good at thought-catching all the time",
+  "explanation": "Humans may experience depression, stress, or other mental health issues that prevent them from effectively catching thoughts. Machines can be trained to help with this task.",
+  "bloom_level": "Evaluating",
+  "needs_image": false
+}
+
+{
+  "question": "Is it necessary to check all conditions in a series of 'if' statements?",
+  "answer": "False",
+  "explanation": "Only one condition can be true at a time, so it's more efficient to use 'else-if' conditions to check subsequent conditions only if the previous one is false.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "Can machines be trained to catch thoughts just like humans do?",
+  "answer": "True",
+  "explanation": "Machines can be trained to identify patterns in data, making them capable of catching thoughts, which is a complex task for humans.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "The machine learning model is trained to recognize only positive thoughts.",
+  "answer": "False",
+  "explanation": "The machine learning model is trained to recognize both positive and negative thoughts, as demonstrated by Abida and AI.S.H.A.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+}
+
+{
+  "question": "Clones in Scratch are sprites that look identical.",
+  "answer": "True",
+  "explanation": "Clones in Scratch are sprites that look identical, as demonstrated by AI.S.H.A.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "What is the purpose of using the 'when I start as a clone' event block in Scratch?",
+  "options": [
+    "To create a new sprite",
+    "To make the clone visible",
+    "To set a specific x and y location",
+    "To switch between costumes"
+  ],
+  "answer": "B",
+  "explanation": "The 'when I start as a clone' event block is used to make the clone visible when it is created.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+}
+
+{
+  "question": "Scratch sets a limit to the number of clones that will be created at a time to avoid glitches and hangs of the system.",
+  "answer": "True",
+  "explanation": "Scratch does set a limit to the number of clones that will be created at a time to prevent system crashes.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+}
+
+{
+  "question": "The 'change y block' can be used to make a snowflake move down without the need for a repeat block.",
+  "answer": "False",
+  "explanation": "A repeat block is required when using the 'change y block' to make a snowflake move down.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+}

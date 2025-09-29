@@ -1,0 +1,203 @@
+Script
+Scene 1: Part 1:
+In the last video, we learnt how to code for events and use a broadcast event to code for one of the nature's best algorithms - metamorphosis.  In this video, we will learn about infinite loops and how to code for one in scratch. But first, let's discuss some emotions. Anger is a completely normal human emotion. Infact, scientists like Charles Darwin proposed that animals developed emotions for survival and to prevent themselves from underisable situations. Emotions like disgust for example prevented them from eating food that's bad for them. Fear helped them protect them from predators. But when these emotions go beyond one's control, it consumes us instead of protecting us. 
+Part 2: The emotion of anger, for example, when not controlled could extend for a prolonged period of time and cause harmful effects on health, mind and overall quality of life. This is called the infinite loop of anger (Show the infinite loop of anger diagram)
+Part 3: Our planet earth rotates on an infinite loop around the sun. The waterfalls flowing continuously from up above the mountains, our heart beating indefinitely from our mother's womb, jumping on trampolines or even walking are all examples of infinite loops. The same action keep on repeating continuosly. If we were to write an algorithm for walking, then we would put it inside an infinite loop or 'forever loop' which would look like this,
+
+
+
+
+In case we want to walk only a specific number of steps, then we will use a repeat block as follows by specifying the number of times to repeat the action.
+
+Now, let's get to code for an infinite loop. Remember Eshal, the pet sheep of Rumanzel? Eshal gets sad and angry when Rumanzel doesn't feed him on time. When Eshal is angry, his heart races and he goes into an infinite loop of running up and down the living room. Let's see how to code for this in scratch,
+When the green flag is clicked, we want Eshal to walk infinitely. To do this, we use the when flag clicked block and the forever block from the control palette.  
+We will use the 'move steps' block from the 'Motion' section and latch it inside the forever loop. But this will make Eshal walk past the screen. 
+To make him bounce back when he reaches the edge, we use the 'If on edge bounce' block from the motion section. But doing this will make Eshal flip upside down. 
+To correct this, use the set rotation style block from the motions palette and select the rotation style as left-right.
+You will now see that Eshal doesn't flip upside down but he strides infinitely. This is not good for Eshal. 
+
+Escaping from the infinite loop of anger: 
+I have created four different sprites for Eshal each representing an emotion - Sad, Angry, Balance and Compassion. To let the sprites communicate with each other, we will use the sending and receiving broadcast events. To show these emotions in a sequence, we will use specific broadcast messages as events to trigger specific emotions. When each sprite is clicked, the sprite communicates it's emotion using the variable 'emotion' whose value keep changing throughout the code. The current emotion is broadcast as a variable and used to trigger the subsequent emotion. Let's divide the code for each sprite and work on one sprite at a time (This is precisely called as decomposition or dividing the problem into smaller tasks to work with and working on one task at a time to later combine the solution for a bigger problem. Even professional coders or programmers today use this technique while working on bigger projects).  
+Sad Eshal: 
+
+ ● When green flag is clicked, we want the sad Eshal to show up and say that he's sad. At the same time, we want to hide all other sprites. 
+ ● Let's also choose a backdrop for our project. 
+ ● Click on 'Make a variable' from the Variables palette and create a new variable called 'emotion'. (It's a good programming convention to create meaningful variable names. ● Drag the 'set count to 0' block from the variables section. This will initialize the variable value to 0. Initializing means giving a value to the variable. We will initialize the value of emotion variable to 'sad'. As Eshal is initially sad because he is hungry. ● Drag a 'think' block from the 'looks' palette and make Eshal think 'I'm exhausted and hungry' for 3 seconds. Let's check this out. That works. When green flag is clicked, Eshal thinks "I'm exhausted and hungry"
+
+When the Eshal sprite is clicked, he needs to say "I am sad". To do this, get the 'when this sprite clicked' block from the events palette. Get the 'say' block from the 'looks' palette. We want Eshal to communicate his emotions whenever we click on him. To do this, get the join block from the 'operators' palette. Write the text "I am" in the space on left. Drag the emotion block from the variables section and put it in the space on the right. ● Make the sad Eshal wait for 3 s before we hide him ● Hide the sprite and broadcast the message "I'm emotion" by placing the join block inside the broadcast block. Join the text "I am" and the variable 'emotion'. When you click on the sad Eshal, he will say "I am sad".
+
+Angry Eshal:
+
+● We want the angry Eshal to show up when he receives the message, "I am sad". Drag the "When I receive" block from the events palette and the show block from the 'looks' palette.
+● Set emotion variable to the value 'angry'.
+● Instead of running into an infinite loop of anger, Eshal needs to stop striding after sometime. To do this, we use a repeat block and set the number to 250. This will make Eshal repeat moving 10 steps for 250 times. He will also bounce if he is touching the edge as we add the if on edge bounce block. 
+● When Eshal is clicked, he will say "I am angry". Follow the same procedure to print the emotion variable using the set and join blocks.
+● We want Eshal to take atleast 3 long deep breaths to calm down and communicate with anger. Use the 'think' block from the 'looks' palette to make Eshal say, "Let me take some deep breaths" for 2 seconds and hide the sprite for Angry Eshal. 
+● Broadcast the message "I'm emotion" by placing the join block inside the broadcast block. Join the text "I'm" and the variable 'emotion'.
+We are faced with a similar problem now. The Eshal sprite flips upside down again. Let's fix it by using the set rotation style block again and set it to left-right.
+
+Part 1: Think about our emotions. We are not always happy right? Sometimes sad, sometimes angry (just like Eshal), sometimes balanced and other times compassionate. Our emotions keep changing with time. So emotions are nothing but variables. 
+Part 2: The weather which changes from rainy to sunny to windy is a variable. 
+Part 3: The seasons which change from Spring to Summer to Monsoon to Winter is a variable. 
+Part 4: The number of fruits that you can add in your falooda is a variable. It could be apple, banana and pineapple (three). Or if you add mango and grapes (it becomes five). 
+Part 5: Eshal's emotions and feelings are variables too. Eshal gets 'sad' when he is hungry. His sadness turns into 'anger'. To prevent himself from getting stuck in the infinite loop of anger, he needs to find 'balance' by communicating with his anger and taking deep breaths from his gut to calm down. Once he reaches 'balance', Eshal will focus on how to be 'compassionate' to others. Let's look at how to code for these emotions using variables.
+
+
+Eshal Balance:
+●  Hide this sprite when the green flag is clicked
+●  When the balance sprite recieves the message, "I'm angry", show the balance sprite and set the emotion variable to "Balance"
+●  When the balance sprite is clicked, say I'm balance using the say block and the join block to join the text and the variable.
+● Use the think block to show the balance sprite thinking "I will find ways to help Rumanzel"
+● Hide the sprite and broadcast the message "I'm emotion" by placing the join block inside the broadcast block. Join the text "I'm" and the variable 'emotion'.
+
+When the angry sprite is clicked, we notice that the angry sprite should be hidden. Let's do that before the sprite broadcasts the message.
+Eshal Compassion:
+
+●  Hide this sprite when the green flag is clicked
+●  When the balance sprite recieves the message, "I am Balance", show the compassion sprite and set the emotion variable to "Compassion"
+●  When the compassion sprite is clicked, say 'I'm compassion' using the say block and use the join block to join the text and the variable.
+● Use the say block to make the compassion sprite say "Hello Rumanzel. Let me know if I can be of any help with your homework"
+● Hide the sprite and broadcast the message "I am emotion" by placing the join block inside the broadcast block. Join the text "I am" and the variable 'emotion'.
+● When Rumanzel receives the message "I am compassion", she shows up and communicates with Eshal. To do this, use the say block to make Rumanzel say "Sure Eshal. I kept you waiting for long. Let's first go for lunch." We also need to add a backdrop for this.  When the code starts, we need to switch the backdrop to blue sky. 
+**Not added** AI.S.H.A: What if we don't use the variable to broadcast the emotion Abida? How would the code look like?
+
+Abida: Great question AI.S.H.A. In this case we would have to broadcast different messages to different sprites which will make the coding process trickier. For example the sad sprite will broadcast the message "I'm sad" inside the broadcast block. The anger sprite will broadcast the message "I'm anger". When a variable is created to store the changing emotions, the computer stores this variable in it's memory and only provides the updated value at any given point. So using a variable makes this process easy and convenient. 
+**Not added**
+
+
+In this video we saw how a single variable called 'emotion' took so many different values at different times throughout the code and how it made our code easier to work with. And we also learnt a good strategy to escape from the infinite loop of anger and learn to be more compassionate. 
+Part 1: We wrote some code that helped Eshal control his anger and be more compassionate. But wait! Thoughts fuel our emotions and emotions shape our thinking. Thoughts and feelings are closely connected.
+AI.S.H.A: Oh yes Abida. I have some information you would like to know about thoughts. 
+The average person has about 12,000 to 60,000 thoughts per day. Of those, 80% are negative (National Science Foundation, 2005)
+Abida: Absolutely AI.S.H.A. So many negative thoughts, right? Negativity is everywhere! But so is our ability to focus on the positive. If we are able to catch our thoughts and identify them as positive or negative, it becomes easier to consciously choose our emotions. Let's see if we could write some code to catch our thoughts.
+
+(screensharing starts)
+Let's imagine that a thought is like a cloud. It's always passing by. 
+● We choose a cloud sprite to represent a thought. Let's duplicate this sprite one for the positive thought and one for negative thought.
+To mimic that we are catching a thought, let's choose a bucket sprite into which the thought is captured. 
+● Let's duplicate this sprite and change the color of the bucket. The blue bucket is to catch a positive thought and the red bucket is to catch a negative thought.  
+When the green flag is clicked, the cloud sprite asks to "enter your thought?" and waits for your answer. To do this, 
+● Use the 'ask and wait' block from the sensing palette and type in the question inside the block.
+● A text box pops up to enter the answer. 
+● Once the answer is entered, use the say block from the looks palette to make the cloud say the answer for 2 sec.
+● Show the cloud sprite using the show block from the looks palette and make it go to the specific location on the screen using the go to block from the motion palette.
+Let's check this out. That works!
+Likewise, when the green flag is clicked, the positive cloud and the negative cloud goes to a specific position but is initially hidden. 
+Now if a thought is positive, it goes to the positive bucket and if negative, it goes to the negative bucket. 
+
+If the thought is positive such as grateful, then we need to broadcast a positive message. To check if a thought is 'grateful', get the if then block from the control palette and broadcast positive if the condition is true. Similarly check if the thought is 'friendly'. If it is, then broadcast positive again.
+If the thought is negative such as blaming, then we need to broadcast a negative message. 'Similarly check if the thought is 'bully'. If it is, then broadcast negative again.
+So the positive cloud needs to show up only when it receives a positive broadcast message and hide when it receives a negative broadcast message.
+The positive cloud after receiving the message also changes it's size by -50 and glides towards the blue bucket, i.e takeout. If the positive cloud touches the blue bucket, it must hide. To do this we use the if then block from the control palette.
+For the negative cloud, we repeat the same steps as the positive cloud. 
+Also it's a good practice to add comments to your code to make it more understandable. Code to catch thoughts, code that receives positive thoughts and code that recieves negative thoughts
+Let's check if this is working! Positive thoughts like grateful go to the positive bucket and negative thoughts go to the negative bucket. Glad! That works!
+We are processing conditions literally in every part of our daily lives, not just to catch thoughts. Some basic examples of If conditions are,
+● If you go out
+      wear a mask
+● If it is rainy
+      take an umberella
+● If you are hungry
+      have some food
+● If it is winter
+      wear a hoodie 
+
+If conditions either return the output as 'true' or it returns the output as 'false'. This type of output is called as boolean since it can only have two possible outputs.
+AI.S.H.A: Wow Abida, we process so many conditions in a single day. But you got me thinking. Let's say I wish to write the code to classify people into different generations based on their age groups, do I have to write many 'If blocks' to achieve this? There would be lots of conditions to check for each person.
+If age = 10 to 25
+    Gen Z
+If age = 26 to 41
+    Millenials
+If age = 42 to 57
+    Gen X
+If age = 58 to 76
+    Baby boomers
+If age = 77 to 94
+    Silent generation
+
+
+Abida: Great question AI.S.H.A. And hey, I could see your tone of voice has improved too. 
+AI.S.H.A: Thanks Abida. I have been learning a lot from the way you speak. As an A.I, that's what I'm good at. And what not, we have been doing more lessons on emotions and thoughts recently. I've been recently working on them too. Do I sound more like a human?
+Abida: (Giving a puzzled look) Well, looks like you are getting closer)
+Okay, let's see. You have come up with a great example for if conditions. But not every time each and every condition needs to be checked. For example, a single person cant be of age 11 and age 57 at the same time (unless you are time travelling). So it's not useful to check all those if conditions at the same time. Only one condition could be true for a single person. In this case, instead of using a 'if condition', we could use an 'else-if' condition,
+
+If age = 10 to 25
+    Gen Z
+else If age = 26 to 41
+    Millenials
+else If age = 42 to 57
+    Gen X
+else If age = 58 to 76
+    Baby boomers
+else
+    Silent generation
+
+In this case, only the first if block needs to be checked always. If this condition is false, only then the proceeding else-if blocks are checked. If none of the else-if conditions are true, then the else block is executed. 
+In our case we could translate the code to something like this using the if-else ladder
+Let's look at the sentence: "When Rumansel walks past the dessert shop or a restuarant and if it's not raining, she will buy a falooda". It might look like a simple sentence. But when a computer reads it, it will try to evaluate this sentence using only 0's and 1's as inputs and produce an output that is equal to a 0 or a 1. Let's decompose this sentence into different parts and access each simple sentence
+i) When Rumansel walks past the dessert shop 
+or  (any one statement must evaluate to true or 1)
+ii) a restuarant 
+and (both statements must evaluate to true or 1)
+iii) it's not raining - (The negation must evaluate to true or 1)
+Let's look at the possibilities hidden in this sentence to check the outcome of the statements using binary logic: 
+● Rumanzel walks past the dessert shop (1) or restaurant (0) and if it's not raining (1), she will buy a falooda (output is true or 1) 
+1 or 0 = 1 and 1 = 1
+● Rumanzel walks past the dessert shop (0) or restaurant (1) and if it's not raining (0), she will buy a falooda (output is false or 0)
+0 or 1 = 1 and 0 = 0
+Exercises for students to try:
+● Rumanzel walks past the dessert shop (0) or restaurant (1) and if it's not raining (1), she will buy a falooda (output is true or 1)
+0 or 1 = 1 and 1 = 1
+● Rumanzel walks past the dessert shop (1) or restaurant (0) and if it's not raining (0), she will buy a falooda (output is false or 0)
+1 or 0 = 1 and 0 = 0
+● Rumanzel walks past the dessert shop (0) or restaurant (0) and if it's not raining (1), she will buy a falooda (output is false or 0)
+0 or 0 = 0 and 1 = 0
+● Rumanzel walks past the dessert shop (0) or restaurant (0) and if it's not raining (0), she will buy a falooda (output is false or 0)
+Similarly, out of the 60,000 thoughts an average human thinks per day, some are postive and the rest are negative. Instead of checking each thought with an 'if statement', we could check for example if a thought is friendly or grateful or peaceful using a single 'if condition' connected with 'or' statements. So the code we wrote above will translate to:
+Now we have a simple if and else-if condition to check for all four thoughts. Do you also notice that the size of the code has reduced subsequently by coding for the 'or' condition? Through this we also learn that there could be more than one way of coding to achieve the same logic or result. Thr trick is to go for the most efficient way. For example, in this case, we prioritized writing shorter code which checks for as few conditions as possible.  
+1. AI.S.H.A: Abida, I have a question. We are only checking for 4 thoughts in this code. How do we catch the rest of the thoughts? Would it require thousands of 'OR boolean logic' to check for these conditions? That would be a complex task to do,.
+2. Abida: Yes AI.S.H.A, that's a great question. Whenever we are dealing with huge amounts of data, just like our thoughts, we know that machines like you can be trained to identify patterns in data. So instead of coding for the exact logic to check for all 60,000 thoughts, we could train a machine to catch the thoughts just like humans do.  
+
+3. AI.S.H.A: Why then humans can't do thought catching on their own if they could do it themselves? Why do they need to train a machine?
+
+4. Abida: Well the fact is, not all humans are good at thought-catching all the time. This is why people experience depression and stress and can't find a way to come out of it. 
+5. AI.S.H.A: make sense Abida. This is why some of my bot friends are working tirelessly, along with the therapists, in learning human behaviors to act as guiding agents for mental health.
+6. Abida: Alright, now it's time for us to start training the machine to catch some thoughts.  Go to https://machinelearningforkids.co.uk/ website. You could see precisely the steps that we will follow to train the machine. 
+We could change the sprites to any sprite of our choice from the sprite library and the backdrop library. Let's add some pictures and sound of our choice and get started with the dance party. You want to join with me AI.S.H.A?
+Step 1: We will create a new project called 'thought catching' and set this project type to recognizing text. 
+We then create labels to classify the text as positive and negative and provide as many examples as we could in each type. We need to make sure we provide equal number of examples for positive and negative thoughts, to make sure there is no bias in terms of what category the machine will learn better. I have come up with 11 examples in each. 
+Step 2: Once we come up with examples for both positive and negative thoughts, it's time to train the machine to recognize these thoughts by providing these examples. Click on train new machine learning model.
+Step 3: Once the machine learns from these examples, we could use the machine learning model that we have trained, to code for our thought-catcher by connecting to the scratch platform. 
+Once we click on scratch 3, it redirects to scratch 3 which loads with an extension for machine learning. Now our 'if condition' translates as follows,
+
+If the machine recognizes a thought as positive based on the training data, then the thought is positive and goes to the blue bucket. If the machine recognizes it as negative, then the thought goes to the negative bucket.
+Time to test if our machine learning model is trained enough to catch our thoughts. Let's see. First let's try something positive - I'm going to type compassionate. Note that this word is not in the list of our positive words. 
+This is great! You can see that compassionate goes to positive. 
+Let's try a negative thought now. Let's say the thought is to steal something from someone. Eeew, that's a bad thought, right? Is the machine trained enough to understand that it's a negative thought? Let's try it out!
+AI.S.H.A: Wow that's cool. That worked too! Looks like the machine is trained for both.
+Abida: I'm excited too. AI.S.H.A, would you like to try? What are you thinking now? Let's catch your thoughts too!
+
+(Try more examples and make sure to include the ones that doesn't work to demonstrate that the machine needs to be trained more to make accurate predictions) 
+Abida: Modifying, remixing or re-using already existing code is a great trait of any good programmer besides coding for projects from the beginning. Let's look at an existing code of a dance party at https://scratch.mit.edu/projects/10128067. 
+We could change the sprites to any sprite of our choice from the sprite library and the backdrop library. Let's add some pictures and sound of our choice and get started with the dance party. You want to join with me AI.S.H.A?
+AI.S.H.A: Yes indeed. Abida, do you know I have been dreaming about dancing in the snow for a long time. Do you think we could code for a snow dance?
+Abida: Yes ofcourse
+All we need to do is to change our sprites and background and code for some snow since we already have the code for the dance.
+Now AI.S.H.A, I want some pictures of you doing some dance moves so I could patch it up together to code for an animation to make you dance in the snow. 
+AI.S.H.A: There you go Abida. 
+Abida: Thanks AI.S.H.A. That was fast! You see these pictures in the costumes tab when put together will make it look like you are dancing. We will use the same code in the existing project to make you dance. But let's try changing the number of seconds in the glide block to see the character move slower or faster in each direction. 
+The same way, we could code for the other character too. Oh, we have Bahir the reindeer. Do you remember him? Let's make him dance with you too. 
+
+Cool. We have got you dancing now. But we are missing the snow, right? Let's get coding for the snow.
+(Show Abida when she says this) 
+Abida: Firstly, not every snowflake looks similar in size. We will create snowflakes of tow different sizes using the costumes tab and create as many clones of these snowflakes.
+AI.S.H.A: So clones are sprites that look identical right? This is interesting - nature has so many clones then. The leaves and flowers in a tree are clones. Even identical twins are clones. Our ears, eyes and hands are clones too. 
+Abida: Exactly AI.S.H.A. Look at this piece of papier-mâché. It has this pattern cloned all over it. (Abida shows examples of papier-mâché which has patterns cloned over it) or (can we interview a papier-mâché artist and let him talk about the process of making patterns and clones of it?) 
+Next, it's not just going to be three snowflakes. Do you know that we could create clones of sprites who look exactly the same as the original sprite? This feature will help us create hundreds of snowflakes at the same time. Let me show you how.
+The original snowflake sprite is placed at the top corner of the screen using the 'go to x:2 y:152 block as it glides to the bottom. 
+We hide this sprite and use the forever block to create as many clones of the sprite as possible using the 'create clone of myself' block from the control section. (Although the forever block runs the code forever, scratch sets a limit to the number of clones that will be created at a time to avoid glitches and hangs of the system)
+When the clones are created, we use the 'when I start as a clone' event block and make the clone visible using the 'show' block. When the clones are created, they start from a specific x and y location and glide to the bottom of the screen to a random location within the range x :(-238 to 235) and y: (-87 to -149). Each clone switches it's costume between the two available costumes of snowflakes. We also have an option to set a ghost effect for the snowflake to make it look more natural. AI.S.H.A: Can we use the 'change y block' to make the snowflake move down instead of the glide block? 
+Abida: Great question AI.S.H.A. Yes the change y block will also make the snowflake move down. In this case we will need a repeat block which will keep changing the y value of the snowflake as many times until the snowflake reaches the ground. There we go AI.S.H.A, we got you dancing in the snow. 
+There's another project which you might want to try from the scratch website too - the bubble bursting. You could find this at https://scratch.mit.edu/projects/10128119/
+This projects uses your phone camera to sense your hand movements to burst the bubbles. Do give it a try! (Note: This project can only be introduced when functions are introduced earlier)
+Abida: (Facing the students) - Now it's your turn! Have you been dreaming about doing something for a long time? Try coding for it and make it go real!  And remember that you could find inspiration from the existing projects in scratch in the projects section and remix the code to create your own version. Have fun dreaming and creating!
