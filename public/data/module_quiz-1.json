@@ -1,0 +1,425 @@
+[
+{
+  "question": "What is the purpose of using the 'forever' block in Scratch?",
+  "options": [
+    "A) To create a sequence of actions",
+    "B) To repeat an action a specific number of times",
+    "C) To create an infinite loop",
+    "D) To pause the program"
+  ],
+  "answer": "C",
+  "explanation": "The 'forever' block is used to create an infinite loop, which repeats an action continuously.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+},
+
+{
+  "question": "What is the purpose of using the 'if on edge bounce' block in Scratch?",
+  "options": [
+    "A) To create a sequence of actions",
+    "B) To repeat an action a specific number of times",
+    "C) To make a sprite bounce back when it reaches the edge",
+    "D) To pause the program"
+  ],
+  "answer": "C",
+  "explanation": "The 'if on edge bounce' block is used to make a sprite bounce back when it reaches the edge.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "What is the purpose of using variables in Scratch?",
+  "options": [
+    "A) To create a sequence of actions",
+    "B) To repeat an action a specific number of times",
+    "C) To store and manipulate data",
+    "D) To pause the program"
+  ],
+  "answer": "C",
+  "explanation": "Variables are used to store and manipulate data in Scratch.",
+  "bloom_level": "Applying",
+  "needs_image": false
+},
+
+{
+  "question": "What is decomposition in programming?",
+  "options": [
+    "A) Breaking down a problem into smaller tasks",
+    "B) Creating a sequence of actions",
+    "C) Repeating an action a specific number of times",
+    "D) Pausing the program"
+  ],
+  "answer": "A",
+  "explanation": "Decomposition is the process of breaking down a problem into smaller tasks to make it more manageable.",
+  "bloom_level": "Evaluating",
+  "needs_image": false
+},
+
+{
+  "question": "Infinite loops can be used to create a sequence of actions.",
+  "answer": "False",
+  "explanation": "Infinite loops repeat an action continuously, whereas sequences of actions are a series of actions that are performed in a specific order.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "Variables are used to store and manipulate data in Scratch.",
+  "answer": "True",
+  "explanation": "Variables are a fundamental concept in programming and are used to store and manipulate data.",
+  "bloom_level": "Remembering",
+  "needs_image": false
+},
+
+{
+  "question": "Decomposition is the process of creating a sequence of actions.",
+  "answer": "False",
+  "explanation": "Decomposition is the process of breaking down a problem into smaller tasks to make it more manageable.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+},
+
+{
+  "question": "What happens when Eshal receives the message 'I am sad'?",
+  "options": [
+    "The angry sprite appears",
+    "The balance sprite appears",
+    "The sad sprite appears",
+    "The compassion sprite appears"
+  ],
+  "answer": "C",
+  "explanation": "When Eshal receives the message 'I am sad', the sad sprite appears.",
+  "bloom_level": "Remembering",
+  "needs_image": false
+},
+
+{
+  "question": "What is the purpose of the repeat block in the angry Eshal code?",
+  "options": [
+    "To make Eshal move faster",
+    "To make Eshal move slower",
+    "To prevent Eshal from getting stuck in an infinite loop of anger",
+    "To make Eshal jump higher"
+  ],
+  "answer": "C",
+  "explanation": "The repeat block is used to prevent Eshal from getting stuck in an infinite loop of anger by limiting the number of times he moves.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "What happens when the balance sprite is clicked?",
+  "options": [
+    "It says 'I am balance'",
+    "It says 'I am angry'",
+    "It says 'I am sad'",
+    "It says 'I am compassion'"
+  ],
+  "answer": "A",
+  "explanation": "When the balance sprite is clicked, it says 'I am balance'.",
+  "bloom_level": "Remembering",
+  "needs_image": false
+},
+
+{
+  "question": "What is the purpose of the think block in the balance sprite code?",
+  "options": [
+    "To make Eshal move faster",
+    "To make Eshal move slower",
+    "To make Eshal say a message",
+    "To make Eshal think and then say a message"
+  ],
+  "answer": "D",
+  "explanation": "The think block is used to make Eshal think and then say a message, in this case, 'I will find ways to help Rumanzel'.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "Using a variable to store Eshal's emotions makes the code more complex.",
+  "answer": "False",
+  "explanation": "Using a variable to store Eshal's emotions actually makes the code easier to understand and manage.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "The angry sprite appears when Eshal receives the message 'I am sad'.",
+  "answer": "False",
+  "explanation": "The sad sprite appears when Eshal receives the message 'I am sad'.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+},
+
+{
+  "question": "The repeat block in the angry Eshal code is used to make Eshal move faster.",
+  "answer": "False",
+  "explanation": "The repeat block is used to prevent Eshal from getting stuck in an infinite loop of anger by limiting the number of times he moves.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+},
+
+{
+  "question": "What is the primary purpose of the 'if-then' block in the code?",
+  "options": [
+    "To create a loop",
+    "To broadcast a message",
+    "To check a condition and perform an action",
+    "To hide a sprite"
+  ],
+  "answer": "C",
+  "explanation": "The 'if-then' block is used to check a condition and perform an action based on that condition.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+},
+
+{
+  "question": "What is the difference between a positive and negative thought in the context of the code?",
+  "options": [
+    "A positive thought is one that is hidden, while a negative thought is one that is shown",
+    "A positive thought is one that is shown, while a negative thought is one that is hidden",
+    "A positive thought is one that is broadcast as 'grateful', while a negative thought is one that is broadcast as 'blaming'",
+    "A positive thought is one that is broadcast as 'friendly', while a negative thought is one that is broadcast as 'bully'"
+  ],
+  "answer": "C",
+  "explanation": "In the code, a positive thought is one that is broadcast as 'grateful', while a negative thought is one that is broadcast as 'blaming'.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "What is the purpose of the 'bucket' sprite in the code?",
+  "options": [
+    "To represent a thought",
+    "To represent a condition",
+    "To catch a thought and categorize it as positive or negative",
+    "To broadcast a message"
+  ],
+  "answer": "C",
+  "explanation": "The 'bucket' sprite is used to catch a thought and categorize it as positive or negative.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+},
+
+{
+  "question": "What is the name of the AI system that Abida is interacting with?",
+  "options": [
+    "AI.S.H.A",
+    "AI.S.H.B",
+    "AI.S.H.C",
+    "AI.S.H.D"
+  ],
+  "answer": "A",
+  "explanation": "Abida is interacting with AI.S.H.A.",
+  "bloom_level": "Remembering",
+  "needs_image": false
+},
+
+{
+  "question": "The 'if-then' block is used to create a loop in the code.",
+  "answer": "False",
+  "explanation": "The 'if-then' block is used to check a condition and perform an action based on that condition.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "A positive thought is one that is broadcast as 'blaming' in the code.",
+  "answer": "False",
+  "explanation": "In the code, a positive thought is one that is broadcast as 'grateful', while a negative thought is one that is broadcast as 'blaming'.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+},
+
+{
+  "question": "The 'bucket' sprite is used to represent a thought in the code.",
+  "answer": "False",
+  "explanation": "The 'bucket' sprite is used to catch a thought and categorize it as positive or negative.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "Using 'else-if' conditions always reduces the size of the code.",
+  "answer": "False",
+  "explanation": "Using 'else-if' conditions can reduce the size of the code, but it depends on the specific situation.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+},
+
+{
+  "question": "Machine learning is only useful for small datasets.",
+  "answer": "False",
+  "explanation": "Machine learning can be useful for large datasets, as it can identify patterns that may not be apparent to humans.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+},
+
+{
+  "question": "Humans are always good at thought-catching.",
+  "answer": "False",
+  "explanation": "Humans may not be good at thought-catching all the time, leading to issues like depression and stress.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+},
+
+{
+  "question": "What is the purpose of training a machine learning model?",
+  "options": [
+    "A) To recognize text",
+    "B) To classify text as positive and negative",
+    "C) To connect to the Scratch platform",
+    "D) To create labels for the text"
+  ],
+  "answer": "B",
+  "explanation": "The purpose of training a machine learning model is to enable it to classify text as positive and negative based on the examples provided.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+},
+
+{
+  "question": "What is the term for creating multiple copies of a sprite that look identical?",
+  "options": [
+    "A) Cloning",
+    "B) Remixing",
+    "C) Modifying",
+    "D) Reusing"
+  ],
+  "answer": "A",
+  "explanation": "In Scratch, creating multiple copies of a sprite that look identical is called cloning.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "What is the benefit of using clones in a Scratch project?",
+  "options": [
+    "A) To create a single sprite that looks different",
+    "B) To reuse code from an existing project",
+    "C) To create multiple copies of a sprite that look identical",
+    "D) To modify a sprite's appearance"
+  ],
+  "answer": "C",
+  "explanation": "Using clones in a Scratch project allows you to create multiple copies of a sprite that look identical, which can be useful for creating patterns or animations.",
+  "bloom_level": "Evaluating",
+  "needs_image": false
+},
+
+{
+  "question": "What is the term for creating a new project in Scratch and setting its type to 'recognizing text'?",
+  "options": [
+    "A) Creating a new project",
+    "B) Setting the project type",
+    "C) Recognizing text",
+    "D) Thought catching"
+  ],
+  "answer": "D",
+  "explanation": "In the provided transcript, the term 'thought catching' is used to describe creating a new project in Scratch and setting its type to 'recognizing text'.",
+  "bloom_level": "Remembering",
+  "needs_image": false
+},
+
+{
+  "question": "Is it necessary to provide equal numbers of positive and negative examples for the machine learning model to learn effectively?",
+  "answer": "True",
+  "explanation": "Providing equal numbers of positive and negative examples helps to prevent bias in the machine learning model.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "Can clones be used to create a single sprite that looks different?",
+  "answer": "False",
+  "explanation": "Clones are used to create multiple copies of a sprite that look identical, not to create a single sprite that looks different.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+},
+
+{
+  "question": "Is the Scratch platform used to train machine learning models?",
+  "answer": "False",
+  "explanation": "The Scratch platform is used to create and run Scratch projects, but it is not typically used to train machine learning models.",
+  "bloom_level": "Evaluating",
+  "needs_image": true
+},
+
+{
+  "question": "What is the purpose of using the 'when I start as a clone' event block in Scratch?",
+  "options": [
+    "To create a new sprite",
+    "To make the clone visible",
+    "To set the x and y location of the clone",
+    "To switch the costume of the clone"
+  ],
+  "answer": "B",
+  "explanation": "The 'when I start as a clone' event block is used to make the clone visible when it is created.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+},
+
+{
+  "question": "What is the effect of using the 'glide' block to move a clone in Scratch?",
+  "options": [
+    "The clone moves down to a random location on the screen",
+    "The clone moves up to a random location on the screen",
+    "The clone stays at the same location on the screen",
+    "The clone moves to a specific location on the screen"
+  ],
+  "answer": "A",
+  "explanation": "The 'glide' block is used to move a clone down to a random location on the screen in Scratch.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "What is the alternative to using the 'glide' block to move a clone in Scratch?",
+  "options": [
+    "Change y block",
+    "Forever block",
+    "Create clone of myself block",
+    "Show block"
+  ],
+  "answer": "A",
+  "explanation": "The 'change y block' is an alternative to using the 'glide' block to move a clone in Scratch.",
+  "bloom_level": "Evaluating",
+  "needs_image": false
+},
+
+{
+  "question": "What is the purpose of using a repeat block in Scratch?",
+  "options": [
+    "To create a new sprite",
+    "To make the clone visible",
+    "To set the x and y location of the clone",
+    "To repeat a block of code"
+  ],
+  "answer": "D",
+  "explanation": "The repeat block is used to repeat a block of code in Scratch.",
+  "bloom_level": "Creating",
+  "needs_image": false
+},
+
+{
+  "question": "The 'create clone of myself' block is used to create a new sprite in Scratch.",
+  "answer": "False",
+  "explanation": "The 'create clone of myself' block is used to create clones of a sprite in Scratch.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+},
+
+{
+  "question": "The 'when I start as a clone' event block is used to make the clone invisible in Scratch.",
+  "answer": "False",
+  "explanation": "The 'when I start as a clone' event block is used to make the clone visible when it is created in Scratch.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "The 'glide' block is used to move a clone up to a random location on the screen in Scratch.",
+  "answer": "False",
+  "explanation": "The 'glide' block is used to move a clone down to a random location on the screen in Scratch.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+}
+]

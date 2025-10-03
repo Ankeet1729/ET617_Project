@@ -1,0 +1,129 @@
+[
+{
+  "question": "Can you create a new sprite from an existing one using the 'create clone of myself' block in Scratch?",
+  "answer": "True",
+  "explanation": "The 'create clone of myself' block is used to duplicate a sprite, which is useful for creating multiple instances of the same sprite.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "The 'forever' block in Scratch creates a loop that runs only once.",
+  "answer": "False",
+  "explanation": "The 'forever' block is used to create a loop that runs multiple times, which is useful for creating repetitive actions in a project.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "The 'show' block in Scratch is used to hide a sprite.",
+  "answer": "False",
+  "explanation": "The 'show' block is used to make a sprite visible, which is useful for creating animations and interactions in a project.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "Functions in coding make code more complex.",
+  "answer": "False",
+  "explanation": "Functions in coding make code more modular and reusable, making it easier to work with and modify.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+},
+
+{
+  "question": "The video sensing extension in Scratch is used to turn the video on and off.",
+  "answer": "True",
+  "explanation": "The video sensing extension is used to turn the video on and off, allowing users to interact with the video.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "The video motion on sprite block in Scratch is used to change the costume of the sprite.",
+  "answer": "False",
+  "explanation": "The video motion on sprite block is used to sense the video motion, allowing users to interact with the video.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+},
+
+{
+  "question": "What is the role of the 'chooseShape' function in the given code?",
+  "options": [
+    "To draw a shape on the screen",
+    "To choose the shape to draw based on the tap count",
+    "To erase the screen",
+    "To initialize the count variable"
+  ],
+  "answer": "B",
+  "explanation": "The 'chooseShape' function determines which shape to draw based on the tap count.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "What is the purpose of the 'drawShape' function?",
+  "options": [
+    "To choose the shape to draw",
+    "To draw a shape on the screen",
+    "To erase the screen",
+    "To initialize the count variable"
+  ],
+  "answer": "B",
+  "explanation": "The 'drawShape' function draws a shape on the screen based on the given parameters.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+},
+
+{
+  "question": "What happens to the count variable when it reaches 4?",
+  "options": [
+    "It increments by 1",
+    "It resets to 1",
+    "It stays the same",
+    "It decrements by 1"
+  ],
+  "answer": "B",
+  "explanation": "When the count variable reaches 4, it resets to 1, allowing the pattern to repeat.",
+  "bloom_level": "Remembering",
+  "needs_image": false
+},
+
+{
+  "question": "What is the purpose of the 'drawPattern' function?",
+  "options": [
+    "To choose the shape to draw",
+    "To draw a shape on the screen",
+    "To erase the screen",
+    "To create clones of the shape"
+  ],
+  "answer": "D",
+  "explanation": "The 'drawPattern' function creates clones of the shape and draws a pattern based on the given parameters.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "The 'chooseShape' function is used to draw a shape on the screen.",
+  "answer": "False",
+  "explanation": "The 'chooseShape' function is used to choose the shape to draw based on the tap count.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "The 'drawShape' function is used to erase the screen.",
+  "answer": "False",
+  "explanation": "The 'drawShape' function is used to draw a shape on the screen based on the given parameters.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "The count variable increments by 1 when it reaches 4.",
+  "answer": "False",
+  "explanation": "When the count variable reaches 4, it resets to 1, allowing the pattern to repeat.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+}
+]

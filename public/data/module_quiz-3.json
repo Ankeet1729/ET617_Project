@@ -1,0 +1,81 @@
+[
+{
+  "question": "What is the term for achieving a balance between the amount of greenhouse gases released and the amount removed from the atmosphere?",
+  "options": [
+    "A. Net-zero emissions",
+    "B. Climate change",
+    "C. Global warming",
+    "D. Carbon sequestration"
+  ],
+  "answer": "A",
+  "explanation": "Net-zero emissions refer to the balance between the amount of greenhouse gases released and the amount removed from the atmosphere, which is essential to mitigate climate change.",
+  "bloom_level": "Understanding",
+  "needs_image": false
+},
+
+{
+  "question": "How do trees help reduce climate change?",
+  "options": [
+    "A. By releasing carbon dioxide into the atmosphere",
+    "B. By absorbing carbon dioxide from the atmosphere and storing it underground",
+    "C. By producing oxygen and releasing carbon dioxide",
+    "D. By not contributing to climate change"
+  ],
+  "answer": "B",
+  "explanation": "Trees absorb carbon dioxide from the atmosphere through photosynthesis and store it in their roots, which can later be converted into charcoal, a stable form of carbon.",
+  "bloom_level": "Analyzing",
+  "needs_image": false
+},
+
+{
+  "question": "What is the process of converting carbon dioxide into a stable form of carbon?",
+  "options": [
+    "A. Carbon sequestration",
+    "B. Photosynthesis",
+    "C. Respiration",
+    "D. Decomposition"
+  ],
+  "answer": "A",
+  "explanation": "Carbon sequestration is the process of converting carbon dioxide into a stable form of carbon, such as charcoal, which doesn't easily release into the air.",
+  "bloom_level": "Applying",
+  "needs_image": false
+},
+
+{
+  "question": "What is the effect of blowing into the microphone in the simulation to blow off heat?",
+  "options": [
+    "A. The fire sprite grows larger",
+    "B. The fire sprite starts shrinking and disappears when its size is less than 5",
+    "C. The earth sprite becomes sad",
+    "D. The trees are cut down"
+  ],
+  "answer": "B",
+  "explanation": "Blowing into the microphone in the simulation causes the fire sprite to start shrinking and disappear when its size is less than 5, indicating the reduction of heat.",
+  "bloom_level": "Applying",
+  "needs_image": false
+},
+
+{
+  "question": "Global warming is caused by the release of carbon dioxide and other greenhouse gases into the atmosphere.",
+  "answer": "True",
+  "explanation": "Global warming is indeed caused by the release of carbon dioxide and other greenhouse gases into the atmosphere, which trap heat and prevent it from leaving the Earth's surface.",
+  "bloom_level": "Remembering",
+  "needs_image": true
+},
+
+{
+  "question": "Trees can absorb carbon dioxide from the atmosphere and store it underground.",
+  "answer": "True",
+  "explanation": "Trees absorb carbon dioxide through photosynthesis and store it in their roots, which can later be converted into charcoal, a stable form of carbon.",
+  "bloom_level": "Understanding",
+  "needs_image": true
+},
+
+{
+  "question": "Carbon sequestration is the process of releasing carbon dioxide into the atmosphere.",
+  "answer": "False",
+  "explanation": "Carbon sequestration is actually the process of converting carbon dioxide into a stable form of carbon, such as charcoal, which doesn't easily release into the air.",
+  "bloom_level": "Analyzing",
+  "needs_image": true
+}
+]
