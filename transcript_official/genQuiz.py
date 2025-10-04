@@ -73,7 +73,8 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
           "explanation": "...",
           "bloom_level": "Remembering",
           "concept": "...", 
-          "needs_image": false
+          "needs_image": false,
+          "grade": grade_level
         }}
       ],
       "true_false": [
@@ -83,7 +84,8 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
           "explanation": "...",
           "bloom_level": "Understanding",
           "concept": "...",
-          "needs_image": true
+          "needs_image": true,
+          "grade": grade_level
         }}
       ]
     }}
