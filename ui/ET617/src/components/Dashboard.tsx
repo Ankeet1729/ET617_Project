@@ -46,22 +46,16 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
 
   // Restore state from localStorage on component mount
   useEffect(() => {
-    const savedQuiz = localStorage.getItem("currentQuiz");
+    // Only restore module selection, not quiz state
+    // Quiz state should only be restored when explicitly navigating to a quiz
     const savedModule = localStorage.getItem("selectedModule");
-    
-    if (savedQuiz) {
-      try {
-        const quizData = JSON.parse(savedQuiz);
-        setCurrentQuiz(quizData);
-      } catch (error) {
-        console.error("Error parsing saved quiz data:", error);
-        localStorage.removeItem("currentQuiz");
-      }
-    }
     
     if (savedModule) {
       setSelectedModule(parseInt(savedModule));
     }
+    
+    // Clear any stale quiz data from localStorage on app startup
+    localStorage.removeItem("currentQuiz");
   }, []);
 
   const modules: Module[] = [

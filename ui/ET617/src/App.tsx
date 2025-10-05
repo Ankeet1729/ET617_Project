@@ -27,7 +27,7 @@ const App: React.FC = () => {
   const handleLogout = () => {
     setCurrentUser("");
     setMode("login");
-    // Clear login state from localStorage
+    // Clear all state from localStorage
     localStorage.removeItem("currentUser");
     localStorage.removeItem("currentQuiz");
     localStorage.removeItem("selectedModule");

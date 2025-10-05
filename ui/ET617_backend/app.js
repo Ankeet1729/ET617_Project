@@ -2,8 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const pool = require('./db');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+require('dotenv').config();
 
 const app = express();
+
+// Initialize Gemini AI
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
 // Configure CORS to allow requests from the frontend
 app.use(cors({
@@ -37,6 +43,94 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
+// Function to generate quiz using Gemini AI
+async function generateQuizWithGemini(transcript, grade, no_of_mcq = 2, no_of_tf = 2) {
+  const prompt = `
+You are an expert in educational psychology and curriculum design. 
+Your task is to generate a pedagogically sound quiz from the provided learning material,
+keeping the learner's cognitive development in mind.
+
+### Input Parameters
+1. Grade Level: ${grade}
+2. Transcript: Provided at the end.
+
+### Instructions
+1.  Read the entire transcript to understand the core concepts.
+2.  Generate a quiz with exactly:
+    - ${no_of_mcq} Multiple Choice Questions (4 options each, one correct).
+    - ${no_of_tf} True/False Questions.
+3.  **Grade-Level Adaptation (Based on NEP 5+3+3+4 System):**
+    - **foundational (Grades 1-2):** Use very simple language. Questions should be direct and concrete. Focus on "Remembering."
+    - **preparatory (Grades 3-5):** Use simple, clear language. Introduce questions that require basic "Understanding" and connections.
+    - **middle (Grades 6-8):** Use standard terminology. Questions should test "Application" of concepts and basic "Analysis."
+    - **secondary (Grades 9-12):** Use precise, academic language. Questions should challenge learners with "Analysis," "Evaluation," and synthesis of information.
+4.  **Cognitive Diversity (Based on Bloom's Taxonomy):**
+    - Structure the quiz to have a gradual increase in cognitive demand.
+    - Start with Lower-Order Thinking Skills (LOTS) and move to Higher-Order Thinking Skills (HOTS).
+    - Distribute questions across these levels as appropriate for the grade:
+        - **Remembering:** Recalling facts and basic concepts.
+        - **Understanding:** Explaining ideas or concepts.
+        - **Applying:** Using information in new situations.
+        - **Analyzing:** Drawing connections among ideas.
+        - **Evaluating:** Justifying a stand or decision.
+5.  **Question Quality:**
+    - Ensure questions are unambiguous and directly based on the transcript's terminology.
+    - The goal is to test comprehension and critical thinking, not just rote memorization.
+6.  Provide a concise explanation for each answer, referencing the core concept from the transcript.
+7. No need to put A., B., C., D. before options in MCQs output.
+8. Also have a field called "needs_image" in each question object, set it to true if the question would benefit from an accompanying image, else false.
+9. Do not return the content enclosed within \`\`\`json ... \`\`\`.
+10. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<Snippet 1> ... <Snippet 2>". So you should only generate the quiz for the part between <Snippet 1> and <Snippet 2>, but keep the context of the entire transcript.
+
+### Output Format (Strict JSON)
+{
+  "multiple_choice": [
+    {
+      "question": "...",
+      "options": ["A", "B", "C", "D"],
+      "answer": "B",
+      "explanation": "...",
+      "bloom_level": "Remembering",
+      "concept": "...", 
+      "needs_image": false,
+      "grade": grade_level
+    }
+  ],
+  "true_false": [
+    {
+      "question": "...",
+      "answer": "True",
+      "explanation": "...",
+      "bloom_level": "Understanding",
+      "concept": "...",
+      "needs_image": true,
+      "grade": grade_level
+    }
+  ]
+}
+
+### Important points to be noted
+1.  Do not explicitly mention the word "transcript" in any question or answer or explanation. Think of it like a student sees the video and then directly sees the questions.
+2.  In one or two words, mention the concept tested from the video/transcript under "concept" in json.
+3.  Include 60% of the questions from "apply" and above from Bloom's Taxonomy. [i.e. apply, analyze, evaluate, create/synthesize]
+### Transcript:
+${transcript}
+`;
+
+  try {
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    
+    // Parse the JSON response
+    const quizData = JSON.parse(text);
+    return quizData;
+  } catch (error) {
+    console.error('Error generating quiz with Gemini:', error);
+    throw new Error('Failed to generate quiz');
+  }
+}
 
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
@@ -103,62 +197,59 @@ app.post('/api/generate_quiz', async (req, res) => {
   }
 
   try {
-    // Placeholder quiz data without explanations (explanations will be shown after submission)
-    const placeholderQuiz = {
-      multiple_choice: [
-        {
-          question: `What is the primary focus of Module ${Math.ceil(quiz_id / 3)}?`,
-          options: [
-            "Option A - Basic concepts",
-            "Option B - Advanced topics", 
-            "Option C - Practical applications",
-            "Option D - Theoretical foundations"
-          ],
-          answer: "Option A - Basic concepts",
-          bloom_level: "Remembering",
-          concept: `Module ${Math.ceil(quiz_id / 3)} Core Concept`,
-          needs_image: false,
-          grade: parseInt(grade) || 8
-        },
-        {
-          question: `Which statement best describes the learning outcome for Quiz ${quiz_id}?`,
-          options: [
-            "Students will memorize facts",
-            "Students will analyze complex problems",
-            "Students will create original solutions",
-            "Students will evaluate different approaches"
-          ],
-          answer: "Students will analyze complex problems",
-          bloom_level: "Analyzing",
-          concept: `Quiz ${quiz_id} Learning Outcome`,
-          needs_image: true,
-          grade: parseInt(grade) || 8
-        }
-      ],
-      true_false: [
-        {
-          question: `Module ${Math.ceil(quiz_id / 3)} covers advanced mathematical concepts.`,
-          answer: "True",
-          bloom_level: "Understanding",
-          concept: `Module ${Math.ceil(quiz_id / 3)} Content`,
-          needs_image: false,
-          grade: parseInt(grade) || 8
-        },
-        {
-          question: `Quiz ${quiz_id} is designed for students at grade level ${grade}.`,
-          answer: "True",
-          bloom_level: "Remembering",
-          concept: "Grade Appropriateness",
-          needs_image: true,
-          grade: parseInt(grade) || 8
-        }
-      ]
+    // Fetch transcript from database
+    const transcriptResult = await pool.query(
+      "SELECT transcript FROM transcript WHERE quiz_id = $1",
+      [quiz_id]
+    );
+
+    if (transcriptResult.rows.length === 0) {
+      return res.status(404).json({
+        error: `No transcript found for quiz_id: ${quiz_id}`
+      });
+    }
+
+    const transcript = transcriptResult.rows[0].transcript;
+    
+    // Map grade to NEP format
+    const gradeMapping = {
+      "1": "foundational", "2": "foundational",
+      "3": "preparatory", "4": "preparatory", "5": "preparatory",
+      "6": "middle", "7": "middle", "8": "middle",
+      "9": "secondary", "10": "secondary", "11": "secondary", "12": "secondary"
+    };
+    
+    const nepGrade = gradeMapping[grade] || "middle";
+    
+    // Generate quiz using Gemini AI
+    console.log(`Generating quiz for Quiz ID: ${quiz_id}, Grade: ${grade} (${nepGrade})`);
+    const quizData = await generateQuizWithGemini(transcript, nepGrade, 2, 2);
+    
+    // Remove explanations from the response (will be shown after submission)
+    const quizWithoutExplanations = {
+      multiple_choice: quizData.multiple_choice.map(q => ({
+        question: q.question,
+        options: q.options,
+        answer: q.answer,
+        bloom_level: q.bloom_level,
+        concept: q.concept,
+        needs_image: q.needs_image,
+        grade: q.grade
+      })),
+      true_false: quizData.true_false.map(q => ({
+        question: q.question,
+        answer: q.answer,
+        bloom_level: q.bloom_level,
+        concept: q.concept,
+        needs_image: q.needs_image,
+        grade: q.grade
+      }))
     };
 
-    // Log the request for debugging
-    console.log(`Quiz generation requested - Quiz ID: ${quiz_id}, Grade: ${grade}`);
+    // Log the successful generation
+    console.log(`Quiz generated successfully - Quiz ID: ${quiz_id}, Grade: ${grade}`);
     
-    res.json(placeholderQuiz);
+    res.json(quizWithoutExplanations);
   } catch (err) {
     console.error('Error generating quiz:', err);
     res.status(500).json({ 
@@ -185,61 +276,33 @@ app.post('/api/evaluate_quiz', async (req, res) => {
   }
 
   try {
-    // Generate the same quiz data for evaluation (in real app, this would come from database)
-    const quizData = {
-      multiple_choice: [
-        {
-          question: `What is the primary focus of Module ${Math.ceil(quiz_id / 3)}?`,
-          options: [
-            "Option A - Basic concepts",
-            "Option B - Advanced topics", 
-            "Option C - Practical applications",
-            "Option D - Theoretical foundations"
-          ],
-          answer: "Option A - Basic concepts",
-          explanation: "This question tests your understanding of the module's primary learning objectives.",
-          bloom_level: "Remembering",
-          concept: `Module ${Math.ceil(quiz_id / 3)} Core Concept`,
-          needs_image: false,
-          grade: parseInt(grade) || 8
-        },
-        {
-          question: `Which statement best describes the learning outcome for Quiz ${quiz_id}?`,
-          options: [
-            "Students will memorize facts",
-            "Students will analyze complex problems",
-            "Students will create original solutions",
-            "Students will evaluate different approaches"
-          ],
-          answer: "Students will analyze complex problems",
-          explanation: "This quiz focuses on analytical thinking and problem-solving skills.",
-          bloom_level: "Analyzing",
-          concept: `Quiz ${quiz_id} Learning Outcome`,
-          needs_image: true,
-          grade: parseInt(grade) || 8
-        }
-      ],
-      true_false: [
-        {
-          question: `Module ${Math.ceil(quiz_id / 3)} covers advanced mathematical concepts.`,
-          answer: "True",
-          explanation: "This module includes both basic and advanced mathematical principles relevant to the curriculum.",
-          bloom_level: "Understanding",
-          concept: `Module ${Math.ceil(quiz_id / 3)} Content`,
-          needs_image: false,
-          grade: parseInt(grade) || 8
-        },
-        {
-          question: `Quiz ${quiz_id} is designed for students at grade level ${grade}.`,
-          answer: "True",
-          explanation: `This quiz has been specifically tailored for ${grade}th grade students' cognitive development.`,
-          bloom_level: "Remembering",
-          concept: "Grade Appropriateness",
-          needs_image: true,
-          grade: parseInt(grade) || 8
-        }
-      ]
+    // Fetch transcript from database and regenerate quiz for evaluation
+    const transcriptResult = await pool.query(
+      "SELECT transcript FROM transcript WHERE quiz_id = $1",
+      [quiz_id]
+    );
+
+    if (transcriptResult.rows.length === 0) {
+      return res.status(404).json({
+        error: `No transcript found for quiz_id: ${quiz_id}`
+      });
+    }
+
+    const transcript = transcriptResult.rows[0].transcript;
+    
+    // Map grade to NEP format
+    const gradeMapping = {
+      "1": "foundational", "2": "foundational",
+      "3": "preparatory", "4": "preparatory", "5": "preparatory",
+      "6": "middle", "7": "middle", "8": "middle",
+      "9": "secondary", "10": "secondary", "11": "secondary", "12": "secondary"
     };
+    
+    const nepGrade = gradeMapping[grade] || "middle";
+    
+    // Generate quiz with explanations for evaluation
+    console.log(`Evaluating quiz for Quiz ID: ${quiz_id}, Grade: ${grade} (${nepGrade})`);
+    const quizData = await generateQuizWithGemini(transcript, nepGrade, 2, 2);
 
     // Evaluate answers
     const allQuestions = [

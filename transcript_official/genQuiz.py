@@ -62,6 +62,7 @@ def generate_quiz(transcript: str, grade: str, no_of_mcq=7, no_of_tf=3):
     6.  Provide a concise explanation for each answer, referencing the core concept from the transcript.
     7. No need to put A., B., C., D. before options in MCQs output.
     8. Also have a field called "needs_image" in each question object, set it to true if the question would benefit from an accompanying image, else false.
+    9. Do not return the content enclosed within ```json ... ```.
 
     ### Output Format (Strict JSON)
     {{
