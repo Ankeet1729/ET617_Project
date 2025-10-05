@@ -1,5 +1,5 @@
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (1, $$
 Scene 1: Part 1: ... set it to left-right.
 
 Scene 1: Part 1:
@@ -206,8 +206,8 @@ This projects uses your phone camera to sense your hand movements to burst the b
 Abida: (Facing the students) - Now it's your turn! Have you been dreaming about doing something for a long time? Try coding for it and make it go real!  And remember that you could find inspiration from the existing projects in scratch in the projects section and remix the code to create your own version. Have fun dreaming and creating!
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (1, $$
 Part 1: Think about our emotions ... to be more compassionate.
 
 Scene 1: Part 1:
@@ -414,8 +414,8 @@ This projects uses your phone camera to sense your hand movements to burst the b
 Abida: (Facing the students) - Now it's your turn! Have you been dreaming about doing something for a long time? Try coding for it and make it go real!  And remember that you could find inspiration from the existing projects in scratch in the projects section and remix the code to create your own version. Have fun dreaming and creating!
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (1, $$
 Part 1: We wrote some code ... something like this using the if-else ladder
 
 Scene 1: Part 1:
@@ -622,8 +622,8 @@ This projects uses your phone camera to sense your hand movements to burst the b
 Abida: (Facing the students) - Now it's your turn! Have you been dreaming about doing something for a long time? Try coding for it and make it go real!  And remember that you could find inspiration from the existing projects in scratch in the projects section and remix the code to create your own version. Have fun dreaming and creating!
 $$);
 
-Insert INTO transcript (transcript)
-VALUES ($$
+Insert INTO transcript (module, transcript)
+VALUES (1, $$
 Let's look at the sentence: ... as few conditions as possible
 
 Scene 1: Part 1:
@@ -830,8 +830,8 @@ This projects uses your phone camera to sense your hand movements to burst the b
 Abida: (Facing the students) - Now it's your turn! Have you been dreaming about doing something for a long time? Try coding for it and make it go real!  And remember that you could find inspiration from the existing projects in scratch in the projects section and remix the code to create your own version. Have fun dreaming and creating!
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (1, $$
 1. AI.S.H.A: Abida, I have a question ... more to make accurate predictions)
 
 Scene 1: Part 1:
@@ -1038,8 +1038,8 @@ This projects uses your phone camera to sense your hand movements to burst the b
 Abida: (Facing the students) - Now it's your turn! Have you been dreaming about doing something for a long time? Try coding for it and make it go real!  And remember that you could find inspiration from the existing projects in scratch in the projects section and remix the code to create your own version. Have fun dreaming and creating!
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (2, $$
 Abida: Modifying, remixing or re-using ... Have fun dreaming and creating!
 
 Scene 1: Part 1:
@@ -1246,8 +1246,8 @@ This projects uses your phone camera to sense your hand movements to burst the b
 Abida: (Facing the students) - Now it's your turn! Have you been dreaming about doing something for a long time? Try coding for it and make it go real!  And remember that you could find inspiration from the existing projects in scratch in the projects section and remix the code to create your own version. Have fun dreaming and creating!
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (2, $$
 2. Can we create some music aswell using ... each other. Let's code for this now.
 
 Abida: Modifying, remixing or re-using already existing code is a great trait of any good programmer besides coding for projects from the beginning. Let's look at an existing code of a dance party at https://scratch.mit.edu/projects/10128067. 
@@ -1324,8 +1324,8 @@ We then define functions to specify the characteristic of each magic pattern. Fo
 Once we choose the shape to draw and define the characteristics of a pattern, we need to draw the pattern. So we define a draw pattern function which will draw the shape.  We create clones corresponding to number of edges and draw a pattern of specific length. And then we create clones for each clone turning at specific angles and drawing patterns, extending this for 5 levels. After every pattern is drawn, we delete the clones for that pattern to make sure we don't run out of clones in scratch. There we go, let's check this out! We got a beautiful pattern of snowflake, honeycomb and kite. And we could repeat this forever to create something that looks like a wallpaper.
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (2, $$
 Wow, that was intense ... to change the costume waiting for 3 seconds.
 
 Abida: Modifying, remixing or re-using already existing code is a great trait of any good programmer besides coding for projects from the beginning. Let's look at an existing code of a dance party at https://scratch.mit.edu/projects/10128067. 
@@ -1402,8 +1402,8 @@ We then define functions to specify the characteristic of each magic pattern. Fo
 Once we choose the shape to draw and define the characteristics of a pattern, we need to draw the pattern. So we define a draw pattern function which will draw the shape.  We create clones corresponding to number of edges and draw a pattern of specific length. And then we create clones for each clone turning at specific angles and drawing patterns, extending this for 5 levels. After every pattern is drawn, we delete the clones for that pattern to make sure we don't run out of clones in scratch. There we go, let's check this out! We got a beautiful pattern of snowflake, honeycomb and kite. And we could repeat this forever to create something that looks like a wallpaper.
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (2, $$
 Part 1: Abida: In the past videos, ... something that looks like a wallpaper.
 
 Abida: Modifying, remixing or re-using already existing code is a great trait of any good programmer besides coding for projects from the beginning. Let's look at an existing code of a dance party at https://scratch.mit.edu/projects/10128067. 
@@ -1480,8 +1480,8 @@ We then define functions to specify the characteristic of each magic pattern. Fo
 Once we choose the shape to draw and define the characteristics of a pattern, we need to draw the pattern. So we define a draw pattern function which will draw the shape.  We create clones corresponding to number of edges and draw a pattern of specific length. And then we create clones for each clone turning at specific angles and drawing patterns, extending this for 5 levels. After every pattern is drawn, we delete the clones for that pattern to make sure we don't run out of clones in scratch. There we go, let's check this out! We got a beautiful pattern of snowflake, honeycomb and kite. And we could repeat this forever to create something that looks like a wallpaper.
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (3, $$
 Abida: We have so far coded ... see how we could achieve this.
 
 Abida: We have so far coded for some of the things that we love doing and are passionate about. How about coding for something the world needs the most?
@@ -1500,8 +1500,8 @@ How about we also simulate how these trees help with reducing the climate change
 Other artificial way of achieving sequestration is by absorbing carbon from the atmosphere and storing it underground. Let's see how to code for carbon sequestration.
 $$);
 
-INSERT INTO transcript (transcript)
-VALUES ($$
+INSERT INTO transcript (module, transcript)
+VALUES (3, $$
 That's nice. We simulated ... to code for carbon sequestration.
 
 Abida: We have so far coded for some of the things that we love doing and are passionate about. How about coding for something the world needs the most?

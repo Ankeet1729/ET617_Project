@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Function to generate quiz using Gemini AI
-async function generateQuizWithGemini(transcript, grade, no_of_mcq = 2, no_of_tf = 2) {
+async function generateQuizWithGemini(transcript, grade, no_of_mcq = 7, no_of_tf = 3) {
   const prompt = `
 You are an expert in educational psychology and curriculum design. 
 Your task is to generate a pedagogically sound quiz from the provided learning material,
@@ -80,7 +80,6 @@ keeping the learner's cognitive development in mind.
 6.  Provide a concise explanation for each answer, referencing the core concept from the transcript.
 7. No need to put A., B., C., D. before options in MCQs output.
 8. Also have a field called "needs_image" in each question object, set it to true if the question would benefit from an accompanying image, else false.
-9. Do not return the content enclosed within \`\`\`json ... \`\`\`.
 10. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<Snippet 1> ... <Snippet 2>". So you should only generate the quiz for the part between <Snippet 1> and <Snippet 2>, but keep the context of the entire transcript.
 
 ### Output Format (Strict JSON)
@@ -121,7 +120,8 @@ ${transcript}
   try {
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = response.text();
+    let text = response.text();
+    text = text.slice(7, -3);
     
     // Parse the JSON response
     const quizData = JSON.parse(text);
@@ -169,6 +169,30 @@ app.post('/login', async (req, res) => {
     res.json({ message: "Login successful!", user: { username, email: user.email } });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/modules', async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT quiz_id, module
+      FROM transcript 
+      ORDER BY module, quiz_id
+    `);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        error: "No transcript data found in the database"
+      });
+    }
+
+    console.log('Raw transcript data fetched successfully from database');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error fetching transcript data from database:', err);
+    res.status(500).json({ 
+      error: "Internal server error while fetching transcript data" 
+    });
   }
 });
 
