@@ -3,6 +3,7 @@ import QuizView from "./QuizView";
 
 interface DashboardProps {
   username: string;
+  grade: string;
   onLogout: () => void;
 }
 
@@ -82,6 +83,23 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
 
     fetchModules();
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost:5000/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Include cookies if using session-based auth
+      });
+    } catch (error) {
+      console.error("Error during logout:", error);
+    } finally {
+      // Call the parent logout function regardless of API success/failure
+      onLogout();
+    }
+  };
 
   const handleModuleClick = (moduleId: number) => {
     setSelectedModule(moduleId);
@@ -174,7 +192,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
         <h1 style={{ margin: 0, color: "#333" }}>{selectedModule ? `Module ${selectedModule}` : "Dashboard"}</h1>
         <div>
           <span style={{ marginRight: "20px", color: "#666" }}>Welcome, {username}!</span>
-          <button onClick={onLogout} style={{ padding: "8px 16px", backgroundColor: "#dc3545", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}>
+          <button onClick={handleLogout} style={{ padding: "8px 16px", backgroundColor: "#dc3545", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}>
             Logout
           </button>
         </div>

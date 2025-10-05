@@ -1,11 +1,29 @@
-const express = require('express');
-const cors = require('cors');
-const bcrypt = require('bcryptjs');
-const pool = require('./db');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-require('dotenv').config();
+import express from "express";
+import cors from "cors";
+import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
+import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import pool from "./db.js"; // note: add `.js` extension for ESM
 
+dotenv.config();
+
+// const { GoogleGenerativeAI } = pkg;
 const app = express();
+
+const PgSession = connectPgSimple(session);
+
+app.use(session({
+  store: new PgSession({
+    pool: pool, // your existing PostgreSQL pool
+    tableName: 'user_sessions'
+  }),
+  secret: "your_secret_here",   // put in .env
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // set true if using HTTPS
+}));
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -133,7 +151,7 @@ ${transcript}
 }
 
 app.post('/register', async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, grade } = req.body;
   const password_hash = await bcrypt.hash(password, 10);
   const userExists = await pool.query(
     "SELECT * FROM users WHERE username = $1 OR email = $2",
@@ -144,8 +162,8 @@ app.post('/register', async (req, res) => {
   }
   try {
     await pool.query(
-      "INSERT INTO users (username, password_hash, email) VALUES ($1, $2, $3)",
-      [username, password_hash, email]
+      "INSERT INTO users (username, password_hash, email, grade) VALUES ($1, $2, $3, $4)",
+      [username, password_hash, email, grade]
     );
     res.status(201).json({ message: "User registered!" });
   } catch (err) {
@@ -162,11 +180,23 @@ app.post('/login', async (req, res) => {
     );
     if (result.rows.length === 0)
       return res.status(401).json({ error: "No user found." });
+
     const user = result.rows[0];
+
     const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid)
       return res.status(401).json({ error: "Invalid password." });
-    res.json({ message: "Login successful!", user: { username, email: user.email } });
+
+    req.session.username = user.username;
+
+    res.json({ 
+      message: "Login successful!", 
+      user: { 
+      username, 
+      email: user.email, 
+      grade: user.grade 
+      } 
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -198,6 +228,28 @@ app.get('/api/modules', async (req, res) => {
 
 app.post('/api/generate_quiz', async (req, res) => {
   const { quiz_id, grade } = req.body;
+
+  // Check if there is any quiz associated with the user
+  try {
+    const existingQuiz = await pool.query(
+      "SELECT * FROM quiz WHERE username = $1",
+      [req.session.username]
+    );
+
+    if (existingQuiz.rows.length > 0) {
+      // Delete the existing quiz associated with the user
+      await pool.query(
+        "DELETE FROM quiz WHERE username = $1",
+        [req.session.username]
+      );
+      console.log(`Deleted existing quiz for user: ${req.session.username}`);
+    }
+  } catch (err) {
+    console.error('Error checking or deleting existing quiz:', err);
+    return res.status(500).json({ 
+      error: "Internal server error while checking or deleting existing quiz" 
+    });
+  }
   
   // Validate required parameters
   if (!quiz_id || !grade) {
@@ -240,14 +292,31 @@ app.post('/api/generate_quiz', async (req, res) => {
       "1": "foundational", "2": "foundational",
       "3": "preparatory", "4": "preparatory", "5": "preparatory",
       "6": "middle", "7": "middle", "8": "middle",
-      "9": "secondary", "10": "secondary", "11": "secondary", "12": "secondary"
+      "9": "secondary", "10": "secondary", "11": "secondary", "12": "secondary",
+      "null": "null"
     };
     
-    const nepGrade = gradeMapping[grade] || "middle";
+    // Retrieve the user's grade level from the login details
+    const result = await pool.query(
+      "SELECT grade FROM users WHERE username = $1",
+      [req.session.username]
+    );
+    
+    const nepGrade = result.rows[0]?.grade;
     
     // Generate quiz using Gemini AI
     console.log(`Generating quiz for Quiz ID: ${quiz_id}, Grade: ${grade} (${nepGrade})`);
-    const quizData = await generateQuizWithGemini(transcript, nepGrade, 2, 2);
+    const quizData = await generateQuizWithGemini(transcript, nepGrade, 7, 3);
+
+    try {
+      await pool.query(
+        "INSERT INTO quiz (username, quiz_data) VALUES ($1, $2)",
+        [req.session.username, JSON.stringify(quizData)]
+      )
+    }
+    catch (err) {
+      console.error('Error saving quiz data to database:', err);
+    }
     
     // Remove explanations from the response (will be shown after submission)
     const quizWithoutExplanations = {
@@ -326,7 +395,20 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     
     // Generate quiz with explanations for evaluation
     console.log(`Evaluating quiz for Quiz ID: ${quiz_id}, Grade: ${grade} (${nepGrade})`);
-    const quizData = await generateQuizWithGemini(transcript, nepGrade, 2, 2);
+    // Fetch quiz data from the database for the logged-in user
+    const quizResult = await pool.query(
+      "SELECT quiz_data FROM quiz WHERE username = $1",
+      [req.session.username]
+    );
+
+    if (quizResult.rows.length === 0) {
+      return res.status(404).json({
+        error: `No quiz data found for the user: ${req.session.username}`
+      });
+    }
+
+    // Parse the quiz data
+    const quizData = JSON.parse(quizResult.rows[0].quiz_data);
 
     // Evaluate answers
     const allQuestions = [
@@ -374,6 +456,12 @@ app.post('/api/evaluate_quiz', async (req, res) => {
       submittedAt: new Date().toISOString()
     };
 
+    // Delete the quiz entry from the database
+    await pool.query(
+      "DELETE FROM quiz WHERE username = $1",
+      [req.session.username, quiz_id]
+    );
+
     // Log the evaluation for debugging
     console.log(`Quiz evaluation completed - Quiz ID: ${quiz_id}, Score: ${percentage}%`);
     
@@ -383,6 +471,24 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     res.status(500).json({ 
       error: "Internal server error while evaluating quiz" 
     });
+  }
+});
+
+app.post('/logout', (req, res) => {
+  if (req.session) {
+    // Destroy the session
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.status(500).json({ error: 'Failed to log out. Please try again.' });
+      }
+
+      // Clear the session cookie
+      res.clearCookie('connect.sid'); // Replace 'connect.sid' with your session cookie name if different
+      return res.status(200).json({ message: 'Logged out successfully.' });
+    });
+  } else {
+    return res.status(400).json({ error: 'No active session to log out from.' });
   }
 });
 

@@ -4,6 +4,7 @@ const RegisterForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [grade, setGrade] = useState(1);
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -12,7 +13,7 @@ const RegisterForm: React.FC = () => {
       const res = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: name, email, password }),
+        body: JSON.stringify({ username: name, email, password, grade }),
       });
       const data = await res.json();
       if (res.ok) {
@@ -49,6 +50,20 @@ const RegisterForm: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+      <label>
+        Grade:
+        <select
+          value={grade}
+          onChange={(e) => setGrade(Number(e.target.value))}
+          required
+        >
+          {Array.from({ length: 12 }, (_, i) => i + 1).map((g) => (
+            <option key={g} value={g}>
+              {g}
+            </option>
+          ))}
+        </select>
+      </label>
       <button type="submit">Register</button>
       {message && <p>{message}</p>}
     </form>
