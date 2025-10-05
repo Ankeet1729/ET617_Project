@@ -76,7 +76,7 @@ const QuizView: React.FC<QuizViewProps> = ({
   const submitQuiz = async () => {
     setIsSubmitting(true);
     try {
-      const response = await fetch("http://localhost:5000/api/evaluate_quiz", {
+      const response = await fetch("http://localhost:5001/api/evaluate_quiz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,6 +86,7 @@ const QuizView: React.FC<QuizViewProps> = ({
           answers: answers,
           grade: "8"
         }),
+        credentials: "include"
       });
 
       const result = await response.json();

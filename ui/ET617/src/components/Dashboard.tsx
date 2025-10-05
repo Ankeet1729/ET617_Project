@@ -52,7 +52,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
   useEffect(() => {
     const fetchModules = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/modules");
+        const response = await fetch("http://localhost:5001/api/modules");
         const data = await response.json();
 
         if (response.ok) {
@@ -86,7 +86,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/logout", {
+      await fetch("http://localhost:5001/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +133,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
     setQuizMessage((prev) => ({ ...prev, [quizName]: "" }));
 
     try {
-      const response = await fetch("http://localhost:5000/api/generate_quiz", {
+      const response = await fetch("http://localhost:5001/api/generate_quiz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -142,6 +142,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
           quiz_id: getQuizIdFromName(quizName),
           grade: "8",
         }),
+        credentials: "include"
       });
 
       const data = await response.json();
