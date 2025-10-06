@@ -7,32 +7,43 @@ import "./App.css";
 const App: React.FC = () => {
   const [mode, setMode] = useState<"login" | "register" | "dashboard">("login");
   const [currentUser, setCurrentUser] = useState<string>("");
+  const [currentGrade, setCurrentGrade] = useState<number | null>(null);
 
   // Check for existing login session on app load
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
+    const savedGrade = localStorage.getItem("currentGrade");
     if (savedUser) {
       setCurrentUser(savedUser);
+      setCurrentGrade(savedGrade ? Number(savedGrade) : null);
       setMode("dashboard");
     }
   }, []);
 
-  const handleLoginSuccess = (username: string) => {
+  const handleLoginSuccess = (username: string, grade: number | null) => {
     setCurrentUser(username);
+    setCurrentGrade(grade);
     setMode("dashboard");
     localStorage.setItem("currentUser", username);
+    if (grade !== null && grade !== undefined) {
+      localStorage.setItem("currentGrade", String(grade));
+    } else {
+      localStorage.removeItem("currentGrade");
+    }
   };
 
   const handleLogout = () => {
     setCurrentUser("");
+    setCurrentGrade(null);
     setMode("login");
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("currentGrade");
     localStorage.removeItem("currentQuiz");
     localStorage.removeItem("selectedModule");
   };
 
   if (mode === "dashboard") {
-    return <Dashboard username={currentUser} onLogout={handleLogout} />;
+    return <Dashboard username={currentUser} grade={currentGrade ? String(currentGrade) : ""} onLogout={handleLogout} />;
   }
 
   return (
