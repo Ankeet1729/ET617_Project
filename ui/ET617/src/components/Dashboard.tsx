@@ -3,7 +3,7 @@ import QuizView from "./QuizView";
 
 interface DashboardProps {
   username: string;
-  grade: string;
+  grade?: string;
   onLogout: () => void;
 }
 
@@ -39,7 +39,7 @@ interface QuizData {
   true_false: TrueFalseQuestion[];
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
+const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   const [modules, setModules] = useState<Module[]>([]);
   const [selectedModule, setSelectedModule] = useState<number | null>(null);
   const [loadingModules, setLoadingModules] = useState<boolean>(true);
@@ -47,6 +47,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
   const [quizMessage, setQuizMessage] = useState<{ [key: string]: string }>({});
   const [currentQuiz, setCurrentQuiz] = useState<{ name: string; data: QuizData; quizId: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const displayGrade = grade && grade !== "null" && grade !== "undefined" && grade !== "" ? grade : (localStorage.getItem("currentGrade") || "");
 
   // Fetch modules from the backend API
   useEffect(() => {
@@ -133,14 +134,17 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
     setQuizMessage((prev) => ({ ...prev, [quizName]: "" }));
 
     try {
+      console.log(displayGrade+"yeah");
       const response = await fetch("http://localhost:5000/api/generate_quiz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
           quiz_id: getQuizIdFromName(quizName),
-          grade: "8",
+          grade: displayGrade || "8",
+          username: username || localStorage.getItem("currentUser") || undefined
         }),
       });
 
@@ -191,7 +195,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, onLogout }) => {
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "30px", padding: "20px", backgroundColor: "#f5f5f5", borderRadius: "8px" }}>
         <h1 style={{ margin: 0, color: "#333" }}>{selectedModule ? `Module ${selectedModule}` : "Dashboard"}</h1>
         <div>
-          <span style={{ marginRight: "20px", color: "#666" }}>Welcome, {username}!</span>
+          <span style={{ marginRight: "20px", color: "#666" }}>Welcome, {username}{displayGrade ? ` (Grade ${displayGrade})` : ""}!</span>
           <button onClick={handleLogout} style={{ padding: "8px 16px", backgroundColor: "#dc3545", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}>
             Logout
           </button>

@@ -185,6 +185,7 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ error: "Invalid password." });
 
     req.session.username = user.username;
+    console.log("Grade: " + user.grade);
 
     res.json({ 
       message: "Login successful!", 
@@ -224,22 +225,23 @@ app.get('/api/modules', async (req, res) => {
 });
 
 app.post('/api/generate_quiz', async (req, res) => {
-  const { quiz_id, grade } = req.body;
+  const { quiz_id, grade, username } = req.body;
+  const activeUser = req.session?.username || username;
 
   // Check if there is any quiz associated with the user
   try {
     const existingQuiz = await pool.query(
       "SELECT * FROM quiz WHERE username = $1",
-      [req.session.username]
+      [activeUser]
     );
 
     if (existingQuiz.rows.length > 0) {
       // Delete the existing quiz associated with the user
       await pool.query(
         "DELETE FROM quiz WHERE username = $1",
-        [req.session.username]
+        [activeUser]
       );
-      console.log(`Deleted existing quiz for user: ${req.session.username}`);
+      console.log(`Deleted existing quiz for user: ${activeUser}`);
     }
   } catch (err) {
     console.error('Error checking or deleting existing quiz:', err);
@@ -296,7 +298,7 @@ app.post('/api/generate_quiz', async (req, res) => {
     // Retrieve the user's grade level from the login details
     const result = await pool.query(
       "SELECT grade FROM users WHERE username = $1",
-      [req.session.username]
+      [activeUser]
     );
     
     const nepGrade = result.rows[0]?.grade;
@@ -308,7 +310,7 @@ app.post('/api/generate_quiz', async (req, res) => {
     try {
       await pool.query(
         "INSERT INTO quiz (username, quiz_data) VALUES ($1, $2)",
-        [req.session.username, JSON.stringify(quizData)]
+        [activeUser, JSON.stringify(quizData)]
       )
     }
     catch (err) {
@@ -349,7 +351,7 @@ app.post('/api/generate_quiz', async (req, res) => {
 });
 
 app.post('/api/evaluate_quiz', async (req, res) => {
-  const { quiz_id, answers, grade } = req.body;
+  const { quiz_id, answers, grade, username } = req.body;
   
   // Validate required parameters
   if (!quiz_id || !answers || !grade) {
@@ -393,14 +395,15 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     // Generate quiz with explanations for evaluation
     console.log(`Evaluating quiz for Quiz ID: ${quiz_id}, Grade: ${grade} (${nepGrade})`);
     // Fetch quiz data from the database for the logged-in user
+    const activeUser = req.session?.username || username;
     const quizResult = await pool.query(
       "SELECT quiz_data FROM quiz WHERE username = $1",
-      [req.session.username]
+      [activeUser]
     );
 
     if (quizResult.rows.length === 0) {
       return res.status(404).json({
-        error: `No quiz data found for the user: ${req.session.username}`
+        error: `No quiz data found for the user: ${activeUser}`
       });
     }
 
@@ -456,7 +459,7 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     // Delete the quiz entry from the database
     await pool.query(
       "DELETE FROM quiz WHERE username = $1",
-      [req.session.username, quiz_id]
+      [activeUser]
     );
 
     // Log the evaluation for debugging
