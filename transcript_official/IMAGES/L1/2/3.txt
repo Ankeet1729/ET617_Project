@@ -1,0 +1,1 @@
+This image shows the two essential scripts for the "Sad Eshal" sprite, which introduce variables and broadcasting. The first script runs when the green flag is clicked to initialize the emotion variable to "sad". The second script handles the interaction: when the sprite is clicked, it says its emotion and then broadcasts a message to trigger the next state (Anger).

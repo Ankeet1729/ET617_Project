@@ -1,0 +1,1 @@
+This script demonstrates how to get input from the user. When the green flag is clicked, it uses a ask and wait block to prompt the user to "enter your thought?". After the user types their answer, the sprite uses a say block to display the answer variable on the screen for 2 seconds.

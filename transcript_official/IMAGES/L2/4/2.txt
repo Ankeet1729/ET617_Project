@@ -1,0 +1,1 @@
+This image shows the logic for cycling through different shapes. It uses a count variable to keep track of taps. A function named chooseShape contains an if/else if/else ladder that checks the value of count. Based on the count, it calls the drawShape function with the correct parameters for a triangle (3 sides), a square (4 sides), or a hexagon (6 sides).

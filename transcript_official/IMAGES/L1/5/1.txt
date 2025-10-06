@@ -1,0 +1,1 @@
+This script demonstrates how to use the Boolean or operator to write more efficient code. Instead of using a separate if block for each positive thought, this single condition checks if the user's answer is "friendly" OR "grateful" OR "peaceful". If any one of these is true, the entire condition evaluates to true, significantly reducing the amount of code needed.

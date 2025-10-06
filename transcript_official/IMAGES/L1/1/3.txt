@@ -1,0 +1,1 @@
+This script shows the alternative method for making snowflakes fall, as suggested by AI.S.H.A. Instead of a glide block, it uses a repeat until loop that continuously moves the clone down with change y by (-5) until its y-position is off-screen, at which point it is deleted.

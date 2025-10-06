@@ -1,0 +1,1 @@
+This code demonstrates how a sprite (the "positive cloud") can react to a broadcast message. When it `receives` the "positive" message, it becomes visible, glides towards a target "blue bucket" sprite, and then uses another `if then` block to check if it is touching the bucket, hiding itself if the condition is true.

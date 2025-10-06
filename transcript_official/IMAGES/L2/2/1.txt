@@ -1,0 +1,1 @@
+This script demonstrates a nested loop used to create a repeating musical phrase, as described for Stanza 2. The outer repeat (2) block plays the entire two-line phrase twice. The inner repeat (2) block handles the repetition within a single line, playing a sequence of 6 notes two times. This structure is efficient for creating complex, repetitive melodies.
