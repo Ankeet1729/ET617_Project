@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
-import connectPgSimple from "connect-pg-simple";
+// import connectPgSimple from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -12,18 +12,15 @@ dotenv.config();
 // const { GoogleGenerativeAI } = pkg;
 const app = express();
 
-const PgSession = connectPgSimple(session);
+// const PgSession = connectPgSimple(session);
 
 app.use(session({
-  store: new PgSession({
-    pool: pool, // your existing PostgreSQL pool
-    tableName: 'user_sessions'
-  }),
-  secret: "your_secret_here",   // put in .env
+  secret: process.env.SESSION_SECRET || "your_secret_here",
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false } // set true if using HTTPS
 }));
+
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
