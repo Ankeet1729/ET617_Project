@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 interface LoginFormProps {
-  onLoginSuccess: (username: string) => void;
+  onLoginSuccess: (username: string, grade: number | null) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
@@ -20,6 +20,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
       const res = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ username, password }),
       });
 
@@ -29,7 +30,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         setMessageType("success");
         setMessage("Login successful! Redirecting...");
         setTimeout(() => {
-          onLoginSuccess(username);
+          onLoginSuccess(data?.user?.username ?? username, (data?.user?.grade ?? null) as number | null);
         }, 1000);
       } else {
         setMessageType("error");

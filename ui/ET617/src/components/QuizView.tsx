@@ -76,15 +76,19 @@ const QuizView: React.FC<QuizViewProps> = ({
   const submitQuiz = async () => {
     setIsSubmitting(true);
     try {
+      const storedGrade = localStorage.getItem("currentGrade");
+      const gradeToSend = storedGrade && storedGrade !== "null" && storedGrade !== "undefined" && storedGrade !== "" ? storedGrade : "8";
       const response = await fetch("http://localhost:5000/api/evaluate_quiz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
           quiz_id: quizId,
           answers: answers,
-          grade: "8"
+          grade: gradeToSend,
+          username: localStorage.getItem("currentUser") || undefined
         }),
       });
 
@@ -94,8 +98,8 @@ const QuizView: React.FC<QuizViewProps> = ({
         setEvaluationResult(result);
         setShowResults(true);
       } else {
-        console.error("Error submitting quiz:", result.error);
-        alert("Error submitting quiz. Please try again.");
+        console.error("Error submitting quiz:", response.status, result);
+        alert(result?.error ? `Error submitting quiz: ${result.error}` : "Error submitting quiz. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting quiz:", error);
