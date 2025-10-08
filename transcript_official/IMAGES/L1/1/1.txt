@@ -1,0 +1,1 @@
+This script creates a continuous dancing animation for a sprite. It uses a forever loop to make the sprite constantly switch to its next costume while simultaneously gliding to a new random position on the stage. The wait block controls the pace of the animation, making it a core technique for creating dynamic, non-player characters.

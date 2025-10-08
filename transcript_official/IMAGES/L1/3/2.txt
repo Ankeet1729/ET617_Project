@@ -1,0 +1,1 @@
+This shows the code for the final emotional state, "Eshal Compassion". It listens for the message from the "Balance" sprite, sets the emotion variable to "Compassion", and, when clicked, delivers a helpful message to Rumanzel before broadcasting the final message that triggers Rumanzel's response.

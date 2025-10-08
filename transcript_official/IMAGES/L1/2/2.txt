@@ -1,0 +1,1 @@
+This script demonstrates the alternative to a forever loop, used for a finite number of actions. The repeat block is used to make a sprite move 10 steps a specific number of times (in this case, 250), which is used for Angry Eshal's controlled running.

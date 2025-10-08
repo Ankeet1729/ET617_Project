@@ -1,0 +1,1 @@
+This script shows how to use multiple `if then` blocks to check for specific user inputs. The code checks if the `answer` is "grateful" to broadcast a "positive" message, and then separately checks if the `answer` is "blaming" to broadcast a "negative" message. This illustrates a basic way to handle different conditions.

@@ -1,0 +1,1 @@
+This image shows the complete code for the "Eshal Balance" sprite. The scripts demonstrate how it acts as the next step in the emotional state machine. It waits to receive the "I'm angry" message, updates the shared emotion variable to "Balance", and then waits to be clicked to broadcast its own state and trigger the "Compassion" sprite.

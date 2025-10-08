@@ -1,0 +1,1 @@
+This image shows the core concept of creating a reusable drawing module. A custom block (function) named drawShape is defined with two inputs: sides and length. Inside the function, it uses a repeat loop to draw any regular polygon by moving and then turning by an angle calculated as 360 / sides. This function is the fundamental building block for the rest of the project.

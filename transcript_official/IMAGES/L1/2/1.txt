@@ -1,0 +1,1 @@
+This script is the primary example of an infinite loop from the video. It uses a forever block to make the "Eshal" sprite move continuously. The if on edge, bounce block keeps the sprite on screen, and the set rotation style block is essential to prevent the sprite from flipping upside down after bouncing.

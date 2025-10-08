@@ -1,0 +1,1 @@
+This image shows the complete and optimized "thought-catcher" logic. It uses a single if/else block. The if condition uses nested or operators to check for all known positive thoughts. If the thought is positive, it broadcasts "positive". For every other possible thought, the else part of the block is executed, broadcasting "negative", making the code both shorter and faster.
