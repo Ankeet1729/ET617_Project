@@ -230,96 +230,86 @@ app.post('/api/generate_quiz', async (req, res) => {
 
   // Check if there is any quiz associated with the user
   try {
-    const existingQuiz = await pool.query(
-      "SELECT * FROM quiz WHERE username = $1",
-      [activeUser]
-    );
-
+    const existingQuiz = await pool.query('SELECT * FROM quiz WHERE username = $1', [activeUser]);
     if (existingQuiz.rows.length > 0) {
       // Delete the existing quiz associated with the user
-      await pool.query(
-        "DELETE FROM quiz WHERE username = $1",
-        [activeUser]
-      );
-      console.log(`Deleted existing quiz for user: ${activeUser}`);
+      await pool.query('DELETE FROM quiz WHERE username = $1', [activeUser]);
+      console.log(`Deleted existing quiz for user ${activeUser}`);
     }
   } catch (err) {
     console.error('Error checking or deleting existing quiz:', err);
-    return res.status(500).json({ 
-      error: "Internal server error while checking or deleting existing quiz" 
-    });
+    return res.status(500).json({ error: 'Internal server error while checking or deleting existing quiz' });
   }
-  
+
   // Validate required parameters
   if (!quiz_id || !grade) {
-    return res.status(400).json({ 
-      error: "Missing required parameters: quiz_id and grade are required" 
-    });
+    return res.status(400).json({ error: 'Missing required parameters: quiz_id and grade are required' });
   }
 
   // Validate quiz_id is a number starting from 1
   if (typeof quiz_id !== 'number' || quiz_id < 1) {
-    return res.status(400).json({ 
-      error: "quiz_id must be a number starting from 1" 
-    });
+    return res.status(400).json({ error: 'quiz_id must be a number starting from 1' });
   }
 
-  // Validate grade is a string
-  if (typeof grade !== 'string') {
-    return res.status(400).json({ 
-      error: "grade must be a string" 
-    });
+  // Validate and normalize grade (accept string or number)
+  let normalizedGrade = grade;
+  if (typeof grade === 'number') {
+    normalizedGrade = String(grade);
+  } else if (typeof grade !== 'string') {
+    return res.status(400).json({ error: 'grade must be a string or number' });
   }
 
   try {
     // Fetch transcript from database
     const transcriptResult = await pool.query(
-      "SELECT transcript FROM transcript WHERE quiz_id = $1",
+      'SELECT transcript FROM transcript WHERE quiz_id = $1',
       [quiz_id]
     );
 
     if (transcriptResult.rows.length === 0) {
-      return res.status(404).json({
-        error: `No transcript found for quiz_id: ${quiz_id}`
-      });
+      return res.status(404).json({ error: `No transcript found for quiz_id ${quiz_id}` });
     }
 
     const transcript = transcriptResult.rows[0].transcript;
-    
-    // Map grade to NEP format
+
+    // Map grade to NEP format (using normalizedGrade as string key)
     const gradeMapping = {
-      "1": "foundational", "2": "foundational",
-      "3": "preparatory", "4": "preparatory", "5": "preparatory",
-      "6": "middle", "7": "middle", "8": "middle",
-      "9": "secondary", "10": "secondary", "11": "secondary", "12": "secondary",
-      "null": "null"
+      '1': 'foundational', '2': 'foundational',
+      '3': 'preparatory', '4': 'preparatory', '5': 'preparatory',
+      '6': 'middle', '7': 'middle', '8': 'middle',
+      '9': 'secondary', '10': 'secondary', '11': 'secondary', '12': 'secondary'
     };
-    
-    // Retrieve the user's grade level from the login details
-    const result = await pool.query(
-      "SELECT grade FROM users WHERE username = $1",
-      [activeUser]
-    );
-    
-    const nepGrade = result.rows[0]?.grade;
-    
+    let nepGrade = gradeMapping[normalizedGrade] || 'middle';  // Default to 'middle' for invalid/null
+
+    // Retrieve the user's grade level from the login details (for consistency)
+    const result = await pool.query('SELECT grade FROM users WHERE username = $1', [activeUser]);
+    const userGrade = result.rows[0]?.grade;
+
+    // Use userGrade if available and valid, fallback to normalizedGrade
+    if (userGrade !== null && userGrade !== undefined) {
+      const userGradeStr = String(userGrade);
+      nepGrade = gradeMapping[userGradeStr] || 'middle';
+    }
+
+    console.log(`Generating quiz for Quiz ID: ${quiz_id}, Grade: ${normalizedGrade} (${nepGrade})`);
+
     // Generate quiz using Gemini AI
-    console.log(`Generating quiz for Quiz ID: ${quiz_id}, Grade: ${grade} (${nepGrade})`);
     const quizData = await generateQuizWithGemini(transcript, nepGrade, 7, 3);
 
+    // Save to database
     try {
       await pool.query(
-        "INSERT INTO quiz (username, quiz_data) VALUES ($1, $2)",
+        'INSERT INTO quiz (username, quiz_data) VALUES ($1, $2)',
         [activeUser, JSON.stringify(quizData)]
-      )
-    }
-    catch (err) {
+      );
+    } catch (err) {
       console.error('Error saving quiz data to database:', err);
+      return res.status(500).json({ error: 'Failed to save quiz data' });
     }
-    
+
     // Remove explanations from the response (will be shown after submission)
     const quizWithoutExplanations = {
-      multiple_choice: quizData.multiple_choice.map(q => ({
+      multiple_choice: quizData.multiple_choice?.map(q => ({
         question: q.question,
         options: q.options,
         answer: q.answer,
@@ -327,28 +317,25 @@ app.post('/api/generate_quiz', async (req, res) => {
         concept: q.concept,
         needs_image: q.needs_image,
         grade: q.grade
-      })),
-      true_false: quizData.true_false.map(q => ({
+      })) || [],
+      true_false: quizData.true_false?.map(q => ({
         question: q.question,
         answer: q.answer,
         bloom_level: q.bloom_level,
         concept: q.concept,
         needs_image: q.needs_image,
         grade: q.grade
-      }))
+      })) || []
     };
 
-    // Log the successful generation
-    console.log(`Quiz generated successfully - Quiz ID: ${quiz_id}, Grade: ${grade}`);
-    
+    console.log(`Quiz generated successfully - Quiz ID: ${quiz_id}, Grade: ${normalizedGrade}`);
     res.json(quizWithoutExplanations);
   } catch (err) {
     console.error('Error generating quiz:', err);
-    res.status(500).json({ 
-      error: "Internal server error while generating quiz" 
-    });
+    res.status(500).json({ error: 'Internal server error while generating quiz' });
   }
 });
+
 
 app.post('/api/evaluate_quiz', async (req, res) => {
   const { quiz_id, answers, grade, username } = req.body;
@@ -492,4 +479,119 @@ app.post('/logout', (req, res) => {
   }
 });
 
+// Admin Login Route (separate from student login for security)
+app.post('/admin/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    if (username !== 'root' || password !== 'admin') {
+      return res.status(401).json({ error: 'Invalid admin credentials' });
+    }
+    
+    // Create admin session
+    req.session.isAdmin = true;
+    req.session.username = 'root';
+    
+    res.json({ success: true, message: 'Admin login successful' });
+  } catch (error) {
+    console.error('Admin login error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Middleware to check admin session
+const checkAdmin = (req, res, next) => {
+  if (req.session.isAdmin) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Admin access required' });
+  }
+};
+
+// Get grades with student counts
+app.get('/admin/students/grades', checkAdmin, async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT grade, COUNT(*) as student_count 
+      FROM users 
+      WHERE grade IS NOT NULL 
+      GROUP BY grade 
+      ORDER BY grade
+    `);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching grades:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Get students by grade
+app.get('/admin/students/:grade', checkAdmin, async (req, res) => {
+  const { grade } = req.params;
+  try {
+    const result = await pool.query(`
+      SELECT username, email, grade 
+      FROM users 
+      WHERE grade = $1 
+      ORDER BY username
+    `, [grade]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Get grades with quiz availability
+app.get('/admin/quizzes/grades', checkAdmin, async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT u.grade, COUNT(q.username) as quiz_count
+      FROM users u
+      LEFT JOIN quiz q ON u.username = q.username
+      WHERE u.grade IS NOT NULL
+      GROUP BY u.grade
+      ORDER BY u.grade
+    `);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching quiz grades:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Get quizzes by grade (aggregate quiz_data from users in that grade)
+app.get('/admin/quizzes/:grade', checkAdmin, async (req, res) => {
+  const { grade } = req.params;
+  try {
+    const result = await pool.query(`
+      SELECT q.username, q.quiz_data, u.grade
+      FROM quiz q
+      JOIN users u ON q.username = u.username
+      WHERE u.grade = $1
+      ORDER BY q.username
+    `, [grade]);
+    
+    // Parse quiz_data JSON for each user
+    const quizzes = result.rows.map(row => ({
+      username: row.username,
+      grade: row.grade,
+      quiz: JSON.parse(row.quiz_data || '{}') // Handle empty quiz_data
+    }));
+    
+    res.json(quizzes);
+  } catch (error) {
+    console.error('Error fetching quizzes:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Admin Logout
+app.post('/admin/logout', checkAdmin, (req, res) => {
+  req.session.destroy();
+  res.json({ success: true, message: 'Admin logged out' });
+});
+
 app.listen(5000, () => console.log("Server running on port 5000"));
+
+
