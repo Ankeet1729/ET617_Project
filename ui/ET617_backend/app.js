@@ -344,18 +344,17 @@ app.post('/api/evaluate_quiz', async (req, res) => {
   const { quiz_id, answers, grade, username, module, set_index } = req.body;
 
   // Validate required parameters
-  if (!answers || !grade) {
+  if (!answers || !grade || !username) {
     return res.status(400).json({
-      error: "Missing required parameters: answers and grade are required"
+      error: "Missing required parameters: answers, grade, and username are required"
     });
   }
 
   try {
     console.log(`Evaluating quiz for user: ${username}, grade: ${grade}, module: ${module || quiz_id}`);
 
-    // NEW: Fetch the correct answers from quiz_sets table
-    // Use module and set_index if provided, otherwise try to infer from quiz_id
-    const actualModule = module || quiz_id; // Fallback to quiz_id as module
+    // Fetch the correct answers from quiz_sets table
+    const actualModule = module || quiz_id;
     
     if (!actualModule) {
       return res.status(400).json({
@@ -363,8 +362,8 @@ app.post('/api/evaluate_quiz', async (req, res) => {
       });
     }
 
-    // Fetch the quiz set (use set_index if provided, otherwise get latest)
-    let query = 'SELECT questions FROM quiz_sets WHERE grade = $1 AND module = $2 AND is_hidden = FALSE';
+    // Fetch the quiz set
+    let query = 'SELECT id, questions, set_index FROM quiz_sets WHERE grade = $1 AND module = $2 AND is_hidden = FALSE';
     const params = [parseInt(grade), parseInt(actualModule)];
     
     if (set_index) {
@@ -382,7 +381,9 @@ app.post('/api/evaluate_quiz', async (req, res) => {
       });
     }
 
+    const quizSetId = quizSetResult.rows[0].id;
     const questions = quizSetResult.rows[0].questions;
+    const actualSetIndex = quizSetResult.rows[0].set_index;
 
     // Convert questions to evaluation format
     const allQuestions = questions.map((q, i) => ({
@@ -421,6 +422,25 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     else if (percentage >= 70) gradeLevel = "Satisfactory";
     else if (percentage >= 60) gradeLevel = "Below Average";
 
+    // NEW: Save attempt to database
+    await pool.query(
+      `INSERT INTO quiz_attempts 
+        (username, grade, module, set_index, quiz_set_id, score, total_questions, percentage, grade_level, answers) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+      [
+        username,
+        parseInt(grade),
+        parseInt(actualModule),
+        parseFloat(actualSetIndex),
+        quizSetId,
+        correctCount,
+        totalQuestions,
+        percentage,
+        gradeLevel,
+        JSON.stringify(detailedResults)
+      ]
+    );
+
     const evaluationResult = {
       quiz_id: actualModule,
       totalQuestions: totalQuestions,
@@ -431,8 +451,7 @@ app.post('/api/evaluate_quiz', async (req, res) => {
       submittedAt: new Date().toISOString()
     };
 
-    // Log the evaluation for debugging
-    console.log(`Quiz evaluation completed - Module: ${actualModule}, Score: ${percentage}%`);
+    console.log(`Quiz evaluation completed and saved - Module: ${actualModule}, Score: ${percentage}%`);
     res.json(evaluationResult);
   } catch (err) {
     console.error('Error evaluating quiz:', err);
@@ -441,6 +460,7 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     });
   }
 });
+
 
 
 app.post('/logout', (req, res) => {
@@ -541,6 +561,48 @@ app.get('/admin/quizzes/grades', checkAdmin, async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+// NEW: Get quiz attempts for a specific student
+app.get('/admin/student_attempts/:username', checkAdmin, async (req, res) => {
+  const { username } = req.params;
+  try {
+    const result = await pool.query(
+      `SELECT id, grade, module, set_index, score, total_questions, percentage, 
+              grade_level, submitted_at, answers 
+       FROM quiz_attempts 
+       WHERE username = $1 
+       ORDER BY submitted_at DESC`,
+      [username]
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching student attempts:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// NEW: Get attempt statistics for a student
+app.get('/admin/student_stats/:username', checkAdmin, async (req, res) => {
+  const { username } = req.params;
+  try {
+    const result = await pool.query(
+      `SELECT 
+        COUNT(*) as total_attempts,
+        AVG(percentage)::INTEGER as avg_score,
+        MAX(percentage) as best_score,
+        MIN(percentage) as worst_score,
+        COUNT(DISTINCT module) as modules_attempted
+       FROM quiz_attempts 
+       WHERE username = $1`,
+      [username]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error fetching student stats:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 
 // Get quizzes by grade (aggregate quiz_data from users in that grade)
 app.get('/admin/quizzes/:grade', checkAdmin, async (req, res) => {

@@ -44,3 +44,27 @@ $$ language 'plpgsql';
 
 CREATE TRIGGER update_quiz_sets_updated_at BEFORE UPDATE
     ON quiz_sets FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Quiz Attempts Tracking (stores all student quiz submissions)
+CREATE TABLE IF NOT EXISTS quiz_attempts (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
+    grade INTEGER NOT NULL,
+    module INTEGER NOT NULL,
+    set_index DECIMAL(3,1) NOT NULL,
+    quiz_set_id INTEGER REFERENCES quiz_sets(id) ON DELETE SET NULL,
+    score INTEGER NOT NULL, -- Correct answers count
+    total_questions INTEGER NOT NULL,
+    percentage INTEGER NOT NULL,
+    grade_level VARCHAR(50), -- Excellent, Good, etc.
+    answers JSONB NOT NULL, -- User's answers with correctness: [{"question": "...", "user_answer": "...", "correct_answer": "...", "is_correct": true, ...}]
+    time_taken INTEGER, -- In seconds (optional for future)
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_quiz_set FOREIGN KEY (grade, module, set_index) 
+        REFERENCES quiz_sets(grade, module, set_index) ON DELETE CASCADE
+);
+
+-- Indexes for fast queries
+CREATE INDEX idx_attempts_username ON quiz_attempts(username);
+CREATE INDEX idx_attempts_grade_module ON quiz_attempts(grade, module);
+CREATE INDEX idx_attempts_submitted ON quiz_attempts(submitted_at DESC);
