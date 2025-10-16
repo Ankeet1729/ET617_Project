@@ -11,6 +11,7 @@ interface QuizResult {
   concept: string;
   type: string;
   needs_image: boolean;
+  options?: string[];
 }
 
 interface EvaluationResult {
@@ -247,6 +248,51 @@ const QuizResults: React.FC<QuizResultsProps> = ({
                   </div>
                 </div>
               </div>
+
+              {/* Options (if multiple choice) */}
+              {result.type === "multiple_choice" && result.options && result.options.length > 0 && (
+                <div style={{ marginBottom: "15px" }}>
+                  <div style={{ fontSize: "14px", fontWeight: "bold", color: "#333", marginBottom: "8px" }}>
+                    Options:
+                  </div>
+                  <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+                    {result.options.map((opt, i) => (
+                      <li
+                        key={i}
+                        style={{
+                          backgroundColor:
+                            opt === result.correctAnswer
+                              ? "#d4edda"
+                              : opt === result.userAnswer
+                              ? "#f8d7da"
+                              : "#f8f9fa",
+                          border:
+                            opt === result.correctAnswer
+                              ? "1px solid #c3e6cb"
+                              : opt === result.userAnswer
+                              ? "1px solid #f5c6cb"
+                              : "1px solid #dee2e6",
+                          borderRadius: "6px",
+                          padding: "8px 12px",
+                          marginBottom: "6px",
+                          color:
+                            opt === result.correctAnswer
+                              ? "#155724"
+                              : opt === result.userAnswer
+                              ? "#721c24"
+                              : "#333",
+                          fontWeight:
+                            opt === result.correctAnswer || opt === result.userAnswer
+                              ? "bold"
+                              : "normal",
+                        }}
+                      >
+                        {opt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Explanation Toggle */}
               <button

@@ -120,8 +120,13 @@ keeping the learner's cognitive development in mind.
 7. No need to put A., B., C., D. before options in MCQs output.
 
 8. Also have a field called "needs_image" in each question object, set it to true if the question would benefit from an accompanying image, else false.
+<<<<<<< Updated upstream
 
 10. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<start_time>X</start_time> <end_time>Y</end_time> ... ". So you should only generate the quiz for the part between <start_time> and <end_time>, but keep the context of the entire transcript.
+=======
+10. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<Snippet 1> ... <Snippet 2>". So you should only generate the quiz for the part between <Snippet 1> and <Snippet 2>, but keep the context of the entire transcript.
+11. Do not keep any ambiguous options in MCQs where 2 or more answers could be correct.
+>>>>>>> Stashed changes
 
 ### Output Format (Strict JSON)
 {
@@ -401,6 +406,7 @@ app.post('/api/evaluate_quiz', async (req, res) => {
       return {
         questionIndex: index + 1,
         question: question.question,
+        options: question.options || [],  // 👈 add this line
         userAnswer: userAnswer || "Not answered",
         correctAnswer: question.answer,
         isCorrect: isCorrect,
