@@ -29,16 +29,18 @@ interface QuizViewProps {
   quizName: string;
   quizData: QuizData;
   quizId: number;
-  onBackToModules: () => void;
-  onBackToDashboard: () => void;
+  username: string;
+  grade: string;
+  onBack: () => void;
 }
 
-const QuizView: React.FC<QuizViewProps> = ({ 
-  quizName, 
-  quizData, 
+const QuizView: React.FC<QuizViewProps> = ({
+  quizName,
+  quizData,
   quizId,
-  onBackToModules, 
-  onBackToDashboard 
+  username,
+  grade,
+  onBack
 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
@@ -77,7 +79,24 @@ const QuizView: React.FC<QuizViewProps> = ({
     setIsSubmitting(true);
     try {
       const storedGrade = localStorage.getItem("currentGrade");
-      const gradeToSend = storedGrade && storedGrade !== "null" && storedGrade !== "undefined" && storedGrade !== "" ? storedGrade : "8";
+      const gradeToSend = storedGrade && storedGrade !== "null" && storedGrade !== "undefined" && storedGrade !== "" ? storedGrade : grade || "8";
+  
+      // NEW: Get module and set_index from localStorage (saved when quiz was loaded)
+      const currentQuizData = localStorage.getItem("currentQuiz");
+      let moduleId = quizId; // Default to quizId
+      let setIndex = null;
+      
+      if (currentQuizData) {
+        try {
+          const parsed = JSON.parse(currentQuizData);
+          // Check if we stored module/set info
+          if (parsed.moduleId) moduleId = parsed.moduleId;
+          if (parsed.set_index) setIndex = parsed.set_index;
+        } catch (e) {
+          console.warn('Could not parse stored quiz data');
+        }
+      }
+  
       const response = await fetch("http://localhost:5000/api/evaluate_quiz", {
         method: "POST",
         headers: {
@@ -85,15 +104,17 @@ const QuizView: React.FC<QuizViewProps> = ({
         },
         credentials: "include",
         body: JSON.stringify({
-          quiz_id: quizId,
+          quiz_id: moduleId,
           answers: answers,
           grade: gradeToSend,
-          username: localStorage.getItem("currentUser") || undefined
+          username: localStorage.getItem("currentUser") || username || undefined,
+          module: moduleId,
+          set_index: setIndex
         }),
       });
-
+  
       const result = await response.json();
-      
+  
       if (response.ok) {
         setEvaluationResult(result);
         setShowResults(true);
@@ -108,254 +129,214 @@ const QuizView: React.FC<QuizViewProps> = ({
       setIsSubmitting(false);
     }
   };
+  
 
   if (showResults && evaluationResult) {
     return (
       <QuizResults
-        quizName={quizName}
         evaluationResult={evaluationResult}
-        onBackToModules={onBackToModules}
-        onBackToDashboard={onBackToDashboard}
-        onRetakeQuiz={() => {
+        onReturnToDashboard={() => {
           setShowResults(false);
           setEvaluationResult(null);
           setCurrentQuestionIndex(0);
           setAnswers({});
+          onBack();
         }}
       />
     );
   }
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <header style={{ 
-        display: "flex", 
-        justifyContent: "space-between", 
-        alignItems: "center",
-        marginBottom: "30px",
-        padding: "20px",
-        backgroundColor: "#f5f5f5",
-        borderRadius: "8px"
-      }}>
-        <h1 style={{ margin: 0, color: "#333" }}>{quizName}</h1>
-        <button 
-          onClick={onBackToModules}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "#6c757d",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
-        >
-          ← Back to Modules
-        </button>
-      </header>
+    <div style={{ fontFamily: "Arial, sans-serif", maxWidth: "1400px", margin: "0 auto", padding: "20px", display: "flex", gap: "20px" }}>
+      {/* Question Palette Sidebar */}
+      <div style={{ width: "200px", backgroundColor: "#f8f9fa", padding: "20px", borderRadius: "10px", position: "sticky", top: "20px", height: "fit-content" }}>
+        <h3 style={{ marginTop: 0, color: "#333", fontSize: "16px", marginBottom: "15px" }}>Question Palette</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px" }}>
+          {allQuestions.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handleJumpToQuestion(index)}
+              style={{
+                width: "40px",
+                height: "40px",
+                backgroundColor: index === currentQuestionIndex ? "#007bff" : answers[allQuestions[index].id] ? "#28a745" : "#e9ecef",
+                color: index === currentQuestionIndex ? "white" : "#333",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: "bold",
+                fontSize: "14px",
+                transition: "all 0.2s"
+              }}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      </div>
 
-      <div style={{ display: "flex", gap: "20px" }}>
-        {/* Question Palette */}
-        <div style={{
-          width: "200px",
-          backgroundColor: "#f8f9fa",
-          borderRadius: "8px",
-          padding: "10px",
-          boxShadow: "0 4px 8px rgba(0,0,0,0.1)"
-        }}>
-          <h3 style={{ fontSize: "16px", marginBottom: "10px", color: "#333" }}>Question Palette</h3>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-            {allQuestions.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => handleJumpToQuestion(index)}
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: index === currentQuestionIndex ? "#007bff" : answers[allQuestions[index].id] ? "#28a745" : "#e9ecef",
-                  color: index === currentQuestionIndex ? "white" : "#333",
-                  border: "none",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  fontWeight: "bold"
-                }}
-              >
-                {index + 1}
-              </button>
-            ))}
+      {/* Main Quiz Content */}
+      <div style={{ flex: 1 }}>
+        <div style={{ background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", color: "white", padding: "20px", borderRadius: "10px", marginBottom: "20px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div>
+              <h2 style={{ margin: 0, fontSize: "24px" }}>{quizName}</h2>
+              <p style={{ margin: "5px 0 0 0", opacity: 0.9 }}>Username: {username} | Grade: {grade}</p>
+            </div>
+            <button
+              onClick={onBack}
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "rgba(255,255,255,0.2)",
+                border: "2px solid white",
+                borderRadius: "8px",
+                color: "white",
+                cursor: "pointer",
+                fontSize: "14px"
+              }}
+            >
+              Exit Quiz
+            </button>
           </div>
         </div>
 
-        {/* Main Quiz Content */}
-        <div style={{ flex: 1 }}>
-          {/* Progress Bar */}
-          <div style={{ marginBottom: "30px" }}>
-            <div style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "10px"
-            }}>
-              <span style={{ fontSize: "14px", color: "#666" }}>
-                Question {currentQuestionIndex + 1} of {allQuestions.length}
-              </span>
-              <span style={{ fontSize: "14px", color: "#666" }}>
-                {Math.round(((currentQuestionIndex + 1) / allQuestions.length) * 100)}%
-              </span>
-            </div>
-            <div style={{
-              width: "100%",
-              height: "8px",
-              backgroundColor: "#e9ecef",
-              borderRadius: "4px",
-              overflow: "hidden"
-            }}>
-              <div style={{
-                width: `${((currentQuestionIndex + 1) / allQuestions.length) * 100}%`,
-                height: "100%",
-                backgroundColor: "#007bff",
-                transition: "width 0.3s ease"
-              }} />
-            </div>
+        {/* Progress Bar */}
+        <div style={{ marginBottom: "20px", backgroundColor: "#f8f9fa", padding: "15px", borderRadius: "8px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px", fontSize: "14px", color: "#666" }}>
+            <span>Question {currentQuestionIndex + 1} of {allQuestions.length}</span>
+            <span>{Math.round(((currentQuestionIndex + 1) / allQuestions.length) * 100)}%</span>
           </div>
+          <div style={{ height: "8px", backgroundColor: "#e9ecef", borderRadius: "4px", overflow: "hidden" }}>
+            <div style={{ height: "100%", width: `${((currentQuestionIndex + 1) / allQuestions.length) * 100}%`, backgroundColor: "#667eea", transition: "width 0.3s" }} />
+          </div>
+        </div>
 
-          {/* Question Card */}
-          <div style={{
-            backgroundColor: "#fff",
-            borderRadius: "12px",
-            padding: "30px",
-            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-            marginBottom: "20px"
-          }}>
-            <div style={{
-              display: "inline-block",
-              padding: "4px 12px",
-              backgroundColor: currentQuestion.type === 'multiple_choice' ? "#e3f2fd" : "#f3e5f5",
-              color: currentQuestion.type === 'multiple_choice' ? "#1976d2" : "#7b1fa2",
-              borderRadius: "20px",
-              fontSize: "12px",
-              fontWeight: "bold",
-              marginBottom: "15px"
-            }}>
+        {/* Question Card */}
+        <div style={{ backgroundColor: "white", padding: "30px", borderRadius: "10px", boxShadow: "0 2px 10px rgba(0,0,0,0.1)", marginBottom: "20px" }}>
+          <div style={{ marginBottom: "15px" }}>
+            <span style={{ backgroundColor: "#667eea", color: "white", padding: "5px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold" }}>
               {currentQuestion.type.replace('_', ' ').toUpperCase()}
-            </div>
-
-            <h2 style={{ 
-              color: "#000000", 
-              marginBottom: "20px",
-              lineHeight: "1.4"
-            }}>
-              {currentQuestion.question}
-            </h2>
-
-            {currentQuestion.type === 'multiple_choice' ? (
-              <div style={{ marginBottom: "20px" }}>
-                {(currentQuestion as any).options.map((option: string, index: number) => (
-                  <label key={index} style={{
-                    display: "block",
-                    padding: "12px 16px",
-                    margin: "8px 0",
-                    backgroundColor: answers[currentQuestion.id] === option ? "#e3f2fd" : "#f8f9fa",
-                    border: `2px solid ${answers[currentQuestion.id] === option ? "#1976d2" : "#e9ecef"}`,
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                    color: "#000000"
-                  }}>
-                    <input
-                      type="radio"
-                      name={`question_${currentQuestion.id}`}
-                      value={option}
-                      checked={answers[currentQuestion.id] === option}
-                      onChange={(e) => handleAnswerSelect(currentQuestion.id, e.target.value)}
-                      style={{ marginRight: "10px" }}
-                    />
-                    {option}
-                  </label>
-                ))}
-              </div>
-            ) : (
-              <div style={{ marginBottom: "20px" }}>
-                {['True', 'False'].map((option) => (
-                  <label key={option} style={{
-                    display: "block",
-                    padding: "12px 16px",
-                    margin: "8px 0",
-                    backgroundColor: answers[currentQuestion.id] === option ? "#f3e5f5" : "#f8f9fa",
-                    border: `2px solid ${answers[currentQuestion.id] === option ? "#7b1fa2" : "#e9ecef"}`,
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                    color: "#000000"
-                  }}>
-                    <input
-                      type="radio"
-                      name={`question_${currentQuestion.id}`}
-                      value={option}
-                      checked={answers[currentQuestion.id] === option}
-                      onChange={(e) => handleAnswerSelect(currentQuestion.id, e.target.value)}
-                      style={{ marginRight: "10px" }}
-                    />
-                    {option}
-                  </label>
-                ))}
-              </div>
-            )}
+            </span>
+            <span style={{ marginLeft: "10px", color: "#999", fontSize: "12px" }}>
+              {currentQuestion.bloom_level} • {currentQuestion.concept}
+            </span>
           </div>
+          <h3 style={{ color: "#333", fontSize: "20px", marginBottom: "25px", lineHeight: 1.6 }}>
+            {currentQuestion.question}
+          </h3>
 
-          {/* Navigation Buttons */}
-          <div style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}>
-            <button
-              onClick={handlePrevious}
-              disabled={currentQuestionIndex === 0}
-              style={{
-                padding: "12px 24px",
-                backgroundColor: currentQuestionIndex === 0 ? "#e9ecef" : "#6c757d",
-                color: currentQuestionIndex === 0 ? "#6c757d" : "white",
-                border: "none",
-                borderRadius: "4px",
-                cursor: currentQuestionIndex === 0 ? "not-allowed" : "pointer",
-                fontSize: "16px"
-              }}
-            >
-              ← Previous
-            </button>
+          {currentQuestion.type === 'multiple_choice' ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              {(currentQuestion as any).options.map((option: string, index: number) => (
+                <label
+                  key={index}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "15px",
+                    backgroundColor: answers[currentQuestion.id] === option ? "#e7f3ff" : "#f8f9fa",
+                    border: answers[currentQuestion.id] === option ? "2px solid #667eea" : "2px solid #e9ecef",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    transition: "all 0.2s"
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name={currentQuestion.id}
+                    value={option}
+                    checked={answers[currentQuestion.id] === option}
+                    onChange={(e) => handleAnswerSelect(currentQuestion.id, e.target.value)}
+                    style={{ marginRight: "10px", width: "18px", height: "18px" }}
+                  />
+                  <span style={{ fontSize: "16px", color: "#333" }}>{option}</span>
+                </label>
+              ))}
+            </div>
+          ) : (
+            <div style={{ display: "flex", gap: "15px" }}>
+              {['True', 'False'].map((option) => (
+                <label
+                  key={option}
+                  style={{
+                    flex: 1,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "20px",
+                    backgroundColor: answers[currentQuestion.id] === option ? "#e7f3ff" : "#f8f9fa",
+                    border: answers[currentQuestion.id] === option ? "2px solid #667eea" : "2px solid #e9ecef",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    transition: "all 0.2s"
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name={currentQuestion.id}
+                    value={option}
+                    checked={answers[currentQuestion.id] === option}
+                    onChange={(e) => handleAnswerSelect(currentQuestion.id, e.target.value)}
+                    style={{ marginRight: "10px", width: "18px", height: "18px" }}
+                  />
+                  <span style={{ fontSize: "18px", fontWeight: "bold", color: "#333" }}>{option}</span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
 
+        {/* Navigation Buttons */}
+        <div style={{ display: "flex", justifyContent: "space-between", gap: "15px" }}>
+          <button
+            onClick={handlePrevious}
+            disabled={currentQuestionIndex === 0}
+            style={{
+              padding: "12px 24px",
+              backgroundColor: currentQuestionIndex === 0 ? "#e9ecef" : "#6c757d",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: currentQuestionIndex === 0 ? "not-allowed" : "pointer",
+              fontSize: "16px"
+            }}
+          >
+            ← Previous
+          </button>
+
+          {currentQuestionIndex < allQuestions.length - 1 ? (
             <button
               onClick={handleNext}
-              disabled={!answers[currentQuestion.id] || isSubmitting}
               style={{
                 padding: "12px 24px",
-                backgroundColor: (!answers[currentQuestion.id] || isSubmitting) ? "#e9ecef" : "#007bff",
-                color: (!answers[currentQuestion.id] || isSubmitting) ? "#6c757d" : "white",
+                backgroundColor: "#667eea",
+                color: "white",
                 border: "none",
-                borderRadius: "4px",
-                cursor: (!answers[currentQuestion.id] || isSubmitting) ? "not-allowed" : "pointer",
+                borderRadius: "8px",
+                cursor: "pointer",
                 fontSize: "16px"
               }}
             >
               Next →
             </button>
-
+          ) : (
             <button
               onClick={submitQuiz}
               disabled={isSubmitting}
               style={{
                 padding: "12px 24px",
-                backgroundColor: isSubmitting ? "#e9ecef" : "#28a745",
-                color: isSubmitting ? "#6c757d" : "white",
+                backgroundColor: isSubmitting ? "#6c757d" : "#28a745",
+                color: "white",
                 border: "none",
-                borderRadius: "4px",
+                borderRadius: "8px",
                 cursor: isSubmitting ? "not-allowed" : "pointer",
-                fontSize: "16px"
+                fontSize: "16px",
+                fontWeight: "bold"
               }}
             >
               {isSubmitting ? "Submitting..." : "Finish Quiz"}
             </button>
-          </div>
+          )}
         </div>
       </div>
     </div>

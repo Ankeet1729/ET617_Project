@@ -1,0 +1,29 @@
+1. Let's get to see all quiz qtns generated for video 24 according to concepts mapped already
+2. Personalize for all grades and change rigor for same concepts
+3. Auto-geenration of concepts for all videos
+4. Concept Tracking
+
+What we should do next:
+
+1) Get screenshots/frames of videos of each module which better represent the video (have a separate text file as well which contains additional context (CAN BE A HUMAN PROMPT IN BACKEND))
+2) Context = Transcript + Screenshots + Human Prompt (if necessary)
+3) collect context across all videos in a module -> CREATE CONCEPTS LIST
+4) for each grade -> get a grade subset of the concepts (GRADE SPECIFIC CONCEPTS SUBSET) - store in a database
+5) Prompt -> System Prompt + Context + Concept_Subset (Generate one question of each subset)
+6) Question Editing Flexibility
+7) Dashboard: 
+	Students:
+		Grade and student level activity tracking
+		Concept Level Tracking - Grade Level:
+			See how students are peforming in a Concept
+		(concept level tracking - student specific?)
+	Quizzes:
+		Grade level
+		AI generated or Manual Addition
+		Manual Edits to Question (or AI edits)
+		
+
+
+
+Questions:
+Are questions generated according to module or videos?

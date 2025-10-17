@@ -10,7 +10,13 @@ interface DashboardProps {
 interface Module {
   id: number;
   name: string;
-  quizzes: string[];
+  sets: Set[];  // CHANGED: From quizzes to sets
+}
+
+interface Set {
+  set_index: number;
+  question_count: number;
+  created_at: string;
 }
 
 interface MultipleChoiceQuestion {
@@ -42,48 +48,73 @@ interface QuizData {
 const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   const [modules, setModules] = useState<Module[]>([]);
   const [selectedModule, setSelectedModule] = useState<number | null>(null);
-  const [loadingModules, setLoadingModules] = useState<boolean>(true);
+  const [loadingModules, setLoadingModules] = useState(true);
   const [loadingQuiz, setLoadingQuiz] = useState<string | null>(null);
   const [quizMessage, setQuizMessage] = useState<{ [key: string]: string }>({});
   const [currentQuiz, setCurrentQuiz] = useState<{ name: string; data: QuizData; quizId: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const displayGrade = grade && grade !== "null" && grade !== "undefined" && grade !== "" ? grade : (localStorage.getItem("currentGrade") || "");
 
-  // Fetch modules from the backend API
+  const displayGrade = grade && grade !== "null" && grade !== "undefined" && grade !== "" 
+    ? grade 
+    : (localStorage.getItem("currentGrade") || "");
+
+  // UPDATED: Fetch modules with available sets from quiz_sets table
   useEffect(() => {
     const fetchModules = async () => {
+      if (!displayGrade) {
+        setError("Grade not found. Please log in again.");
+        setLoadingModules(false);
+        return;
+      }
+  
       try {
-        const response = await fetch("http://localhost:5000/api/modules");
-        const data = await response.json();
-
-        if (response.ok) {
-          // Transform the data into the required format
-          const transformedModules: Module[] = data.reduce((acc: Module[], row: any) => {
-            const moduleIndex = acc.findIndex((m) => m.id === row.module);
-            if (moduleIndex === -1) {
-              acc.push({
-                id: row.module,
-                name: `Module ${row.module}`,
-                quizzes: [`Quiz ${row.module}.${row.quiz_id}`],
-              });
-            } else {
-              acc[moduleIndex].quizzes.push(`Quiz ${row.module}.${row.quiz_id}`);
+        console.log('📚 Fetching modules for grade:', displayGrade);
+        
+        // Fetch all 7 modules and their sets
+        const moduleData: Module[] = [];
+        
+        for (let m = 1; m <= 7; m++) {
+          try {
+            // CHANGED: Use student endpoint instead of admin endpoint
+            const response = await fetch(
+              `http://localhost:5000/api/student/quiz_sets/${displayGrade}/${m}`,
+              { credentials: "include" }
+            );
+  
+            if (response.ok) {
+              const sets = await response.json();
+              
+              if (sets.length > 0) {
+                moduleData.push({
+                  id: m,
+                  name: `Module ${m}`,
+                  sets: sets
+                });
+              }
             }
-            return acc;
-          }, []);
-          setModules(transformedModules);
-        } else {
-          setError(data.error || "Failed to fetch modules");
+          } catch (err) {
+            console.warn(`Module ${m} fetch failed:`, err);
+            // Continue to next module
+          }
         }
+  
+        console.log('📚 Modules fetched:', moduleData);
+        
+        if (moduleData.length === 0) {
+          setError("No quiz sets available yet. Please contact your teacher.");
+        }
+        
+        setModules(moduleData);
       } catch (err) {
+        console.error('Error fetching modules:', err);
         setError("Error connecting to server");
       } finally {
         setLoadingModules(false);
       }
     };
-
     fetchModules();
-  }, []);
+  }, [displayGrade]);
+  
 
   const handleLogout = async () => {
     try {
@@ -92,12 +123,11 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Include cookies if using session-based auth
+        credentials: "include",
       });
     } catch (error) {
       console.error("Error during logout:", error);
     } finally {
-      // Call the parent logout function regardless of API success/failure
       onLogout();
     }
   };
@@ -121,58 +151,79 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     localStorage.removeItem("currentQuiz");
   };
 
-  const getQuizIdFromName = (quizName: string): number => {
-    const match = quizName.match(/Quiz (\d+)\.(\d+)/);
-    if (match) {
-      return parseInt(match[2]);
-    }
-    return 1;
-  };
+  // UPDATED: Start quiz with set_index instead of quiz_id
+  const handleStartQuiz = async (setIndex: number, setName: string) => {
+    const moduleId = selectedModule;
 
-  const handleStartQuiz = async (quizName: string) => {
-    setLoadingQuiz(quizName);
-    setQuizMessage((prev) => ({ ...prev, [quizName]: "" }));
+    if (!displayGrade || !moduleId) {
+      setQuizMessage({ [setName]: "Error: Grade or module not found" });
+      return;
+    }
+
+    setLoadingQuiz(setName);
+    setQuizMessage({});
 
     try {
-      console.log(displayGrade+"yeah");
-      const response = await fetch("http://localhost:5000/api/generate_quiz", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          quiz_id: getQuizIdFromName(quizName),
-          grade: displayGrade || "8",
-          username: username || localStorage.getItem("currentUser") || undefined
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        if (data.multiple_choice || data.true_false) {
-          const quizId = getQuizIdFromName(quizName);
-          const quizState = { name: quizName, data: data, quizId: quizId };
-          setCurrentQuiz(quizState);
-          localStorage.setItem("currentQuiz", JSON.stringify(quizState));
-        } else {
-          setQuizMessage((prev) => ({
-            ...prev,
-            [quizName]: `Quiz generated successfully! ${data.message || ""}`,
-          }));
+      console.log(`🎯 Fetching quiz set: Grade ${displayGrade}, Module ${moduleId}, Set ${setIndex}`);
+      
+      // Fetch specific quiz set
+      const response = await fetch(
+        `http://localhost:5000/api/fetch_quiz?grade=${displayGrade}&module=${moduleId}&set_index=${setIndex}`,
+        {
+          credentials: "include",
         }
-      } else {
-        setQuizMessage((prev) => ({
-          ...prev,
-          [quizName]: `Error: ${data.error || "Failed to generate quiz"}`,
-        }));
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch quiz");
       }
-    } catch (error) {
-      setQuizMessage((prev) => ({
-        ...prev,
-        [quizName]: "Error connecting to server",
+
+      const { questions, set_index } = await response.json();
+
+      // Convert fetched questions to old format for QuizView compatibility
+      const quizData: QuizData = {
+        multiple_choice: questions.filter((q: any) => q.type === 'mcq').map((q: any) => ({
+          question: q.question,
+          options: q.options,
+          answer: q.answer,
+          explanation: q.explanation || "",
+          bloom_level: q.bloom_level,
+          concept: q.concept,
+          needs_image: q.needs_image || false,
+          grade: q.grade,
+        })),
+        true_false: questions.filter((q: any) => q.type === 'tf').map((q: any) => ({
+          question: q.question,
+          answer: q.answer,
+          explanation: q.explanation || "",
+          bloom_level: q.bloom_level,
+          concept: q.concept,
+          needs_image: q.needs_image || false,
+          grade: q.grade,
+        })),
+      };
+
+      setCurrentQuiz({
+        name: setName,
+        data: quizData,
+        quizId: moduleId,
+      });
+      
+      // UPDATED: Store with module and set_index info
+      localStorage.setItem("currentQuiz", JSON.stringify({
+        ...quizData,
+        moduleId: moduleId,
+        set_index: set_index
       }));
+      
+      setQuizMessage({ [setName]: `Quiz set ${set_index} loaded successfully!` });
+    } catch (error) {
+      console.error("Error fetching quiz:", error);
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "Error fetching quiz. Please try again.";
+      setQuizMessage({ [setName]: errorMessage });
     } finally {
       setLoadingQuiz(null);
     }
@@ -181,35 +232,103 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   if (currentQuiz) {
     return (
       <QuizView
-        quizName={currentQuiz.name}
         quizData={currentQuiz.data}
+        quizName={currentQuiz.name}
         quizId={currentQuiz.quizId}
-        onBackToModules={handleBackToModules}
-        onBackToDashboard={handleBackToDashboard}
+        username={username}
+        grade={displayGrade}
+        onBack={handleBackToDashboard}
       />
     );
   }
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "30px", padding: "20px", backgroundColor: "#f5f5f5", borderRadius: "8px" }}>
-        <h1 style={{ margin: 0, color: "#333" }}>{selectedModule ? `Module ${selectedModule}` : "Dashboard"}</h1>
-        <div>
-          <span style={{ marginRight: "20px", color: "#666" }}>Welcome, {username}{displayGrade ? ` (Grade ${displayGrade})` : ""}!</span>
-          <button onClick={handleLogout} style={{ padding: "8px 16px", backgroundColor: "#dc3545", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}>
+    <div
+      style={{
+        fontFamily: "Arial, sans-serif",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          color: "white",
+          padding: "30px",
+          borderRadius: "15px",
+          marginBottom: "30px",
+          boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <h1 style={{ margin: "0 0 10px 0", fontSize: "32px" }}>
+              Welcome, {username}!
+            </h1>
+            <p style={{ margin: 0, fontSize: "18px", opacity: 0.9 }}>
+              {displayGrade && `Grade: ${displayGrade} | `}Ready to learn?
+            </p>
+          </div>
+          <button
+            onClick={handleLogout}
+            style={{
+              padding: "12px 24px",
+              backgroundColor: "rgba(255,255,255,0.2)",
+              border: "2px solid white",
+              borderRadius: "8px",
+              color: "white",
+              fontSize: "16px",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+          >
             Logout
           </button>
         </div>
-      </header>
+      </div>
 
       {loadingModules ? (
-        <p>Loading modules...</p>
+        <div style={{ textAlign: "center", padding: "50px", color: "#666" }}>
+          Loading modules...
+        </div>
       ) : error ? (
-        <p style={{ color: "red" }}>{error}</p>
+        <div
+          style={{
+            padding: "20px",
+            backgroundColor: "#fee",
+            border: "2px solid #fcc",
+            borderRadius: "10px",
+            color: "#c00",
+            textAlign: "center",
+          }}
+        >
+          {error}
+        </div>
       ) : selectedModule === null ? (
-        <div>
-            <h2 style={{ color: "#FFFF00", marginBottom: "20px" }}>Available Modules</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
+        <>
+          <h2
+            style={{
+              color: "#333",
+              marginBottom: "25px",
+              fontSize: "24px",
+            }}
+          >
+            Available Modules
+          </h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gap: "25px",
+            }}
+          >
             {modules.map((module) => (
               <div
                 key={module.id}
@@ -223,50 +342,83 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
                   transition: "all 0.3s ease",
                   boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 16px rgba(102, 126, 234, 0.2)";
+                  e.currentTarget.style.borderColor = "#667eea";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+                  e.currentTarget.style.borderColor = "#e0e0e0";
+                }}
               >
-                <h3 style={{ margin: "0 0 10px 0", color: "#333", fontSize: "24px", fontWeight: "bold" }}>{module.name}</h3>
-                <p style={{ margin: "0 0 15px 0", color: "#666", fontSize: "16px" }}>{module.quizzes.length} Quizzes Available</p>
-                <div style={{ display: "flex", alignItems: "center", color: "#007bff", fontWeight: "500" }}>
-                  <span>Click to view quizzes →</span>
-                </div>
+                <h3
+                  style={{
+                    color: "#667eea",
+                    marginTop: 0,
+                    marginBottom: "15px",
+                    fontSize: "22px",
+                  }}
+                >
+                  {module.name}
+                </h3>
+                <p
+                  style={{
+                    color: "#666",
+                    marginBottom: "15px",
+                    fontSize: "16px",
+                  }}
+                >
+                  {module.sets.length} Quiz {module.sets.length === 1 ? 'Set' : 'Sets'} Available
+                </p>
+                <p style={{ color: "#999", margin: 0, fontSize: "14px" }}>
+                  Click to view quiz sets →
+                </p>
               </div>
             ))}
           </div>
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           <button
             onClick={handleBackToModules}
             style={{
-              padding: "8px 16px",
-              backgroundColor: "#6c757d",
+              padding: "10px 20px",
+              backgroundColor: "#667eea",
               color: "white",
               border: "none",
-              borderRadius: "4px",
+              borderRadius: "8px",
               cursor: "pointer",
               marginBottom: "20px",
-              fontSize: "14px",
+              fontSize: "16px",
             }}
           >
             ← Back to Modules
           </button>
-
-          <h2 style={{ color: "#FFFF00", marginBottom: "20px" }}>
-            Quizzes in {modules.find((m) => m.id === selectedModule)?.name}
+          <h2 style={{ color: "#333", marginBottom: "25px", fontSize: "24px" }}>
+            Quiz Sets in {modules.find((m) => m.id === selectedModule)?.name}
           </h2>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gap: "20px",
+            }}
+          >
             {modules
               .find((m) => m.id === selectedModule)
-              ?.quizzes.map((quiz, index) => {
-                const isLoading = loadingQuiz === quiz;
-                const message = quizMessage[quiz];
+              ?.sets.map((set, index) => {
+                const setName = `Set ${parseFloat(String(set.set_index)).toFixed(1)}`;
+                const isLoading = loadingQuiz === setName;
+                const message = quizMessage[setName];
                 const isSuccess = message && message.includes("successfully");
 
                 return (
                   <div
                     key={index}
-                    onClick={() => !isLoading && handleStartQuiz(quiz)}
+                    onClick={() => !isLoading && handleStartQuiz(set.set_index, setName)}
                     style={{
                       padding: "20px",
                       backgroundColor: isLoading ? "#f8f9fa" : "#fff",
@@ -277,49 +429,61 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
                       boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
                       opacity: isLoading ? 0.7 : 1,
                     }}
+                    onMouseEnter={(e) => {
+                      if (!isLoading) {
+                        e.currentTarget.style.transform = "translateY(-5px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 8px 16px rgba(102, 126, 234, 0.2)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isLoading) {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow =
+                          "0 2px 4px rgba(0,0,0,0.1)";
+                      }
+                    }}
                   >
-                    <h4 style={{ margin: "0 0 10px 0", color: "#333", fontSize: "18px" }}>{quiz}</h4>
-                    <p style={{ margin: "0 0 15px 0", color: "#666", fontSize: "14px" }}>
-                      {isLoading ? "Generating quiz..." : "Click to start quiz"}
+                    <h3 style={{ color: "#667eea", marginTop: 0, marginBottom: "10px" }}>
+                      {setName}
+                    </h3>
+                    <p style={{ color: "#666", fontSize: "14px", marginBottom: "8px" }}>
+                      {set.question_count} Questions
                     </p>
-
+                    <p style={{ color: "#999", fontSize: "12px", marginBottom: "15px" }}>
+                      Created: {new Date(set.created_at).toLocaleDateString()}
+                    </p>
                     {message && (
-                      <div
+                      <p
                         style={{
-                          margin: "10px 0",
-                          padding: "8px 12px",
+                          marginTop: "10px",
+                          padding: "8px",
                           backgroundColor: isSuccess ? "#d4edda" : "#f8d7da",
-                          border: `1px solid ${isSuccess ? "#c3e6cb" : "#f5c6cb"}`,
-                          borderRadius: "4px",
-                          fontSize: "12px",
                           color: isSuccess ? "#155724" : "#721c24",
+                          borderRadius: "5px",
+                          fontSize: "13px",
                         }}
                       >
                         {message}
-                      </div>
+                      </p>
                     )}
-
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                      <span
-                        style={{
-                          padding: "4px 8px",
-                          backgroundColor: isLoading ? "#ffc107" : isSuccess ? "#28a745" : "#e9ecef",
-                          borderRadius: "4px",
-                          fontSize: "12px",
-                          color: isLoading ? "#333" : isSuccess ? "#fff" : "#495057",
-                        }}
-                      >
-                        {isLoading ? "Generating..." : isSuccess ? "Generated" : "Not Started"}
-                      </span>
-                      <span style={{ color: isLoading ? "#666" : "#28a745", fontWeight: "500", fontSize: "14px" }}>
-                        {isLoading ? "Please wait..." : "Start Quiz →"}
-                      </span>
+                    <div
+                      style={{
+                        marginTop: "15px",
+                        padding: "8px 12px",
+                        backgroundColor: isLoading ? "#fff3cd" : isSuccess ? "#d4edda" : "#e9ecef",
+                        borderRadius: "5px",
+                        fontSize: "12px",
+                        color: "#333",
+                      }}
+                    >
+                      {isLoading ? "Loading..." : isSuccess ? "Loaded" : "Click to start"}
                     </div>
                   </div>
                 );
               })}
           </div>
-        </div>
+        </>
       )}
     </div>
   );
