@@ -141,6 +141,10 @@ CREATE TABLE IF NOT EXISTS student_concept_stats (
 
 ALTER TABLE questions ADD COLUMN IF NOT EXISTS explanation TEXT;
 
+ALTER TABLE question_sets ADD COLUMN IF NOT EXISTS is_hidden BOOLEAN DEFAULT TRUE;
+
+UPDATE question_sets SET is_hidden = TRUE WHERE is_hidden IS NULL;
+
 CREATE INDEX idx_student_concept_stats ON student_concept_stats(student_username, grade, submodule_id);
 
 

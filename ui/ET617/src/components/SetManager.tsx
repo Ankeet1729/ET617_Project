@@ -9,6 +9,7 @@ interface QuizSet {
   question_count: number;
   created_at: string;
   submodule_name?: string;
+  is_hidden: boolean;
 }
 
 interface Grade {
@@ -65,6 +66,27 @@ const SetManager: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const handleToggleVisibility = async (setId: number, currentHiddenStatus: boolean) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/admin/quiz_sets/${setId}/visibility`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ is_hidden: !currentHiddenStatus }),
+        }
+      );
+  
+      if (res.ok) {
+        fetchSets(selectedGrade, selectedModule); // Refresh
+      }
+    } catch (err) {
+      console.error('Error toggling visibility:', err);
+    }
+  };
+  
 
   const fetchModules = async (grade: number) => {
     setLoading(true);
@@ -173,6 +195,8 @@ const SetManager: React.FC = () => {
       alert("Error deleting quiz set");
     }
   };
+
+  
 
   // If viewing a specific question set, show the viewer
   if (viewingSetId) {
@@ -488,6 +512,20 @@ const SetManager: React.FC = () => {
                       >
                         View Details
                       </button>
+                      <button
+                      onClick={() => handleToggleVisibility(set.id, set.is_hidden)}
+                      style={{
+                        padding: '10px 20px',
+                        backgroundColor: set.is_hidden ? '#10b981' : '#f59e0b',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {set.is_hidden ? '👁️ Show' : '🙈 Hide'}
+                    </button>
                       <button
                         onClick={() => deleteSet(set.id)}
                         style={{

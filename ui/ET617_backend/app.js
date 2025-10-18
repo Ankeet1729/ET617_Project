@@ -44,7 +44,7 @@ app.use(cors({
     }
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
@@ -672,7 +672,7 @@ app.get('/admin/quizzes/sets/:grade/:submodule_code', checkAdmin, async (req, re
   
   try {
     const result = await pool.query(`
-      SELECT qs.id, qs.set_name as name, qs.created_at,
+      SELECT qs.id, qs.set_name as name, qs.created_at, qs.is_hidden,
              s.submodule_name, s.submodule_code,
              (SELECT array_agg(qsi.question_id) FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_ids,
              (SELECT COUNT(*) FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_count
@@ -695,6 +695,23 @@ app.get('/admin/quizzes/sets/:grade/:submodule_code', checkAdmin, async (req, re
     });
   }
 });
+
+app.patch('/api/admin/quiz_sets/:id/visibility', checkAdmin, async (req, res) => {
+  const { id } = req.params;
+  const { is_hidden } = req.body;
+
+  try {
+    await pool.query(
+      'UPDATE question_sets SET is_hidden = $1 WHERE id = $2',
+      [is_hidden, id]
+    );
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error updating visibility:', err);
+    res.status(500).json({ error: 'Failed to update visibility' });
+  }
+});
+
 
 // Get quiz attempts by IDs
 app.get('/admin/quiz_attempts', checkAdmin, async (req, res) => {
@@ -894,8 +911,8 @@ app.post('/generatequiz', checkAdmin, async (req, res) => {
         // Create question set first
         const finalSetName = set_name || `${submodule_code} - Grade ${grade} Quiz`;
         const setResult = await pool.query(`
-          INSERT INTO question_sets (submodule_id, grade, set_name, created_at)
-          VALUES ($1, $2, $3, NOW())
+          INSERT INTO question_sets (submodule_id, grade, set_name, created_at, is_hidden)
+          VALUES ($1, $2, $3, NOW(), TRUE)
           RETURNING id
         `, [submodule_id, grade, finalSetName]);
         
