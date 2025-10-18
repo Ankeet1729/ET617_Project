@@ -359,14 +359,14 @@ app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
     
     // Fetch all questions (without correct answers for students)
     const questionsResult = await pool.query(`
-      SELECT q.id, q.question_text, q.question_type, q.options, 
-             q.bloom_level, q.image_path, c.concept_name as concept
+      SELECT q.id, q.question_text, q.question_type, q.options, q.correct_answer, q.bloom_level, q.image_path, q.grade, q.explanation, c.concept_name as concept, c.id as concept_id
       FROM questions q
       INNER JOIN question_set_items qsi ON qsi.question_id = q.id
       INNER JOIN concepts c ON c.id = q.concept_id
       WHERE qsi.set_id = $1
       ORDER BY q.id
     `, [question_set_id]);
+    
     
     console.log('✅ Questions fetched:', questionsResult.rows.length);
     
@@ -419,7 +419,7 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     // Fetch all questions with correct answers
     const questionsResult = await pool.query(`
       SELECT q.id, q.question_text, q.question_type, q.options, q.correct_answer, 
-             q.bloom_level, q.image_path, q.grade,
+             q.bloom_level, q.image_path, q.grade, q.explanation,
              c.concept_name as concept, c.id as concept_id
       FROM questions q
       INNER JOIN question_set_items qsi ON qsi.question_id = q.id
@@ -471,9 +471,8 @@ app.post('/api/evaluate_quiz', async (req, res) => {
         concept: question.concept,
         type: question.question_type,
         image_path: question.image_path,
-        explanation: isCorrect 
-          ? "Great job! You got this right." 
-          : `The correct answer is: ${question.correct_answer}`
+        explanation: question.explanation || `The correct answer is: ${question.correct_answer}`,
+
       });
     });
     
@@ -919,12 +918,12 @@ app.post('/generatequiz', checkAdmin, async (req, res) => {
           
           const concept_id = conceptResult.rows[0].id;
           
-          // Insert question
+          // Insert question with explanation
           const questionResult = await pool.query(`
             INSERT INTO questions (
               concept_id, grade, question_text, question_type, options, 
-              correct_answer, bloom_level, image_path
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+              correct_answer, bloom_level, image_path, explanation
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING id
           `, [
             concept_id,
@@ -934,8 +933,10 @@ app.post('/generatequiz', checkAdmin, async (req, res) => {
             JSON.stringify(q.options || {}),
             q.correct_answer || q.answer,
             q.bloom_level,
-            q.image_path || null
+            q.image_path || null,
+            q.explanation || ''  // Add explanation field
           ]);
+
           
           const questionId = questionResult.rows[0].id;
           

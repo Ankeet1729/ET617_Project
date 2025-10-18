@@ -139,6 +139,8 @@ CREATE TABLE IF NOT EXISTS student_concept_stats (
     UNIQUE(student_username, concept_id, grade, submodule_id)
 );
 
+ALTER TABLE questions ADD COLUMN IF NOT EXISTS explanation TEXT;
+
 CREATE INDEX idx_student_concept_stats ON student_concept_stats(student_username, grade, submodule_id);
 
 
