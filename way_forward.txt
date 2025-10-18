@@ -67,6 +67,11 @@ Question (question id -> timestamp, concept, type, grade, options, correct answe
 Question Set (question set id -> list of questions id)
 QSet Mapping ((submodule, grade) -> list of question sets ids)
 
+UPDATE submodules SET image_path = 'uploads/submodules/L3.C1.png' WHERE submodule_code = 'L3.C1';
+UPDATE submodules SET image_path = 'uploads/submodules/L3.C2.png' WHERE submodule_code = 'L3.C2';
+UPDATE submodules SET image_path = 'uploads/submodules/L3.C3.png' WHERE submodule_code = 'L3.C3';
+
+
 
 
 

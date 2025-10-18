@@ -96,6 +96,85 @@ const checkAdmin = (req, res, next) => {
   }
 };
 
+// ==================== HELPER FUNCTION FOR CONCEPT STATS ====================
+
+async function updateStudentConceptStats(studentUsername, questionSetId, answers) {
+  try {
+    console.log('🔄 Updating concept stats for', studentUsername);
+    
+    // Get all questions and their concepts from this question set
+    const questionsResult = await pool.query(`
+      SELECT 
+        q.id,
+        q.correct_answer,
+        q.concept_id,
+        c.concept_name,
+        qs.submodule_id,
+        qs.grade
+      FROM questions q
+      INNER JOIN question_set_items qsi ON qsi.question_id = q.id
+      INNER JOIN question_sets qs ON qs.id = qsi.set_id
+      INNER JOIN concepts c ON c.id = q.concept_id
+      WHERE qsi.set_id = $1
+    `, [questionSetId]);
+    
+    // Track concept performance
+    const conceptStats = new Map();
+    
+    for (const question of questionsResult.rows) {
+      const key = `${question.concept_id}_${question.submodule_id}_${question.grade}`;
+      
+      if (!conceptStats.has(key)) {
+        conceptStats.set(key, {
+          concept_id: question.concept_id,
+          submodule_id: question.submodule_id,
+          grade: question.grade,
+          correct: 0,
+          incorrect: 0
+        });
+      }
+      
+      const stats = conceptStats.get(key);
+      const studentAnswer = answers[question.id];
+      const isCorrect = studentAnswer === question.correct_answer;
+      
+      if (isCorrect) {
+        stats.correct++;
+      } else {
+        stats.incorrect++;
+      }
+    }
+    
+    // Upsert to student_concept_stats table
+    for (const [key, stats] of conceptStats.entries()) {
+      await pool.query(`
+        INSERT INTO student_concept_stats 
+          (student_username, concept_id, grade, submodule_id, correct_count, incorrect_count, last_updated)
+        VALUES ($1, $2, $3, $4, $5, $6, NOW())
+        ON CONFLICT (student_username, concept_id, grade, submodule_id)
+        DO UPDATE SET
+          correct_count = student_concept_stats.correct_count + EXCLUDED.correct_count,
+          incorrect_count = student_concept_stats.incorrect_count + EXCLUDED.incorrect_count,
+          last_updated = NOW()
+      `, [
+        studentUsername,
+        stats.concept_id,
+        stats.grade,
+        stats.submodule_id,
+        stats.correct,
+        stats.incorrect
+      ]);
+    }
+    
+    console.log('✅ Updated', conceptStats.size, 'concept stats');
+    
+  } catch (err) {
+    console.error('❌ Error updating concept stats:', err);
+    // Don't throw - let the quiz submission succeed even if stats fail
+  }
+}
+
+
 // ==================== AUTHENTICATION ROUTES ====================
 
 // Student Registration
@@ -213,8 +292,12 @@ app.get('/api/student/modules/:grade', async (req, res) => {
   
   try {
     const result = await pool.query(`
-      SELECT DISTINCT s.id, s.submodule_code, s.submodule_name, s.image_path,
-             COUNT(DISTINCT qs.id) as set_count
+      SELECT 
+        s.id,
+        s.submodule_code,
+        s.submodule_name,
+        s.image_path,
+        COUNT(DISTINCT qs.id)::integer as set_count
       FROM submodules s
       INNER JOIN concepts c ON c.submodule_id = s.id
       INNER JOIN concept_grade_mapping cgm ON cgm.concept_id = c.id
@@ -419,6 +502,8 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     const attemptId = attemptResult.rows[0].id;
     console.log('✅ Quiz attempt saved with ID:', attemptId);
     
+    await updateStudentConceptStats(username, question_set_id, answers);
+
     // Update student_activity for concept-level tracking
     const activityCheck = await pool.query(`
       SELECT id, concept_performance
@@ -611,6 +696,36 @@ app.get('/admin/quizzes/sets/:grade/:submodule_code', checkAdmin, async (req, re
     });
   }
 });
+
+// Get quiz attempts by IDs
+app.get('/admin/quiz_attempts', checkAdmin, async (req, res) => {
+  const { ids } = req.query;
+  
+  if (!ids) {
+    return res.status(400).json({ error: 'Missing attempt IDs' });
+  }
+  
+  const attemptIds = ids.split(',').map(id => parseInt(id));
+  
+  try {
+    const result = await pool.query(`
+      SELECT qa.id, qa.question_set_id, qs.set_name, qa.submitted_at,
+             qa.score, qa.total_questions,
+             ROUND((qa.score::numeric / qa.total_questions) * 100) as percentage
+      FROM quiz_attempts qa
+      INNER JOIN question_sets qs ON qs.id = qa.question_set_id
+      WHERE qa.id = ANY($1)
+      ORDER BY qa.submitted_at DESC
+    `, [attemptIds]);
+    
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error fetching attempts:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
 // Get full question set details (for viewing/editing)
 app.get('/admin/question_set/:id', checkAdmin, async (req, res) => {
   console.log('🔍 [/admin/question_set/:id] Request for set:', req.params.id);
@@ -890,11 +1005,24 @@ app.get('/admin/concepts/:submodule_code/:grade', checkAdmin, async (req, res) =
 });
 
 
-// Create manual question set (empty initially)
+
+// Create manual question set (empty initially) - FIXED
 app.post('/admin/create_manual_set', checkAdmin, async (req, res) => {
   const { submodule_code, grade, set_name } = req.body;
   
-  console.log('🔍 [POST /admin/create_manual_set] Creating manual set:', set_name);
+  console.log('🔍 [POST /admin/create_manual_set] Creating manual set');
+  console.log('🔍 Submodule code:', submodule_code);
+  console.log('🔍 Grade:', grade);
+  console.log('🔍 Set name:', set_name);
+  
+  // Validation
+  if (!submodule_code || !grade || !set_name) {
+    console.error('❌ Missing required fields');
+    return res.status(400).json({ 
+      error: 'Missing required fields',
+      received: { submodule_code, grade, set_name }
+    });
+  }
   
   try {
     // Get submodule_id
@@ -904,10 +1032,12 @@ app.post('/admin/create_manual_set', checkAdmin, async (req, res) => {
     );
     
     if (submoduleResult.rows.length === 0) {
+      console.error('❌ Submodule not found:', submodule_code);
       return res.status(404).json({ error: 'Submodule not found' });
     }
     
     const submodule_id = submoduleResult.rows[0].id;
+    console.log('🔍 Found submodule_id:', submodule_id);
     
     // Create the question set
     const result = await pool.query(`
@@ -1119,6 +1249,107 @@ app.get('/admin/student_activity/:username', checkAdmin, async (req, res) => {
   }
 });
 
+// Get student activity with concept-level performance from student_concept_stats
+app.get('/admin/student_activity/:username/:grade', checkAdmin, async (req, res) => {
+  const { username, grade } = req.params;
+  
+  console.log('🔍 [GET /admin/student_activity] Username:', username, 'Grade:', grade);
+  
+  try {
+    // Get all quiz attempts for this student
+    const attemptsResult = await pool.query(`
+      SELECT 
+        qa.id as attempt_id,
+        qa.question_set_id,
+        qs.set_name,
+        qs.submodule_id,
+        s.submodule_code,
+        s.submodule_name,
+        qa.submitted_at,
+        qa.score,
+        qa.total_questions
+      FROM quiz_attempts qa
+      INNER JOIN question_sets qs ON qs.id = qa.question_set_id
+      INNER JOIN submodules s ON s.id = qs.submodule_id
+      WHERE qa.student_username = $1
+      ORDER BY s.submodule_code, qa.submitted_at DESC
+    `, [username]);
+    
+    if (attemptsResult.rows.length === 0) {
+      console.log('⚠️  No attempts found for', username);
+      return res.json([]);
+    }
+    
+    console.log('✅ Found', attemptsResult.rows.length, 'attempts');
+    
+    // Group by submodule
+    const submoduleMap = new Map();
+    
+    for (const attempt of attemptsResult.rows) {
+      const submoduleKey = `${attempt.submodule_code}_${attempt.submodule_id}`;
+      
+      if (!submoduleMap.has(submoduleKey)) {
+        submoduleMap.set(submoduleKey, {
+          submodule_code: attempt.submodule_code,
+          submodule_name: attempt.submodule_name,
+          submodule_id: attempt.submodule_id,
+          grade: parseInt(grade),
+          attempt_ids: [],
+          last_attempt_at: attempt.submitted_at,
+          concept_performance: {}
+        });
+      }
+      
+      const submoduleData = submoduleMap.get(submoduleKey);
+      submoduleData.attempt_ids.push(attempt.attempt_id);
+      
+      // Update last_attempt_at
+      if (new Date(attempt.submitted_at) > new Date(submoduleData.last_attempt_at)) {
+        submoduleData.last_attempt_at = attempt.submitted_at;
+      }
+    }
+    
+    // Get concept performance from student_concept_stats table
+    for (const [key, submoduleData] of submoduleMap.entries()) {
+      const statsResult = await pool.query(`
+        SELECT 
+          c.concept_name,
+          scs.correct_count as correct,
+          scs.incorrect_count as incorrect
+        FROM student_concept_stats scs
+        INNER JOIN concepts c ON c.id = scs.concept_id
+        WHERE scs.student_username = $1 
+          AND scs.submodule_id = $2
+        ORDER BY c.concept_name
+      `, [username, submoduleData.submodule_id]);
+      
+      // Build concept performance map
+      for (const stat of statsResult.rows) {
+        submoduleData.concept_performance[stat.concept_name] = {
+          concept_name: stat.concept_name,
+          correct: stat.correct,
+          incorrect: stat.incorrect
+        };
+      }
+    }
+    
+    // Convert map to array
+    const activities = Array.from(submoduleMap.values()).map((activity, index) => ({
+      id: index + 1,
+      ...activity
+    }));
+    
+    console.log('✅ Sending', activities.length, 'submodule activities');
+    res.json(activities);
+    
+  } catch (err) {
+    console.error('❌ Error fetching student activity:', err);
+    res.status(500).json({ error: 'Server error', message: err.message });
+  }
+});
+
+
+
 app.delete('/admin/question/:id', checkAdmin, async (req, res) => {
   const { id } = req.params;
   
@@ -1141,8 +1372,25 @@ app.delete('/admin/question/:id', checkAdmin, async (req, res) => {
 
 // ==================== START SERVER ====================
 
+console.log('========== STARTING SERVER ==========');
+
+// Also add this error handler RIGHT BEFORE app.listen():
+process.on('uncaughtException', (err) => {
+  console.error('💥 UNCAUGHT EXCEPTION:', err);
+  // process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('💥 UNHANDLED REJECTION at:', promise, 'reason:', reason);
+  // process.exit(1);
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📚 Quiz Generation Platform - New Schema Version`);
 });
+
+console.log('========== SERVER LISTENING ==========');
+
+process.stdin.resume();

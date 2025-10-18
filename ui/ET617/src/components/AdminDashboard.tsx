@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { PowerIcon, UserGroupIcon, DocumentDuplicateIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 import SetManager from './SetManager';
 import StudentsPanel from './StudentsPanel';
-import StudentActivityPanel from './StudentActivityPanel';
 
 // Define the type for the panel names for type safety
-type AdminPanel = 'quizSets' | 'students' | 'activity';
+type AdminPanel = 'quizSets' | 'students';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -35,8 +34,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
         return <SetManager />;
       case 'students':
         return <StudentsPanel />;
-      case 'activity':
-        return <StudentActivityPanel />;
       default:
         return <SetManager />;
     }
@@ -90,7 +87,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
           <nav className="flex space-x-4 p-4 border-b border-gray-200">
             <NavButton panel="quizSets" label="Quiz Set Management" icon={DocumentDuplicateIcon} />
             <NavButton panel="students" label="Student Management" icon={UserGroupIcon} />
-            <NavButton panel="activity" label="Student Activity" icon={ChartBarIcon} />
           </nav>
           
           {/* Content Panel */}

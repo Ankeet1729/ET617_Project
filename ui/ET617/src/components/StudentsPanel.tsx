@@ -5,6 +5,7 @@ interface Student {
   username: string;
   email: string;
   grade: number;
+  full_name?: string; // Add this field
 }
 
 interface GradeSummary {
@@ -16,7 +17,7 @@ const StudentsPanel: React.FC = () => {
   const [grades, setGrades] = useState<GradeSummary[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [selectedGrade, setSelectedGrade] = useState<number | null>(null);
-  const [selectedStudent, setSelectedStudent] = useState<string | null>(null);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null); // FIX: Store full student object
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const StudentsPanel: React.FC = () => {
         setGrades(data);
       }
     } catch (error) {
-      console.error("Error fetching grades");
+      console.error("Error fetching grades:", error);
     } finally {
       setLoading(false);
     }
@@ -51,7 +52,7 @@ const StudentsPanel: React.FC = () => {
         setSelectedGrade(grade);
       }
     } catch (error) {
-      console.error("Error fetching students");
+      console.error("Error fetching students:", error);
     } finally {
       setLoading(false);
     }
@@ -62,195 +63,133 @@ const StudentsPanel: React.FC = () => {
     setStudents([]);
   };
 
-  // NEW: If viewing a student's activity, show StudentActivityPanel
+  // If viewing a student's activity, show StudentActivityPanel
   if (selectedStudent) {
     return (
-      <StudentActivityPanel 
-        username={selectedStudent} 
-        onBack={() => setSelectedStudent(null)} 
+      <StudentActivityPanel
+        student={{
+          username: selectedStudent.username,
+          full_name: selectedStudent.full_name || selectedStudent.username, // Fallback to username if no full_name
+          grade: selectedStudent.grade,
+        }}
+        onBack={() => setSelectedStudent(null)}
       />
     );
   }
 
   if (loading && !selectedGrade) {
-    return <div className="loading">Loading grades...</div>;
+    return <div style={{ padding: "20px", color: "#f1f5f9" }}>Loading grades...</div>;
   }
 
   return (
-    <div className="students-panel">
-      <h2 className="panel-title">Students Management</h2>
+    <div style={{ padding: "20px", minHeight: "100vh" }}>
+      <h2 style={{ color: "#f1f5f9", marginBottom: "30px" }}>Students Management</h2>
 
       {!selectedGrade ? (
-        <div className="grades-grid">
+        // Grade selection view
+        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
           {grades.map((grade) => (
             <div
               key={grade.grade}
-              className="grade-card"
               onClick={() => fetchStudents(grade.grade)}
+              style={{
+                padding: "30px",
+                backgroundColor: "#1e293b",
+                borderRadius: "12px",
+                cursor: "pointer",
+                border: "1px solid #334155",
+                minWidth: "200px",
+                textAlign: "center",
+                transition: "all 0.2s",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.borderColor = "#6366f1")}
+              onMouseOut={(e) => (e.currentTarget.style.borderColor = "#334155")}
             >
-              <h3>Grade {grade.grade}</h3>
-              <p>{grade.student_count} Students</p>
+              <div style={{ fontSize: "24px", fontWeight: "bold", color: "#f1f5f9", marginBottom: "10px" }}>
+                Grade {grade.grade}
+              </div>
+              <div style={{ color: "#94a3b8", fontSize: "14px" }}>
+                {grade.student_count} Students
+              </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="students-view">
-          <button onClick={handleBackToGrades} className="back-btn">
+        // Students list view
+        <div>
+          <button
+            onClick={handleBackToGrades}
+            style={{
+              padding: "12px 24px",
+              marginBottom: "20px",
+              backgroundColor: "#334155",
+              color: "#f1f5f9",
+              border: "1px solid #475569",
+              borderRadius: "8px",
+              cursor: "pointer",
+            }}
+          >
             ← Back to Grades
           </button>
-          <h3 className="section-title">Grade {selectedGrade} Students</h3>
+
+          <h3 style={{ color: "#cbd5e1", marginBottom: "20px" }}>
+            Grade {selectedGrade} Students
+          </h3>
+
           {loading ? (
-            <div className="loading">Loading students...</div>
+            <div style={{ color: "#f1f5f9" }}>Loading students...</div>
           ) : students.length > 0 ? (
-            <div className="students-table-container">
-              <table className="students-table">
-                <thead>
-                  <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Grade</th>
-                    <th>Actions</th>
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                backgroundColor: "#1e293b",
+                borderRadius: "8px",
+                overflow: "hidden",
+              }}
+            >
+              <thead>
+                <tr style={{ backgroundColor: "#0f172a" }}>
+                  <th style={{ padding: "15px", textAlign: "left", color: "#f1f5f9" }}>Username</th>
+                  <th style={{ padding: "15px", textAlign: "left", color: "#f1f5f9" }}>Email</th>
+                  <th style={{ padding: "15px", textAlign: "left", color: "#f1f5f9" }}>Grade</th>
+                  <th style={{ padding: "15px", textAlign: "left", color: "#f1f5f9" }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {students.map((student) => (
+                  <tr
+                    key={student.username}
+                    style={{ borderBottom: "1px solid #334155" }}
+                  >
+                    <td style={{ padding: "15px", color: "#f1f5f9" }}>{student.username}</td>
+                    <td style={{ padding: "15px", color: "#cbd5e1" }}>{student.email}</td>
+                    <td style={{ padding: "15px", color: "#cbd5e1" }}>{student.grade}</td>
+                    <td style={{ padding: "15px" }}>
+                      <button
+                        onClick={() => setSelectedStudent(student)} // FIX: Pass full student object
+                        style={{
+                          padding: "8px 16px",
+                          backgroundColor: "#3b82f6",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "6px",
+                          cursor: "pointer",
+                          fontSize: "14px",
+                        }}
+                      >
+                        📊 View Activity
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {students.map((student) => (
-                    <tr key={student.username}>
-                      <td>{student.username}</td>
-                      <td>{student.email}</td>
-                      <td>{student.grade}</td>
-                      <td>
-                        <button
-                          className="btn-activity"
-                          onClick={() => setSelectedStudent(student.username)}
-                        >
-                          📊 View Activity
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           ) : (
-            <div className="no-data">No students in Grade {selectedGrade}</div>
+            <div style={{ color: "#94a3b8" }}>No students in Grade {selectedGrade}</div>
           )}
         </div>
       )}
-
-      <style jsx>{`
-        .students-panel {
-          background: white;
-          padding: 1.5rem;
-          border-radius: 10px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        .panel-title {
-          color: #333;
-          margin-bottom: 1rem;
-          font-size: 1.8rem;
-        }
-        .grades-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap: 1rem;
-        }
-        .grade-card {
-          background: #f8f9ff;
-          padding: 1.5rem;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s;
-          border: 2px solid #e1e5e9;
-        }
-        .grade-card:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(102, 126, 234, 0.15);
-          border-color: #667eea;
-        }
-        .grade-card h3 {
-          color: #667eea;
-          margin: 0 0 0.5rem 0;
-        }
-        .grade-card p {
-          margin: 0.25rem 0;
-          color: #666;
-        }
-        .students-view {
-          margin-top: 1rem;
-        }
-        .back-btn {
-          background: #667eea;
-          color: white;
-          border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 5px;
-          cursor: pointer;
-          margin-bottom: 1rem;
-          font-size: 0.9rem;
-          transition: background 0.2s;
-        }
-        .back-btn:hover {
-          background: #5568d3;
-        }
-        .section-title {
-          color: #333;
-          margin-bottom: 1rem;
-        }
-        .students-table-container {
-          overflow-x: auto;
-          border-radius: 8px;
-          border: 1px solid #e1e5e9;
-        }
-        .students-table {
-          width: 100%;
-          border-collapse: collapse;
-          background: white;
-        }
-        .students-table thead {
-          background: #f8f9ff;
-        }
-        .students-table th {
-          padding: 1rem;
-          text-align: left;
-          font-weight: bold;
-          color: #667eea;
-          border-bottom: 2px solid #e1e5e9;
-        }
-        .students-table td {
-          padding: 1rem;
-          border-bottom: 1px solid #f0f0f0;
-          color: #333;
-        }
-        .students-table tbody tr:hover {
-          background: #f8f9ff;
-        }
-        .btn-activity {
-          background: #667eea;
-          color: white;
-          border: none;
-          padding: 0.5rem 1rem;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 0.85rem;
-          transition: all 0.2s;
-        }
-        .btn-activity:hover {
-          background: #5568d3;
-          transform: translateY(-1px);
-        }
-        .loading {
-          text-align: center;
-          padding: 2rem;
-          color: #666;
-        }
-        .no-data {
-          text-align: center;
-          padding: 2rem;
-          color: #999;
-          background: #f8f9ff;
-          border-radius: 8px;
-        }
-      `}</style>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import QuestionSetViewer from "./QuestionSetViewer";
+import ManualSetCreator from "./ManualSetCreator";
 
 interface QuizSet {
   id: number;
@@ -35,6 +36,7 @@ const SetManager: React.FC = () => {
   const [setName, setSetName] = useState("");
   const [generating, setGenerating] = useState(false);
   const [viewingSetId, setViewingSetId] = useState<number | null>(null);
+  const [showManualCreator, setShowManualCreator] = useState(false);
 
   useEffect(() => {
     fetchGrades();
@@ -175,6 +177,21 @@ const SetManager: React.FC = () => {
   // If viewing a specific question set, show the viewer
   if (viewingSetId) {
     return <QuestionSetViewer setId={viewingSetId} onBack={() => setViewingSetId(null)} />;
+  }
+
+  // If showing manual creator, render it
+  if (showManualCreator && selectedGrade && selectedModule) {
+    return (
+      <ManualSetCreator
+        submoduleCode={selectedModule}
+        grade={selectedGrade}
+        onComplete={() => {
+          setShowManualCreator(false);
+          fetchSets(selectedGrade, selectedModule);
+        }}
+        onCancel={() => setShowManualCreator(false)}
+      />
+    );
   }
 
   if (loading) return <div style={{ padding: "20px", color: "#f1f5f9" }}><p>Loading...</p></div>;
@@ -339,7 +356,7 @@ const SetManager: React.FC = () => {
               🤖 Generate AI Quiz
             </button>
             <button
-              onClick={() => alert("Manual quiz creation coming soon!")}
+              onClick={() => setShowManualCreator(true)}
               style={{
                 padding: "15px 30px",
                 backgroundColor: "#3b82f6",

@@ -126,8 +126,25 @@ CREATE TABLE student_activity (
   UNIQUE(student_username, submodule_id, grade)
 );
 
+-- Create student_concept_stats table to track performance per concept
+CREATE TABLE IF NOT EXISTS student_concept_stats (
+    id SERIAL PRIMARY KEY,
+    student_username VARCHAR(50) NOT NULL REFERENCES students(username) ON DELETE CASCADE,
+    concept_id INTEGER NOT NULL REFERENCES concepts(id) ON DELETE CASCADE,
+    grade INTEGER NOT NULL,
+    submodule_id INTEGER NOT NULL REFERENCES submodules(id) ON DELETE CASCADE,
+    correct_count INTEGER DEFAULT 0,
+    incorrect_count INTEGER DEFAULT 0,
+    last_updated TIMESTAMP DEFAULT NOW(),
+    UNIQUE(student_username, concept_id, grade, submodule_id)
+);
+
+CREATE INDEX idx_student_concept_stats ON student_concept_stats(student_username, grade, submodule_id);
+
+
 -- Indexes for performance
 CREATE INDEX idx_quiz_attempts_student ON quiz_attempts(student_username);
 CREATE INDEX idx_quiz_attempts_set ON quiz_attempts(question_set_id);
 CREATE INDEX idx_student_activity_student ON student_activity(student_username);
 CREATE INDEX idx_student_activity_submodule ON student_activity(submodule_id);
+
