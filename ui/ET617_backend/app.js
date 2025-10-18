@@ -300,19 +300,26 @@ app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
 });
 
 // Evaluate quiz and save attempt
+// Evaluate quiz and save attempt - UPDATED FOR NEW SCHEMA
 app.post('/api/evaluate_quiz', async (req, res) => {
   const { question_set_id, answers, username, grade } = req.body;
+  
+  console.log('🔍 [/api/evaluate_quiz] Request received');
+  console.log('🔍 Question Set ID:', question_set_id);
+  console.log('🔍 Answers:', answers);
+  console.log('🔍 Username:', username);
+  console.log('🔍 Grade:', grade);
   
   if (!question_set_id || !answers || !username || !grade) {
     return res.status(400).json({ error: "Missing required parameters" });
   }
   
   try {
-    // Fetch the question set with mapping info
+    // Fetch the question set info
     const setResult = await pool.query(`
-      SELECT qs.id, qs.name, qs.question_ids, qsm.submodule_code, qsm.grade
+      SELECT qs.id, qs.set_name, s.submodule_code, s.id as submodule_id
       FROM question_sets qs
-      INNER JOIN question_set_mapping qsm ON qsm.question_set_id = qs.id
+      INNER JOIN submodules s ON s.id = qs.submodule_id
       WHERE qs.id = $1
     `, [question_set_id]);
     
@@ -321,18 +328,25 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     }
     
     const questionSet = setResult.rows[0];
-    const questionIds = questionSet.question_ids;
+    const submodule_id = questionSet.submodule_id;
     const submodule_code = questionSet.submodule_code;
+    
+    console.log('🔍 Question set found:', questionSet.set_name);
     
     // Fetch all questions with correct answers
     const questionsResult = await pool.query(`
-      SELECT id, question_text, question_type, options, correct_answer, 
-             bloom_level, concept, grade, image_path
-      FROM questions
-      WHERE id = ANY($1)
-    `, [questionIds]);
+      SELECT q.id, q.question_text, q.question_type, q.options, q.correct_answer, 
+             q.bloom_level, q.image_path, q.grade,
+             c.concept_name as concept, c.id as concept_id
+      FROM questions q
+      INNER JOIN question_set_items qsi ON qsi.question_id = q.id
+      INNER JOIN concepts c ON c.id = q.concept_id
+      WHERE qsi.set_id = $1
+      ORDER BY q.id
+    `, [question_set_id]);
     
     const questions = questionsResult.rows;
+    console.log('🔍 Questions fetched:', questions.length);
     
     // Evaluate answers
     let correctCount = 0;
@@ -340,21 +354,27 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     const conceptPerformance = {}; // Track performance per concept
     
     questions.forEach((question, index) => {
-      const userAnswer = answers[question.id.toString()];
+      const userAnswer = answers[question.id.toString()] || answers[question.id];
       const isCorrect = userAnswer === question.correct_answer;
       
       if (isCorrect) correctCount++;
       
       // Track concept performance
       const concept = question.concept;
-      if (!conceptPerformance[concept]) {
-        conceptPerformance[concept] = { correct: 0, incorrect: 0 };
+      const concept_id = question.concept_id;
+      
+      if (!conceptPerformance[concept_id]) {
+        conceptPerformance[concept_id] = { 
+          concept_name: concept,
+          correct: 0, 
+          incorrect: 0 
+        };
       }
       
       if (isCorrect) {
-        conceptPerformance[concept].correct++;
+        conceptPerformance[concept_id].correct++;
       } else {
-        conceptPerformance[concept].incorrect++;
+        conceptPerformance[concept_id].incorrect++;
       }
       
       detailedResults.push({
@@ -367,7 +387,10 @@ app.post('/api/evaluate_quiz', async (req, res) => {
         bloom_level: question.bloom_level,
         concept: question.concept,
         type: question.question_type,
-        image_path: question.image_path
+        image_path: question.image_path,
+        explanation: isCorrect 
+          ? "Great job! You got this right." 
+          : `The correct answer is: ${question.correct_answer}`
       });
     });
     
@@ -381,6 +404,9 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     else if (percentage >= 70) gradeLevel = "Satisfactory";
     else if (percentage >= 60) gradeLevel = "Below Average";
     
+    console.log('🔍 Score:', correctCount, '/', totalQuestions, '=', percentage, '%');
+    console.log('🔍 Grade Level:', gradeLevel);
+    
     // Save quiz attempt
     const attemptResult = await pool.query(`
       INSERT INTO quiz_attempts (
@@ -391,14 +417,14 @@ app.post('/api/evaluate_quiz', async (req, res) => {
     `, [username, question_set_id, correctCount, totalQuestions, JSON.stringify(detailedResults)]);
     
     const attemptId = attemptResult.rows[0].id;
+    console.log('✅ Quiz attempt saved with ID:', attemptId);
     
     // Update student_activity for concept-level tracking
-    // First, get or create student_activity record
     const activityCheck = await pool.query(`
       SELECT id, concept_performance
       FROM student_activity
-      WHERE student_username = $1 AND submodule_code = $2 AND grade = $3
-    `, [username, submodule_code, grade]);
+      WHERE student_username = $1 AND submodule_id = $2 AND grade = $3
+    `, [username, submodule_id, grade]);
     
     let existingPerformance = {};
     
@@ -408,12 +434,17 @@ app.post('/api/evaluate_quiz', async (req, res) => {
       existingPerformance = activityCheck.rows[0].concept_performance || {};
       
       // Merge concept performance
-      Object.keys(conceptPerformance).forEach(concept => {
-        if (!existingPerformance[concept]) {
-          existingPerformance[concept] = { correct: 0, incorrect: 0 };
+      Object.keys(conceptPerformance).forEach(concept_id => {
+        const key = concept_id.toString();
+        if (!existingPerformance[key]) {
+          existingPerformance[key] = { 
+            concept_name: conceptPerformance[concept_id].concept_name,
+            correct: 0, 
+            incorrect: 0 
+          };
         }
-        existingPerformance[concept].correct += conceptPerformance[concept].correct;
-        existingPerformance[concept].incorrect += conceptPerformance[concept].incorrect;
+        existingPerformance[key].correct += conceptPerformance[concept_id].correct;
+        existingPerformance[key].incorrect += conceptPerformance[concept_id].incorrect;
       });
       
       await pool.query(`
@@ -424,19 +455,32 @@ app.post('/api/evaluate_quiz', async (req, res) => {
         WHERE id = $3
       `, [attemptId, JSON.stringify(existingPerformance), activityId]);
       
+      console.log('✅ Updated existing student activity');
+      
     } else {
       // Create new student_activity record
+      const conceptPerfObj = {};
+      Object.keys(conceptPerformance).forEach(concept_id => {
+        conceptPerfObj[concept_id] = {
+          concept_name: conceptPerformance[concept_id].concept_name,
+          correct: conceptPerformance[concept_id].correct,
+          incorrect: conceptPerformance[concept_id].incorrect
+        };
+      });
+      
       await pool.query(`
         INSERT INTO student_activity (
-          student_username, submodule_code, grade, 
+          student_username, submodule_id, grade, 
           attempt_ids, concept_performance, last_attempt_at
         ) VALUES ($1, $2, $3, $4, $5, NOW())
-      `, [username, submodule_code, grade, [attemptId], JSON.stringify(conceptPerformance)]);
+      `, [username, submodule_id, grade, [attemptId], JSON.stringify(conceptPerfObj)]);
+      
+      console.log('✅ Created new student activity record');
     }
     
     const evaluationResult = {
       attempt_id: attemptId,
-      question_set_id: question_set_id,
+      quiz_id: question_set_id,
       totalQuestions: totalQuestions,
       correctAnswers: correctCount,
       percentage: percentage,
@@ -445,13 +489,18 @@ app.post('/api/evaluate_quiz', async (req, res) => {
       submittedAt: new Date().toISOString()
     };
     
+    console.log('✅ [/api/evaluate_quiz] Success');
     res.json(evaluationResult);
     
   } catch (err) {
-    console.error('Error evaluating quiz:', err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error('❌ Error evaluating quiz:', err);
+    res.status(500).json({ 
+      error: "Internal server error",
+      message: err.message 
+    });
   }
 });
+
 
 // ==================== ADMIN ROUTES ====================
 
@@ -610,6 +659,57 @@ app.get('/admin/question_set/:id', checkAdmin, async (req, res) => {
     });
   }
 });
+
+app.post('/admin/question_set/:setId/add_question', checkAdmin, upload.single('image'), async (req, res) => {
+  const { setId } = req.params;
+  const {
+    question_text,
+    question_type,
+    options,
+    correct_answer,
+    bloom_level,
+    concept_id,
+    grade
+  } = req.body;
+  
+  console.log('🔍 [POST /admin/question_set/add_question] Adding to set:', setId);
+  
+  try {
+    // Insert the new question
+    const questionResult = await pool.query(`
+      INSERT INTO questions (
+        concept_id, grade, question_text, question_type, options,
+        correct_answer, bloom_level, image_path
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING id
+    `, [
+      concept_id,
+      grade,
+      question_text,
+      question_type,
+      typeof options === 'string' ? options : JSON.stringify(options),
+      correct_answer,
+      bloom_level,
+      req.file ? req.file.path : null
+    ]);
+    
+    const questionId = questionResult.rows[0].id;
+    
+    // Add to question_set_items
+    await pool.query(`
+      INSERT INTO question_set_items (set_id, question_id)
+      VALUES ($1, $2)
+    `, [setId, questionId]);
+    
+    console.log('✅ Question added to set:', questionId);
+    res.json({ success: true, question_id: questionId });
+  } catch (err) {
+    console.error('❌ Error adding question:', err);
+    res.status(500).json({ error: 'Server error', message: err.message });
+  }
+});
+
+
 // Generate quiz using Python script
 // Generate quiz using Python script - UPDATED FOR YOUR SCHEMA
 app.post('/generatequiz', checkAdmin, async (req, res) => {
@@ -769,93 +869,79 @@ app.post('/generatequiz', checkAdmin, async (req, res) => {
 app.get('/admin/concepts/:submodule_code/:grade', checkAdmin, async (req, res) => {
   const { submodule_code, grade } = req.params;
   
+  console.log('🔍 [/admin/concepts] Fetching concepts for:', submodule_code, 'grade:', grade);
+  
   try {
     const result = await pool.query(`
-      SELECT DISTINCT c.concept_name, c.ct_concepts, c.description
+      SELECT DISTINCT c.id, c.concept_name, c.description, c.ct_concepts
       FROM concepts c
       INNER JOIN submodules s ON s.id = c.submodule_id
       INNER JOIN concept_grade_mapping cgm ON cgm.concept_id = c.id
-      WHERE s.submodule_code = $1 AND cgm.grade_level = $2
+      WHERE s.submodule_code = $1 AND cgm.grade = $2
       ORDER BY c.concept_name
     `, [submodule_code, grade]);
     
+    console.log('✅ Concepts found:', result.rows.length);
     res.json(result.rows);
   } catch (err) {
-    console.error('Error fetching concepts:', err);
+    console.error('❌ Error fetching concepts:', err);
     res.status(500).json({ error: 'Database error' });
   }
 });
 
-// Manual question set creation
-app.post('/admin/create_manual_set', checkAdmin, upload.array('images', 10), async (req, res) => {
-  const { submodule_code, grade, set_name, questions_json } = req.body;
-  const files = req.files || [];
+
+// Create manual question set (empty initially)
+app.post('/admin/create_manual_set', checkAdmin, async (req, res) => {
+  const { submodule_code, grade, set_name } = req.body;
   
-  if (!submodule_code || !grade || !questions_json) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
+  console.log('🔍 [POST /admin/create_manual_set] Creating manual set:', set_name);
   
   try {
-    const questions = JSON.parse(questions_json);
-    const questionIds = [];
+    // Get submodule_id
+    const submoduleResult = await pool.query(
+      'SELECT id FROM submodules WHERE submodule_code = $1',
+      [submodule_code]
+    );
     
-    for (let i = 0; i < questions.length; i++) {
-      const q = questions[i];
-      const imagePath = files[i] ? files[i].path : null;
-      
-      const insertResult = await pool.query(`
-        INSERT INTO questions (
-          question_text, question_type, options, correct_answer,
-          bloom_level, concept, grade, image_path, created_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
-        RETURNING id
-      `, [
-        q.question_text,
-        q.question_type || 'multiple_choice',
-        JSON.stringify(q.options || []),
-        q.correct_answer,
-        q.bloom_level || 'Understanding',
-        q.concept,
-        grade,
-        imagePath
-      ]);
-      
-      questionIds.push(insertResult.rows[0].id);
+    if (submoduleResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Submodule not found' });
     }
     
-    // Create question set
-    const finalSetName = set_name || `Manual Set - ${submodule_code} Grade ${grade}`;
-    const setResult = await pool.query(`
-      INSERT INTO question_sets (name, question_ids, created_at)
-      VALUES ($1, $2, NOW())
+    const submodule_id = submoduleResult.rows[0].id;
+    
+    // Create the question set
+    const result = await pool.query(`
+      INSERT INTO question_sets (submodule_id, grade, set_name, created_at)
+      VALUES ($1, $2, $3, NOW())
       RETURNING id
-    `, [finalSetName, questionIds]);
+    `, [submodule_id, grade, set_name]);
     
-    const questionSetId = setResult.rows[0].id;
+    const questionSetId = result.rows[0].id;
+    console.log('✅ Manual set created with ID:', questionSetId);
     
-    // Map to submodule and grade
-    await pool.query(`
-      INSERT INTO question_set_mapping (question_set_id, submodule_code, grade)
-      VALUES ($1, $2, $3)
-    `, [questionSetId, submodule_code, grade]);
-    
-    res.json({
-      success: true,
-      question_set_id: questionSetId,
-      question_count: questionIds.length
-    });
-    
+    res.json({ success: true, question_set_id: questionSetId });
   } catch (err) {
-    console.error('Error creating manual set:', err);
-    res.status(500).json({ error: 'Server error' });
+    console.error('❌ Error creating manual set:', err);
+    res.status(500).json({ error: 'Server error', message: err.message });
   }
 });
+
 
 // Edit a question
 app.put('/admin/question/:id', checkAdmin, upload.single('image'), async (req, res) => {
   const { id } = req.params;
-  const { question_text, question_type, options, correct_answer, bloom_level, concept, grade } = req.body;
-  const imagePath = req.file ? req.file.path : null;
+  const { 
+    question_text, 
+    question_type, 
+    options, 
+    correct_answer, 
+    bloom_level, 
+    concept_id,
+    grade 
+  } = req.body;
+  
+  console.log('🔍 [PUT /admin/question] Updating question:', id);
+  console.log('🔍 Data:', { question_text, question_type, concept_id });
   
   try {
     const updateFields = [];
@@ -870,9 +956,9 @@ app.put('/admin/question/:id', checkAdmin, upload.single('image'), async (req, r
       updateFields.push(`question_type = $${paramCount++}`);
       values.push(question_type);
     }
-    if (options) {
+    if (options !== undefined) {
       updateFields.push(`options = $${paramCount++}`);
-      values.push(JSON.stringify(JSON.parse(options)));
+      values.push(typeof options === 'string' ? options : JSON.stringify(options));
     }
     if (correct_answer) {
       updateFields.push(`correct_answer = $${paramCount++}`);
@@ -882,17 +968,17 @@ app.put('/admin/question/:id', checkAdmin, upload.single('image'), async (req, r
       updateFields.push(`bloom_level = $${paramCount++}`);
       values.push(bloom_level);
     }
-    if (concept) {
-      updateFields.push(`concept = $${paramCount++}`);
-      values.push(concept);
+    if (concept_id) {
+      updateFields.push(`concept_id = $${paramCount++}`);
+      values.push(concept_id);
     }
     if (grade) {
       updateFields.push(`grade = $${paramCount++}`);
       values.push(grade);
     }
-    if (imagePath) {
+    if (req.file) {
       updateFields.push(`image_path = $${paramCount++}`);
-      values.push(imagePath);
+      values.push(req.file.path);
     }
     
     if (updateFields.length === 0) {
@@ -900,18 +986,19 @@ app.put('/admin/question/:id', checkAdmin, upload.single('image'), async (req, r
     }
     
     values.push(id);
+    const query = `UPDATE questions SET ${updateFields.join(', ')} WHERE id = $${paramCount} RETURNING *`;
     
-    await pool.query(`
-      UPDATE questions
-      SET ${updateFields.join(', ')}
-      WHERE id = $${paramCount}
-    `, values);
+    const result = await pool.query(query, values);
     
-    res.json({ success: true, message: 'Question updated' });
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Question not found' });
+    }
     
+    console.log('✅ Question updated successfully');
+    res.json(result.rows[0]);
   } catch (err) {
-    console.error('Error updating question:', err);
-    res.status(500).json({ error: 'Server error' });
+    console.error('❌ Error updating question:', err);
+    res.status(500).json({ error: 'Server error', message: err.message });
   }
 });
 
@@ -1029,6 +1116,26 @@ app.get('/admin/student_activity/:username', checkAdmin, async (req, res) => {
   } catch (error) {
     console.error('Error fetching student activity:', error);
     res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.delete('/admin/question/:id', checkAdmin, async (req, res) => {
+  const { id } = req.params;
+  
+  console.log('🔍 [DELETE /admin/question] Deleting question:', id);
+  
+  try {
+    // Delete from question_set_items first (CASCADE should handle this, but being explicit)
+    await pool.query('DELETE FROM question_set_items WHERE question_id = $1', [id]);
+    
+    // Delete the question
+    await pool.query('DELETE FROM questions WHERE id = $1', [id]);
+    
+    console.log('✅ Question deleted');
+    res.json({ success: true });
+  } catch (err) {
+    console.error('❌ Error deleting question:', err);
+    res.status(500).json({ error: 'Server error', message: err.message });
   }
 });
 

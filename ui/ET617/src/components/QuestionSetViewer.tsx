@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import QuestionEditor from "./QuestionEditor";
 
 interface Question {
   id: number;
@@ -8,6 +9,7 @@ interface Question {
   correct_answer: string;
   bloom_level: string;
   concept: string;
+  concept_id: number;
   image_path: string | null;
   grade: number;
 }
@@ -30,19 +32,22 @@ interface QuestionSetViewerProps {
 const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) => {
   const [questionSet, setQuestionSet] = useState<QuestionSet | null>(null);
   const [loading, setLoading] = useState(true);
-  const [editingQuestion, setEditingQuestion] = useState<number | null>(null);
+  const [editingQuestionId, setEditingQuestionId] = useState<number | null>(null);
+  const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
     fetchQuestionSet();
   }, [setId]);
 
   const fetchQuestionSet = async () => {
+    setLoading(true);
     try {
       const res = await fetch(`http://localhost:5000/admin/question_set/${setId}`, {
         credentials: "include",
       });
       if (res.ok) {
         const data = await res.json();
+        console.log("✅ Question set loaded:", data);
         setQuestionSet(data);
       }
     } catch (err) {
@@ -50,6 +55,35 @@ const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) 
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDeleteQuestion = async (questionId: number) => {
+    if (!window.confirm("Are you sure you want to delete this question?")) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:5000/admin/question/${questionId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        alert("Question deleted successfully!");
+        fetchQuestionSet();
+      } else {
+        alert("Failed to delete question");
+      }
+    } catch (err) {
+      console.error("Error deleting question:", err);
+      alert("Error deleting question");
+    }
+  };
+
+  const handleSaveComplete = () => {
+    setEditingQuestionId(null);
+    setShowAddForm(false);
+    fetchQuestionSet();
   };
 
   if (loading) {
@@ -109,200 +143,264 @@ const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) 
         </div>
       </div>
 
+      {/* Add Question Button */}
+      <div style={{ marginBottom: "30px" }}>
+        <button
+          onClick={() => setShowAddForm(!showAddForm)}
+          style={{
+            padding: "15px 30px",
+            backgroundColor: "#10b981",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "16px",
+            fontWeight: "bold",
+            boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+          }}
+        >
+          {showAddForm ? "❌ Cancel Adding" : "➕ Add New Question"}
+        </button>
+      </div>
+
+      {/* Add Question Form */}
+      {showAddForm && (
+        <QuestionEditor
+          mode="add"
+          submoduleCode={questionSet.submodule_code}
+          grade={questionSet.grade}
+          setId={setId}
+          onSave={handleSaveComplete}
+          onCancel={() => setShowAddForm(false)}
+        />
+      )}
+
       {/* Questions List */}
       <div>
         <h3 style={{ color: "#cbd5e1", marginBottom: "20px" }}>Questions</h3>
         
         {questionSet.questions.map((question, index) => (
-          <div
-            key={question.id}
-            style={{
-              backgroundColor: "#1e293b",
-              border: "1px solid #334155",
-              borderRadius: "12px",
-              padding: "20px",
-              marginBottom: "20px",
-            }}
-          >
-            {/* Question Header */}
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px" }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
-                  <span
-                    style={{
-                      backgroundColor: "#6366f1",
-                      color: "white",
-                      padding: "4px 12px",
-                      borderRadius: "12px",
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Q{index + 1}
-                  </span>
-                  <span
-                    style={{
-                      backgroundColor: "#8b5cf6",
-                      color: "white",
-                      padding: "4px 12px",
-                      borderRadius: "12px",
-                      fontSize: "12px",
-                    }}
-                  >
-                    {question.question_type}
-                  </span>
-                  <span
-                    style={{
-                      backgroundColor: "#3b82f6",
-                      color: "white",
-                      padding: "4px 12px",
-                      borderRadius: "12px",
-                      fontSize: "12px",
-                    }}
-                  >
-                    {question.bloom_level}
-                  </span>
-                  <span
-                    style={{
-                      backgroundColor: "#10b981",
-                      color: "white",
-                      padding: "4px 12px",
-                      borderRadius: "12px",
-                      fontSize: "12px",
-                    }}
-                  >
-                    {question.concept}
-                  </span>
-                </div>
-              </div>
-              
-              <button
-                onClick={() => alert("Edit functionality coming soon!")}
+          <div key={question.id}>
+            {editingQuestionId === question.id ? (
+              <QuestionEditor
+                mode="edit"
+                questionData={question}
+                submoduleCode={questionSet.submodule_code}
+                grade={questionSet.grade}
+                setId={setId}
+                onSave={handleSaveComplete}
+                onCancel={() => setEditingQuestionId(null)}
+              />
+            ) : (
+              <div
                 style={{
-                  padding: "8px 16px",
-                  backgroundColor: "#f59e0b",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  fontSize: "14px",
+                  backgroundColor: "#1e293b",
+                  border: "1px solid #334155",
+                  borderRadius: "12px",
+                  padding: "20px",
+                  marginBottom: "20px",
                 }}
               >
-                ✏️ Edit
-              </button>
-            </div>
-
-            {/* Question Text */}
-            <div style={{ marginBottom: "15px" }}>
-              <p
-                style={{
-                  color: "#f1f5f9",
-                  fontSize: "16px",
-                  lineHeight: "1.6",
-                  margin: "0",
-                }}
-              >
-                {question.question_text}
-              </p>
-            </div>
-
-            {/* Image (if exists) */}
-            {question.image_path && (
-              <div style={{ marginBottom: "15px" }}>
-                <img
-                  src={`http://localhost:5000/${question.image_path}`}
-                  alt="Question"
-                  style={{
-                    maxWidth: "400px",
-                    borderRadius: "8px",
-                    border: "1px solid #334155",
-                  }}
-                />
-              </div>
-            )}
-
-            {/* Options */}
-            {question.question_type === "MCQ" && (
-              <div style={{ marginBottom: "15px" }}>
-                <p style={{ color: "#cbd5e1", fontSize: "14px", marginBottom: "10px" }}>
-                  <strong>Options:</strong>
-                </p>
-                <div style={{ display: "grid", gap: "10px" }}>
-                  {Object.entries(question.options || {}).map(([key, value]) => (
-                    <div
-                      key={key}
-                      style={{
-                        backgroundColor: key === question.correct_answer ? "#10b98120" : "#0f172a",
-                        border: `2px solid ${key === question.correct_answer ? "#10b981" : "#334155"}`,
-                        borderRadius: "8px",
-                        padding: "12px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                      }}
-                    >
+                {/* Question Header */}
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px" }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", gap: "10px", marginBottom: "10px", flexWrap: "wrap" }}>
                       <span
                         style={{
-                          backgroundColor: key === question.correct_answer ? "#10b981" : "#475569",
+                          backgroundColor: "#6366f1",
                           color: "white",
-                          padding: "4px 10px",
-                          borderRadius: "4px",
+                          padding: "4px 12px",
+                          borderRadius: "12px",
+                          fontSize: "12px",
                           fontWeight: "bold",
-                          minWidth: "30px",
-                          textAlign: "center",
                         }}
                       >
-                        {key}
+                        Q{index + 1}
                       </span>
-                      <span style={{ color: "#f1f5f9", flex: 1 }}>{String(value)}</span>
-                      {key === question.correct_answer && (
-                        <span style={{ color: "#10b981", fontWeight: "bold" }}>✓ Correct</span>
-                      )}
+                      <span
+                        style={{
+                          backgroundColor: "#8b5cf6",
+                          color: "white",
+                          padding: "4px 12px",
+                          borderRadius: "12px",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {question.question_type}
+                      </span>
+                      <span
+                        style={{
+                          backgroundColor: "#3b82f6",
+                          color: "white",
+                          padding: "4px 12px",
+                          borderRadius: "12px",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {question.bloom_level}
+                      </span>
+                      <span
+                        style={{
+                          backgroundColor: "#10b981",
+                          color: "white",
+                          padding: "4px 12px",
+                          borderRadius: "12px",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {question.concept}
+                      </span>
                     </div>
-                  ))}
+                  </div>
+                  
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <button
+                      onClick={() => setEditingQuestionId(question.id)}
+                      style={{
+                        padding: "8px 16px",
+                        backgroundColor: "#f59e0b",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        fontSize: "14px",
+                      }}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteQuestion(question.id)}
+                      style={{
+                        padding: "8px 16px",
+                        backgroundColor: "#ef4444",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        fontSize: "14px",
+                      }}
+                    >
+                      🗑️ Delete
+                    </button>
+                  </div>
                 </div>
-              </div>
-            )}
 
-            {/* True/False */}
-            {question.question_type === "True/False" && (
-              <div style={{ marginBottom: "15px" }}>
-                <p style={{ color: "#cbd5e1", fontSize: "14px", marginBottom: "10px" }}>
-                  <strong>Correct Answer:</strong>
-                </p>
+                {/* Question Text */}
+                <div style={{ marginBottom: "15px" }}>
+                  <p
+                    style={{
+                      color: "#f1f5f9",
+                      fontSize: "16px",
+                      lineHeight: "1.6",
+                      margin: "0",
+                    }}
+                  >
+                    {question.question_text}
+                  </p>
+                </div>
+
+                {/* Image (if exists) */}
+                {question.image_path && (
+                  <div style={{ marginBottom: "15px" }}>
+                    <img
+                      src={`http://localhost:5000/${question.image_path}`}
+                      alt="Question"
+                      style={{
+                        maxWidth: "400px",
+                        borderRadius: "8px",
+                        border: "1px solid #334155",
+                      }}
+                    />
+                  </div>
+                )}
+
+                {/* Options */}
+                {question.question_type === "MCQ" && (
+                  <div style={{ marginBottom: "15px" }}>
+                    <p style={{ color: "#cbd5e1", fontSize: "14px", marginBottom: "10px" }}>
+                      <strong>Options:</strong>
+                    </p>
+                    <div style={{ display: "grid", gap: "10px" }}>
+                      {Object.entries(question.options || {}).map(([key, value]) => (
+                        <div
+                          key={key}
+                          style={{
+                            backgroundColor: key === question.correct_answer ? "#10b98120" : "#0f172a",
+                            border: `2px solid ${key === question.correct_answer ? "#10b981" : "#334155"}`,
+                            borderRadius: "8px",
+                            padding: "12px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          <span
+                            style={{
+                              backgroundColor: key === question.correct_answer ? "#10b981" : "#475569",
+                              color: "white",
+                              padding: "4px 10px",
+                              borderRadius: "4px",
+                              fontWeight: "bold",
+                              minWidth: "30px",
+                              textAlign: "center",
+                            }}
+                          >
+                            {key}
+                          </span>
+                          <span style={{ color: "#f1f5f9", flex: 1 }}>{String(value)}</span>
+                          {key === question.correct_answer && (
+                            <span style={{ color: "#10b981", fontWeight: "bold" }}>✓ Correct</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* True/False - FIXED */}
+                {question.question_type === "BOOLEAN" && (
+                  <div style={{ marginBottom: "15px" }}>
+                    <p style={{ color: "#cbd5e1", fontSize: "14px", marginBottom: "10px" }}>
+                      <strong>Correct Answer:</strong>
+                    </p>
+                    <div
+                      style={{
+                        backgroundColor: "#10b98120",
+                        border: "2px solid #10b981",
+                        borderRadius: "8px",
+                        padding: "12px",
+                        color: "#f1f5f9",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {/* Convert A/B to True/False if needed */}
+                      {question.correct_answer === 'A' ? 'True' : 
+                       question.correct_answer === 'B' ? 'False' : 
+                       question.correct_answer}
+                    </div>
+                  </div>
+                )}
+
+                {/* Metadata */}
                 <div
                   style={{
-                    backgroundColor: "#10b98120",
-                    border: "2px solid #10b981",
-                    borderRadius: "8px",
-                    padding: "12px",
-                    color: "#f1f5f9",
-                    fontWeight: "bold",
+                    borderTop: "1px solid #334155",
+                    paddingTop: "15px",
+                    display: "flex",
+                    gap: "20px",
+                    color: "#94a3b8",
+                    fontSize: "13px",
                   }}
                 >
-                  {question.correct_answer}
+                  <span>
+                    <strong>ID:</strong> {question.id}
+                  </span>
+                  <span>
+                    <strong>Grade:</strong> {question.grade}
+                  </span>
                 </div>
               </div>
             )}
-
-            {/* Metadata */}
-            <div
-              style={{
-                borderTop: "1px solid #334155",
-                paddingTop: "15px",
-                display: "flex",
-                gap: "20px",
-                color: "#94a3b8",
-                fontSize: "13px",
-              }}
-            >
-              <span>
-                <strong>ID:</strong> {question.id}
-              </span>
-              <span>
-                <strong>Grade:</strong> {question.grade}
-              </span>
-            </div>
           </div>
         ))}
       </div>
