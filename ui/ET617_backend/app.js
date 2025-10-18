@@ -1,46 +1,41 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
-// import connectPgSimple from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import pool from "./db.js"; // note: add `.js` extension for ESM
-import multer from 'multer';  // NEW: For image uploads
-import path from 'path';      // NEW: For file handling
-import fs from 'fs';          // NEW: For directory checks
+import pool from "./db.js";
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import { spawn } from 'child_process';
 
 dotenv.config();
 
-// const { GoogleGenerativeAI } = pkg;
 const app = express();
 
-// const PgSession = connectPgSimple(session);
-
+// Session configuration
 app.use(session({
   secret: process.env.SESSION_SECRET || "your_secret_here",
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false } // set true if using HTTPS
+  cookie: { secure: false }
 }));
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
-// Configure CORS to allow requests from the frontend
+// CORS configuration
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-
     const allowedOrigins = [
       'http://localhost:3000',
       'http://localhost:5173',
       'http://127.0.0.1:3000',
       'http://127.0.0.1:5173'
     ];
-
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
@@ -53,7 +48,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
-// Add logging middleware for debugging
+// Logging middleware
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url} from ${req.get('Origin') || 'no-origin'}`);
   next();
@@ -61,10 +56,10 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-// NEW: Serve static files from uploads directory
+// Serve static files from uploads directory
 app.use('/uploads', express.static('uploads'));
 
-// NEW: Multer configuration for image uploads
+// Multer configuration for image uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const dir = 'uploads';
@@ -76,114 +71,12 @@ const storage = multer.diskStorage({
     cb(null, uniqueSuffix + path.extname(file.originalname));
   }
 });
-const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } }); // 5MB limit
 
-// Function to generate quiz using Gemini AI (YOUR EXISTING - UNCHANGED)
-async function generateQuizWithGemini(transcript, grade, no_of_mcq = 7, no_of_tf = 3) {
-  const prompt = `
-You are an expert in educational psychology and curriculum design.
-Your task is to generate a pedagogically sound quiz from the provided learning material,
-keeping the learner's cognitive development in mind.
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
 
-### Input Parameters
-1. Grade Level: ${grade}
-2. Transcript: Provided at the end.
+// ==================== HELPER FUNCTIONS ====================
 
-### Instructions
-1. Read the entire transcript to understand the core concepts.
-2. Generate a quiz with exactly:
-   - ${no_of_mcq} Multiple Choice Questions (4 options each, one correct).
-   - ${no_of_tf} True/False Questions.
-
-3. **Grade-Level Adaptation (Based on NEP 5+3+3+4 System):**
-   - **foundational (Grades 1-2):** Use very simple language. Questions should be direct and concrete. Focus on "Remembering."
-   - **preparatory (Grades 3-5):** Use simple, clear language. Introduce questions that require basic "Understanding" and connections.
-   - **middle (Grades 6-8):** Use standard terminology. Questions should test "Application" of concepts and basic "Analysis."
-   - **secondary (Grades 9-12):** Use precise, academic language. Questions should challenge learners with "Analysis," "Evaluation," and synthesis of information.
-
-4. **Cognitive Diversity (Based on Bloom's Taxonomy):**
-   - Structure the quiz to have a gradual increase in cognitive demand.
-   - Start with Lower-Order Thinking Skills (LOTS) and move to Higher-Order Thinking Skills (HOTS).
-   - Distribute questions across these levels as appropriate for the grade:
-     - **Remembering:** Recalling facts and basic concepts.
-     - **Understanding:** Explaining ideas or concepts.
-     - **Applying:** Using information in new situations.
-     - **Analyzing:** Drawing connections among ideas.
-     - **Evaluating:** Justifying a stand or decision.
-
-5. **Question Quality:**
-   - Ensure questions are unambiguous and directly based on the transcript's terminology.
-   - The goal is to test comprehension and critical thinking, not just rote memorization.
-
-6. Provide a concise explanation for each answer, referencing the core concept from the transcript.
-
-7. No need to put A., B., C., D. before options in MCQs output.
-
-8. Also have a field called "needs_image" in each question object, set it to true if the question would benefit from an accompanying image, else false.
-
-10. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<start_time>X</start_time> <end_time>Y</end_time> ... ". So you should only generate the quiz for the part between <start_time> and <end_time>, but keep the context of the entire transcript.
-
-### Output Format (Strict JSON)
-{
-  "multiple_choice": [
-    {
-      "question": "...",
-      "options": ["A", "B", "C", "D"],
-      "answer": "B",
-      "explanation": "...",
-      "bloom_level": "Remembering",
-      "concept": "...",
-      "needs_image": false,
-      "grade": grade_level
-    }
-  ],
-  "true_false": [
-    {
-      "question": "...",
-      "answer": "True",
-      "explanation": "...",
-      "bloom_level": "Understanding",
-      "concept": "...",
-      "needs_image": true,
-      "grade": grade_level
-    }
-  ]
-}
-
-### Important points to be noted
-1. Do not explicitly mention the word "transcript" in any question or answer or explanation. Think of it like a student sees the video and then directly sees the questions.
-2. In one or two words, mention the concept tested from the video/transcript under "concept" in json.
-3. Include 60% of the questions from "apply" and above from Bloom's Taxonomy. [i.e. apply, analyze, evaluate, create/synthesize]
-
-### Transcript:
-${transcript}
-`;
-
-  try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    let text = response.text();
-    text = text.slice(7, -3);
-
-    // Parse the JSON response
-    const quizData = JSON.parse(text);
-    return quizData;
-  } catch (error) {
-    console.error('Error generating quiz with Gemini:', error);
-    throw new Error('Failed to generate quiz');
-  }
-}
-
-// NEW: Helper to get next set_index
-async function getNextSetIndex(grade, module) {
-  const result = await pool.query(
-    'SELECT COALESCE(MAX(set_index), 0) as max_index FROM quiz_sets WHERE grade = $1 AND module = $2',
-    [grade, module]
-  );
-  return (parseFloat(result.rows[0].max_index) + 0.1).toFixed(1);
-}
-
-// NEW: Helper for NEP grade mapping
+// Helper to get NEP grade category
 function getNepGrade(grade) {
   const mapping = {
     '1': 'foundational', '2': 'foundational',
@@ -194,313 +87,6 @@ function getNepGrade(grade) {
   return mapping[String(grade)] || 'middle';
 }
 
-// YOUR EXISTING ROUTES (UNCHANGED)
-app.post('/register', async (req, res) => {
-  const { username, email, password, grade } = req.body;
-  const password_hash = await bcrypt.hash(password, 10);
-
-  const userExists = await pool.query(
-    "SELECT * FROM users WHERE username = $1 OR email = $2",
-    [username, email]
-  );
-
-  if (userExists.rows.length > 0) {
-    return res.status(400).json({ error: "User already exists." });
-  }
-
-  try {
-    await pool.query(
-      "INSERT INTO users (username, password_hash, email, grade) VALUES ($1, $2, $3, $4)",
-      [username, password_hash, email, grade]
-    );
-    res.status(201).json({ message: "User registered!" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    const result = await pool.query(
-      "SELECT * FROM users WHERE username = $1",
-      [username]
-    );
-
-    if (result.rows.length === 0)
-      return res.status(401).json({ error: "No user found." });
-
-    const user = result.rows[0];
-    const valid = await bcrypt.compare(password, user.password_hash);
-
-    if (!valid)
-      return res.status(401).json({ error: "Invalid password." });
-
-    req.session.username = user.username;
-    console.log("Grade: " + user.grade);
-
-    res.json({
-      message: "Login successful!",
-      user: {
-        username,
-        email: user.email,
-        grade: user.grade
-      }
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get('/api/modules', async (req, res) => {
-  try {
-    const result = await pool.query(`
-      SELECT quiz_id, module
-      FROM transcript
-      ORDER BY module, quiz_id
-    `);
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({
-        error: "No transcript data found in the database"
-      });
-    }
-
-    console.log('Raw transcript data fetched successfully from database');
-    res.json(result.rows);
-  } catch (err) {
-    console.error('Error fetching transcript data from database:', err);
-    res.status(500).json({
-      error: "Internal server error while fetching transcript data"
-    });
-  }
-});
-
-// REMOVED: /api/generate_quiz route (replaced by new teacher-side creation + student fetch)
-// NEW: Student endpoint to get available sets for a grade/module
-app.get('/api/student/quiz_sets/:grade/:module', async (req, res) => {
-  const { grade, module } = req.params;
-  try {
-    const result = await pool.query(
-      'SELECT set_index, created_at, questions FROM quiz_sets WHERE grade = $1 AND module = $2 AND is_hidden = FALSE ORDER BY set_index DESC',
-      [parseInt(grade), parseInt(module)]
-    );
-    
-    // Return simplified data (without explanations, just metadata)
-    const sets = result.rows.map(row => ({
-      set_index: row.set_index,
-      question_count: Array.isArray(row.questions) ? row.questions.length : 0,
-      created_at: row.created_at
-    }));
-    
-    res.json(sets);
-  } catch (error) {
-    console.error('Error fetching student sets:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-// NEW: Student fetch quiz from pre-created sets
-app.get('/api/fetch_quiz', async (req, res) => {
-  const { grade, module, set_index } = req.query;
-  
-  if (!grade || !module) {
-    return res.status(400).json({ error: 'Grade and module required' });
-  }
-
-  try {
-    let query = 'SELECT id, set_index, questions FROM quiz_sets WHERE grade = $1 AND module = $2 AND is_hidden = FALSE';
-    const params = [parseInt(grade), parseInt(module)];
-    
-    if (set_index) {
-      query += ' AND set_index = $3';
-      params.push(parseFloat(set_index));
-    } else {
-      query += ' ORDER BY set_index DESC LIMIT 1'; // Get latest if no specific set requested
-    }
-
-    const result = await pool.query(query, params);
-    
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'No active quiz set found for this grade and module' });
-    }
-
-    const set = result.rows[0];
-    // Strip explanations for students
-    const studentQuestions = set.questions.map(q => {
-      const { explanation, ...safeQ } = q;
-      return safeQ;
-    });
-
-    res.json({ questions: studentQuestions, set_index: set.set_index });
-  } catch (error) {
-    console.error('Error fetching quiz:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-app.post('/api/evaluate_quiz', async (req, res) => {
-  const { quiz_id, answers, grade, username, module, set_index } = req.body;
-
-  // Validate required parameters
-  if (!answers || !grade || !username) {
-    return res.status(400).json({
-      error: "Missing required parameters: answers, grade, and username are required"
-    });
-  }
-
-  try {
-    console.log(`Evaluating quiz for user: ${username}, grade: ${grade}, module: ${module || quiz_id}`);
-
-    // Fetch the correct answers from quiz_sets table
-    const actualModule = module || quiz_id;
-    
-    if (!actualModule) {
-      return res.status(400).json({
-        error: "Module information is required for evaluation"
-      });
-    }
-
-    // Fetch the quiz set
-    let query = 'SELECT id, questions, set_index FROM quiz_sets WHERE grade = $1 AND module = $2 AND is_hidden = FALSE';
-    const params = [parseInt(grade), parseInt(actualModule)];
-    
-    if (set_index) {
-      query += ' AND set_index = $3';
-      params.push(parseFloat(set_index));
-    } else {
-      query += ' ORDER BY set_index DESC LIMIT 1';
-    }
-
-    const quizSetResult = await pool.query(query, params);
-
-    if (quizSetResult.rows.length === 0) {
-      return res.status(404).json({
-        error: `No quiz set found for grade ${grade}, module ${actualModule}`
-      });
-    }
-
-    const quizSetId = quizSetResult.rows[0].id;
-    const questions = quizSetResult.rows[0].questions;
-    const actualSetIndex = quizSetResult.rows[0].set_index;
-
-    // Convert questions to evaluation format
-    const allQuestions = questions.map((q, i) => ({
-      ...q,
-      id: q.type === 'mcq' ? `mc_${i}` : `tf_${i}`
-    }));
-
-    // Evaluate answers
-    let correctCount = 0;
-    const detailedResults = allQuestions.map((question, index) => {
-      const userAnswer = answers[question.id];
-      const isCorrect = userAnswer === question.answer;
-      if (isCorrect) correctCount++;
-
-      return {
-        questionIndex: index + 1,
-        question: question.question,
-        userAnswer: userAnswer || "Not answered",
-        correctAnswer: question.answer,
-        isCorrect: isCorrect,
-        explanation: question.explanation || "No explanation provided",
-        bloom_level: question.bloom_level,
-        concept: question.concept,
-        type: question.type,
-        needs_image: question.needs_image || false
-      };
-    });
-
-    const totalQuestions = allQuestions.length;
-    const percentage = Math.round((correctCount / totalQuestions) * 100);
-
-    // Determine grade level
-    let gradeLevel = "Needs Improvement";
-    if (percentage >= 90) gradeLevel = "Excellent";
-    else if (percentage >= 80) gradeLevel = "Good";
-    else if (percentage >= 70) gradeLevel = "Satisfactory";
-    else if (percentage >= 60) gradeLevel = "Below Average";
-
-    // NEW: Save attempt to database
-    await pool.query(
-      `INSERT INTO quiz_attempts 
-        (username, grade, module, set_index, quiz_set_id, score, total_questions, percentage, grade_level, answers) 
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
-      [
-        username,
-        parseInt(grade),
-        parseInt(actualModule),
-        parseFloat(actualSetIndex),
-        quizSetId,
-        correctCount,
-        totalQuestions,
-        percentage,
-        gradeLevel,
-        JSON.stringify(detailedResults)
-      ]
-    );
-
-    const evaluationResult = {
-      quiz_id: actualModule,
-      totalQuestions: totalQuestions,
-      correctAnswers: correctCount,
-      percentage: percentage,
-      gradeLevel: gradeLevel,
-      results: detailedResults,
-      submittedAt: new Date().toISOString()
-    };
-
-    console.log(`Quiz evaluation completed and saved - Module: ${actualModule}, Score: ${percentage}%`);
-    res.json(evaluationResult);
-  } catch (err) {
-    console.error('Error evaluating quiz:', err);
-    res.status(500).json({
-      error: "Internal server error while evaluating quiz"
-    });
-  }
-});
-
-
-
-app.post('/logout', (req, res) => {
-  if (req.session) {
-    // Destroy the session
-    req.session.destroy((err) => {
-      if (err) {
-        console.error('Error destroying session:', err);
-        return res.status(500).json({ error: 'Failed to log out. Please try again.' });
-      }
-
-      // Clear the session cookie
-      res.clearCookie('connect.sid'); // Replace 'connect.sid' with your session cookie name if different
-      return res.status(200).json({ message: 'Logged out successfully.' });
-    });
-  } else {
-    return res.status(400).json({ error: 'No active session to log out from.' });
-  }
-});
-
-// Admin Login Route (separate from student login for security)
-app.post('/admin/login', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    
-    if (username !== 'root' || password !== 'admin') {
-      return res.status(401).json({ error: 'Invalid admin credentials' });
-    }
-
-    // Create admin session
-    req.session.isAdmin = true;
-    req.session.username = 'root';
-
-    res.json({ success: true, message: 'Admin login successful' });
-  } catch (error) {
-    console.error('Admin login error:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
 // Middleware to check admin session
 const checkAdmin = (req, res, next) => {
   if (req.session.isAdmin) {
@@ -510,272 +96,104 @@ const checkAdmin = (req, res, next) => {
   }
 };
 
-// Get grades with student counts
-app.get('/admin/students/grades', checkAdmin, async (req, res) => {
-  try {
-    const result = await pool.query(`
-      SELECT grade, COUNT(*) as student_count 
-      FROM users 
-      WHERE grade IS NOT NULL 
-      GROUP BY grade 
-      ORDER BY grade
-    `);
-    res.json(result.rows);
-  } catch (error) {
-    console.error('Error fetching grades:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
+// ==================== AUTHENTICATION ROUTES ====================
 
-// Get students by grade
-app.get('/admin/students/:grade', checkAdmin, async (req, res) => {
-  const { grade } = req.params;
-  try {
-    const result = await pool.query(`
-      SELECT username, email, grade
-      FROM users 
-      WHERE grade = $1 
-      ORDER BY username
-    `, [grade]);
-    res.json(result.rows);
-  } catch (error) {
-    console.error('Error fetching students:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-// Get grades with quiz availability
-app.get('/admin/quizzes/grades', checkAdmin, async (req, res) => {
-  try {
-    const result = await pool.query(`
-      SELECT u.grade, COUNT(q.username) as quiz_count
-      FROM users u
-      LEFT JOIN quiz q ON u.username = q.username
-      WHERE u.grade IS NOT NULL
-      GROUP BY u.grade
-      ORDER BY u.grade
-    `);
-    res.json(result.rows);
-  } catch (error) {
-    console.error('Error fetching quiz grades:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-// NEW: Get quiz attempts for a specific student
-app.get('/admin/student_attempts/:username', checkAdmin, async (req, res) => {
-  const { username } = req.params;
-  try {
-    const result = await pool.query(
-      `SELECT id, grade, module, set_index, score, total_questions, percentage, 
-              grade_level, submitted_at, answers 
-       FROM quiz_attempts 
-       WHERE username = $1 
-       ORDER BY submitted_at DESC`,
-      [username]
-    );
-    res.json(result.rows);
-  } catch (error) {
-    console.error('Error fetching student attempts:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-// NEW: Get attempt statistics for a student
-app.get('/admin/student_stats/:username', checkAdmin, async (req, res) => {
-  const { username } = req.params;
-  try {
-    const result = await pool.query(
-      `SELECT 
-        COUNT(*) as total_attempts,
-        AVG(percentage)::INTEGER as avg_score,
-        MAX(percentage) as best_score,
-        MIN(percentage) as worst_score,
-        COUNT(DISTINCT module) as modules_attempted
-       FROM quiz_attempts 
-       WHERE username = $1`,
-      [username]
-    );
-    res.json(result.rows[0]);
-  } catch (error) {
-    console.error('Error fetching student stats:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-
-// Get quizzes by grade (aggregate quiz_data from users in that grade)
-app.get('/admin/quizzes/:grade', checkAdmin, async (req, res) => {
-  const { grade } = req.params;
-  try {
-    const result = await pool.query(`
-      SELECT q.username, q.quiz_data, u.grade
-      FROM quiz q
-      JOIN users u ON q.username = u.username
-      WHERE u.grade = $1
-      ORDER BY q.username
-    `, [grade]);
-    
-    // Parse quiz_data JSON for each user
-    const quizzes = result.rows.map(row => ({
-      username: row.username,
-      grade: row.grade,
-      quiz: JSON.parse(row.quiz_data || '{}') // Handle empty quiz_data
-    }));
-    
-    res.json(quizzes);
-  } catch (error) {
-    console.error('Error fetching quizzes:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-// NEW: Admin routes for quiz set management
-app.get('/admin/quizzes/grades/modules', checkAdmin, async (req, res) => {
-  const { grade } = req.query;
-  if (!grade) return res.status(400).json({ error: 'Grade required' });
+// Student Registration
+app.post('/register', async (req, res) => {
+  const { username, email, password, grade } = req.body;
   
   try {
-    const modules = [];
-    for (let m = 1; m <= 7; m++) {
-      const startQuizId = (m - 1) * 7 + 1;
-      const endQuizId = m * 7;
-      const countResult = await pool.query(
-        'SELECT COUNT(*) as count FROM transcript WHERE quiz_id BETWEEN $1 AND $2',
-        [startQuizId, endQuizId]
-      );
-      modules.push({
-        module: m,
-        transcripts: parseInt(countResult.rows[0].count)
-      });
+    const password_hash = await bcrypt.hash(password, 10);
+    const userExists = await pool.query(
+      "SELECT * FROM students WHERE username = $1 OR email = $2",
+      [username, email]
+    );
+    
+    if (userExists.rows.length > 0) {
+      return res.status(400).json({ error: "User already exists." });
     }
-    res.json({ grade: parseInt(grade), modules });
-  } catch (error) {
-    console.error('Modules fetch error:', error);
-    res.status(500).json({ error: 'Server error' });
+    
+    await pool.query(
+      "INSERT INTO students (username, password_hash, email, grade) VALUES ($1, $2, $3, $4)",
+      [username, password_hash, email, grade]
+    );
+    
+    res.status(201).json({ message: "User registered!" });
+  } catch (err) {
+    console.error('Registration error:', err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-app.get('/admin/quizzes/:grade/:module/sets', checkAdmin, async (req, res) => {
-  const { grade, module } = req.params;
+// Student Login
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  
   try {
     const result = await pool.query(
-      'SELECT id, set_index, is_hidden, created_at, questions FROM quiz_sets WHERE grade = $1 AND module = $2 ORDER BY set_index DESC',
-      [parseInt(grade), parseInt(module)]
+      "SELECT * FROM students WHERE username = $1",
+      [username]
     );
-    res.json(result.rows);
-  } catch (error) {
-    console.error('Sets fetch error:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-app.post('/admin/create_quiz_set', checkAdmin, upload.array('images', 10), async (req, res) => {
-  const { grade, module, type } = req.body;
-  const manualQuestions = req.body.questions;
-  const files = req.files || [];
-
-  if (!grade || !module || !type || (type === 'manual' && !manualQuestions)) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  try {
-    const nextIndex = await getNextSetIndex(parseInt(grade), parseInt(module));
-    let finalQuestions = [];
-
-    if (type === 'ai') {
-      // Fetch transcript for module
-      const startQuizId = (parseInt(module) - 1) * 7 + 1;
-      const endQuizId = parseInt(module) * 7;
-      const transcriptResult = await pool.query(
-        'SELECT transcript FROM transcript WHERE quiz_id BETWEEN $1 AND $2 ORDER BY RANDOM() LIMIT 1',
-        [startQuizId, endQuizId]
-      );
-      
-      if (transcriptResult.rows.length === 0) {
-        return res.status(404).json({ error: 'No transcript for this module' });
-      }
-
-      const nepGrade = getNepGrade(parseInt(grade));
-      const generated = await generateQuizWithGemini(transcriptResult.rows[0].transcript, nepGrade, 7, 3);
-
-      // Convert to new format
-      let fileIndex = 0;
-      finalQuestions = [
-        ...generated.multiple_choice.map(q => {
-          const imgPath = files[fileIndex] ? files[fileIndex].path : null;
-          fileIndex++;
-          return {
-            type: 'mcq',
-            question: q.question,
-            options: q.options,
-            answer: q.answer,
-            explanation: q.explanation || '',
-            bloom_level: q.bloom_level,
-            concept: q.concept,
-            image_path: imgPath,
-            grade: parseInt(grade)
-          };
-        }),
-        ...generated.true_false.map(q => {
-          const imgPath = files[fileIndex] ? files[fileIndex].path : null;
-          fileIndex++;
-          return {
-            type: 'tf',
-            question: q.question,
-            answer: q.answer === true || q.answer === 'True' ? 'true' : 'false',
-            explanation: q.explanation || '',
-            bloom_level: q.bloom_level,
-            concept: q.concept,
-            image_path: imgPath,
-            grade: parseInt(grade)
-          };
-        })
-      ];
-    } else if (type === 'manual') {
-      const parsedQuestions = JSON.parse(manualQuestions);
-      let fileIndex = 0;
-      finalQuestions = parsedQuestions.map(q => {
-        const imgPath = files[fileIndex] ? files[fileIndex].path : (q.image_path || null);
-        fileIndex++;
-        return { ...q, image_path: imgPath, grade: parseInt(grade) };
-      });
+    
+    if (result.rows.length === 0) {
+      return res.status(401).json({ error: "No user found." });
     }
-
-    await pool.query(
-      'INSERT INTO quiz_sets (grade, module, set_index, questions) VALUES ($1, $2, $3, $4)',
-      [parseInt(grade), parseInt(module), parseFloat(nextIndex), JSON.stringify(finalQuestions)]
-    );
-
-    res.json({ success: true, set_index: nextIndex, questions_count: finalQuestions.length });
-  } catch (error) {
-    console.error('Create set error:', error);
-    res.status(500).json({ error: 'Server error' });
+    
+    const user = result.rows[0];
+    const valid = await bcrypt.compare(password, user.password_hash);
+    
+    if (!valid) {
+      return res.status(401).json({ error: "Invalid password." });
+    }
+    
+    req.session.username = user.username;
+    req.session.grade = user.grade;
+    
+    res.json({
+      message: "Login successful!",
+      user: {
+        username,
+        email: user.email,
+        grade: user.grade
+      }
+    });
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-app.put('/admin/hide_quiz_set/:id', checkAdmin, async (req, res) => {
-  const { id } = req.params;
-  const { is_hidden } = req.body;
-  try {
-    await pool.query(
-      'UPDATE quiz_sets SET is_hidden = $1 WHERE id = $2',
-      [is_hidden, id]
-    );
-    res.json({ success: true });
-  } catch (error) {
-    console.error('Hide set error:', error);
-    res.status(500).json({ error: 'Server error' });
+// Student Logout
+app.post('/logout', (req, res) => {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.status(500).json({ error: 'Failed to log out.' });
+      }
+      res.clearCookie('connect.sid');
+      return res.status(200).json({ message: 'Logged out successfully.' });
+    });
+  } else {
+    return res.status(400).json({ error: 'No active session.' });
   }
 });
 
-app.delete('/admin/delete_quiz_set/:id', checkAdmin, async (req, res) => {
-  const { id } = req.params;
+// Admin Login
+app.post('/admin/login', async (req, res) => {
   try {
-    await pool.query('DELETE FROM quiz_sets WHERE id = $1', [id]);
-    res.json({ success: true });
+    const { username, password } = req.body;
+    
+    if (username !== 'root' || password !== 'admin') {
+      return res.status(401).json({ error: 'Invalid admin credentials' });
+    }
+    
+    req.session.isAdmin = true;
+    req.session.username = 'root';
+    
+    res.json({ success: true, message: 'Admin login successful' });
   } catch (error) {
-    console.error('Delete set error:', error);
+    console.error('Admin login error:', error);
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -786,4 +204,838 @@ app.post('/admin/logout', checkAdmin, (req, res) => {
   res.json({ success: true, message: 'Admin logged out' });
 });
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+// ==================== STUDENT ROUTES ====================
+
+// Get available submodules for student's grade
+app.get('/api/student/modules/:grade', async (req, res) => {
+  console.log('🔍 [/api/student/modules] Request for grade:', req.params.grade);
+  const { grade } = req.params;
+  
+  try {
+    const result = await pool.query(`
+      SELECT DISTINCT s.id, s.submodule_code, s.submodule_name, s.image_path,
+             COUNT(DISTINCT qs.id) as set_count
+      FROM submodules s
+      INNER JOIN concepts c ON c.submodule_id = s.id
+      INNER JOIN concept_grade_mapping cgm ON cgm.concept_id = c.id
+      LEFT JOIN question_sets qs ON qs.submodule_id = s.id AND qs.grade = $1
+      WHERE cgm.grade = $1
+      GROUP BY s.id, s.submodule_code, s.submodule_name, s.image_path
+      ORDER BY s.submodule_code
+    `, [grade]);
+    
+    console.log('✅ Student modules found:', result.rows.length);
+    res.json(result.rows);
+  } catch (err) {
+    console.error('❌ Error fetching student modules:', err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+// Get quiz sets for specific grade and submodule
+app.get('/api/student/quiz_sets/:grade/:submodule_code', async (req, res) => {
+  console.log('🔍 [/api/student/quiz_sets] Request:', req.params);
+  const { grade, submodule_code } = req.params;
+  
+  try {
+    const result = await pool.query(`
+      SELECT qs.id, qs.set_name as name, qs.created_at,
+             s.submodule_name,
+             (SELECT COUNT(*) FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_count
+      FROM question_sets qs
+      INNER JOIN submodules s ON s.id = qs.submodule_id
+      WHERE qs.grade = $1 AND s.submodule_code = $2
+      ORDER BY qs.created_at DESC
+    `, [grade, submodule_code]);
+    
+    console.log('✅ Quiz sets found:', result.rows.length);
+    res.json(result.rows);
+  } catch (err) {
+    console.error('❌ Error fetching quiz sets:', err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+// Fetch specific quiz for student (without answers)
+app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
+  console.log('🔍 [/api/fetch_quiz] Request for set:', req.params.question_set_id);
+  const { question_set_id } = req.params;
+  
+  try {
+    const setResult = await pool.query(`
+      SELECT qs.id, qs.set_name as name, s.submodule_name
+      FROM question_sets qs
+      INNER JOIN submodules s ON s.id = qs.submodule_id
+      WHERE qs.id = $1
+    `, [question_set_id]);
+    
+    if (setResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Quiz set not found' });
+    }
+    
+    const questionSet = setResult.rows[0];
+    
+    // Fetch all questions (without correct answers for students)
+    const questionsResult = await pool.query(`
+      SELECT q.id, q.question_text, q.question_type, q.options, 
+             q.bloom_level, q.image_path, c.concept_name as concept
+      FROM questions q
+      INNER JOIN question_set_items qsi ON qsi.question_id = q.id
+      INNER JOIN concepts c ON c.id = q.concept_id
+      WHERE qsi.set_id = $1
+      ORDER BY q.id
+    `, [question_set_id]);
+    
+    console.log('✅ Questions fetched:', questionsResult.rows.length);
+    
+    res.json({
+      set_id: questionSet.id,
+      set_name: questionSet.name,
+      submodule_name: questionSet.submodule_name,
+      questions: questionsResult.rows
+    });
+  } catch (err) {
+    console.error('❌ Error fetching quiz:', err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+// Evaluate quiz and save attempt
+app.post('/api/evaluate_quiz', async (req, res) => {
+  const { question_set_id, answers, username, grade } = req.body;
+  
+  if (!question_set_id || !answers || !username || !grade) {
+    return res.status(400).json({ error: "Missing required parameters" });
+  }
+  
+  try {
+    // Fetch the question set with mapping info
+    const setResult = await pool.query(`
+      SELECT qs.id, qs.name, qs.question_ids, qsm.submodule_code, qsm.grade
+      FROM question_sets qs
+      INNER JOIN question_set_mapping qsm ON qsm.question_set_id = qs.id
+      WHERE qs.id = $1
+    `, [question_set_id]);
+    
+    if (setResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Quiz set not found' });
+    }
+    
+    const questionSet = setResult.rows[0];
+    const questionIds = questionSet.question_ids;
+    const submodule_code = questionSet.submodule_code;
+    
+    // Fetch all questions with correct answers
+    const questionsResult = await pool.query(`
+      SELECT id, question_text, question_type, options, correct_answer, 
+             bloom_level, concept, grade, image_path
+      FROM questions
+      WHERE id = ANY($1)
+    `, [questionIds]);
+    
+    const questions = questionsResult.rows;
+    
+    // Evaluate answers
+    let correctCount = 0;
+    const detailedResults = [];
+    const conceptPerformance = {}; // Track performance per concept
+    
+    questions.forEach((question, index) => {
+      const userAnswer = answers[question.id.toString()];
+      const isCorrect = userAnswer === question.correct_answer;
+      
+      if (isCorrect) correctCount++;
+      
+      // Track concept performance
+      const concept = question.concept;
+      if (!conceptPerformance[concept]) {
+        conceptPerformance[concept] = { correct: 0, incorrect: 0 };
+      }
+      
+      if (isCorrect) {
+        conceptPerformance[concept].correct++;
+      } else {
+        conceptPerformance[concept].incorrect++;
+      }
+      
+      detailedResults.push({
+        questionIndex: index + 1,
+        question_id: question.id,
+        question: question.question_text,
+        userAnswer: userAnswer || "Not answered",
+        correctAnswer: question.correct_answer,
+        isCorrect: isCorrect,
+        bloom_level: question.bloom_level,
+        concept: question.concept,
+        type: question.question_type,
+        image_path: question.image_path
+      });
+    });
+    
+    const totalQuestions = questions.length;
+    const percentage = Math.round((correctCount / totalQuestions) * 100);
+    
+    // Determine grade level
+    let gradeLevel = "Needs Improvement";
+    if (percentage >= 90) gradeLevel = "Excellent";
+    else if (percentage >= 80) gradeLevel = "Good";
+    else if (percentage >= 70) gradeLevel = "Satisfactory";
+    else if (percentage >= 60) gradeLevel = "Below Average";
+    
+    // Save quiz attempt
+    const attemptResult = await pool.query(`
+      INSERT INTO quiz_attempts (
+        student_username, question_set_id, submitted_at, 
+        score, total_questions, answers_json
+      ) VALUES ($1, $2, NOW(), $3, $4, $5)
+      RETURNING id
+    `, [username, question_set_id, correctCount, totalQuestions, JSON.stringify(detailedResults)]);
+    
+    const attemptId = attemptResult.rows[0].id;
+    
+    // Update student_activity for concept-level tracking
+    // First, get or create student_activity record
+    const activityCheck = await pool.query(`
+      SELECT id, concept_performance
+      FROM student_activity
+      WHERE student_username = $1 AND submodule_code = $2 AND grade = $3
+    `, [username, submodule_code, grade]);
+    
+    let existingPerformance = {};
+    
+    if (activityCheck.rows.length > 0) {
+      // Update existing record
+      const activityId = activityCheck.rows[0].id;
+      existingPerformance = activityCheck.rows[0].concept_performance || {};
+      
+      // Merge concept performance
+      Object.keys(conceptPerformance).forEach(concept => {
+        if (!existingPerformance[concept]) {
+          existingPerformance[concept] = { correct: 0, incorrect: 0 };
+        }
+        existingPerformance[concept].correct += conceptPerformance[concept].correct;
+        existingPerformance[concept].incorrect += conceptPerformance[concept].incorrect;
+      });
+      
+      await pool.query(`
+        UPDATE student_activity
+        SET attempt_ids = array_append(attempt_ids, $1),
+            concept_performance = $2,
+            last_attempt_at = NOW()
+        WHERE id = $3
+      `, [attemptId, JSON.stringify(existingPerformance), activityId]);
+      
+    } else {
+      // Create new student_activity record
+      await pool.query(`
+        INSERT INTO student_activity (
+          student_username, submodule_code, grade, 
+          attempt_ids, concept_performance, last_attempt_at
+        ) VALUES ($1, $2, $3, $4, $5, NOW())
+      `, [username, submodule_code, grade, [attemptId], JSON.stringify(conceptPerformance)]);
+    }
+    
+    const evaluationResult = {
+      attempt_id: attemptId,
+      question_set_id: question_set_id,
+      totalQuestions: totalQuestions,
+      correctAnswers: correctCount,
+      percentage: percentage,
+      gradeLevel: gradeLevel,
+      results: detailedResults,
+      submittedAt: new Date().toISOString()
+    };
+    
+    res.json(evaluationResult);
+    
+  } catch (err) {
+    console.error('Error evaluating quiz:', err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// ==================== ADMIN ROUTES ====================
+
+// Get all grades with quiz counts
+// Get all grades with quiz counts - CORRECTED
+// Get all grades with quiz counts - FULLY QUALIFIED
+app.get('/admin/quizzes/grades', checkAdmin, async (req, res) => {
+  console.log('═══════════════════════════════════════════');
+  console.log('🔍 [GET /admin/quizzes/grades] START');
+  
+  try {
+    const result = await pool.query(`
+      SELECT DISTINCT cgm.grade, 
+             COUNT(DISTINCT qs.id)::integer as quiz_count
+      FROM concept_grade_mapping cgm
+      LEFT JOIN question_sets qs ON qs.grade = cgm.grade
+      GROUP BY cgm.grade
+      ORDER BY cgm.grade
+    `);
+    
+    console.log('✅ Query successful. Rows returned:', result.rows.length);
+    console.log('🔍 Data:', JSON.stringify(result.rows, null, 2));
+    console.log('═══════════════════════════════════════════');
+    
+    res.json(result.rows);
+  } catch (err) {
+    console.error('═══════════════════════════════════════════');
+    console.error('❌ [ERROR] /admin/quizzes/grades failed');
+    console.error('❌ Message:', err.message);
+    console.error('❌ Stack:', err.stack);
+    console.error('═══════════════════════════════════════════');
+    
+    res.status(500).json({ 
+      error: 'Database error', 
+      message: err.message
+    });
+  }
+});
+
+
+
+// Get all submodules for a specific grade
+app.get('/admin/quizzes/modules/:grade', checkAdmin, async (req, res) => {
+  console.log('═══════════════════════════════════════════');
+  console.log('🔍 [/admin/quizzes/modules] Request for grade:', req.params.grade);
+  
+  const { grade } = req.params;
+  
+  try {
+    const result = await pool.query(`
+      SELECT DISTINCT s.id, s.submodule_code, s.submodule_name,
+             COUNT(qs.id) as set_count
+      FROM submodules s
+      LEFT JOIN question_sets qs ON qs.submodule_id = s.id AND qs.grade = $1
+      WHERE s.id IN (
+        SELECT DISTINCT c.submodule_id 
+        FROM concepts c
+        INNER JOIN concept_grade_mapping cgm ON cgm.concept_id = c.id
+        WHERE cgm.grade = $1
+      )
+      GROUP BY s.id, s.submodule_code, s.submodule_name
+      ORDER BY s.submodule_code
+    `, [grade]);
+    
+    console.log('✅ Modules query successful');
+    console.log('🔍 Result:', result.rows);
+    console.log('═══════════════════════════════════════════');
+    
+    res.json(result.rows);
+  } catch (err) {
+    console.error('❌ [ERROR] Error fetching modules:', err);
+    res.status(500).json({ 
+      error: 'Database error', 
+      message: err.message 
+    });
+  }
+});
+
+// Get all question sets for a specific grade and submodule
+app.get('/admin/quizzes/sets/:grade/:submodule_code', checkAdmin, async (req, res) => {
+  console.log('═══════════════════════════════════════════');
+  console.log('🔍 [/admin/quizzes/sets] Request for:', req.params);
+  
+  const { grade, submodule_code } = req.params;
+  
+  try {
+    const result = await pool.query(`
+      SELECT qs.id, qs.set_name as name, qs.created_at,
+             s.submodule_name, s.submodule_code,
+             (SELECT array_agg(qsi.question_id) FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_ids,
+             (SELECT COUNT(*) FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_count
+      FROM question_sets qs
+      INNER JOIN submodules s ON s.id = qs.submodule_id
+      WHERE qs.grade = $1 AND s.submodule_code = $2
+      ORDER BY qs.created_at DESC
+    `, [grade, submodule_code]);
+    
+    console.log('✅ Sets query successful');
+    console.log('🔍 Result:', result.rows);
+    console.log('═══════════════════════════════════════════');
+    
+    res.json(result.rows);
+  } catch (err) {
+    console.error('❌ [ERROR] Error fetching sets:', err);
+    res.status(500).json({ 
+      error: 'Database error', 
+      message: err.message 
+    });
+  }
+});
+// Get full question set details (for viewing/editing)
+app.get('/admin/question_set/:id', checkAdmin, async (req, res) => {
+  console.log('🔍 [/admin/question_set/:id] Request for set:', req.params.id);
+  
+  const { id } = req.params;
+  
+  try {
+    const setResult = await pool.query(`
+      SELECT qs.id, qs.set_name as name, qs.created_at, qs.grade,
+             s.submodule_code, s.submodule_name
+      FROM question_sets qs
+      INNER JOIN submodules s ON s.id = qs.submodule_id
+      WHERE qs.id = $1
+    `, [id]);
+    
+    if (setResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Question set not found' });
+    }
+    
+    const questionSet = setResult.rows[0];
+    
+    // Fetch all questions in this set
+    const questionsResult = await pool.query(`
+      SELECT q.id, q.question_text, q.question_type, q.options, q.correct_answer,
+             q.bloom_level, q.image_path, q.grade,
+             c.concept_name as concept
+      FROM questions q
+      INNER JOIN question_set_items qsi ON qsi.question_id = q.id
+      INNER JOIN concepts c ON c.id = q.concept_id
+      WHERE qsi.set_id = $1
+      ORDER BY q.id
+    `, [id]);
+    
+    console.log('✅ Question set fetched:', questionSet.name);
+    console.log('🔍 Questions count:', questionsResult.rows.length);
+    
+    res.json({
+      ...questionSet,
+      questions: questionsResult.rows
+    });
+  } catch (err) {
+    console.error('❌ [ERROR] Error fetching question set:', err);
+    res.status(500).json({ 
+      error: 'Database error', 
+      message: err.message 
+    });
+  }
+});
+// Generate quiz using Python script
+// Generate quiz using Python script - UPDATED FOR YOUR SCHEMA
+app.post('/generatequiz', checkAdmin, async (req, res) => {
+  const { submodule_code, grade, set_name } = req.body;
+  
+  console.log('═══════════════════════════════════════════');
+  console.log('🔍 [/generatequiz] Request received');
+  console.log('🔍 Submodule:', submodule_code, 'Grade:', grade);
+  
+  if (!submodule_code || !grade) {
+    return res.status(400).json({ error: 'Missing submodule_code or grade' });
+  }
+  
+  try {
+    // Get submodule_id from code
+    const submoduleResult = await pool.query(
+      'SELECT id FROM submodules WHERE submodule_code = $1',
+      [submodule_code]
+    );
+    
+    if (submoduleResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Submodule not found' });
+    }
+    
+    const submodule_id = submoduleResult.rows[0].id;
+    console.log('🔍 Submodule ID:', submodule_id);
+    console.log('🔍 Starting Python script...');
+    
+    // Call Python script
+    const pythonProcess = spawn('python3', [
+      'generate_questions.py',
+      submodule_code,
+      grade.toString()
+    ]);
+    
+    let dataString = '';
+    let errorString = '';
+    
+    pythonProcess.stdout.on('data', (data) => {
+      dataString += data.toString();
+    });
+    
+    pythonProcess.stderr.on('data', (data) => {
+      errorString += data.toString();
+      console.error('🔴 Python stderr:', data.toString());
+    });
+    
+    pythonProcess.on('close', async (code) => {
+      if (code !== 0) {
+        console.error('❌ Python script failed with code:', code);
+        console.error('❌ Error:', errorString);
+        return res.status(500).json({ 
+          error: 'Question generation failed', 
+          details: errorString 
+        });
+      }
+      
+      try {
+        console.log('🔍 Parsing Python output...');
+        const generatedData = JSON.parse(dataString);
+        
+        if (generatedData.error) {
+          return res.status(500).json({ error: generatedData.error });
+        }
+        
+        console.log('🔍 Generated', generatedData.questions.length, 'questions');
+        
+        // Create question set first
+        const finalSetName = set_name || `${submodule_code} - Grade ${grade} Quiz`;
+        const setResult = await pool.query(`
+          INSERT INTO question_sets (submodule_id, grade, set_name, created_at)
+          VALUES ($1, $2, $3, NOW())
+          RETURNING id
+        `, [submodule_id, grade, finalSetName]);
+        
+        const questionSetId = setResult.rows[0].id;
+        console.log('✅ Question set created with ID:', questionSetId);
+        
+        // Insert questions and map to set
+        let insertedCount = 0;
+        for (const q of generatedData.questions) {
+          // Get concept_id from concept name
+          const conceptResult = await pool.query(`
+            SELECT id FROM concepts 
+            WHERE submodule_id = $1 AND concept_name = $2
+          `, [submodule_id, q.concept]);
+          
+          if (conceptResult.rows.length === 0) {
+            console.warn('⚠️ Concept not found:', q.concept);
+            continue;
+          }
+          
+          const concept_id = conceptResult.rows[0].id;
+          
+          // Insert question
+          const questionResult = await pool.query(`
+            INSERT INTO questions (
+              concept_id, grade, question_text, question_type, options, 
+              correct_answer, bloom_level, image_path
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            RETURNING id
+          `, [
+            concept_id,
+            grade,
+            q.question_text || q.question,
+            q.type || 'MCQ',
+            JSON.stringify(q.options || {}),
+            q.correct_answer || q.answer,
+            q.bloom_level,
+            q.image_path || null
+          ]);
+          
+          const questionId = questionResult.rows[0].id;
+          
+          // Map question to set
+          await pool.query(`
+            INSERT INTO question_set_items (set_id, question_id)
+            VALUES ($1, $2)
+          `, [questionSetId, questionId]);
+          
+          insertedCount++;
+        }
+        
+        console.log('✅ Quiz generated successfully!');
+        console.log('🔍 Question Set ID:', questionSetId);
+        console.log('🔍 Questions inserted:', insertedCount);
+        console.log('═══════════════════════════════════════════');
+        
+        res.json({
+          success: true,
+          message: 'Quiz generated successfully',
+          question_set_id: questionSetId,
+          question_count: insertedCount
+        });
+        
+      } catch (parseError) {
+        console.error('❌ Failed to parse or insert questions:', parseError);
+        console.error('❌ Raw Python output:', dataString);
+        res.status(500).json({ 
+          error: 'Failed to process generated questions',
+          details: parseError.message
+        });
+      }
+    });
+    
+  } catch (err) {
+    console.error('❌ Error in quiz generation:', err);
+    res.status(500).json({ 
+      error: 'Server error during quiz generation',
+      message: err.message
+    });
+  }
+});
+
+
+// Get concepts for a submodule and grade (for manual question creation)
+app.get('/admin/concepts/:submodule_code/:grade', checkAdmin, async (req, res) => {
+  const { submodule_code, grade } = req.params;
+  
+  try {
+    const result = await pool.query(`
+      SELECT DISTINCT c.concept_name, c.ct_concepts, c.description
+      FROM concepts c
+      INNER JOIN submodules s ON s.id = c.submodule_id
+      INNER JOIN concept_grade_mapping cgm ON cgm.concept_id = c.id
+      WHERE s.submodule_code = $1 AND cgm.grade_level = $2
+      ORDER BY c.concept_name
+    `, [submodule_code, grade]);
+    
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error fetching concepts:', err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+// Manual question set creation
+app.post('/admin/create_manual_set', checkAdmin, upload.array('images', 10), async (req, res) => {
+  const { submodule_code, grade, set_name, questions_json } = req.body;
+  const files = req.files || [];
+  
+  if (!submodule_code || !grade || !questions_json) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+  
+  try {
+    const questions = JSON.parse(questions_json);
+    const questionIds = [];
+    
+    for (let i = 0; i < questions.length; i++) {
+      const q = questions[i];
+      const imagePath = files[i] ? files[i].path : null;
+      
+      const insertResult = await pool.query(`
+        INSERT INTO questions (
+          question_text, question_type, options, correct_answer,
+          bloom_level, concept, grade, image_path, created_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
+        RETURNING id
+      `, [
+        q.question_text,
+        q.question_type || 'multiple_choice',
+        JSON.stringify(q.options || []),
+        q.correct_answer,
+        q.bloom_level || 'Understanding',
+        q.concept,
+        grade,
+        imagePath
+      ]);
+      
+      questionIds.push(insertResult.rows[0].id);
+    }
+    
+    // Create question set
+    const finalSetName = set_name || `Manual Set - ${submodule_code} Grade ${grade}`;
+    const setResult = await pool.query(`
+      INSERT INTO question_sets (name, question_ids, created_at)
+      VALUES ($1, $2, NOW())
+      RETURNING id
+    `, [finalSetName, questionIds]);
+    
+    const questionSetId = setResult.rows[0].id;
+    
+    // Map to submodule and grade
+    await pool.query(`
+      INSERT INTO question_set_mapping (question_set_id, submodule_code, grade)
+      VALUES ($1, $2, $3)
+    `, [questionSetId, submodule_code, grade]);
+    
+    res.json({
+      success: true,
+      question_set_id: questionSetId,
+      question_count: questionIds.length
+    });
+    
+  } catch (err) {
+    console.error('Error creating manual set:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Edit a question
+app.put('/admin/question/:id', checkAdmin, upload.single('image'), async (req, res) => {
+  const { id } = req.params;
+  const { question_text, question_type, options, correct_answer, bloom_level, concept, grade } = req.body;
+  const imagePath = req.file ? req.file.path : null;
+  
+  try {
+    const updateFields = [];
+    const values = [];
+    let paramCount = 1;
+    
+    if (question_text) {
+      updateFields.push(`question_text = $${paramCount++}`);
+      values.push(question_text);
+    }
+    if (question_type) {
+      updateFields.push(`question_type = $${paramCount++}`);
+      values.push(question_type);
+    }
+    if (options) {
+      updateFields.push(`options = $${paramCount++}`);
+      values.push(JSON.stringify(JSON.parse(options)));
+    }
+    if (correct_answer) {
+      updateFields.push(`correct_answer = $${paramCount++}`);
+      values.push(correct_answer);
+    }
+    if (bloom_level) {
+      updateFields.push(`bloom_level = $${paramCount++}`);
+      values.push(bloom_level);
+    }
+    if (concept) {
+      updateFields.push(`concept = $${paramCount++}`);
+      values.push(concept);
+    }
+    if (grade) {
+      updateFields.push(`grade = $${paramCount++}`);
+      values.push(grade);
+    }
+    if (imagePath) {
+      updateFields.push(`image_path = $${paramCount++}`);
+      values.push(imagePath);
+    }
+    
+    if (updateFields.length === 0) {
+      return res.status(400).json({ error: 'No fields to update' });
+    }
+    
+    values.push(id);
+    
+    await pool.query(`
+      UPDATE questions
+      SET ${updateFields.join(', ')}
+      WHERE id = $${paramCount}
+    `, values);
+    
+    res.json({ success: true, message: 'Question updated' });
+    
+  } catch (err) {
+    console.error('Error updating question:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Delete a question set
+app.delete('/admin/question_set/:id', checkAdmin, async (req, res) => {
+  console.log('🔍 [DELETE /admin/question_set/:id] Request for set:', req.params.id);
+  
+  const { id } = req.params;
+  
+  try {
+    // question_set_items will be deleted automatically due to CASCADE
+    await pool.query('DELETE FROM question_sets WHERE id = $1', [id]);
+    
+    console.log('✅ Question set deleted:', id);
+    res.json({ success: true, message: 'Question set deleted' });
+    
+  } catch (err) {
+    console.error('❌ [ERROR] Error deleting question set:', err);
+    res.status(500).json({ 
+      error: 'Server error', 
+      message: err.message 
+    });
+  }
+});
+
+// ==================== STUDENT MANAGEMENT ROUTES ====================
+
+// Get grades with student counts
+app.get('/admin/students/grades', checkAdmin, async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT grade, COUNT(*) as student_count
+      FROM students
+      WHERE grade IS NOT NULL
+      GROUP BY grade
+      ORDER BY grade
+    `);
+    
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching grades:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Get students by grade
+app.get('/admin/students/:grade', checkAdmin, async (req, res) => {
+  const { grade } = req.params;
+  
+  try {
+    const result = await pool.query(`
+      SELECT username, email, grade, created_at
+      FROM students
+      WHERE grade = $1
+      ORDER BY username
+    `, [grade]);
+    
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Get student activity data
+app.get('/admin/student_activity/:username', checkAdmin, async (req, res) => {
+  const { username } = req.params;
+  
+  try {
+    // Get all attempts
+    const attemptsResult = await pool.query(`
+      SELECT qa.id, qa.submitted_at, qa.score, qa.total_questions,
+             qs.name as quiz_name, qsm.submodule_code, qsm.grade,
+             s.submodule_name
+      FROM quiz_attempts qa
+      INNER JOIN question_sets qs ON qs.id = qa.question_set_id
+      INNER JOIN question_set_mapping qsm ON qsm.question_set_id = qs.id
+      INNER JOIN submodules s ON s.submodule_code = qsm.submodule_code
+      WHERE qa.student_username = $1
+      ORDER BY qa.submitted_at DESC
+    `, [username]);
+    
+    // Get concept-level performance
+    const activityResult = await pool.query(`
+      SELECT sa.submodule_code, sa.grade, sa.concept_performance,
+             s.submodule_name, sa.last_attempt_at
+      FROM student_activity sa
+      INNER JOIN submodules s ON s.submodule_code = sa.submodule_code
+      WHERE sa.student_username = $1
+      ORDER BY sa.last_attempt_at DESC
+    `, [username]);
+    
+    // Calculate statistics
+    const attempts = attemptsResult.rows;
+    const stats = {
+      total_attempts: attempts.length,
+      avg_score: attempts.length > 0 
+        ? Math.round(attempts.reduce((sum, a) => sum + (a.score / a.total_questions * 100), 0) / attempts.length)
+        : 0,
+      best_score: attempts.length > 0
+        ? Math.max(...attempts.map(a => Math.round(a.score / a.total_questions * 100)))
+        : 0,
+      worst_score: attempts.length > 0
+        ? Math.min(...attempts.map(a => Math.round(a.score / a.total_questions * 100)))
+        : 0,
+      submodules_attempted: new Set(attempts.map(a => a.submodule_code)).size
+    };
+    
+    res.json({
+      attempts: attemptsResult.rows,
+      activity: activityResult.rows,
+      stats
+    });
+    
+  } catch (error) {
+    console.error('Error fetching student activity:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ==================== START SERVER ====================
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📚 Quiz Generation Platform - New Schema Version`);
+});

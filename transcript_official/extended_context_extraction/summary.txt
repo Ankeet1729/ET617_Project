@@ -1,0 +1,380 @@
+Images will be saved in the 'extracted_content' directory, sorted by sheet name.
+
+Processing sheet: 'OverAll'...
+  - No images found in this sheet.
+
+Processing sheet: 'Timelines'...
+  - No images found in this sheet.
+
+Processing sheet: 'L3.C1'...
+  - Saved 'extracted_content/L3.C1/L3.C1-B4.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B6.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B10.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B13.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B15.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B17.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B19.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B21.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B23.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B27.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B29.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B31.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B33.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B35.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B36.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B38.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B39.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B44.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B48.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B55.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B56.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B57.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B58.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B59.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B60.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B62.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B64.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B65.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B67.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B68.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B70.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B71.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B74.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B80.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B82.png'
+  - Saved 'extracted_content/L3.C1/L3.C1-B83.png'
+
+Processing sheet: 'L3.C2'...
+  - Saved 'extracted_content/L3.C2/L3.C2-B4.png'
+  - Could not save image from cell B6. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C2/L3.C2-B10.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B13.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B15.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B17.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B19.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B21.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B23.png'
+  - Could not save image from cell B27. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C2/L3.C2-B29.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B31.png'
+  - Could not save image from cell B33. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C2/L3.C2-B35.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B36.png'
+  - Could not save image from cell B38. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C2/L3.C2-B39.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B44.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B48.png'
+  - Could not save image from cell B55. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C2/L3.C2-B56.png'
+  - Could not save image from cell B57. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C2/L3.C2-B58.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B59.png'
+  - Could not save image from cell B60. Reason: I/O operation on closed file.
+  - Could not save image from cell B62. Reason: I/O operation on closed file.
+  - Could not save image from cell B64. Reason: I/O operation on closed file.
+  - Could not save image from cell B65. Reason: I/O operation on closed file.
+  - Could not save image from cell B67. Reason: I/O operation on closed file.
+  - Could not save image from cell B68. Reason: I/O operation on closed file.
+  - Could not save image from cell B70. Reason: I/O operation on closed file.
+  - Could not save image from cell B71. Reason: I/O operation on closed file.
+  - Could not save image from cell B74. Reason: I/O operation on closed file.
+  - Could not save image from cell B80. Reason: I/O operation on closed file.
+  - Could not save image from cell B82. Reason: I/O operation on closed file.
+  - Could not save image from cell B83. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C2/L3.C2-B12.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B24.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B26.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B32.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B34.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B40.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B41.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B42.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B46.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B50.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B52.png'
+  - Saved 'extracted_content/L3.C2/L3.C2-B54.png'
+
+Processing sheet: 'L3.C3'...
+  - Could not save image from cell B4. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C3/L3.C3-B6.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B10.png'
+  - Could not save image from cell B13. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C3/L3.C3-B15.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B17.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B19.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B21.png'
+  - Could not save image from cell B23. Reason: I/O operation on closed file.
+  - Could not save image from cell B27. Reason: I/O operation on closed file.
+  - Could not save image from cell B29. Reason: I/O operation on closed file.
+  - Could not save image from cell B31. Reason: I/O operation on closed file.
+  - Could not save image from cell B33. Reason: I/O operation on closed file.
+  - Could not save image from cell B35. Reason: I/O operation on closed file.
+  - Could not save image from cell B36. Reason: I/O operation on closed file.
+  - Could not save image from cell B38. Reason: I/O operation on closed file.
+  - Could not save image from cell B39. Reason: I/O operation on closed file.
+  - Could not save image from cell B44. Reason: I/O operation on closed file.
+  - Could not save image from cell B48. Reason: I/O operation on closed file.
+  - Could not save image from cell B55. Reason: I/O operation on closed file.
+  - Could not save image from cell B56. Reason: I/O operation on closed file.
+  - Could not save image from cell B57. Reason: I/O operation on closed file.
+  - Could not save image from cell B58. Reason: I/O operation on closed file.
+  - Could not save image from cell B59. Reason: I/O operation on closed file.
+  - Could not save image from cell B60. Reason: I/O operation on closed file.
+  - Could not save image from cell B62. Reason: I/O operation on closed file.
+  - Could not save image from cell B64. Reason: I/O operation on closed file.
+  - Could not save image from cell B65. Reason: I/O operation on closed file.
+  - Could not save image from cell B67. Reason: I/O operation on closed file.
+  - Could not save image from cell B68. Reason: I/O operation on closed file.
+  - Could not save image from cell B70. Reason: I/O operation on closed file.
+  - Could not save image from cell B71. Reason: I/O operation on closed file.
+  - Could not save image from cell B74. Reason: I/O operation on closed file.
+  - Could not save image from cell B80. Reason: I/O operation on closed file.
+  - Could not save image from cell B82. Reason: I/O operation on closed file.
+  - Could not save image from cell B83. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C3/L3.C3-B12.png'
+  - Could not save image from cell B24. Reason: I/O operation on closed file.
+  - Could not save image from cell B26. Reason: I/O operation on closed file.
+  - Could not save image from cell B32. Reason: I/O operation on closed file.
+  - Could not save image from cell B34. Reason: I/O operation on closed file.
+  - Could not save image from cell B40. Reason: I/O operation on closed file.
+  - Could not save image from cell B41. Reason: I/O operation on closed file.
+  - Could not save image from cell B42. Reason: I/O operation on closed file.
+  - Could not save image from cell B46. Reason: I/O operation on closed file.
+  - Could not save image from cell B50. Reason: I/O operation on closed file.
+  - Could not save image from cell B52. Reason: I/O operation on closed file.
+  - Could not save image from cell B54. Reason: I/O operation on closed file.
+  - Saved 'extracted_content/L3.C3/L3.C3-B7.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B8.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B11.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B14.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B16.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B18.png'
+  - Saved 'extracted_content/L3.C3/L3.C3-B20.png'
+
+Processing sheet: 'Test sprint script1'...
+  - Could not save image from cell B4. Reason: I/O operation on closed file.
+  - Could not save image from cell B6. Reason: I/O operation on closed file.
+  - Could not save image from cell B10. Reason: I/O operation on closed file.
+  - Could not save image from cell B13. Reason: I/O operation on closed file.
+  - Could not save image from cell B15. Reason: I/O operation on closed file.
+  - Could not save image from cell B17. Reason: I/O operation on closed file.
+  - Could not save image from cell B19. Reason: I/O operation on closed file.
+  - Could not save image from cell B21. Reason: I/O operation on closed file.
+  - Could not save image from cell B23. Reason: I/O operation on closed file.
+  - Could not save image from cell B27. Reason: I/O operation on closed file.
+  - Could not save image from cell B29. Reason: I/O operation on closed file.
+  - Could not save image from cell B31. Reason: I/O operation on closed file.
+  - Could not save image from cell B33. Reason: I/O operation on closed file.
+  - Could not save image from cell B35. Reason: I/O operation on closed file.
+  - Could not save image from cell B36. Reason: I/O operation on closed file.
+  - Could not save image from cell B38. Reason: I/O operation on closed file.
+  - Could not save image from cell B39. Reason: I/O operation on closed file.
+  - Could not save image from cell B44. Reason: I/O operation on closed file.
+  - Could not save image from cell B48. Reason: I/O operation on closed file.
+  - Could not save image from cell B55. Reason: I/O operation on closed file.
+  - Could not save image from cell B56. Reason: I/O operation on closed file.
+  - Could not save image from cell B57. Reason: I/O operation on closed file.
+  - Could not save image from cell B58. Reason: I/O operation on closed file.
+  - Could not save image from cell B59. Reason: I/O operation on closed file.
+  - Could not save image from cell B60. Reason: I/O operation on closed file.
+  - Could not save image from cell B62. Reason: I/O operation on closed file.
+  - Could not save image from cell B64. Reason: I/O operation on closed file.
+  - Could not save image from cell B65. Reason: I/O operation on closed file.
+  - Could not save image from cell B67. Reason: I/O operation on closed file.
+  - Could not save image from cell B68. Reason: I/O operation on closed file.
+  - Could not save image from cell B70. Reason: I/O operation on closed file.
+  - Could not save image from cell B71. Reason: I/O operation on closed file.
+  - Could not save image from cell B74. Reason: I/O operation on closed file.
+  - Could not save image from cell B80. Reason: I/O operation on closed file.
+  - Could not save image from cell B82. Reason: I/O operation on closed file.
+  - Could not save image from cell B83. Reason: I/O operation on closed file.
+  - Could not save image from cell B12. Reason: I/O operation on closed file.
+  - Could not save image from cell B24. Reason: I/O operation on closed file.
+  - Could not save image from cell B26. Reason: I/O operation on closed file.
+  - Could not save image from cell B32. Reason: I/O operation on closed file.
+  - Could not save image from cell B34. Reason: I/O operation on closed file.
+  - Could not save image from cell B40. Reason: I/O operation on closed file.
+  - Could not save image from cell B41. Reason: I/O operation on closed file.
+  - Could not save image from cell B42. Reason: I/O operation on closed file.
+  - Could not save image from cell B46. Reason: I/O operation on closed file.
+  - Could not save image from cell B50. Reason: I/O operation on closed file.
+  - Could not save image from cell B52. Reason: I/O operation on closed file.
+  - Could not save image from cell B54. Reason: I/O operation on closed file.
+  - Could not save image from cell B7. Reason: I/O operation on closed file.
+  - Could not save image from cell B8. Reason: I/O operation on closed file.
+  - Could not save image from cell B11. Reason: I/O operation on closed file.
+  - Could not save image from cell B14. Reason: I/O operation on closed file.
+  - Could not save image from cell B16. Reason: I/O operation on closed file.
+  - Could not save image from cell B18. Reason: I/O operation on closed file.
+  - Could not save image from cell B20. Reason: I/O operation on closed file.
+
+Processing sheet: 'Gantt chart'...
+  - Could not save image from cell B4. Reason: I/O operation on closed file.
+  - Could not save image from cell B6. Reason: I/O operation on closed file.
+  - Could not save image from cell B10. Reason: I/O operation on closed file.
+  - Could not save image from cell B13. Reason: I/O operation on closed file.
+  - Could not save image from cell B15. Reason: I/O operation on closed file.
+  - Could not save image from cell B17. Reason: I/O operation on closed file.
+  - Could not save image from cell B19. Reason: I/O operation on closed file.
+  - Could not save image from cell B21. Reason: I/O operation on closed file.
+  - Could not save image from cell B23. Reason: I/O operation on closed file.
+  - Could not save image from cell B27. Reason: I/O operation on closed file.
+  - Could not save image from cell B29. Reason: I/O operation on closed file.
+  - Could not save image from cell B31. Reason: I/O operation on closed file.
+  - Could not save image from cell B33. Reason: I/O operation on closed file.
+  - Could not save image from cell B35. Reason: I/O operation on closed file.
+  - Could not save image from cell B36. Reason: I/O operation on closed file.
+  - Could not save image from cell B38. Reason: I/O operation on closed file.
+  - Could not save image from cell B39. Reason: I/O operation on closed file.
+  - Could not save image from cell B44. Reason: I/O operation on closed file.
+  - Could not save image from cell B48. Reason: I/O operation on closed file.
+  - Could not save image from cell B55. Reason: I/O operation on closed file.
+  - Could not save image from cell B56. Reason: I/O operation on closed file.
+  - Could not save image from cell B57. Reason: I/O operation on closed file.
+  - Could not save image from cell B58. Reason: I/O operation on closed file.
+  - Could not save image from cell B59. Reason: I/O operation on closed file.
+  - Could not save image from cell B60. Reason: I/O operation on closed file.
+  - Could not save image from cell B62. Reason: I/O operation on closed file.
+  - Could not save image from cell B64. Reason: I/O operation on closed file.
+  - Could not save image from cell B65. Reason: I/O operation on closed file.
+  - Could not save image from cell B67. Reason: I/O operation on closed file.
+  - Could not save image from cell B68. Reason: I/O operation on closed file.
+  - Could not save image from cell B70. Reason: I/O operation on closed file.
+  - Could not save image from cell B71. Reason: I/O operation on closed file.
+  - Could not save image from cell B74. Reason: I/O operation on closed file.
+  - Could not save image from cell B80. Reason: I/O operation on closed file.
+  - Could not save image from cell B82. Reason: I/O operation on closed file.
+  - Could not save image from cell B83. Reason: I/O operation on closed file.
+  - Could not save image from cell B12. Reason: I/O operation on closed file.
+  - Could not save image from cell B24. Reason: I/O operation on closed file.
+  - Could not save image from cell B26. Reason: I/O operation on closed file.
+  - Could not save image from cell B32. Reason: I/O operation on closed file.
+  - Could not save image from cell B34. Reason: I/O operation on closed file.
+  - Could not save image from cell B40. Reason: I/O operation on closed file.
+  - Could not save image from cell B41. Reason: I/O operation on closed file.
+  - Could not save image from cell B42. Reason: I/O operation on closed file.
+  - Could not save image from cell B46. Reason: I/O operation on closed file.
+  - Could not save image from cell B50. Reason: I/O operation on closed file.
+  - Could not save image from cell B52. Reason: I/O operation on closed file.
+  - Could not save image from cell B54. Reason: I/O operation on closed file.
+  - Could not save image from cell B7. Reason: I/O operation on closed file.
+  - Could not save image from cell B8. Reason: I/O operation on closed file.
+  - Could not save image from cell B11. Reason: I/O operation on closed file.
+  - Could not save image from cell B14. Reason: I/O operation on closed file.
+  - Could not save image from cell B16. Reason: I/O operation on closed file.
+  - Could not save image from cell B18. Reason: I/O operation on closed file.
+  - Could not save image from cell B20. Reason: I/O operation on closed file.
+
+Processing sheet: 'Sheet8'...
+  - Could not save image from cell B4. Reason: I/O operation on closed file.
+  - Could not save image from cell B6. Reason: I/O operation on closed file.
+  - Could not save image from cell B10. Reason: I/O operation on closed file.
+  - Could not save image from cell B13. Reason: I/O operation on closed file.
+  - Could not save image from cell B15. Reason: I/O operation on closed file.
+  - Could not save image from cell B17. Reason: I/O operation on closed file.
+  - Could not save image from cell B19. Reason: I/O operation on closed file.
+  - Could not save image from cell B21. Reason: I/O operation on closed file.
+  - Could not save image from cell B23. Reason: I/O operation on closed file.
+  - Could not save image from cell B27. Reason: I/O operation on closed file.
+  - Could not save image from cell B29. Reason: I/O operation on closed file.
+  - Could not save image from cell B31. Reason: I/O operation on closed file.
+  - Could not save image from cell B33. Reason: I/O operation on closed file.
+  - Could not save image from cell B35. Reason: I/O operation on closed file.
+  - Could not save image from cell B36. Reason: I/O operation on closed file.
+  - Could not save image from cell B38. Reason: I/O operation on closed file.
+  - Could not save image from cell B39. Reason: I/O operation on closed file.
+  - Could not save image from cell B44. Reason: I/O operation on closed file.
+  - Could not save image from cell B48. Reason: I/O operation on closed file.
+  - Could not save image from cell B55. Reason: I/O operation on closed file.
+  - Could not save image from cell B56. Reason: I/O operation on closed file.
+  - Could not save image from cell B57. Reason: I/O operation on closed file.
+  - Could not save image from cell B58. Reason: I/O operation on closed file.
+  - Could not save image from cell B59. Reason: I/O operation on closed file.
+  - Could not save image from cell B60. Reason: I/O operation on closed file.
+  - Could not save image from cell B62. Reason: I/O operation on closed file.
+  - Could not save image from cell B64. Reason: I/O operation on closed file.
+  - Could not save image from cell B65. Reason: I/O operation on closed file.
+  - Could not save image from cell B67. Reason: I/O operation on closed file.
+  - Could not save image from cell B68. Reason: I/O operation on closed file.
+  - Could not save image from cell B70. Reason: I/O operation on closed file.
+  - Could not save image from cell B71. Reason: I/O operation on closed file.
+  - Could not save image from cell B74. Reason: I/O operation on closed file.
+  - Could not save image from cell B80. Reason: I/O operation on closed file.
+  - Could not save image from cell B82. Reason: I/O operation on closed file.
+  - Could not save image from cell B83. Reason: I/O operation on closed file.
+  - Could not save image from cell B12. Reason: I/O operation on closed file.
+  - Could not save image from cell B24. Reason: I/O operation on closed file.
+  - Could not save image from cell B26. Reason: I/O operation on closed file.
+  - Could not save image from cell B32. Reason: I/O operation on closed file.
+  - Could not save image from cell B34. Reason: I/O operation on closed file.
+  - Could not save image from cell B40. Reason: I/O operation on closed file.
+  - Could not save image from cell B41. Reason: I/O operation on closed file.
+  - Could not save image from cell B42. Reason: I/O operation on closed file.
+  - Could not save image from cell B46. Reason: I/O operation on closed file.
+  - Could not save image from cell B50. Reason: I/O operation on closed file.
+  - Could not save image from cell B52. Reason: I/O operation on closed file.
+  - Could not save image from cell B54. Reason: I/O operation on closed file.
+  - Could not save image from cell B7. Reason: I/O operation on closed file.
+  - Could not save image from cell B8. Reason: I/O operation on closed file.
+  - Could not save image from cell B11. Reason: I/O operation on closed file.
+  - Could not save image from cell B14. Reason: I/O operation on closed file.
+  - Could not save image from cell B16. Reason: I/O operation on closed file.
+  - Could not save image from cell B18. Reason: I/O operation on closed file.
+  - Could not save image from cell B20. Reason: I/O operation on closed file.
+
+Processing sheet: 'Script DT and Problem Solving'...
+  - Could not save image from cell B4. Reason: I/O operation on closed file.
+  - Could not save image from cell B6. Reason: I/O operation on closed file.
+  - Could not save image from cell B10. Reason: I/O operation on closed file.
+  - Could not save image from cell B13. Reason: I/O operation on closed file.
+  - Could not save image from cell B15. Reason: I/O operation on closed file.
+  - Could not save image from cell B17. Reason: I/O operation on closed file.
+  - Could not save image from cell B19. Reason: I/O operation on closed file.
+  - Could not save image from cell B21. Reason: I/O operation on closed file.
+  - Could not save image from cell B23. Reason: I/O operation on closed file.
+  - Could not save image from cell B27. Reason: I/O operation on closed file.
+  - Could not save image from cell B29. Reason: I/O operation on closed file.
+  - Could not save image from cell B31. Reason: I/O operation on closed file.
+  - Could not save image from cell B33. Reason: I/O operation on closed file.
+  - Could not save image from cell B35. Reason: I/O operation on closed file.
+  - Could not save image from cell B36. Reason: I/O operation on closed file.
+  - Could not save image from cell B38. Reason: I/O operation on closed file.
+  - Could not save image from cell B39. Reason: I/O operation on closed file.
+  - Could not save image from cell B44. Reason: I/O operation on closed file.
+  - Could not save image from cell B48. Reason: I/O operation on closed file.
+  - Could not save image from cell B55. Reason: I/O operation on closed file.
+  - Could not save image from cell B56. Reason: I/O operation on closed file.
+  - Could not save image from cell B57. Reason: I/O operation on closed file.
+  - Could not save image from cell B58. Reason: I/O operation on closed file.
+  - Could not save image from cell B59. Reason: I/O operation on closed file.
+  - Could not save image from cell B60. Reason: I/O operation on closed file.
+  - Could not save image from cell B62. Reason: I/O operation on closed file.
+  - Could not save image from cell B64. Reason: I/O operation on closed file.
+  - Could not save image from cell B65. Reason: I/O operation on closed file.
+  - Could not save image from cell B67. Reason: I/O operation on closed file.
+  - Could not save image from cell B68. Reason: I/O operation on closed file.
+  - Could not save image from cell B70. Reason: I/O operation on closed file.
+  - Could not save image from cell B71. Reason: I/O operation on closed file.
+  - Could not save image from cell B74. Reason: I/O operation on closed file.
+  - Could not save image from cell B80. Reason: I/O operation on closed file.
+  - Could not save image from cell B82. Reason: I/O operation on closed file.
+  - Could not save image from cell B83. Reason: I/O operation on closed file.
+  - Could not save image from cell B12. Reason: I/O operation on closed file.
+  - Could not save image from cell B24. Reason: I/O operation on closed file.
+  - Could not save image from cell B26. Reason: I/O operation on closed file.
+  - Could not save image from cell B32. Reason: I/O operation on closed file.
+  - Could not save image from cell B34. Reason: I/O operation on closed file.
+  - Could not save image from cell B40. Reason: I/O operation on closed file.
+  - Could not save image from cell B41. Reason: I/O operation on closed file.
+  - Could not save image from cell B42. Reason: I/O operation on closed file.
+  - Could not save image from cell B46. Reason: I/O operation on closed file.
+  - Could not save image from cell B50. Reason: I/O operation on closed file.
+  - Could not save image from cell B52. Reason: I/O operation on closed file.
+  - Could not save image from cell B54. Reason: I/O operation on closed file.
+  - Could not save image from cell B7. Reason: I/O operation on closed file.
+  - Could not save image from cell B8. Reason: I/O operation on closed file.
+  - Could not save image from cell B11. Reason: I/O operation on closed file.
+  - Could not save image from cell B14. Reason: I/O operation on closed file.
+  - Could not save image from cell B16. Reason: I/O operation on closed file.
+  - Could not save image from cell B18. Reason: I/O operation on closed file.
+  - Could not save image from cell B20. Reason: I/O operation on closed file.

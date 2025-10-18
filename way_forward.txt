@@ -23,7 +23,51 @@ What we should do next:
 		Manual Edits to Question (or AI edits)
 		
 
-
-
 Questions:
 Are questions generated according to module or videos?
+
+Plan:
+
+Prompt Input: 
+	Overall Image (for showing submodule division) 
+	+ Transcript of each video * (COMBINED TRANSCRIPT FOR EACH SUBMODULE)
+	+ Mega Image for each submodule (in what directory should I put the image?)
+	+ Human Prompt (Guidance - * give example of concept list)
+Prompt Output:
+	Submodules:
+		Submodule name: 
+		Submodule code: L3.C1/L3.C2/L3.C3
+		List of Concepts:
+		Gradewise concept:
+			Grade 1: List of concepts to test,
+			Grade ..
+			Grade 12: List of concepts to test
+
+QuestionGen Prompt Input (submodule, grade):
+	Primary Guiding Prompt - (each concept should have one question, type of question etc., keep one or two questions of boolean type if possible, single correct mcq)
+	+ Concept Subset for that Grade
+	+ Transcript of that submodule
+	+ Mega Image of that Submodule
+	+ Bloom Level 
+QuestionGen Prompt Output:
+	Question List:
+		Concept:
+		Grade: 
+		Type: MCQ/Boolean
+		Question Text: 
+		Options (If MCQ): A. A_TEXT, B. B_TEXT, C. C_TEXT, D.D_TEXT 
+		Correct_Answer: True/False (if Boolean), A/B/C/D (if MCQ)
+		Bloom_Level: 
+
+Schema:
+Concept_Subset ((grade, submodule_code)->concept_subset)
+Image (submodule code -> image (stored in file directory just like before)
+Transcript (submodule code -> transcript text)
+Question (question id -> timestamp, concept, type, grade, options, correct answer, bloom level , image directory (non if not specified) etc.)
+Question Set (question set id -> list of questions id)
+QSet Mapping ((submodule, grade) -> list of question sets ids)
+
+
+
+
+		

@@ -1,106 +1,104 @@
-import React, { useState, useEffect } from "react";
-import StudentsPanel from "./StudentsPanel";
-import QuizzesPanel from "./QuizzesPanel";
+import React, { useState } from 'react';
+import { PowerIcon, UserGroupIcon, DocumentDuplicateIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import SetManager from './SetManager';
+import StudentsPanel from './StudentsPanel';
+import StudentActivityPanel from './StudentActivityPanel';
+
+// Define the type for the panel names for type safety
+type AdminPanel = 'quizSets' | 'students' | 'activity';
 
 interface AdminDashboardProps {
   onLogout: () => void;
 }
 
 const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
-  const [activePanel, setActivePanel] = useState<"students" | "quizzes">("students");
+  // Default to showing the 'Quiz Sets' panel first
+  const [activePanel, setActivePanel] = useState<AdminPanel>('quizSets');
 
   const handleLogout = async () => {
-    await fetch("http://localhost:5000/admin/logout", {
-      method: "POST",
-      credentials: "include",
-    });
-    localStorage.removeItem("isAdmin");
-    onLogout();
+    try {
+      await fetch('http://localhost:5000/admin/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      localStorage.removeItem('isAdmin');
+      onLogout();
+    }
+  };
+
+  const renderPanel = () => {
+    switch (activePanel) {
+      case 'quizSets':
+        return <SetManager />;
+      case 'students':
+        return <StudentsPanel />;
+      case 'activity':
+        return <StudentActivityPanel />;
+      default:
+        return <SetManager />;
+    }
+  };
+
+  // Helper component for navigation buttons
+  const NavButton = ({ panel, label, icon: Icon }: { 
+    panel: AdminPanel; 
+    label: string; 
+    icon: React.ComponentType<{ className?: string }> 
+  }) => {
+  
+    const isActive = activePanel === panel;
+    return (
+      <button
+        onClick={() => setActivePanel(panel)}
+        className={`
+          flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors
+          ${isActive
+            ? 'bg-indigo-600 text-white shadow-sm'
+            : 'text-gray-600 hover:bg-gray-200 hover:text-gray-900'
+          }
+        `}
+      >
+        <Icon className="h-5 w-5 mr-2" />
+        {label}
+      </button>
+    );
   };
 
   return (
-    <div className="admin-dashboard">
-      <header className="admin-header">
-        <h1>Admin Panel Dashboard</h1>
-        <div className="header-actions">
-          <button onClick={handleLogout} className="logout-btn">
-            Logout
-          </button>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-white shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+            <button
+              onClick={handleLogout}
+              className="flex items-center px-4 py-2 text-sm font-medium text-red-600 bg-red-100 rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              <PowerIcon className="h-5 w-5 mr-2" />
+              Logout
+            </button>
+          </div>
         </div>
       </header>
-      
-      <div className="panel-selector">
-        <button
-          className={activePanel === "students" ? "active" : ""}
-          onClick={() => setActivePanel("students")}
-        >
-          Students
-        </button>
-        <button
-          className={activePanel === "quizzes" ? "active" : ""}
-          onClick={() => setActivePanel("quizzes")}
-        >
-          Quizzes
-        </button>
-      </div>
 
-      <main className="admin-content">
-        {activePanel === "students" && <StudentsPanel />}
-        {activePanel === "quizzes" && <QuizzesPanel />}
+      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="bg-white shadow rounded-lg">
+          {/* Tab Navigation */}
+          <nav className="flex space-x-4 p-4 border-b border-gray-200">
+            <NavButton panel="quizSets" label="Quiz Set Management" icon={DocumentDuplicateIcon} />
+            <NavButton panel="students" label="Student Management" icon={UserGroupIcon} />
+            <NavButton panel="activity" label="Student Activity" icon={ChartBarIcon} />
+          </nav>
+          
+          {/* Content Panel */}
+          <div className="p-6">
+            {renderPanel()}
+          </div>
+        </div>
       </main>
-
-      <style jsx>{`
-        .admin-dashboard {
-          min-height: 100vh;
-          background: #f5f7fa;
-          font-family: Arial, sans-serif;
-        }
-        .admin-header {
-          background: #667eea;
-          color: white;
-          padding: 1rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        .header-actions {
-          display: flex;
-          gap: 1rem;
-        }
-        .logout-btn {
-          background: #ff6b6b;
-          color: white;
-          border: none;
-          padding: 0.5rem 1rem;
-          border-radius: 5px;
-          cursor: pointer;
-        }
-        .panel-selector {
-          display: flex;
-          background: white;
-          border-bottom: 1px solid #eee;
-          padding: 0 2rem;
-        }
-        .panel-selector button {
-          flex: 1;
-          padding: 1rem;
-          border: none;
-          background: none;
-          cursor: pointer;
-          font-size: 1.1rem;
-          border-bottom: 3px solid transparent;
-        }
-        .panel-selector button.active {
-          color: #667eea;
-          border-bottom-color: #667eea;
-          font-weight: bold;
-        }
-        .admin-content {
-          padding: 2rem;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-      `}</style>
     </div>
   );
 };

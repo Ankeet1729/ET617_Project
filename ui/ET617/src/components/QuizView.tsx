@@ -1,33 +1,23 @@
 import React, { useState } from "react";
 import QuizResults from "./QuizResults";
 
-interface MultipleChoiceQuestion {
-  question: string;
-  options: string[];
-  answer: string;
+interface Question {
+  id: number;
+  question_text: string;
+  question_type: string;
+  options: any;
   bloom_level: string;
   concept: string;
-  needs_image: boolean;
-  grade: number;
-}
-
-interface TrueFalseQuestion {
-  question: string;
-  answer: string;
-  bloom_level: string;
-  concept: string;
-  needs_image: boolean;
-  grade: number;
-}
-
-interface QuizData {
-  multiple_choice: MultipleChoiceQuestion[];
-  true_false: TrueFalseQuestion[];
+  image_path: string | null;
 }
 
 interface QuizViewProps {
   quizName: string;
-  quizData: QuizData;
+  quizData: {
+    set_id: number;
+    set_name: string;
+    questions: Question[];
+  };
   quizId: number;
   username: string;
   grade: string;
@@ -43,19 +33,18 @@ const QuizView: React.FC<QuizViewProps> = ({
   onBack
 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<{ [key: string]: string }>({});
+  const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [showResults, setShowResults] = useState(false);
-  const [evaluationResult, setEvaluationResult] = useState<any>(null);
+  const [evaluationResult, setEvaluationResult] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const allQuestions = [
-    ...quizData.multiple_choice.map((q, i) => ({ ...q, type: 'multiple_choice', id: `mc_${i}` })),
-    ...quizData.true_false.map((q, i) => ({ ...q, type: 'true_false', id: `tf_${i}` }))
-  ];
+  console.log("🔍 [QuizView] Received quiz data:", quizData);
 
+  // Use the questions array directly from the new API format
+  const allQuestions = quizData.questions || [];
   const currentQuestion = allQuestions[currentQuestionIndex];
 
-  const handleAnswerSelect = (questionId: string, answer: string) => {
+  const handleAnswerSelect = (questionId: number, answer: string) => {
     setAnswers(prev => ({ ...prev, [questionId]: answer }));
   };
 
@@ -77,26 +66,9 @@ const QuizView: React.FC<QuizViewProps> = ({
 
   const submitQuiz = async () => {
     setIsSubmitting(true);
+    console.log("🔍 [QuizView] Submitting quiz with answers:", answers);
+    
     try {
-      const storedGrade = localStorage.getItem("currentGrade");
-      const gradeToSend = storedGrade && storedGrade !== "null" && storedGrade !== "undefined" && storedGrade !== "" ? storedGrade : grade || "8";
-  
-      // NEW: Get module and set_index from localStorage (saved when quiz was loaded)
-      const currentQuizData = localStorage.getItem("currentQuiz");
-      let moduleId = quizId; // Default to quizId
-      let setIndex = null;
-      
-      if (currentQuizData) {
-        try {
-          const parsed = JSON.parse(currentQuizData);
-          // Check if we stored module/set info
-          if (parsed.moduleId) moduleId = parsed.moduleId;
-          if (parsed.set_index) setIndex = parsed.set_index;
-        } catch (e) {
-          console.warn('Could not parse stored quiz data');
-        }
-      }
-  
       const response = await fetch("http://localhost:5000/api/evaluate_quiz", {
         method: "POST",
         headers: {
@@ -104,32 +76,30 @@ const QuizView: React.FC<QuizViewProps> = ({
         },
         credentials: "include",
         body: JSON.stringify({
-          quiz_id: moduleId,
+          question_set_id: quizData.set_id,
           answers: answers,
-          grade: gradeToSend,
-          username: localStorage.getItem("currentUser") || username || undefined,
-          module: moduleId,
-          set_index: setIndex
+          grade: grade,
+          username: username
         }),
       });
-  
+
       const result = await response.json();
-  
+      console.log("✅ [QuizView] Quiz evaluation result:", result);
+
       if (response.ok) {
         setEvaluationResult(result);
         setShowResults(true);
       } else {
-        console.error("Error submitting quiz:", response.status, result);
-        alert(result?.error ? `Error submitting quiz: ${result.error}` : "Error submitting quiz. Please try again.");
+        console.error("❌ [QuizView] Error submitting quiz:", result);
+        alert(result?.error || "Error submitting quiz. Please try again.");
       }
     } catch (error) {
-      console.error("Error submitting quiz:", error);
+      console.error("❌ [QuizView] Error submitting quiz:", error);
       alert("Error submitting quiz. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
-  
 
   if (showResults && evaluationResult) {
     return (
@@ -146,27 +116,66 @@ const QuizView: React.FC<QuizViewProps> = ({
     );
   }
 
+  if (!currentQuestion) {
+    return (
+      <div style={{ padding: "20px", color: "#f1f5f9" }}>
+        <p>Loading quiz...</p>
+      </div>
+    );
+  }
+
+  // Parse options if it's a JSON string
+  let questionOptions = currentQuestion.options;
+  if (typeof questionOptions === 'string') {
+    try {
+      questionOptions = JSON.parse(questionOptions);
+    } catch (e) {
+      console.error("Failed to parse options:", questionOptions);
+      questionOptions = {};
+    }
+  }
+
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", maxWidth: "1400px", margin: "0 auto", padding: "20px", display: "flex", gap: "20px" }}>
+    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#0f172a" }}>
       {/* Question Palette Sidebar */}
-      <div style={{ width: "200px", backgroundColor: "#f8f9fa", padding: "20px", borderRadius: "10px", position: "sticky", top: "20px", height: "fit-content" }}>
-        <h3 style={{ marginTop: 0, color: "#333", fontSize: "16px", marginBottom: "15px" }}>Question Palette</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px" }}>
-          {allQuestions.map((_, index) => (
+      <div
+        style={{
+          width: "200px",
+          backgroundColor: "#1e293b",
+          padding: "20px",
+          borderRight: "2px solid #334155",
+        }}
+      >
+        <h3 style={{ color: "#f1f5f9", marginBottom: "20px", fontSize: "16px" }}>
+          Question Palette
+        </h3>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "10px",
+          }}
+        >
+          {allQuestions.map((q, index) => (
             <button
-              key={index}
+              key={q.id}
               onClick={() => handleJumpToQuestion(index)}
               style={{
-                width: "40px",
-                height: "40px",
-                backgroundColor: index === currentQuestionIndex ? "#007bff" : answers[allQuestions[index].id] ? "#28a745" : "#e9ecef",
-                color: index === currentQuestionIndex ? "white" : "#333",
+                width: "50px",
+                height: "50px",
+                backgroundColor:
+                  index === currentQuestionIndex
+                    ? "#6366f1"
+                    : answers[q.id]
+                    ? "#10b981"
+                    : "#334155",
+                color: "white",
                 border: "none",
-                borderRadius: "4px",
+                borderRadius: "8px",
                 cursor: "pointer",
                 fontWeight: "bold",
                 fontSize: "14px",
-                transition: "all 0.2s"
+                transition: "all 0.2s",
               }}
             >
               {index + 1}
@@ -176,129 +185,227 @@ const QuizView: React.FC<QuizViewProps> = ({
       </div>
 
       {/* Main Quiz Content */}
-      <div style={{ flex: 1 }}>
-        <div style={{ background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", color: "white", padding: "20px", borderRadius: "10px", marginBottom: "20px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div>
-              <h2 style={{ margin: 0, fontSize: "24px" }}>{quizName}</h2>
-              <p style={{ margin: "5px 0 0 0", opacity: 0.9 }}>Username: {username} | Grade: {grade}</p>
-            </div>
-            <button
-              onClick={onBack}
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "rgba(255,255,255,0.2)",
-                border: "2px solid white",
-                borderRadius: "8px",
-                color: "white",
-                cursor: "pointer",
-                fontSize: "14px"
-              }}
-            >
-              Exit Quiz
-            </button>
+      <div style={{ flex: 1, padding: "30px" }}>
+        {/* Header */}
+        <div
+          style={{
+            backgroundColor: "#1e293b",
+            padding: "25px",
+            borderRadius: "12px",
+            marginBottom: "25px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <h1 style={{ color: "#f1f5f9", margin: "0 0 10px 0", fontSize: "24px" }}>
+              {quizName}
+            </h1>
+            <p style={{ color: "#94a3b8", margin: 0, fontSize: "14px" }}>
+              Username: {username} | Grade: {grade}
+            </p>
           </div>
+          <button
+            onClick={onBack}
+            style={{
+              padding: "12px 24px",
+              backgroundColor: "#ef4444",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontSize: "14px",
+              fontWeight: "bold",
+            }}
+          >
+            Exit Quiz
+          </button>
         </div>
 
         {/* Progress Bar */}
-        <div style={{ marginBottom: "20px", backgroundColor: "#f8f9fa", padding: "15px", borderRadius: "8px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px", fontSize: "14px", color: "#666" }}>
-            <span>Question {currentQuestionIndex + 1} of {allQuestions.length}</span>
-            <span>{Math.round(((currentQuestionIndex + 1) / allQuestions.length) * 100)}%</span>
+        <div
+          style={{
+            backgroundColor: "#1e293b",
+            padding: "15px 25px",
+            borderRadius: "12px",
+            marginBottom: "25px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "10px",
+            }}
+          >
+            <span style={{ color: "#cbd5e1", fontSize: "14px" }}>
+              Question {currentQuestionIndex + 1} of {allQuestions.length}
+            </span>
+            <span style={{ color: "#6366f1", fontSize: "14px", fontWeight: "bold" }}>
+              {Math.round(((currentQuestionIndex + 1) / allQuestions.length) * 100)}%
+            </span>
           </div>
-          <div style={{ height: "8px", backgroundColor: "#e9ecef", borderRadius: "4px", overflow: "hidden" }}>
-            <div style={{ height: "100%", width: `${((currentQuestionIndex + 1) / allQuestions.length) * 100}%`, backgroundColor: "#667eea", transition: "width 0.3s" }} />
+          <div
+            style={{
+              height: "8px",
+              backgroundColor: "#334155",
+              borderRadius: "4px",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                height: "100%",
+                width: `${((currentQuestionIndex + 1) / allQuestions.length) * 100}%`,
+                backgroundColor: "#6366f1",
+                transition: "width 0.3s",
+              }}
+            />
           </div>
         </div>
 
         {/* Question Card */}
-        <div style={{ backgroundColor: "white", padding: "30px", borderRadius: "10px", boxShadow: "0 2px 10px rgba(0,0,0,0.1)", marginBottom: "20px" }}>
-          <div style={{ marginBottom: "15px" }}>
-            <span style={{ backgroundColor: "#667eea", color: "white", padding: "5px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold" }}>
-              {currentQuestion.type.replace('_', ' ').toUpperCase()}
+        <div
+          style={{
+            backgroundColor: "#1e293b",
+            padding: "30px",
+            borderRadius: "12px",
+            marginBottom: "25px",
+          }}
+        >
+          <div style={{ marginBottom: "20px" }}>
+            <span
+              style={{
+                backgroundColor: "#6366f1",
+                color: "white",
+                padding: "6px 16px",
+                borderRadius: "12px",
+                fontSize: "12px",
+                fontWeight: "bold",
+                marginRight: "10px",
+              }}
+            >
+              {currentQuestion.question_type}
             </span>
-            <span style={{ marginLeft: "10px", color: "#999", fontSize: "12px" }}>
+            <span style={{ color: "#94a3b8", fontSize: "14px" }}>
               {currentQuestion.bloom_level} • {currentQuestion.concept}
             </span>
           </div>
-          <h3 style={{ color: "#333", fontSize: "20px", marginBottom: "25px", lineHeight: 1.6 }}>
-            {currentQuestion.question}
-          </h3>
 
-          {currentQuestion.type === 'multiple_choice' ? (
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              {(currentQuestion as any).options.map((option: string, index: number) => (
+          <h2
+            style={{
+              color: "#f1f5f9",
+              fontSize: "20px",
+              marginBottom: "25px",
+              lineHeight: "1.6",
+            }}
+          >
+            {currentQuestion.question_text}
+          </h2>
+
+          {currentQuestion.image_path && (
+            <img
+              src={`http://localhost:5000/${currentQuestion.image_path}`}
+              alt="Question"
+              style={{
+                maxWidth: "400px",
+                borderRadius: "8px",
+                marginBottom: "25px",
+              }}
+            />
+          )}
+
+          {/* Options */}
+          <div style={{ display: "grid", gap: "12px" }}>
+            {currentQuestion.question_type === "MCQ" ? (
+              Object.entries(questionOptions).map(([key, value]) => (
                 <label
-                  key={index}
+                  key={key}
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    padding: "15px",
-                    backgroundColor: answers[currentQuestion.id] === option ? "#e7f3ff" : "#f8f9fa",
-                    border: answers[currentQuestion.id] === option ? "2px solid #667eea" : "2px solid #e9ecef",
+                    padding: "16px",
+                    backgroundColor:
+                      answers[currentQuestion.id] === key ? "#6366f120" : "#0f172a",
+                    border: `2px solid ${
+                      answers[currentQuestion.id] === key ? "#6366f1" : "#334155"
+                    }`,
                     borderRadius: "8px",
                     cursor: "pointer",
-                    transition: "all 0.2s"
+                    transition: "all 0.2s",
+                  }}
+                  onMouseOver={(e) => {
+                    if (answers[currentQuestion.id] !== key) {
+                      e.currentTarget.style.borderColor = "#475569";
+                    }
+                  }}
+                  onMouseOut={(e) => {
+                    if (answers[currentQuestion.id] !== key) {
+                      e.currentTarget.style.borderColor = "#334155";
+                    }
                   }}
                 >
                   <input
                     type="radio"
-                    name={currentQuestion.id}
-                    value={option}
-                    checked={answers[currentQuestion.id] === option}
+                    name={`question-${currentQuestion.id}`}
+                    value={key}
+                    checked={answers[currentQuestion.id] === key}
                     onChange={(e) => handleAnswerSelect(currentQuestion.id, e.target.value)}
-                    style={{ marginRight: "10px", width: "18px", height: "18px" }}
+                    style={{ marginRight: "12px", width: "20px", height: "20px" }}
                   />
-                  <span style={{ fontSize: "16px", color: "#333" }}>{option}</span>
+                  <span style={{ color: "#f1f5f9", fontSize: "16px" }}>
+                    <strong>{key}:</strong> {String(value)}
+                  </span>
                 </label>
-              ))}
-            </div>
-          ) : (
-            <div style={{ display: "flex", gap: "15px" }}>
-              {['True', 'False'].map((option) => (
+              ))
+            ) : (
+              ["True", "False"].map((option) => (
                 <label
                   key={option}
                   style={{
-                    flex: 1,
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    padding: "20px",
-                    backgroundColor: answers[currentQuestion.id] === option ? "#e7f3ff" : "#f8f9fa",
-                    border: answers[currentQuestion.id] === option ? "2px solid #667eea" : "2px solid #e9ecef",
+                    padding: "16px",
+                    backgroundColor:
+                      answers[currentQuestion.id] === option ? "#6366f120" : "#0f172a",
+                    border: `2px solid ${
+                      answers[currentQuestion.id] === option ? "#6366f1" : "#334155"
+                    }`,
                     borderRadius: "8px",
                     cursor: "pointer",
-                    transition: "all 0.2s"
+                    transition: "all 0.2s",
                   }}
                 >
                   <input
                     type="radio"
-                    name={currentQuestion.id}
+                    name={`question-${currentQuestion.id}`}
                     value={option}
                     checked={answers[currentQuestion.id] === option}
                     onChange={(e) => handleAnswerSelect(currentQuestion.id, e.target.value)}
-                    style={{ marginRight: "10px", width: "18px", height: "18px" }}
+                    style={{ marginRight: "12px", width: "20px", height: "20px" }}
                   />
-                  <span style={{ fontSize: "18px", fontWeight: "bold", color: "#333" }}>{option}</span>
+                  <span style={{ color: "#f1f5f9", fontSize: "16px" }}>{option}</span>
                 </label>
-              ))}
-            </div>
-          )}
+              ))
+            )}
+          </div>
         </div>
 
         {/* Navigation Buttons */}
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "15px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <button
             onClick={handlePrevious}
             disabled={currentQuestionIndex === 0}
             style={{
-              padding: "12px 24px",
-              backgroundColor: currentQuestionIndex === 0 ? "#e9ecef" : "#6c757d",
+              padding: "14px 28px",
+              backgroundColor: currentQuestionIndex === 0 ? "#334155" : "#475569",
               color: "white",
               border: "none",
               borderRadius: "8px",
               cursor: currentQuestionIndex === 0 ? "not-allowed" : "pointer",
-              fontSize: "16px"
+              fontSize: "16px",
+              fontWeight: "bold",
             }}
           >
             ← Previous
@@ -308,13 +415,14 @@ const QuizView: React.FC<QuizViewProps> = ({
             <button
               onClick={handleNext}
               style={{
-                padding: "12px 24px",
-                backgroundColor: "#667eea",
+                padding: "14px 28px",
+                backgroundColor: "#6366f1",
                 color: "white",
                 border: "none",
                 borderRadius: "8px",
                 cursor: "pointer",
-                fontSize: "16px"
+                fontSize: "16px",
+                fontWeight: "bold",
               }}
             >
               Next →
@@ -324,14 +432,14 @@ const QuizView: React.FC<QuizViewProps> = ({
               onClick={submitQuiz}
               disabled={isSubmitting}
               style={{
-                padding: "12px 24px",
-                backgroundColor: isSubmitting ? "#6c757d" : "#28a745",
+                padding: "14px 28px",
+                backgroundColor: isSubmitting ? "#64748b" : "#10b981",
                 color: "white",
                 border: "none",
                 borderRadius: "8px",
                 cursor: isSubmitting ? "not-allowed" : "pointer",
                 fontSize: "16px",
-                fontWeight: "bold"
+                fontWeight: "bold",
               }}
             >
               {isSubmitting ? "Submitting..." : "Finish Quiz"}
