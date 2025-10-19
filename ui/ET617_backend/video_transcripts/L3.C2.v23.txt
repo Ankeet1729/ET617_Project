@@ -1,0 +1,29 @@
+Part 1: Abida: In the past videos, we wrote algorithms to draw geometric shapes like squares. How about we write some code now to draw different geometric patterns just as we tap on the screen? We will create three shapes - triangle, square and hexagon. Let's work on these shapes one at a time. 
+
+To draw a shape, we need the length of each line of the shape and the angle of rotation. The angle of rotation is 360 degrees/no of edges. If it's a square, it's 360/4. If it's a triangle, it's 360/3. For a hexagon, it is 360/6. Alright, we know how to draw these shapes. But how do we draw a different shape everytime we tap on the screen? Just like this? 
+Triangle Square Hexagon 
+Triangle Square Hexagon 
+
+And how do we automate this process through our code such that if someone else wants to draw a different shape, they can still achieve this with our code with minor changes. Let's see how?  
+
+Part 2: That was fun. Now, what if we could summon some magic patterns when we tap on the screen using the same logic? This time, may be a 
+snowflake, a honeycomb, Kite (saw it out loud)
+snowflake, a honeycomb, Kite (just do actions)
+snowflake, a honeycomb, Kite (just do actions)
+Let's create some patterns with shapes part 1 (Start to 1.17s) Let's first try drawing a square by replacing the sprite. We will use the pen extension to draw our shapes. When the pen is down, we draw the shape (30 s)
+(1.17 to 6.14s) As we discussed, we could draw different shapes by changing the edge value. (30s)
+(6.08 to 6.58s) Instead of changing these values every single time, what if we could automate this process. First, I want to be able to draw any shape by re-using the logic that we just wrote. Writing functions are a great way to re-use our code. So let's write a function called drawShape. What if I want to draw a shape of any length? In this case, we can create a function with parameter or input called 'length' and define the function. (30s)
+
+(7.24s to 11.08s) But wait, we didn't mention when to draw a square or a triangle or hexagon when we tap on the screen. To do this, let's create another function called chooseShape which automates this process. This function defines that if it's the first tap, i.e if count variable =1, then we draw a triangle, 2 a square and 3 a hexagon. Since we will keep up incrementing the count value, a count of four will reset to 1 and set the edge as 3  (30s)
+
+
+(11.41s to 15.15s) Now when the green flag is clicked, we erase everything from the last run, we initialize the count to 1 and use a forever block to check for a full tap, i.e when the mouse or your finger touches the screen, the shape is drawn. We also call the choose shape function we defined before to choose the shape to draw and play a pop sound as we draw. Let's check if it works so far. We have a problem. 
+
+(15.16s to 16.50s) We need to make the pen go up after drawing every shape until the next tap. Let's fix this. That works! 
+
+(16.51s to end) But we still don't get different shapes. Let's see what we are missing. There we go, this is because we haven't changed the count variable by 1. Also let's set the pen color and try tapping our shapes.
+When green flag is clicked, we first choose the shape, pen down, wait for a full mouse click or a tap and go to the mouse pointer. The next step is to call the draw shape function and then we are done.
+We need these patterns to appear only when we tap on the screen. And how do we know which pattern should be drawn upon tapping on the screen. We want these patterns to appear exactly in the same order everytime. First the triangle, then the square and then on the third tap we want the hexagon. How could we achieve this? We can write a function which initially chooses which shape to draw. If it's the first time we are tapping on the stage, we draw a triangle, second time square and so on. And if the count reaches 4, we reset the count and start drawing a triangle again.
+Let's try and create some magic patterns with the same logic. First we create a function to choose the pattern based on the tap count.
+We then define functions to specify the characteristic of each magic pattern. For example, a value of (4,150, 30) for the (edge, angle, length). If it's the first time the screen is tapped or at the first instance of the mouse click, a snowflake should be summoned. We set the pen color to be white. Similarly we define other two functions honeycomb and kite.  
+Once we choose the shape to draw and define the characteristics of a pattern, we need to draw the pattern. So we define a draw pattern function which will draw the shape.  We create clones corresponding to number of edges and draw a pattern of specific length. And then we create clones for each clone turning at specific angles and drawing patterns, extending this for 5 levels. After every pattern is drawn, we delete the clones for that pattern to make sure we don't run out of clones in scratch. There we go, let's check this out! We got a beautiful pattern of snowflake, honeycomb and kite. And we could repeat this forever to create something that looks like a wallpaper.

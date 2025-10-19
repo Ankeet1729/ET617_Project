@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L3.C2.v21",
+  "submodule_name": "Let's karaoke",
+  "concepts": [
+    {
+      "concept_name": "Creating Custom Blocks (Functions)",
+      "concept_description": "Using the 'My Blocks' feature to create custom blocks (e.g., 'define stanza1 music', 'define move arrow') to encapsulate a sequence of commands, promoting code organization and reusability.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Calling Custom Blocks",
+      "concept_description": "Executing a custom-defined block by placing its corresponding call block (e.g., 'stanza1 music') within another script, such as a main 'play music' function.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Code Modularity and Decomposition",
+      "concept_description": "Breaking down a large program into smaller, independent, and interchangeable modules (functions for each stanza) to simplify development, testing, and debugging.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Using Nested Loops",
+      "concept_description": "Placing one 'repeat' block inside another 'repeat' block to create complex repetitive patterns, as shown in the music and flower stamping logic for the second stanza.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sequencing with Music Blocks",
+      "concept_description": "Arranging 'play note for beats' and 'rest for beats' blocks in a specific order to compose a melody and rhythm for a song.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Synchronization with the 'wait' block",
+      "concept_description": "Using the 'wait' block to create timed pauses in a script, ensuring that visual elements like a moving arrow or stamped flowers are synchronized with the music's tempo.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the 'stamp' block",
+      "concept_description": "Employing the 'stamp' block from the Pen extension to create a static image of a sprite's costume on the stage, used in this project to make flowers appear.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Event Handling with 'when green flag clicked'",
+      "concept_description": "Using the 'when green flag clicked' block to initiate the main program sequence, triggering the karaoke music and animations.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Controlling Sprite Position with X/Y Coordinates",
+      "concept_description": "Using motion blocks like 'go to x: y:', 'change x by', and 'change y by' to precisely control a sprite's location and movement on the stage.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using Loops for Repetition",
+      "concept_description": "Using the 'repeat' block to run a set of commands multiple times, such as replaying the entire song or a musical phrase.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using the Pen 'erase all' block",
+      "concept_description": "Using the 'erase all' block to clear all stamped images from the stage before the program runs, ensuring a clean start for the visualization.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using Variables to Store and Reset Position",
+      "concept_description": "Creating and using variables to store a sprite's coordinate values (e.g., `set x_pos to x position`) so that the sprite can be returned to that specific position later in the script.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the Music Extension",
+      "concept_description": "Adding and using the Music extension to access sound blocks like 'play note', 'rest for', and 'set instrument to' for creating musical projects.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Setting Musical Instruments",
+      "concept_description": "Using the 'set instrument to' block to select a specific sound, such as 'Piano', for the 'play note' blocks to use.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Function Composition",
+      "concept_description": "Creating a master function (e.g., 'play music') that works by calling several smaller, specialized functions (e.g., 'stanza1 music', 'stanza2 music') in a specific sequence.",
+      "grade_level": "5-12"
+    }
+  ]
+}

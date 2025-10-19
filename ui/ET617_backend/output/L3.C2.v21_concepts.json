@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L3.C2.v21",
+  "submodule_name": "Let's karaoke",
+  "concepts": [
+    {
+      "concept_name": "Defining Custom Blocks (Functions)",
+      "concept_description": "Creating custom blocks using the 'define' block to group a set of instructions into a single, reusable procedure. In the project, separate functions are created for each music stanza (e.g., 'define stanza2 music') and for visual effects ('define move arrow').",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Calling Custom Blocks",
+      "concept_description": "Using a previously defined custom block within a script to execute its code. For example, a main 'play music' function calls the 'stanza1 music', 'stanza2 music', and 'stanza3 music' functions in sequence.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Procedural Decomposition",
+      "concept_description": "The practice of breaking down a large, complex task (creating a karaoke video) into smaller, more manageable sub-tasks (functions for each stanza's music, arrow movement, and visual effects).",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Nested Loops",
+      "concept_description": "Placing a 'repeat' block inside another 'repeat' block to create more complex patterns of repetition. This is used in the music for stanza 2, where a musical phrase is repeated within a larger repeating section.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Music Creation with 'play note'",
+      "concept_description": "Using the 'play note for beats' block from the Music extension to create a melody by specifying a note's pitch and its duration in beats.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Synchronization with 'wait' and 'rest'",
+      "concept_description": "Using 'wait' and 'rest for beats' blocks to control the timing of events, ensuring that visual elements (like the moving arrow) are synchronized with the musical rhythm.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the 'stamp' block",
+      "concept_description": "Employing the 'stamp' block from the Pen extension to leave an imprint of a sprite's costume on the stage. This is used to make flowers appear as the song progresses.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sprite Positioning with Coordinates",
+      "concept_description": "Controlling a sprite's location using x and y coordinates with blocks like 'go to x: y:', 'set x to', and 'change x by'. This is used to position the arrow and the flower sprite before stamping.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using Variables to Store Position",
+      "concept_description": "Creating variables to store and retrieve data, specifically storing the x and y coordinates of a sprite to manage positioning for repeated actions like stamping rows of flowers.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Using the 'erase all' block",
+      "concept_description": "Using the 'erase all' block from the Pen extension to clear the stage of all stamped images and pen drawings, typically at the start of a program.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Code Modularity and Reusability",
+      "concept_description": "Designing code in self-contained modules (custom blocks/functions) that can be easily tested, debugged, and reused in different parts of the program or in other projects.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Simple Loops (Repeat)",
+      "concept_description": "Using the 'repeat' block to execute a set of instructions a specific number of times, such as repeating the entire song or a musical phrase.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Event Handling with 'when green flag clicked'",
+      "concept_description": "Using the 'when green flag clicked' event block to trigger the start of the main program scripts for the karaoke song.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Setting an Instrument",
+      "concept_description": "Using the 'set instrument to' block to select the type of sound (e.g., Piano) that will be used by the 'play note' blocks.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sequential Execution",
+      "concept_description": "Understanding that blocks in a Scratch script run in order from top to bottom. This is fundamental to creating the correct sequence of notes for the song.",
+      "grade_level": "1-8"
+    }
+  ]
+}

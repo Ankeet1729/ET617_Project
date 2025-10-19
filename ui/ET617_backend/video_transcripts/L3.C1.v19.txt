@@ -1,0 +1,65 @@
+Part 1: We wrote some code that helped Eshal control his anger and be more compassionate. But wait! Thoughts fuel our emotions and emotions shape our thinking. Thoughts and feelings are closely connected.
+AI.S.H.A: Oh yes Abida. I have some information you would like to know about thoughts. 
+The average person has about 12,000 to 60,000 thoughts per day. Of those, 80% are negative (National Science Foundation, 2005)
+Abida: Absolutely AI.S.H.A. So many negative thoughts, right? Negativity is everywhere! But so is our ability to focus on the positive. If we are able to catch our thoughts and identify them as positive or negative, it becomes easier to consciously choose our emotions. Let's see if we could write some code to catch our thoughts.
+
+(screensharing starts)
+Let's imagine that a thought is like a cloud. It's always passing by. 
+● We choose a cloud sprite to represent a thought. Let's duplicate this sprite one for the positive thought and one for negative thought.
+To mimic that we are catching a thought, let's choose a bucket sprite into which the thought is captured. 
+● Let's duplicate this sprite and change the color of the bucket. The blue bucket is to catch a positive thought and the red bucket is to catch a negative thought.
+When the green flag is clicked, the cloud sprite asks to "enter your thought?" and waits for your answer. To do this, 
+● Use the 'ask and wait' block from the sensing palette and type in the question inside the block.
+● A text box pops up to enter the answer.
+● Once the answer is entered, use the say block from the looks palette to make the cloud say the answer for 2 sec.
+● Show the cloud sprite using the show block from the looks palette and make it go to the specific location on the screen using the go to block from the motion palette.
+Let's check this out. That works!
+Likewise, when the green flag is clicked, the positive cloud and the negative cloud goes to a specific position but is initially hidden.
+Now if a thought is positive, it goes to the positive bucket and if negative, it goes to the negative bucket. 
+
+If the thought is positive such as grateful, then we need to broadcast a positive message. To check if a thought is 'grateful', get the if then block from the control palette and broadcast positive if the condition is true. Similarly check if the thought is 'friendly'. If it is, then broadcast positive again.
+If the thought is negative such as blaming, then we need to broadcast a negative message. 'Similarly check if the thought is 'bully'. If it is, then broadcast negative again.
+So the positive cloud needs to show up only when it receives a positive broadcast message and hide when it receives a negative broadcast message.
+The positive cloud after receiving the message also changes it's size by -50 and glides towards the blue bucket, i.e takeout. If the positive cloud touches the blue bucket, it must hide. To do this we use the if then block from the control palette.
+For the negative cloud, we repeat the same steps as the positive cloud. 
+Also it's a good practice to add comments to your code to make it more understandable. Code to catch thoughts, code that receives positive thoughts and code that recieves negative thoughts
+Let's check if this is working! Positive thoughts like grateful go to the positive bucket and negative thoughts go to the negative bucket. Glad! That works!
+We are processing conditions literally in every part of our daily lives, not just to catch thoughts. Some basic examples of If conditions are,
+● If you go out
+      wear a mask
+● If it is rainy
+      take an umberella
+● If you are hungry
+      have some food
+● If it is winter
+      wear a hoodie 
+
+If conditions either return the output as 'true' or it returns the output as 'false'. This type of output is called as boolean since it can only have two possible outputs.
+AI.S.H.A: Wow Abida, we process so many conditions in a single day. But you got me thinking. Let's say I wish to write the code to classify people into different generations based on their age groups, do I have to write many 'If blocks' to achieve this? There would be lots of conditions to check for each person.
+If age = 10 to 25
+    Gen Z
+If age = 26 to 41
+    Millenials
+If age = 42 to 57
+    Gen X
+If age = 58 to 76
+    Baby boomers
+If age = 77 to 94
+    Silent generation
+Abida: Great question AI.S.H.A. And hey, I could see your tone of voice has improved too. 
+AI.S.H.A: Thanks Abida. I have been learning a lot from the way you speak. As an A.I, that's what I'm good at. And what not, we have been doing more lessons on emotions and thoughts recently. I've been recently working on them too. Do I sound more like a human?
+Abida: (Giving a puzzled look) Well, looks like you are getting closer)
+Okay, let's see. You have come up with a great example for if conditions. But not every time each and every condition needs to be checked. For example, a single person cant be of age 11 and age 57 at the same time (unless you are time travelling). So it's not useful to check all those if conditions at the same time. Only one condition could be true for a single person. In this case, instead of using a 'if condition', we could use an 'else-if' condition,
+If age = 10 to 25
+    Gen Z
+else If age = 26 to 41
+    Millenials
+else If age = 42 to 57
+    Gen X
+else If age = 58 to 76
+    Baby boomers
+else
+    Silent generation
+
+In this case, only the first if block needs to be checked always. If this condition is false, only then the proceeding else-if blocks are checked. If none of the else-if conditions are true, then the else block is executed. 
+In our case we could translate the code to something like this using the if-else ladder

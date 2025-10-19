@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L3.C1.v17",
+  "submodule_name": "Infinite loops of anger & kindness",
+  "concepts": [
+    {
+      "concept_name": "Using a `forever` loop",
+      "concept_description": "Implementing an infinite loop using the `forever` block from the Control palette to make actions repeat endlessly. The image shows a pony moving forever using this block.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using a `repeat` loop",
+      "concept_description": "Implementing a finite loop using the `repeat` block to execute a set of instructions a specific number of times. The transcript contrasts this with the `forever` loop for actions that should eventually stop.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Starting a script with `when green flag clicked`",
+      "concept_description": "Using the primary event handler block to start a script when the green flag is clicked, initiating the main action of the program as shown in the image.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Moving a sprite with `move steps`",
+      "concept_description": "Using the `move` block from the Motion palette to change the position of a sprite in the direction it is currently facing. The image shows `move 6 steps` inside a loop.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Using `if on edge, bounce`",
+      "concept_description": "Using the `if on edge, bounce` block to prevent a sprite from moving off the screen by reversing its direction when it touches the edge of the stage.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Setting sprite rotation style",
+      "concept_description": "Using the `set rotation style` block to control how a sprite visually rotates, specifically using 'left-right' to prevent it from turning upside down after bouncing off an edge.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Creating and initializing variables",
+      "concept_description": "Creating a new variable to store data (e.g., 'emotion') and giving it an initial value using the `set variable to` block.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Updating variable values",
+      "concept_description": "Modifying the value stored in a variable during program execution, for example, changing the 'emotion' variable's value from 'sad' to 'angry' as the story progresses.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Broadcasting messages for sprite communication",
+      "concept_description": "Using the `broadcast` block to send a message that triggers actions in other sprites, allowing for coordination and sequencing between different characters or states.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Receiving messages to trigger scripts",
+      "concept_description": "Using the `when I receive` hat block to start a script when a specific broadcast message is received, enabling one sprite's action to cause another sprite to react.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Using the `join` operator for dynamic text",
+      "concept_description": "Combining two strings, or a string and a variable's value, into a single string using the `join` block from the Operators palette (e.g., joining 'I am' and the 'emotion' variable).",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Showing and hiding sprites",
+      "concept_description": "Using the `show` and `hide` blocks from the Looks palette to control the visibility of sprites on the stage, often used to switch between different character costumes or states.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using `when this sprite clicked` event",
+      "concept_description": "Using the event handler block that triggers a script when the user clicks on a specific sprite, allowing for direct user interaction with characters.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using `say` and `think` blocks",
+      "concept_description": "Making a sprite display a speech bubble (`say`) or a thought bubble (`think`) with text for a specified duration to communicate with the user.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Decomposition",
+      "concept_description": "The computational thinking practice of breaking down a complex problem (coding an emotional sequence) into smaller, more manageable parts (coding each sprite's behavior individually).",
+      "grade_level": "5-12"
+    }
+  ]
+}

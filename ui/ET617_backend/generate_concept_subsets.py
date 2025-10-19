@@ -21,25 +21,35 @@ if not GEMINI_API_KEY:
 
 genai.configure(api_key=GEMINI_API_KEY)
 
-# Submodule configuration
-SUBMODULES = {
-    'L3.C1': {
-        'transcript': 'L3.C1_combined_transcript.txt',
-        'image': 'submodule_images/L3.C1_image.png',
-        'name': 'Just be, Just code - Code your emotions'
-    },
-    'L3.C2': {
-        'transcript': 'L3.C2_combined_transcript.txt',
-        'image': 'submodule_images/L3.C2_image.png',
-        'name': 'Code, for the love of...'
-    },
-    'L3.C3': {
-        'transcript': 'L3.C3_combined_transcript.txt',
-        'image': 'submodule_images/L3.C3_image.png',
-        'name': 'Code with purpose'
-    }
-}
+# Here you can easily update the name for each video one-by-one.
+video_data = [
+    (1, 17, "Infinite loops of anger & kindness"),   # <-- Update these names
+    (1, 18, "Emotions are variables"),
+    (1, 19, "Catch your thoughts with conditions"),
+    (1, 20, "Binary thoughts and boolean logic"),
+    (2, 21, "Let's karaoke"),
+    (2, 22, "Funny face filters"),
+    (2, 23, "Let's summon some magic patterns"),
+    (3, 24, "Code for the net-zero - Planting Trees"),
+]
 
+# Submodule configuration
+SUBMODULES = {}
+
+# This loop automatically builds the dictionary and updates file paths
+for chapter, video_num, name in video_data:
+    # 1. Create the main key (e.g., "L3.C1.v17")
+    key = f"L3.C{chapter}.v{video_num}"
+
+    # 2. Create the inner dictionary with dynamically generated paths
+    value = {
+        "transcript": f"video_transcripts/L3.C{chapter}.v{video_num}.txt",
+        "image":      f"submodule_images/L3.C{chapter}.v{video_num}.png",
+        "name":       name
+    }
+
+    # 3. Add the new entry to the main dictionary
+    SUBMODULES[key] = value
 # --- Prompt A: Concept Subset Generation (Final Version) ---
 PROMPT_A = """
 You are an expert educational content analyst specializing in Scratch programming. 
@@ -68,7 +78,7 @@ High Grade: (9-12)
 They could be a mix as well, like "1-8", "5-12" etc.
 Based on the complexity of the concept, assign a grade level range to each concept. Remember to mention the grade level as "1-4", "5-8", "9-12", "1-8", "5-12", "1-12" any of the given.
 
-### Guiding Examples for CT Concepts (handwritten for submodule L3.C3):
+### Guiding Examples for CT Concepts (handwritten for Video L3.C1.v24):
 > If conditionals
 > variables
 > broadcast&receive

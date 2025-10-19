@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L3.C3.v24",
+  "submodule_name": "Code for the net-zero - Planting Trees",
+  "concepts": [
+    {
+      "concept_name": "Custom Blocks (Procedures)",
+      "concept_description": "Creating and using custom blocks (e.g., `define draw trunk` and `define draw leaves`) to organize code and make it reusable, which demonstrates procedural abstraction.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Pen Extension for Drawing",
+      "concept_description": "Using blocks from the Pen extension like `pen down`, `pen up`, `set pen color`, and `set pen size` to draw shapes directly on the stage, such as the tree trunk.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the Stamp Block",
+      "concept_description": "Using the `stamp` block, often inside a loop, to create copies of a sprite's image on the stage, as seen in the project to create the leaves of a tree.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Event-Driven Programming (Broadcast/Receive)",
+      "concept_description": "Using `broadcast` and `when I receive` blocks to coordinate actions between different sprites and scripts. This controls the program flow from one scene to the next, such as broadcasting 'more trees' after the fire is gone.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Cloning Sprites",
+      "concept_description": "Dynamically creating multiple copies of a sprite using `create clone of myself` and programming their behavior with the `when I start as a clone` hat block, as used for the CO2 sprites.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using Variables for Counting",
+      "concept_description": "Using a variable (e.g., `tree count`) to store, update, and check a value. This is used to count the number of trees planted by the user to trigger the next event.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Conditional Logic with Sensor Input",
+      "concept_description": "Using an `if-then` block with a microphone sensor value (`loudness > 20`) to create an interactive experience where real-world sound affects the program's execution.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Conditional Logic for Sprite Interaction",
+      "concept_description": "Using an `if-then` block with a `touching` sensor block to detect collisions between sprites (e.g., a CO2 clone touching a tree) and trigger a response.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Definite Loops (Repeat)",
+      "concept_description": "Using a `repeat` block to execute a set of commands a specific number of times, such as when stamping leaves for a tree or creating a fixed number of CO2 clones.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Indefinite Loops (Forever)",
+      "concept_description": "Using a `forever` block to run a script continuously. This is used for tasks like constantly checking for user input (`mouse down?`) or ensuring a sprite moves across the screen.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Responding to Mouse Input",
+      "concept_description": "Using the `mouse down?` sensing block within a loop to detect when the user clicks the mouse, which in this project triggers the action of planting a tree at the mouse-pointer's location.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Controlling Program Flow with Backdrops",
+      "concept_description": "Using the `when backdrop switches to` event block to trigger specific scripts when the stage background changes, which helps create distinct scenes or levels in the project (e.g., switching to the 'Farm' backdrop).",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using Comparison Operators",
+      "concept_description": "Applying mathematical comparison operators (`=`, `>`, `<`) within conditional statements to check for specific conditions, such as `tree count = 10` or `size < 5`.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Animating with Costumes and Waits",
+      "concept_description": "Creating an animation effect by using a sequence of `switch costume to` blocks combined with `wait` blocks to control the timing of the visual changes, as seen with the pipeline animation.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sprite Motion and Coordinates",
+      "concept_description": "Controlling a sprite's position and movement on the stage using blocks like `go to x: y:`, `glide to random position`, and `change x by`, demonstrating an understanding of the X and Y coordinate system.",
+      "grade_level": "5-8"
+    }
+  ]
+}

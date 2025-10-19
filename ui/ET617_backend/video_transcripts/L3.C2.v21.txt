@@ -1,0 +1,13 @@
+2. Can we create some music aswell using our code? Let's try!
+AISHA do you remember the computer song that we wrote together the other day? What if we could code for a Karaoke for this song? 
+3. AISHA: Oh how could I forget the computer song!
+First we need to create some karaoke tunes for this song. Let's see how to do this. First we will create music for stanza 1.
+There are 12 beats in first stanza.
+Then we will create music for stanza2. Stanza 2 has 6 notes repeating twice for 2 lines. These 2 lines repeat together one more time. In this case, we will need a nested loop for the second stanza, like the one shown below
+We will then proceed with the last stanza same way
+Wait, to test if the second stanza is working properly, we should have to wait for the first stanza to get over. And for the third, we need to wait for both second and first to complete. Can we do something to test for the 2nd stanza without having to wait for the previous one? Yes we have a way to divide this code into modules or functions to avoid the complexity of working with huge blocks of code. In this case, we can write different functions for each stanza and call that function separately to test our code. Just like this.
+Once we defined all three functions to play music for the three stanzas, we define another function called 'play music' which calls for functions stanza1, stanza2 and stanza3 music. To call a function we use the function name block shown in pink.  We then use a repeat block to repeat the entire music twice resting for 0.5 beats in between.
+See how functions make the code modular and easy to work with? Now let's say if somebody else wants to add more lyrics to the song and create karaoke for the same. They could perhaps find a way to reuse the tones and notes that we have created and the functions that we have written are greatly helping for modifying and reusing parts of the code.
+Now that we have music, we want to guide people to sing along just like in the karaokes. Let's introduce an arrow sprite for this and make it move in sync with the notes.
+Now that we have learnt a easy way to code and check for each of our music stanza's we can build our code for the arrow movement the same way. One stanza at a time and one separate function for each stanza like this and call a single function for moving the arrow for all three stanzas.
+Up next is another interesting visualization. Let's consider that we are in a fairy tale world for now and let's say that for every stanza or line that is repeated, two flowers bloom in the garden right next to each other. Let's code for this now.
