@@ -1039,6 +1039,34 @@ app.get('/api/supermodules/:code/children', async (req, res) => {
   }
 });
 
+// GET /api/student/quiz-sets/:grade/:submodule_code - Get visible quiz sets for students
+app.get('/api/student/quiz-sets/:grade/:submodule_code', async (req, res) => {
+  console.log('📚 [GET /api/student/quiz-sets] Request:', req.params);
+  const { grade, submodule_code } = req.params;
+  
+  try {
+    const result = await pool.query(`
+      SELECT 
+        qs.id,
+        qs.set_name as name,
+        qs.created_at,
+        s.submodule_name,
+        (SELECT COUNT(*)::integer FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_count
+      FROM question_sets qs
+      INNER JOIN submodules s ON s.id = qs.submodule_id
+      WHERE qs.grade = $1 
+        AND s.submodule_code = $2
+        AND qs.is_hidden = FALSE
+      ORDER BY qs.created_at DESC
+    `, [grade, submodule_code]);
+    
+    console.log('✅ Quiz sets found:', result.rows.length);
+    res.json(result.rows);
+  } catch (err) {
+    console.error('❌ Error fetching quiz sets:', err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
 
 
 // Get concepts for a submodule and grade (for manual question creation)
