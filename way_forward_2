@@ -1,0 +1,13 @@
+Messup - Video level NOT submodule level
+what we could do now is imitate the videos as submodules
+but we would also like to show L3.C1 and stuff
+So now we should have a table called supermodule
+
+Supermodule (supermodule_name -> list of submodule id)
+
+1) submodule id = supermodule-video_number
+2) wherever submodule was visible (
+			Student Dashboard,
+			Quiz Set Management -> Grade,
+			Student Management -> Grade -> View Activity
+			

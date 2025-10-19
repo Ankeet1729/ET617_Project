@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L3.C3",
+  "submodule_name": "Code with purpose",
+  "concepts": [
+    {
+      "concept_name": "Event Handling: Broadcast and Receive",
+      "concept_description": "Using 'broadcast' to send a message and 'when I receive' to trigger scripts in other sprites, coordinating actions across the project, such as transitioning from planting trees to showing carbon absorption.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Cloning Sprites",
+      "concept_description": "Creating multiple instances of a sprite using 'create clone of myself' and defining their behavior with 'when I start as a clone'. This is used in the project to generate many CO2 sprites.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Conditional Logic with If-Then",
+      "concept_description": "Using 'if...then' blocks to execute code only when a specific condition is true, such as checking if a sprite's size is less than a certain value or if a variable reaches a target number.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sensor Input (Loudness)",
+      "concept_description": "Using the 'loudness' sensor block as a condition to control sprite behavior, such as shrinking a 'fire' sprite when the microphone detects a sound above a certain threshold.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sensor Input (Touching Sprite)",
+      "concept_description": "Using the 'touching [sprite]?' block to detect collisions between sprites and trigger an action, for example, making a CO2 clone disappear when it touches a tree.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using Variables as Counters",
+      "concept_description": "Initializing and incrementing a variable (e.g., 'tree count') to keep track of how many times an event has occurred, like the number of trees planted, and using it in conditional statements.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Loops (Forever and Repeat)",
+      "concept_description": "Using 'forever' loops for continuous actions like animation and 'repeat' loops to run a block of code a specific number of times, such as creating 20 clones.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Creating Custom Blocks (Functions)",
+      "concept_description": "Defining custom blocks using the 'define' block to create reusable procedures, such as 'draw trunk' and 'draw leaves', which simplifies and organizes the main script.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Using the Pen Extension to Draw",
+      "concept_description": "Utilizing Pen blocks like 'pen down', 'pen up', 'set pen color', and 'set pen size' to programmatically draw shapes and lines on the stage, as seen in drawing tree trunks.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Using the Stamp Block",
+      "concept_description": "Using the 'stamp' block from the Pen extension to create a permanent image of a sprite's costume on the stage, used in the project to create the leaves of the trees.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Modifying Sprite Size",
+      "concept_description": "Changing a sprite's size dynamically using the 'change size by' block to create effects like shrinking or growing. For example, the fire sprite shrinks when the user blows into the microphone.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sprite Motion and Positioning",
+      "concept_description": "Controlling a sprite's location and movement using coordinates ('go to x: y:'), directional movement ('change x by'), and smooth transitions ('glide to').",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Backdrop and Scene Management",
+      "concept_description": "Using the 'switch backdrop to' block to change the stage's background image, effectively managing different scenes or states within the project.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using the Timer for Control Flow",
+      "concept_description": "Using the built-in 'timer' block within a conditional statement (e.g., 'if timer > 100') to trigger an event after a specific amount of time has elapsed.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Event Handling with Mouse Input",
+      "concept_description": "Using the 'mouse down?' sensing block inside a loop to detect when the mouse button is clicked, triggering an action like planting a tree at the mouse-pointer's location.",
+      "grade_level": "5-8"
+    }
+  ]
+}

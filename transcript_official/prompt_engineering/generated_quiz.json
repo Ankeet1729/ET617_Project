@@ -1,0 +1,196 @@
+{
+  "questions": [
+    {
+      "concept": "Variable Creation and Manipulation",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "In the project, Eshal the sheep goes through different feelings like sad, angry, and compassionate. Why is a variable called 'emotion' created?",
+      "options": {
+        "A": "To store the current feeling of Eshal, which changes from 'sad' to 'angry' and so on.",
+        "B": "To count how many times Eshal gets angry.",
+        "C": "To make the Eshal sprite move faster across the screen.",
+        "D": "To permanently set Eshal's feeling to 'happy'."
+      },
+      "correct_answer": "A",
+      "bloom_level": "Understanding"
+    },
+    {
+      "concept": "Infinite Loops with 'forever' block",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "The lesson describes how Eshal can get stuck in an \"infinite loop of anger\" where he runs up and down continuously. Which Scratch block is used to create this kind of non-stop action?",
+      "options": {
+        "A": "repeat (10)",
+        "B": "forever",
+        "C": "if-then",
+        "D": "when green flag clicked"
+      },
+      "correct_answer": "B",
+      "bloom_level": "Remembering"
+    },
+    {
+      "concept": "Finite Loops with 'repeat' block",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "In the 'Angry Eshal' sprite's code, a `repeat (250)` block is used to control his running. What is the purpose of this block?",
+      "options": {
+        "A": "To make Eshal move 250 steps in a single go.",
+        "B": "To make Eshal run back and forth forever.",
+        "C": "To make Eshal repeat his moving action for a limited time, so he eventually calms down.",
+        "D": "To make Eshal wait for 250 seconds before moving."
+      },
+      "correct_answer": "C",
+      "bloom_level": "Understanding"
+    },
+    {
+      "concept": "Event Handling with 'when this sprite clicked'",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "Based on the project's logic, what action is triggered when you click on one of the Eshal sprites, like the 'Sad Eshal'?",
+      "options": {
+        "A": "The project stops and resets.",
+        "B": "The backdrop changes to a different scene.",
+        "C": "The sprite says its current emotion and then broadcasts a message to trigger the next emotion.",
+        "D": "The sprite moves to a random position on the screen."
+      },
+      "correct_answer": "C",
+      "bloom_level": "Remembering"
+    },
+    {
+      "concept": "Sprite Communication with 'broadcast' and 'receive'",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "How does the 'Angry Eshal' sprite know that it's time to appear on the stage after the 'Sad Eshal' has finished its part?",
+      "options": {
+        "A": "It waits for a specific number of seconds.",
+        "B": "It receives a broadcast message sent by the 'Sad Eshal' sprite.",
+        "C": "It appears when the user presses the space key.",
+        "D": "It appears as soon as the green flag is clicked."
+      },
+      "correct_answer": "B",
+      "bloom_level": "Understanding"
+    },
+    {
+      "concept": "Dynamic Broadcasting with Variables",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "The code uses the block `broadcast (join \"I'm \" (emotion))`. Why is this a more flexible way to send messages than broadcasting a fixed message like \"I'm sad\"?",
+      "options": {
+        "A": "It makes the message longer and easier for other sprites to see.",
+        "B": "It ensures the message is sent only to the Rumanzel sprite.",
+        "C": "It adds a sound effect to the broadcast message.",
+        "D": "It allows the same broadcast block to send different messages by using the current value of the 'emotion' variable."
+      },
+      "correct_answer": "D",
+      "bloom_level": "Analyzing"
+    },
+    {
+      "concept": "String Concatenation with 'join' operator",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "If the 'emotion' variable is set to \"balance\", what will the 'Balance Eshal' sprite say when the code `say (join \"I am \" (emotion))` is executed?",
+      "options": {
+        "A": "I am emotion",
+        "B": "I am balance",
+        "C": "I am",
+        "D": "balance"
+      },
+      "correct_answer": "B",
+      "bloom_level": "Applying"
+    },
+    {
+      "concept": "Conditional Logic with 'if-then' block",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "In the \"thought catching\" part of the project, a block checks `if <answer> = [grateful]>`. What is the function of this code?",
+      "options": {
+        "A": "It forces the user to type the word \"grateful\".",
+        "B": "It changes the `answer` variable to \"grateful\".",
+        "C": "It checks if the user's typed thought is \"grateful\" and then runs the script for positive thoughts.",
+        "D": "It asks the question, \"Are you grateful?\"."
+      },
+      "correct_answer": "C",
+      "bloom_level": "Understanding"
+    },
+    {
+      "concept": "User Input with 'ask and wait' block",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "Which block is used to display the question \"enter your thought?\" on the screen and provide a text box for the user to type their answer?",
+      "options": {
+        "A": "say \"enter your thought?\"",
+        "B": "think \"enter your thought?\"",
+        "C": "broadcast \"enter your thought?\"",
+        "D": "ask \"enter your thought?\" and wait"
+      },
+      "correct_answer": "D",
+      "bloom_level": "Remembering"
+    },
+    {
+      "concept": "Boundary Detection with 'if on edge, bounce'",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "When 'Angry Eshal' is moving back and forth, what is the purpose of the `if on edge, bounce` block inside the loop?",
+      "options": {
+        "A": "To make Eshal jump when he reaches the edge.",
+        "B": "To make Eshal hide when he touches the edge.",
+        "C": "To make Eshal turn around and move in the opposite direction when he reaches the edge.",
+        "D": "To make Eshal stop moving when he gets to the edge."
+      },
+      "correct_answer": "C",
+      "bloom_level": "Understanding"
+    },
+    {
+      "concept": "Controlling Sprite Orientation",
+      "grade": 5,
+      "type": "BOOLEAN",
+      "question_text": "True or False: If you forget to add the `set rotation style [left-right]` block, the Eshal sprite will turn upside down after it bounces off the edge of the screen.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "correct_answer": "A",
+      "bloom_level": "Understanding"
+    },
+    {
+      "concept": "Combining Conditions with Boolean 'or' operator",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "In the thought-catching game, why is it more efficient to use a single `if <[answer] = [grateful]> or <[answer] = [friendly]>>` block instead of two separate `if` blocks?",
+      "options": {
+        "A": "It makes the code run slower but is easier to read.",
+        "B": "It allows the code to check for multiple positive words in a single condition, making the script shorter.",
+        "C": "It ensures the sprite only responds to the word \"grateful\".",
+        "D": "It requires the user to type both \"grateful\" and \"friendly\" for the condition to be true."
+      },
+      "correct_answer": "B",
+      "bloom_level": "Analyzing"
+    },
+    {
+      "concept": "Decomposition in Problem Solving",
+      "grade": 5,
+      "type": "MCQ",
+      "question_text": "The lesson explains \"decomposition\" as breaking a big problem into smaller parts. How was this technique used to create Eshal's emotional journey?",
+      "options": {
+        "A": "By using only one very long script for the entire project.",
+        "B": "By making the backdrop change colors randomly.",
+        "C": "By creating a separate sprite and set of scripts for each of Eshal's emotions (Sad, Angry, Balance, Compassion).",
+        "D": "By making all the sprites move at the same speed."
+      },
+      "correct_answer": "C",
+      "bloom_level": "Applying"
+    },
+    {
+      "concept": "Conditional Logic with 'if-then-else' block",
+      "grade": 5,
+      "type": "BOOLEAN",
+      "question_text": "True or False: The `if-then-else` block is used when you need to make a decision. It runs one set of code if a condition is true, and a different set of code if the condition is false.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "correct_answer": "A",
+      "bloom_level": "Remembering"
+    }
+  ]
+}

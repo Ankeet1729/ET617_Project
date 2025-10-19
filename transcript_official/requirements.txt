@@ -2,3 +2,5 @@ google-generativeai
 dotenv
 pandas
 openpyxl
+python-dotenv
+psycopg2-binary

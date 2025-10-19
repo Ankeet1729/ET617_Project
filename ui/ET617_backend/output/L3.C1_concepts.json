@@ -1,0 +1,86 @@
+{
+  "submodule_code": "L3.C1",
+  "submodule_name": "Just be, Just code - Code your emotions",
+  "concepts": [
+    {
+      "concept_name": "Infinite Loops with 'forever' block",
+      "concept_description": "Using the 'forever' block to create a script that runs continuously without stopping, demonstrated by making the Eshal sprite walk back and forth infinitely.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Finite Loops with 'repeat' block",
+      "concept_description": "Using the 'repeat [number]' block to execute a set of commands for a specific number of times, used to control the duration of Eshal's anger.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Event Handling with 'when this sprite clicked'",
+      "concept_description": "Triggering a script or a sequence of actions when a user interacts with a sprite by clicking on it.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Variable Creation and Manipulation",
+      "concept_description": "Creating a variable to store data that changes, such as the 'emotion' variable which holds values like 'sad', 'angry', 'balance', and 'compassion'.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sprite Communication with 'broadcast' and 'receive'",
+      "concept_description": "Using 'broadcast' and 'when I receive' blocks to send and receive messages between different sprites, allowing them to coordinate actions and trigger different emotional states.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Dynamic Broadcasting with Variables",
+      "concept_description": "Using the 'join' operator to include a variable's value within a broadcast message (e.g., 'broadcast (join \"I'm \" (emotion))'), making the communication between sprites more flexible.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "String Concatenation with 'join' operator",
+      "concept_description": "Using the 'join' block to combine text strings and variables for display in 'say' or 'think' blocks (e.g., 'say (join \"I am \" (emotion))').",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Conditional Logic with 'if-then' block",
+      "concept_description": "Using an 'if-then' block to execute a piece of code only if a specific condition is met, such as checking if the user's input matches a specific word.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "User Input with 'ask and wait' block",
+      "concept_description": "Using the 'ask and wait' block to prompt the user for text input and using the provided 'answer' variable to process their response.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Boundary Detection with 'if on edge, bounce'",
+      "concept_description": "Using the 'if on edge, bounce' block inside a loop to ensure a moving sprite reverses direction when it reaches the edge of the stage.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Controlling Sprite Orientation",
+      "concept_description": "Using the 'set rotation style [left-right]' block to prevent a sprite from turning upside down after it bounces off an edge.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Combining Conditions with Boolean 'or' operator",
+      "concept_description": "Using the 'or' operator to create a single conditional statement that checks for multiple possible inputs, making the code more efficient (e.g., 'if answer = grateful or answer = friendly').",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Decomposition in Problem Solving",
+      "concept_description": "The computational practice of breaking a complex problem (coding an emotional journey) into smaller, more manageable parts (coding each emotion as a separate sprite with its own script).",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Conditional Logic with 'if-then-else' block",
+      "concept_description": "Using the 'if-then-else' structure to create a two-way decision, executing one block of code if a condition is true and a different block if it is false, as seen in sorting thoughts into positive or negative categories.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Integrating AI/ML Models in Scratch",
+      "concept_description": "Connecting an external machine learning model (from Machine Learning for Kids) to a Scratch project to enable advanced functionalities like text classification.",
+      "grade_level": "9-12"
+    },
+    {
+      "concept_name": "Using AI Predictions in Conditionals",
+      "concept_description": "Using the 'recognise text (answer) label' block from the ML extension within an 'if' statement to make decisions in the program based on the AI model's classification of user input.",
+      "grade_level": "9-12"
+    }
+  ]
+}

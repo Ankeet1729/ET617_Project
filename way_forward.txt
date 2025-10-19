@@ -1,0 +1,78 @@
+1. Let's get to see all quiz qtns generated for video 24 according to concepts mapped already
+2. Personalize for all grades and change rigor for same concepts
+3. Auto-geenration of concepts for all videos
+4. Concept Tracking
+
+What we should do next:
+
+1) Get screenshots/frames of videos of each module which better represent the video (have a separate text file as well which contains additional context (CAN BE A HUMAN PROMPT IN BACKEND))
+2) Context = Transcript + Screenshots + Human Prompt (if necessary)
+3) collect context across all videos in a module -> CREATE CONCEPTS LIST
+4) for each grade -> get a grade subset of the concepts (GRADE SPECIFIC CONCEPTS SUBSET) - store in a database
+5) Prompt -> System Prompt + Context + Concept_Subset (Generate one question of each subset)
+6) Question Editing Flexibility
+7) Dashboard: 
+	Students:
+		Grade and student level activity tracking
+		Concept Level Tracking - Grade Level:
+			See how students are peforming in a Concept
+		(concept level tracking - student specific?)
+	Quizzes:
+		Grade level
+		AI generated or Manual Addition
+		Manual Edits to Question (or AI edits)
+		
+
+Questions:
+Are questions generated according to module or videos?
+
+Plan:
+
+Prompt Input: 
+	Overall Image (for showing submodule division) 
+	+ Transcript of each video * (COMBINED TRANSCRIPT FOR EACH SUBMODULE)
+	+ Mega Image for each submodule (in what directory should I put the image?)
+	+ Human Prompt (Guidance - * give example of concept list)
+Prompt Output:
+	Submodules:
+		Submodule name: 
+		Submodule code: L3.C1/L3.C2/L3.C3
+		List of Concepts:
+		Gradewise concept:
+			Grade 1: List of concepts to test,
+			Grade ..
+			Grade 12: List of concepts to test
+
+QuestionGen Prompt Input (submodule, grade):
+	Primary Guiding Prompt - (each concept should have one question, type of question etc., keep one or two questions of boolean type if possible, single correct mcq)
+	+ Concept Subset for that Grade
+	+ Transcript of that submodule
+	+ Mega Image of that Submodule
+	+ Bloom Level 
+QuestionGen Prompt Output:
+	Question List:
+		Concept:
+		Grade: 
+		Type: MCQ/Boolean
+		Question Text: 
+		Options (If MCQ): A. A_TEXT, B. B_TEXT, C. C_TEXT, D.D_TEXT 
+		Correct_Answer: True/False (if Boolean), A/B/C/D (if MCQ)
+		Bloom_Level: 
+
+Schema:
+Concept_Subset ((grade, submodule_code)->concept_subset)
+Image (submodule code -> image (stored in file directory just like before)
+Transcript (submodule code -> transcript text)
+Question (question id -> timestamp, concept, type, grade, options, correct answer, bloom level , image directory (non if not specified) etc.)
+Question Set (question set id -> list of questions id)
+QSet Mapping ((submodule, grade) -> list of question sets ids)
+
+UPDATE submodules SET image_path = 'uploads/submodules/L3.C1.png' WHERE submodule_code = 'L3.C1';
+UPDATE submodules SET image_path = 'uploads/submodules/L3.C2.png' WHERE submodule_code = 'L3.C2';
+UPDATE submodules SET image_path = 'uploads/submodules/L3.C3.png' WHERE submodule_code = 'L3.C3';
+
+
+
+
+
+		
