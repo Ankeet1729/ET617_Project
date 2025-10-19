@@ -26,6 +26,12 @@ interface Attempt {
   percentage: number;
 }
 
+interface Supermodule {
+  id: number;
+  supermodule_code: string;
+  supermodule_name: string;
+}
+
 interface StudentActivityPanelProps {
   student: {
     username: string;
@@ -39,26 +45,64 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({
   student,
   onBack,
 }) => {
+  const [supermodules, setSupermodules] = useState<Supermodule[]>([]);
+  const [selectedSupermodule, setSelectedSupermodule] = useState<string | null>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchActivities();
-  }, [student.username, student.grade]);
+    fetchSupermodules();
+  }, []);
 
-  const fetchActivities = async () => {
+  const fetchSupermodules = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
+      const res = await fetch("http://localhost:5000/api/supermodules", {
+        credentials: "include",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log("✅ Supermodules loaded:", data);
+        setSupermodules(data);
+      }
+    } catch (err) {
+      console.error("Error fetching supermodules:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchActivitiesForSupermodule = async (supermoduleCode: string) => {
+    setLoading(true);
+    try {
+      // First get all submodules under this supermodule
+      const submodulesRes = await fetch(
+        `http://localhost:5000/api/supermodules/${supermoduleCode}/children`,
+        { credentials: "include" }
+      );
+      if (!submodulesRes.ok) {
+        console.error("Failed to fetch submodules");
+        setLoading(false);
+        return;
+      }
+      const submodules = await submodulesRes.json();
+      const submoduleCodes = submodules.map((sm: any) => sm.submodule_code);
+
+      // Now fetch all activities for this student and grade
+      const activityRes = await fetch(
         `http://localhost:5000/admin/student_activity/${student.username}/${student.grade}`,
         { credentials: "include" }
       );
-      if (res.ok) {
-        const data = await res.json();
-        console.log("✅ Activities loaded:", data);
-        setActivities(data);
+      if (activityRes.ok) {
+        const allActivities = await activityRes.json();
+        // Filter activities to only those in this supermodule
+        const filteredActivities = allActivities.filter((act: Activity) =>
+          submoduleCodes.includes(act.submodule_code)
+        );
+        console.log("✅ Filtered activities for", supermoduleCode, ":", filteredActivities);
+        setActivities(filteredActivities);
       }
     } catch (err) {
       console.error("Error fetching activities:", err);
@@ -82,6 +126,11 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({
     }
   };
 
+  const handleSupermoduleClick = (supermoduleCode: string) => {
+    setSelectedSupermodule(supermoduleCode);
+    fetchActivitiesForSupermodule(supermoduleCode);
+  };
+
   const handleViewActivity = (activity: Activity) => {
     setSelectedActivity(activity);
     fetchAttempts(activity.attempt_ids);
@@ -91,10 +140,10 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({
     return <div style={{ padding: "20px", color: "#f1f5f9" }}>Loading...</div>;
   }
 
-  // In the detail view section (when selectedActivity is set):
+  // Detail view for a specific video activity
   if (selectedActivity) {
     const conceptPerformance = Object.values(selectedActivity.concept_performance || {});
-    
+
     return (
       <div style={{ padding: "20px", minHeight: "100vh" }}>
         <button
@@ -112,7 +161,7 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({
             marginBottom: "20px",
           }}
         >
-          ← Back to All Activities
+          ← Back to Videos
         </button>
 
         {/* Header Info */}
@@ -142,7 +191,6 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({
 
         {/* SIDE-BY-SIDE LAYOUT */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "30px" }}>
-          
           {/* LEFT SIDE: Quiz Attempts */}
           <div
             style={{
@@ -312,12 +360,8 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({
                           fontSize: "12px",
                         }}
                       >
-                        <span style={{ color: "#10b981" }}>
-                          ✓ Correct: {concept.correct}
-                        </span>
-                        <span style={{ color: "#ef4444" }}>
-                          ✗ Incorrect: {concept.incorrect}
-                        </span>
+                        <span style={{ color: "#10b981" }}>✓ Correct: {concept.correct}</span>
+                        <span style={{ color: "#ef4444" }}>✗ Incorrect: {concept.incorrect}</span>
                       </div>
                     </div>
                   );
@@ -332,8 +376,86 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({
     );
   }
 
+  // List view of video activities under a selected supermodule
+  if (selectedSupermodule) {
+    return (
+      <div style={{ padding: "20px", minHeight: "100vh" }}>
+        <button
+          onClick={() => {
+            setSelectedSupermodule(null);
+            setActivities([]);
+          }}
+          style={{
+            padding: "12px 24px",
+            backgroundColor: "#334155",
+            color: "#f1f5f9",
+            border: "1px solid #475569",
+            borderRadius: "8px",
+            cursor: "pointer",
+            marginBottom: "20px",
+          }}
+        >
+          ← Back to Modules
+        </button>
 
-  // List view of all submodule activities
+        <div
+          style={{
+            backgroundColor: "#1e293b",
+            padding: "25px",
+            borderRadius: "12px",
+            marginBottom: "25px",
+            border: "1px solid #334155",
+          }}
+        >
+          <h2 style={{ color: "#f1f5f9", margin: 0 }}>
+            {selectedSupermodule} - Activity for {student.full_name}
+          </h2>
+          <p style={{ color: "#94a3b8", marginTop: "10px" }}>
+            Username: {student.username} | Grade: {student.grade}
+          </p>
+        </div>
+
+        <h3 style={{ color: "#cbd5e1", marginBottom: "20px" }}>Video Activities</h3>
+
+        {activities.length > 0 ? (
+          <div style={{ display: "grid", gap: "15px" }}>
+            {activities.map((activity) => (
+              <div
+                key={activity.id}
+                onClick={() => handleViewActivity(activity)}
+                style={{
+                  backgroundColor: "#1e293b",
+                  padding: "20px",
+                  borderRadius: "12px",
+                  border: "1px solid #334155",
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.borderColor = "#6366f1")}
+                onMouseOut={(e) => (e.currentTarget.style.borderColor = "#334155")}
+              >
+                <h4 style={{ color: "#f1f5f9", margin: "0 0 10px 0" }}>
+                  {activity.submodule_code} - {activity.submodule_name}
+                </h4>
+                <div style={{ color: "#94a3b8", fontSize: "14px" }}>
+                  <p style={{ margin: "5px 0" }}>Attempts: {activity.attempt_ids.length}</p>
+                  <p style={{ margin: "5px 0" }}>
+                    Last Attempt: {new Date(activity.last_attempt_at).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p style={{ color: "#94a3b8" }}>
+            No activity records found for videos in {selectedSupermodule}.
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  // Supermodule selection view
   return (
     <div style={{ padding: "20px", minHeight: "100vh" }}>
       <button
@@ -368,44 +490,41 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({
         </p>
       </div>
 
-      <h3 style={{ color: "#cbd5e1", marginBottom: "20px" }}>
-        Submodule Activities
-      </h3>
+      <h3 style={{ color: "#cbd5e1", marginBottom: "20px" }}>Select a Module</h3>
 
-      {activities.length > 0 ? (
-        <div style={{ display: "grid", gap: "15px" }}>
-          {activities.map((activity) => (
-            <div
-              key={activity.id}
-              onClick={() => handleViewActivity(activity)}
+      {supermodules.length > 0 ? (
+        <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
+          {supermodules.map((sm) => (
+            <button
+              key={sm.supermodule_code}
+              onClick={() => handleSupermoduleClick(sm.supermodule_code)}
               style={{
-                backgroundColor: "#1e293b",
-                padding: "20px",
+                padding: "20px 30px",
+                fontSize: "18px",
+                backgroundColor: "#8b5cf6",
+                color: "white",
+                border: "none",
                 borderRadius: "12px",
-                border: "1px solid #334155",
                 cursor: "pointer",
+                boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+                textAlign: "center",
+                minWidth: "180px",
                 transition: "all 0.2s",
               }}
-              onMouseOver={(e) => (e.currentTarget.style.borderColor = "#6366f1")}
-              onMouseOut={(e) => (e.currentTarget.style.borderColor = "#334155")}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#7c3aed")}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#8b5cf6")}
             >
-              <h4 style={{ color: "#f1f5f9", margin: "0 0 10px 0" }}>
-                {activity.submodule_code} - {activity.submodule_name}
-              </h4>
-              <div style={{ color: "#94a3b8", fontSize: "14px" }}>
-                <p style={{ margin: "5px 0" }}>
-                  Attempts: {activity.attempt_ids.length}
-                </p>
-                <p style={{ margin: "5px 0" }}>
-                  Last Attempt:{" "}
-                  {new Date(activity.last_attempt_at).toLocaleString()}
-                </p>
+              <div style={{ fontWeight: "bold", fontSize: "20px" }}>
+                {sm.supermodule_code}
               </div>
-            </div>
+              <div style={{ fontSize: "14px", marginTop: "8px", opacity: 0.9 }}>
+                {sm.supermodule_name}
+              </div>
+            </button>
           ))}
         </div>
       ) : (
-        <p style={{ color: "#94a3b8" }}>No activity records found for this student.</p>
+        <p style={{ color: "#94a3b8" }}>No modules available.</p>
       )}
     </div>
   );

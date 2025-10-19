@@ -17,6 +17,12 @@ interface Grade {
   quiz_count: number;
 }
 
+interface Supermodule {
+  id: number;
+  supermodule_code: string;
+  supermodule_name: string;
+}
+
 interface Module {
   id: number;
   submodule_code: string;
@@ -27,6 +33,8 @@ interface Module {
 const SetManager: React.FC = () => {
   const [grades, setGrades] = useState<Grade[]>([]);
   const [selectedGrade, setSelectedGrade] = useState<number | null>(null);
+  const [supermodules, setSupermodules] = useState<Supermodule[]>([]);
+  const [selectedSupermodule, setSelectedSupermodule] = useState<string | null>(null);
   const [modules, setModules] = useState<Module[]>([]);
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
   const [selectedModuleName, setSelectedModuleName] = useState<string>("");
@@ -67,34 +75,38 @@ const SetManager: React.FC = () => {
     }
   };
 
-  const handleToggleVisibility = async (setId: number, currentHiddenStatus: boolean) => {
-    try {
-      const res = await fetch(
-        `http://localhost:5000/api/admin/quiz_sets/${setId}/visibility`,
-        {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ is_hidden: !currentHiddenStatus }),
-        }
-      );
-  
-      if (res.ok) {
-        fetchSets(selectedGrade, selectedModule); // Refresh
-      }
-    } catch (err) {
-      console.error('Error toggling visibility:', err);
-    }
-  };
-  
-
-  const fetchModules = async (grade: number) => {
+  const fetchSupermodules = async () => {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`http://localhost:5000/admin/quizzes/modules/${grade}`, {
+      const res = await fetch("http://localhost:5000/api/supermodules", {
         credentials: "include",
       });
+      if (res.ok) {
+        const data = await res.json();
+        console.log("Supermodules data:", data);
+        setSupermodules(data && Array.isArray(data) ? data : []);
+      } else {
+        setError("Failed to fetch supermodules");
+        setSupermodules([]);
+      }
+    } catch (err) {
+      console.error("Error fetching supermodules:", err);
+      setError("Error fetching supermodules");
+      setSupermodules([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchModules = async (supermoduleCode: string) => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/supermodules/${supermoduleCode}/children`,
+        { credentials: "include" }
+      );
       if (res.ok) {
         const data = await res.json();
         console.log("Modules data:", data);
@@ -134,6 +146,26 @@ const SetManager: React.FC = () => {
       setSets([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleToggleVisibility = async (setId: number, currentHiddenStatus: boolean) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/admin/quiz_sets/${setId}/visibility`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ is_hidden: !currentHiddenStatus }),
+        }
+      );
+
+      if (res.ok && selectedGrade && selectedModule) {
+        fetchSets(selectedGrade, selectedModule);
+      }
+    } catch (err) {
+      console.error("Error toggling visibility:", err);
     }
   };
 
@@ -196,8 +228,6 @@ const SetManager: React.FC = () => {
     }
   };
 
-  
-
   // If viewing a specific question set, show the viewer
   if (viewingSetId) {
     return <QuestionSetViewer setId={viewingSetId} onBack={() => setViewingSetId(null)} />;
@@ -218,8 +248,18 @@ const SetManager: React.FC = () => {
     );
   }
 
-  if (loading) return <div style={{ padding: "20px", color: "#f1f5f9" }}><p>Loading...</p></div>;
-  if (error) return <div style={{ padding: "20px" }}><p style={{ color: "#ef4444" }}>{error}</p></div>;
+  if (loading)
+    return (
+      <div style={{ padding: "20px", color: "#f1f5f9" }}>
+        <p>Loading...</p>
+      </div>
+    );
+  if (error)
+    return (
+      <div style={{ padding: "20px" }}>
+        <p style={{ color: "#ef4444" }}>{error}</p>
+      </div>
+    );
 
   return (
     <div style={{ padding: "20px", minHeight: "100vh" }}>
@@ -236,7 +276,7 @@ const SetManager: React.FC = () => {
                   key={gradeObj.grade}
                   onClick={() => {
                     setSelectedGrade(gradeObj.grade);
-                    fetchModules(gradeObj.grade);
+                    fetchSupermodules();
                   }}
                   style={{
                     padding: "20px 40px",
@@ -260,18 +300,20 @@ const SetManager: React.FC = () => {
               ))}
             </div>
           ) : (
-            <p style={{ color: "#f87171" }}>No grades available. Please seed your database first.</p>
+            <p style={{ color: "#f87171" }}>
+              No grades available. Please seed your database first.
+            </p>
           )}
         </div>
       )}
 
-      {/* Modules Level */}
-      {selectedGrade && !selectedModule && (
+      {/* Supermodules Level */}
+      {selectedGrade && !selectedSupermodule && (
         <div>
           <button
             onClick={() => {
               setSelectedGrade(null);
-              setModules([]);
+              setSupermodules([]);
             }}
             style={{
               padding: "12px 24px",
@@ -287,7 +329,68 @@ const SetManager: React.FC = () => {
             ← Back to Grades
           </button>
           <h3 style={{ color: "#cbd5e1", marginBottom: "20px" }}>
-            Select Submodule (Grade {selectedGrade})
+            Select Module (Grade {selectedGrade})
+          </h3>
+          {supermodules && supermodules.length > 0 ? (
+            <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
+              {supermodules.map((sm) => (
+                <button
+                  key={sm.supermodule_code}
+                  onClick={() => {
+                    setSelectedSupermodule(sm.supermodule_code);
+                    fetchModules(sm.supermodule_code);
+                  }}
+                  style={{
+                    padding: "20px 30px",
+                    fontSize: "18px",
+                    backgroundColor: "#8b5cf6",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "12px",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+                    textAlign: "center",
+                    minWidth: "180px",
+                  }}
+                >
+                  <div style={{ fontWeight: "bold", fontSize: "20px" }}>
+                    {sm.supermodule_code}
+                  </div>
+                  <div style={{ fontSize: "14px", marginTop: "8px", opacity: 0.9 }}>
+                    {sm.supermodule_name}
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p style={{ color: "#f87171" }}>No modules available for Grade {selectedGrade}.</p>
+          )}
+        </div>
+      )}
+
+      {/* Modules Level (Videos) */}
+      {selectedGrade && selectedSupermodule && !selectedModule && (
+        <div>
+          <button
+            onClick={() => {
+              setSelectedSupermodule(null);
+              setModules([]);
+            }}
+            style={{
+              padding: "12px 24px",
+              marginBottom: "20px",
+              backgroundColor: "#334155",
+              color: "#f1f5f9",
+              border: "1px solid #475569",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            ← Back to Modules
+          </button>
+          <h3 style={{ color: "#cbd5e1", marginBottom: "20px" }}>
+            {selectedSupermodule} - Select Video
           </h3>
           {modules && modules.length > 0 ? (
             <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
@@ -302,14 +405,14 @@ const SetManager: React.FC = () => {
                   style={{
                     padding: "20px 30px",
                     fontSize: "16px",
-                    backgroundColor: "#8b5cf6",
+                    backgroundColor: "#ec4899",
                     color: "white",
                     border: "none",
                     borderRadius: "12px",
                     cursor: "pointer",
                     boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
                     textAlign: "left",
-                    minWidth: "200px",
+                    minWidth: "240px",
                   }}
                 >
                   <div style={{ fontWeight: "bold", fontSize: "18px" }}>
@@ -318,14 +421,11 @@ const SetManager: React.FC = () => {
                   <div style={{ fontSize: "14px", marginTop: "8px", opacity: 0.95 }}>
                     {module.submodule_name}
                   </div>
-                  <div style={{ fontSize: "13px", marginTop: "8px", opacity: 0.8 }}>
-                    {module.set_count} quiz sets
-                  </div>
                 </button>
               ))}
             </div>
           ) : (
-            <p style={{ color: "#f87171" }}>No submodules available for Grade {selectedGrade}.</p>
+            <p style={{ color: "#f87171" }}>No videos available for {selectedSupermodule}.</p>
           )}
         </div>
       )}
@@ -351,12 +451,12 @@ const SetManager: React.FC = () => {
               fontSize: "16px",
             }}
           >
-            ← Back to Submodules
+            ← Back to Videos
           </button>
 
           <div style={{ marginBottom: "20px" }}>
             <h3 style={{ color: "#f1f5f9", marginBottom: "10px" }}>
-              Quiz Sets for Grade {selectedGrade}, Submodule {selectedModule}
+              Quiz Sets for Grade {selectedGrade}, Video {selectedModule}
             </h3>
             <p style={{ color: "#94a3b8", fontSize: "14px" }}>{selectedModuleName}</p>
           </div>
@@ -489,7 +589,8 @@ const SetManager: React.FC = () => {
                       </h4>
                       <div style={{ color: "#94a3b8", fontSize: "14px" }}>
                         <p style={{ margin: "5px 0" }}>
-                          <strong style={{ color: "#cbd5e1" }}>Questions:</strong> {set.question_count || 0}
+                          <strong style={{ color: "#cbd5e1" }}>Questions:</strong>{" "}
+                          {set.question_count || 0}
                         </p>
                         <p style={{ margin: "5px 0" }}>
                           <strong style={{ color: "#cbd5e1" }}>Created:</strong>{" "}
@@ -513,19 +614,19 @@ const SetManager: React.FC = () => {
                         View Details
                       </button>
                       <button
-                      onClick={() => handleToggleVisibility(set.id, set.is_hidden)}
-                      style={{
-                        padding: '10px 20px',
-                        backgroundColor: set.is_hidden ? '#10b981' : '#f59e0b',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                        fontSize: '14px',
-                      }}
-                    >
-                      {set.is_hidden ? '👁️ Show' : '🙈 Hide'}
-                    </button>
+                        onClick={() => handleToggleVisibility(set.id, set.is_hidden)}
+                        style={{
+                          padding: "10px 20px",
+                          backgroundColor: set.is_hidden ? "#10b981" : "#f59e0b",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "6px",
+                          cursor: "pointer",
+                          fontSize: "14px",
+                        }}
+                      >
+                        {set.is_hidden ? "👁️ Show" : "🙈 Hide"}
+                      </button>
                       <button
                         onClick={() => deleteSet(set.id)}
                         style={{
@@ -582,10 +683,11 @@ const SetManager: React.FC = () => {
               }}
             >
               <p style={{ fontSize: "18px", margin: "0 0 10px 0", color: "#f1f5f9" }}>
-                📭 No quiz sets yet for this grade and submodule.
+                📭 No quiz sets yet for this video.
               </p>
               <p style={{ margin: 0, color: "#94a3b8" }}>
-                Use the "Generate AI Quiz" or "Create Manual Set" buttons above to create your first set!
+                Use the "Generate AI Quiz" or "Create Manual Set" buttons above to create your
+                first set!
               </p>
             </div>
           )}
