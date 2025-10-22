@@ -197,17 +197,17 @@ function getNepGrade(grade) {
   return mapping[String(grade)] || 'middle';
 }
 
-// YOUR EXISTING ROUTES (UNCHANGED)
-// Helper to get NEP grade category
-function getNepGrade(grade) {
-  const mapping = {
-    '1': 'foundational', '2': 'foundational',
-    '3': 'preparatory', '4': 'preparatory', '5': 'preparatory',
-    '6': 'middle', '7': 'middle', '8': 'middle',
-    '9': 'secondary', '10': 'secondary', '11': 'secondary', '12': 'secondary'
-  };
-  return mapping[String(grade)] || 'middle';
-}
+// // YOUR EXISTING ROUTES (UNCHANGED)
+// // Helper to get NEP grade category
+// function getNepGrade(grade) {
+//   const mapping = {
+//     '1': 'foundational', '2': 'foundational',
+//     '3': 'preparatory', '4': 'preparatory', '5': 'preparatory',
+//     '6': 'middle', '7': 'middle', '8': 'middle',
+//     '9': 'secondary', '10': 'secondary', '11': 'secondary', '12': 'secondary'
+//   };
+//   return mapping[String(grade)] || 'middle';
+// }
 
 // Middleware to check admin session
 const checkAdmin = (req, res, next) => {
