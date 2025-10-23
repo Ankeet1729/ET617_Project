@@ -118,13 +118,10 @@ keeping the learner's cognitive development in mind.
 7. No need to put A., B., C., D. before options in MCQs output.
 
 8. Also have a field called "needs_image" in each question object, set it to true if the question would benefit from an accompanying image, else false.
-<<<<<<< Updated upstream
 
-10. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<start_time>X</start_time> <end_time>Y</end_time> ... ". So you should only generate the quiz for the part between <start_time> and <end_time>, but keep the context of the entire transcript.
-=======
+9. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<start_time>X</start_time> <end_time>Y</end_time> ... ". So you should only generate the quiz for the part between <start_time> and <end_time>, but keep the context of the entire transcript.
 10. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<Snippet 1> ... <Snippet 2>". So you should only generate the quiz for the part between <Snippet 1> and <Snippet 2>, but keep the context of the entire transcript.
 11. Do not keep any ambiguous options in MCQs where 2 or more answers could be correct.
->>>>>>> Stashed changes
 
 ### Output Format (Strict JSON)
 {
@@ -466,12 +463,14 @@ app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
   const { question_set_id } = req.params;
   
   try {
+    // console.log(question_set_id);
     const setResult = await pool.query(`
       SELECT qs.id, qs.set_name as name, s.submodule_name
       FROM question_sets qs
       INNER JOIN submodules s ON s.id = qs.submodule_id
       WHERE qs.id = $1
     `, [question_set_id]);
+
     
     if (setResult.rows.length === 0) {
       return res.status(404).json({ error: 'Quiz set not found' });
@@ -833,6 +832,69 @@ app.patch('/api/admin/quiz_sets/:id/visibility', checkAdmin, async (req, res) =>
     res.status(500).json({ error: 'Failed to update visibility' });
   }
 });
+
+app.patch('/api/admin/quiz_sets/:id/reattempts_allowed', checkAdmin, async (req, res) => {
+  const { id } = req.params;
+  const { reattempts_allowed } = req.body;
+
+  console.log('🔍 Request:', req.body);
+
+  // if (typeof reattempts_allowed !== "number" || reattempts_allowed < 0) {
+  //   return res.status(400).json({ error: "Invalid reattempts_allowed value" });
+  // }
+
+  if(reattempts_allowed === true) {
+    await pool.query(
+      'UPDATE question_sets SET reattempts_allowed = true WHERE id = $1',
+      [id]
+    );
+  } else {
+    await pool.query(
+      'UPDATE question_sets SET reattempts_allowed = false WHERE id = $1',
+      [id]
+    );
+  }
+
+  res.json({ success: true });
+
+  // try {
+  //   await pool.query(
+  //     'UPDATE question_sets SET reattempts_allowed = $1 WHERE id = $2',
+  //     [reattempts_allowed, id]
+  //   );
+  //   res.json({ success: true });
+  // } catch (err) {
+  //   console.error('Error updating reattempts_allowed:', err);
+  //   res.status(500).json({ error: 'Failed to update reattempts_allowed' });
+  // }
+});
+
+app.get(
+  '/api/admin/quiz_sets/:id/fetch_reattempts_allowed',
+  checkAdmin,
+  async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const result = await pool.query(
+        'SELECT reattempts_allowed FROM question_sets WHERE id = $1',
+        [id]
+      );
+
+      if (!result.rows[0]) {
+        return res.status(404).json({ error: 'Quiz set not found' });
+      }
+
+      // Ensure it's a boolean
+      const reattempts_allowed = !!result.rows[0].reattempts_allowed;
+
+      res.json({ reattempts_allowed });
+    } catch (err) {
+      console.error('Error fetching reattempts_allowed:', err);
+      res.status(500).json({ error: 'Failed to fetch reattempts_allowed' });
+    }
+  }
+);
 
 
 // Get quiz attempts by IDs
@@ -1603,5 +1665,4 @@ app.listen(PORT, () => {
 });
 
 console.log('========== SERVER LISTENING ==========');
-
 process.stdin.resume();

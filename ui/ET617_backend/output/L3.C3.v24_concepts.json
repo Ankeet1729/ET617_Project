@@ -3,79 +3,79 @@
   "submodule_name": "Code for the net-zero - Planting Trees",
   "concepts": [
     {
-      "concept_name": "Sensor Input (Microphone)",
-      "concept_description": "Using the 'loudness' sensor block within a conditional statement ('if loudness > 20') to allow the user to interact with the project by making noise, which causes the fire sprite to shrink.",
-      "grade_level": "5-12"
-    },
-    {
-      "concept_name": "Event Handling with Broadcast and Receive",
-      "concept_description": "Using 'broadcast' blocks to send messages (e.g., 'more trees', 'trees absorb carbon') and 'when I receive' blocks to trigger new scripts when these messages are received, coordinating the flow of the animation.",
+      "concept_name": "Microphone Input with 'loudness'",
+      "concept_description": "Using the 'loudness' sensing block inside a conditional statement to trigger actions based on the volume of sound detected by the microphone. In the project, this is used to 'blow away' the fire from the Earth.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "User Input with Mouse",
-      "concept_description": "Using the 'if mouse down?' block in a forever loop to detect clicks, and the 'go to mouse-pointer' block to position the sprite at the click location for planting trees.",
-      "grade_level": "1-8"
+      "concept_name": "Conditional Size Change",
+      "concept_description": "Using an 'if' block to check the 'size' property of a sprite and trigger an action, such as hiding the sprite when it becomes smaller than a certain value.",
+      "grade_level": "5-8"
     },
     {
-      "concept_name": "Custom Blocks (Procedures)",
-      "concept_description": "Defining and using custom blocks ('define draw trunk', 'define draw leaves') to organize code into reusable procedures for drawing parts of a tree. This is an example of procedural abstraction.",
-      "grade_level": "5-12"
+      "concept_name": "Event Handling with Broadcast and Receive",
+      "concept_description": "Using 'broadcast' blocks to send messages and 'when I receive' hat blocks to trigger new scripts when a specific event occurs, such as moving from the fire scene to the tree planting scene.",
+      "grade_level": "5-8"
     },
     {
-      "concept_name": "Variables for Counting",
-      "concept_description": "Initializing ('set tree count to 0') and incrementing ('change tree count by 1') a variable to keep track of the number of trees planted by the user.",
+      "concept_name": "Variable Initialization and Incrementing",
+      "concept_description": "Creating a variable to keep track of a value (e.g., 'tree count'), setting its initial value using the 'set variable to' block, and updating it within a loop using the 'change variable by' block.",
       "grade_level": "5-8"
     },
     {
       "concept_name": "Conditional Logic with Variables",
-      "concept_description": "Using a conditional 'if' block with a comparison operator ('if tree count = 10') to check the value of a variable and trigger an event (a broadcast) when a certain number of trees have been planted.",
+      "concept_description": "Using a variable within a conditional statement (e.g., 'if tree count = 10 then') to execute a block of code once a specific condition is met, like broadcasting a message after 10 trees are planted.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Cloning Sprites",
-      "concept_description": "Using the 'create clone of myself' block inside a 'repeat' loop to generate multiple instances of the CO2 sprite.",
+      "concept_name": "Mouse Input for Drawing",
+      "concept_description": "Detecting mouse clicks with the 'mouse down?' block inside a 'forever' loop and using 'go to mouse-pointer' to position the sprite for drawing at the cursor's location.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Creating Custom Blocks (Procedures)",
+      "concept_description": "Defining custom blocks (My Blocks) like 'draw trunk' and 'draw leaves' to organize code into reusable procedures, demonstrating abstraction.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Clone-Specific Behavior",
-      "concept_description": "Using the 'when I start as a clone' event block to define the unique behavior for each cloned sprite, such as gliding and checking for collisions.",
+      "concept_name": "Using the Pen Extension",
+      "concept_description": "Utilizing blocks from the Pen extension like 'pen down', 'pen up', 'set pen color', and 'set pen size' to programmatically draw on the stage.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Pen Extension for Drawing",
-      "concept_description": "Utilizing blocks from the Pen extension ('set pen size', 'set pen color', 'pen down', 'pen up') within a custom block to draw the tree trunk on the stage.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Collision Detection",
-      "concept_description": "Using the 'touching [sprite]?' block to detect when a CO2 clone comes into contact with the 'Trees' sprite, triggering a change in the clone's size and appearance.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Sprite Property Manipulation (Size)",
-      "concept_description": "Dynamically changing a sprite's size using 'change size by' and checking it with 'if size < 5' to control the shrinking and disappearance of the fire sprite.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Event-Driven State Change",
-      "concept_description": "Using the 'when backdrop switches to' block to trigger different scripts and sprite behaviors as the project moves through different scenes (e.g., from the initial fire scene to the farm scene).",
-      "grade_level": "5-12"
-    },
-    {
-      "concept_name": "Animation with Costume Changes",
-      "concept_description": "Creating a simple animation by using a sequence of 'switch costume to' and 'wait' blocks to show the CO2 moving through a pipeline.",
+      "concept_name": "Stamping Sprites",
+      "concept_description": "Using the 'stamp' block from the Pen extension to create a permanent image of a sprite's costume (like the tree leaves) on the stage at its current position.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Using the Stamp Block",
-      "concept_description": "Using the 'stamp' block within a loop to create the appearance of tree leaves without creating new sprites.",
+      "concept_name": "Sprite Cloning",
+      "concept_description": "Using the 'create clone of myself' block, often inside a loop, to generate multiple instances of a sprite, as seen with the CO2 bubbles.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Programming Clone Behavior",
+      "concept_description": "Using the 'when I start as a clone' hat block to define the specific actions and scripts that cloned sprites will execute, independently of the original sprite.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Collision Detection",
+      "concept_description": "Using the 'touching [sprite]?' sensing block within a conditional to detect when one sprite (a CO2 clone) makes contact with another (a Tree).",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Continuous Motion",
-      "concept_description": "Placing a 'change x by' block inside a 'forever' loop to create continuous horizontal movement for the car sprite.",
-      "grade_level": "1-4"
+      "concept_name": "Sprite Animation with Motion Blocks",
+      "concept_description": "Creating movement and animation by placing motion blocks like 'change x by' or 'glide to' inside a 'forever' loop to make sprites move continuously.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Scene Transitions with Backdrops",
+      "concept_description": "Using the 'switch backdrop to' block to change the stage's appearance, effectively transitioning between different scenes or states of the project.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Managing Sprite Layers",
+      "concept_description": "Using the 'go to back layer' block to control the visual stacking order of sprites, ensuring one sprite appears behind others on the stage.",
+      "grade_level": "1-8"
     }
   ]
 }

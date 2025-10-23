@@ -3,79 +3,74 @@
   "submodule_name": "Let's summon some magic patterns",
   "concepts": [
     {
-      "concept_name": "Creating Custom Blocks (Functions)",
-      "concept_description": "Using 'My Blocks' to define reusable pieces of code, such as 'drawShape', 'chooseShape', and 'drawPattern', to organize the program and avoid repeating code.",
+      "concept_name": "Custom Blocks (Functions)",
+      "concept_description": "Creating and using custom blocks (e.g., 'drawShape', 'chooseShape', 'drawPattern') to define reusable sets of instructions, promoting modularity and code organization.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Using Parameters in Custom Blocks",
-      "concept_description": "Creating a custom block that accepts an input or parameter, like the 'Draw shape' block which takes a 'length' input to draw shapes of varying sizes.",
+      "concept_name": "Custom Blocks with Parameters",
+      "concept_description": "Defining a custom block that accepts an input or parameter, such as the 'Draw shape (length)' block, to make the function more flexible and reusable for drawing shapes of different sizes.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Using Variables to Track State",
-      "concept_description": "Employing a variable, such as 'count', to keep track of the number of user interactions (taps) and control the program's state.",
+      "concept_name": "Using Variables as Counters",
+      "concept_description": "Employing a variable (e.g., 'count') to keep track of the number of user interactions (taps/clicks) to control program flow.",
       "grade_level": "5-8"
     },
     {
       "concept_name": "Conditional Logic for Selection",
-      "concept_description": "Using a series of 'if-then' blocks to check the value of a variable (e.g., 'count') and execute different actions based on that value, such as choosing which shape or pattern to draw.",
+      "concept_description": "Using a series of 'if-then' blocks to check the value of a counter variable ('count') and decide which shape or pattern to draw next.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Creating a Cyclical Sequence",
-      "concept_description": "Implementing logic to reset a counter variable (e.g., 'if count = 4 then set count to 1') to create a repeating cycle of actions or patterns.",
+      "concept_name": "Implementing Cyclical Behavior",
+      "concept_description": "Creating a looping sequence of actions by using a conditional statement to reset a counter variable (e.g., 'if count = 4, then set count to 1') after a cycle is complete.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Event Detection (Mouse Tap)",
-      "concept_description": "Using a combination of 'wait until <not <mouse down?>>' and 'wait until <mouse down?>' blocks within a 'forever' loop to reliably detect a single, complete mouse click or screen tap.",
-      "grade_level": "5-12"
+      "concept_name": "Event Handling for Mouse Clicks",
+      "concept_description": "Using a 'forever' loop with 'wait until <mouse down?>' and 'wait until <not <mouse down?>>' blocks to detect a complete mouse click event.",
+      "grade_level": "5-8"
     },
     {
-      "concept_name": "Using the Pen Extension",
-      "concept_description": "Utilizing blocks from the Pen extension like 'pen down', 'pen up', 'set pen color to', and 'erase all' to draw shapes and patterns on the stage.",
+      "concept_name": "Pen Extension for Drawing",
+      "concept_description": "Utilizing blocks from the Pen extension, such as 'pen down', 'pen up', 'erase all', and 'set pen color', to draw shapes and patterns on the stage.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Dynamic Loops with Variables",
-      "concept_description": "Using a variable (e.g., 'edges') to control the number of iterations in a 'repeat' loop, allowing for the drawing of different polygons with the same code block.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Mathematical Operators for Drawing",
-      "concept_description": "Using the division operator within the 'turn' block's input field (e.g., '360 / edges') to dynamically calculate the correct angle for drawing regular polygons.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Positioning with Mouse Input",
-      "concept_description": "Using the 'go to mouse-pointer' block to move the sprite to the location of the user's tap before drawing a shape.",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Sprite Cloning for Pattern Generation",
-      "concept_description": "Using the 'create clone of myself' block inside a loop to generate multiple copies of a sprite, which then work together to form a complex pattern like a snowflake or honeycomb.",
-      "grade_level": "9-12"
-    },
-    {
-      "concept_name": "Clone Management",
-      "concept_description": "Using the 'delete this clone' block to remove clones after they have completed their task, which is essential for managing program resources and preventing clone limits from being reached.",
-      "grade_level": "9-12"
-    },
-    {
-      "concept_name": "Event-driven Communication (Broadcast/Receive)",
-      "concept_description": "Using 'broadcast' and 'when I receive' blocks to send messages and trigger scripts, coordinating actions between the main sprite and its clones, such as starting a drawing process or deleting all clones.",
-      "grade_level": "9-12"
-    },
-    {
-      "concept_name": "Program Initialization",
-      "concept_description": "Using the 'when green flag clicked' event block to set up the initial state of the program, such as clearing the stage with 'erase all' and setting variables like 'count' to their starting values.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Modularity and Decomposition",
-      "concept_description": "Breaking down a complex task (drawing different magic patterns on tap) into smaller, manageable sub-tasks handled by separate custom blocks ('choosePattern', 'drawPattern', 'snowflake').",
+      "concept_name": "Using Operators for Geometric Calculations",
+      "concept_description": "Applying mathematical operators, specifically the division operator, to calculate the correct turning angle for drawing regular polygons (e.g., '360 / edges').",
       "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Loops for Repetitive Drawing",
+      "concept_description": "Using the 'repeat' block to execute drawing instructions (move and turn) a specific number of times, determined by a variable like 'edges', to form a closed shape.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sprite Positioning with Mouse Input",
+      "concept_description": "Using the 'go to mouse-pointer' block to move the sprite to the location of the user's click before drawing a shape, allowing for interactive pattern placement.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Cloning for Pattern Generation",
+      "concept_description": "Using the 'create clone of myself' block within loops to generate multiple instances of a sprite, which are then used to build complex, fractal-like patterns like snowflakes or honeycombs.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Broadcast and Receive for Coordination",
+      "concept_description": "Using 'broadcast' and 'when I receive' blocks to send messages and trigger scripts, coordinating actions between the original sprite and its clones (e.g., 'broadcast Draw edge' or 'broadcast kill clones').",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Managing Clones",
+      "concept_description": "Using the 'delete this clone' block, often triggered by a broadcast message, to remove clones after a pattern is drawn, which helps manage the total number of clones and prevent performance issues.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Initialization with Green Flag",
+      "concept_description": "Using the 'when green flag clicked' event to set up the initial state of the program, including clearing the stage with 'erase all' and setting variables like 'count' to their starting values.",
+      "grade_level": "1-8"
     }
   ]
 }

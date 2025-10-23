@@ -78,6 +78,7 @@ CREATE TABLE question_sets (
   grade      INTEGER NOT NULL,
   set_name   VARCHAR(100),
   is_hidden  BOOLEAN DEFAULT TRUE,
+  reattempts_allowed BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 

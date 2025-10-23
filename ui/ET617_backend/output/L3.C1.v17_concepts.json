@@ -3,84 +3,79 @@
   "submodule_name": "Infinite loops of anger & kindness",
   "concepts": [
     {
-      "concept_name": "Infinite Loop (Forever Block)",
-      "concept_description": "Using the 'forever' block to create a script that runs repeatedly without stopping. This is demonstrated by making a sprite walk continuously across the stage.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Finite Loop (Repeat Block)",
-      "concept_description": "Using the 'repeat ()' block to execute a set of instructions a specific number of times, as a way to control actions that should not run forever.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Event Handling: Green Flag Click",
-      "concept_description": "Using the 'when green flag clicked' block from the Events palette to initiate a script at the start of the program.",
-      "grade_level": "1-4"
-    },
-    {
-      "concept_name": "Event Handling: Sprite Click",
-      "concept_description": "Using the 'when this sprite clicked' block to trigger a script when the user interacts directly with a sprite.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Continuous Motion and Bouncing",
-      "concept_description": "Combining the 'move () steps' and 'if on edge, bounce' blocks inside a loop to make a sprite move back and forth across the screen.",
+      "concept_name": "Forever Loop for Continuous Action",
+      "concept_description": "Using the 'forever' block from the Control palette to create an infinite loop that repeatedly executes the blocks inside it, such as making a sprite move continuously across the stage.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Setting Rotation Style",
-      "concept_description": "Using the 'set rotation style [left-right]' block to prevent a sprite from flipping upside down after bouncing off an edge.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Variable Creation and Initialization",
-      "concept_description": "Creating a variable (e.g., 'emotion') and using the 'set [variable] to ()' block to assign its initial value at the start of the program.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Updating Variable State",
-      "concept_description": "Changing the value of a variable during program execution to track a state, such as changing an 'emotion' variable from 'sad' to 'angry'.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Broadcasting Messages",
-      "concept_description": "Using the 'broadcast [message]' block to send a signal that other scripts can receive, enabling communication between sprites.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Receiving Broadcasts",
-      "concept_description": "Using the 'when I receive [message]' block as an event handler to trigger a script when a specific broadcast message is received.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "String Concatenation (Join Operator)",
-      "concept_description": "Using the 'join () ()' block from the Operators palette to combine text strings and variables to create dynamic messages.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Dynamic Broadcasting",
-      "concept_description": "Combining the 'join' operator with a variable inside a 'broadcast' block to send messages whose content changes based on the variable's value.",
-      "grade_level": "9-12"
-    },
-    {
-      "concept_name": "Sprite Visibility (Show/Hide)",
-      "concept_description": "Using the 'show' and 'hide' blocks from the Looks palette to control when a sprite is visible on the stage, often used for sequencing animations or scenes.",
+      "concept_name": "Repeat Loop for Finite Action",
+      "concept_description": "Using the 'repeat' block to execute a set of commands for a specified number of times, as a way to control an action without it running infinitely.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Using 'Say' and 'Think' Blocks",
-      "concept_description": "Using the 'say' and 'think' blocks to make a sprite display speech or thought bubbles, communicating information or state to the user.",
+      "concept_name": "Boundary Checking with 'if on edge, bounce'",
+      "concept_description": "Using the 'if on edge, bounce' block within a loop to detect when a sprite reaches the edge of the stage and make it reverse direction.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Controlling Sprite Orientation with 'set rotation style'",
+      "concept_description": "Using the 'set rotation style' block to prevent a sprite from flipping upside down after bouncing off an edge, typically by setting the style to 'left-right'.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Event Handling with 'when green flag clicked'",
+      "concept_description": "Using the 'when green flag clicked' event block to initiate a script or set the initial state of the program when the project starts.",
       "grade_level": "1-4"
     },
     {
-      "concept_name": "Decomposition in Programming",
-      "concept_description": "The computational thinking practice of breaking a complex problem into smaller, more manageable parts, demonstrated by coding the logic for each of the four 'emotion' sprites separately.",
+      "concept_name": "Interactive Event with 'when this sprite clicked'",
+      "concept_description": "Using the 'when this sprite clicked' block to trigger a specific script or action when the user clicks on a particular sprite.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sprite Communication with Broadcast and Receive",
+      "concept_description": "Using the 'broadcast [message]' and 'when I receive [message]' blocks to allow different sprites to communicate and trigger actions in each other.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Sequencing of Actions",
-      "concept_description": "Arranging blocks in a specific order to achieve a desired outcome, such as having a sprite speak, waiting, hiding, and then broadcasting a message.",
+      "concept_name": "Creating and Using Variables",
+      "concept_description": "Creating a variable to store data that can change, such as the 'emotion' variable used to track the character's current emotional state.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Initializing Variables",
+      "concept_description": "Using the 'set [variable] to' block at the start of a program to give a variable its initial value, such as setting the 'emotion' variable to 'sad'.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Managing Sprite Visibility with Show/Hide",
+      "concept_description": "Using the 'show' and 'hide' blocks from the Looks palette to control which sprites are visible on the stage at different times in the program.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Dynamic Text with the 'join' Operator",
+      "concept_description": "Using the 'join' operator to combine strings of text and the value of a variable to create dynamic messages, for example, 'join [I am] [emotion]'.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Using 'say' and 'think' Blocks for Dialogue",
+      "concept_description": "Using the 'say' and 'think' blocks to make a sprite display speech or thought bubbles, conveying information or character thoughts to the user.",
       "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Controlling Timing with the 'wait' Block",
+      "concept_description": "Using the 'wait' block to pause a script for a specified number of seconds, which helps in controlling the pace and sequence of actions.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Decomposition",
+      "concept_description": "The computational thinking practice of breaking down a complex problem into smaller, more manageable sub-problems, such as creating separate scripts and sprites for each emotional state.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Debugging Sprite Movement",
+      "concept_description": "The process of identifying and fixing a problem in the code, such as a sprite flipping upside down, and using a specific block like 'set rotation style' to correct the behavior.",
+      "grade_level": "5-12"
     }
   ]
 }

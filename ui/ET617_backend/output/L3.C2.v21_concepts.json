@@ -3,78 +3,78 @@
   "submodule_name": "Let's karaoke",
   "concepts": [
     {
-      "concept_name": "Defining Custom Blocks (Functions)",
-      "concept_description": "Creating custom blocks using the 'define' block to group a set of instructions into a single, reusable procedure. In the project, separate functions are created for each music stanza (e.g., 'define stanza2 music') and for visual effects ('define move arrow').",
+      "concept_name": "Creating Custom Blocks (Functions)",
+      "concept_description": "Using the 'define' block to create a new custom block that encapsulates a sequence of instructions. This is shown in the project for creating blocks like 'stanza1 music', 'stanza2 music', and 'move arrow'.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Procedural Decomposition",
+      "concept_description": "Breaking down a complex program into smaller, self-contained functions. The karaoke project is decomposed into separate functions for each stanza's music, arrow movement, and flower stamping.",
       "grade_level": "5-12"
     },
     {
       "concept_name": "Calling Custom Blocks",
-      "concept_description": "Using a previously defined custom block within a script to execute its code. For example, a main 'play music' function calls the 'stanza1 music', 'stanza2 music', and 'stanza3 music' functions in sequence.",
-      "grade_level": "5-12"
-    },
-    {
-      "concept_name": "Procedural Decomposition",
-      "concept_description": "The practice of breaking down a large, complex task (creating a karaoke video) into smaller, more manageable sub-tasks (functions for each stanza's music, arrow movement, and visual effects).",
-      "grade_level": "5-12"
+      "concept_description": "Executing a custom-defined block by placing its corresponding block in a script. For example, the 'play music' function calls the 'stanza1 music', 'stanza2 music', and 'stanza3 music' blocks in sequence.",
+      "grade_level": "5-8"
     },
     {
       "concept_name": "Nested Loops",
-      "concept_description": "Placing a 'repeat' block inside another 'repeat' block to create more complex patterns of repetition. This is used in the music for stanza 2, where a musical phrase is repeated within a larger repeating section.",
+      "concept_description": "Placing a 'repeat' block inside another 'repeat' block to create complex patterns of repetition. This is used in the 'define stanza2 music' function to repeat a sequence of notes.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Music Creation with 'play note'",
-      "concept_description": "Using the 'play note for beats' block from the Music extension to create a melody by specifying a note's pitch and its duration in beats.",
+      "concept_name": "Using the Music Extension",
+      "concept_description": "Utilizing blocks from the Music extension, such as 'play note for beats' and 'rest for beats', to program a melody.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Synchronization with 'wait' and 'rest'",
-      "concept_description": "Using 'wait' and 'rest for beats' blocks to control the timing of events, ensuring that visual elements (like the moving arrow) are synchronized with the musical rhythm.",
+      "concept_name": "Synchronization with 'wait'",
+      "concept_description": "Using the 'wait' block to pause the script for a specific duration, allowing for the synchronization of visual events (like an arrow moving) with audio events (music notes).",
       "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Using the 'stamp' block",
-      "concept_description": "Employing the 'stamp' block from the Pen extension to leave an imprint of a sprite's costume on the stage. This is used to make flowers appear as the song progresses.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Sprite Positioning with Coordinates",
-      "concept_description": "Controlling a sprite's location using x and y coordinates with blocks like 'go to x: y:', 'set x to', and 'change x by'. This is used to position the arrow and the flower sprite before stamping.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Using Variables to Store Position",
-      "concept_description": "Creating variables to store and retrieve data, specifically storing the x and y coordinates of a sprite to manage positioning for repeated actions like stamping rows of flowers.",
-      "grade_level": "5-12"
-    },
-    {
-      "concept_name": "Using the 'erase all' block",
-      "concept_description": "Using the 'erase all' block from the Pen extension to clear the stage of all stamped images and pen drawings, typically at the start of a program.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Code Modularity and Reusability",
-      "concept_description": "Designing code in self-contained modules (custom blocks/functions) that can be easily tested, debugged, and reused in different parts of the program or in other projects.",
-      "grade_level": "5-12"
-    },
-    {
-      "concept_name": "Simple Loops (Repeat)",
-      "concept_description": "Using the 'repeat' block to execute a set of instructions a specific number of times, such as repeating the entire song or a musical phrase.",
-      "grade_level": "1-8"
     },
     {
       "concept_name": "Event Handling with 'when green flag clicked'",
-      "concept_description": "Using the 'when green flag clicked' event block to trigger the start of the main program scripts for the karaoke song.",
+      "concept_description": "Using the 'when green flag clicked' hat block to trigger a script to run when the project starts, initiating the karaoke performance.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Using the Pen 'stamp' block",
+      "concept_description": "Using the 'stamp' block from the Pen extension to create copies of a sprite's image (the flower) on the stage as a visual effect.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using Coordinates for Positioning",
+      "concept_description": "Using x and y coordinates with blocks like 'go to x: y:', 'change x by', and 'change y by' to precisely control the position of sprites and pen stamps on the stage.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using Variables for Positioning",
+      "concept_description": "Creating and using variables (e.g., 'x' and 'y') to store and update coordinate values, which helps in systematically placing the stamped flower images.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Code Reusability",
+      "concept_description": "Understanding that functions (custom blocks) allow code to be written once and then used multiple times, which makes the code more efficient, modular, and easier to modify.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Simple Loops with 'repeat'",
+      "concept_description": "Using the 'repeat' block to execute a set of instructions a specified number of times, such as repeating the entire song or a section of a stanza.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Setting an Instrument",
-      "concept_description": "Using the 'set instrument to' block to select the type of sound (e.g., Piano) that will be used by the 'play note' blocks.",
-      "grade_level": "1-8"
+      "concept_name": "Initializing the Stage with 'erase all'",
+      "concept_description": "Using the 'erase all' block from the Pen extension at the beginning of a script to clear any previous drawings from the stage, ensuring a clean start for the visuals.",
+      "grade_level": "5-8"
     },
     {
-      "concept_name": "Sequential Execution",
-      "concept_description": "Understanding that blocks in a Scratch script run in order from top to bottom. This is fundamental to creating the correct sequence of notes for the song.",
+      "concept_name": "Sequencing of Musical Notes",
+      "concept_description": "Arranging 'play note' and 'rest for' blocks in a specific order to create a recognizable melody. The correctness of the song depends on this sequence.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Setting Initial State",
+      "concept_description": "Using a block like 'set instrument to' at the beginning of the script to define an initial property or state for the project before the main action begins.",
       "grade_level": "1-8"
     }
   ]

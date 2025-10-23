@@ -3,74 +3,79 @@
   "submodule_name": "Binary thoughts and boolean logic",
   "concepts": [
     {
-      "concept_name": "Boolean Operator 'or'",
-      "concept_description": "Using the 'or' block to create a compound condition that is true if at least one of its sub-conditions is met. The example checks if the user's answer is either 'grateful' or 'friendly'.",
-      "grade_level": "5-12"
-    },
-    {
-      "concept_name": "Conditional Logic with 'if-then-else'",
-      "concept_description": "Using an 'if-then-else' block to create a branching path in the code. One set of actions runs if the condition is true (positive thoughts), and another set runs if it's false (leading to a check for negative thoughts).",
+      "concept_name": "Boolean OR Operator",
+      "concept_description": "Using the 'or' block to create a condition that is true if at least one of its two sub-conditions is true. For example, the code checks if the 'answer' is 'grateful' OR 'friendly'.",
       "grade_level": "5-8"
     },
     {
       "concept_name": "Nested Conditionals",
-      "concept_description": "Placing an 'if' block inside the 'else' section of another 'if-else' block. This creates an 'if... else if...' structure to check for a second set of conditions (e.g., checking for negative thoughts after confirming it's not a positive one).",
-      "grade_level": "5-12"
+      "concept_description": "Placing an 'if' block inside the 'else' section of an 'if-else' block. This creates a chain of logic to check for a second condition if the first one is false.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "if-else Statement",
+      "concept_description": "Using an 'if-else' block to create two different paths of execution. One path runs if the condition is true, and the other path runs if the condition is false.",
+      "grade_level": "5-8"
     },
     {
       "concept_name": "Event Handling with 'when this sprite clicked'",
-      "concept_description": "Using the 'when this sprite clicked' hat block to trigger a script to run when the user interacts with a sprite by clicking on it.",
+      "concept_description": "Initiating a script or a sequence of actions when a user interacts with a sprite by clicking on it.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Using the 'answer' Variable",
-      "concept_description": "Utilizing the built-in 'answer' variable from the Sensing category to evaluate the text input provided by the user in response to an 'ask and wait' block.",
+      "concept_name": "Evaluating User Input ('answer' block)",
+      "concept_description": "Using the value stored in the special 'answer' variable, which holds the most recent user input from an 'ask and wait' block, as part of a conditional check.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "String Comparison with '=' Operator",
-      "concept_description": "Using the '=' operator to compare a variable (like 'answer') with a specific text string (like 'grateful') to see if they are an exact match.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Changing Sprite Appearance with 'switch costume to'",
-      "concept_description": "Dynamically changing a sprite's costume based on a condition. In the example, the cloud's costume changes to 'cloud2_pos' for positive thoughts and 'cloud2_neg' for negative ones.",
+      "concept_name": "String Comparison with '=' operator",
+      "concept_description": "Using the '=' operator block to compare the text stored in a variable (like 'answer') to a specific string of text (like 'grateful').",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Modifying Sprite Size with 'change size by'",
-      "concept_description": "Using the 'change size by' block with a negative value (-50) to decrease the size of the sprite as part of an animation or reaction.",
+      "concept_name": "Changing Costumes ('switch costume to' block)",
+      "concept_description": "Programmatically changing a sprite's appearance to a different costume to reflect a change in its state, such as 'cloud2_pos' for a positive thought.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Sprite Movement with 'glide'",
-      "concept_description": "Using the 'glide' block to animate a sprite's movement smoothly to a target (another sprite named 'blue' or 'red') over a specified duration.",
+      "concept_name": "Modifying Sprite Size ('change size by' block)",
+      "concept_description": "Using the 'change size by' block with a negative value (-50) to decrease the size of a sprite as part of an animation or effect.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sprite Motion with 'glide to' block",
+      "concept_description": "Animating a sprite by making it move smoothly from its current position to a target location (represented by another sprite named 'blue' or 'red') over a specified period.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sensing Contact ('touching' block)",
+      "concept_description": "Using the 'touching' block within a conditional statement to check if a sprite is making physical contact with a specific color or another sprite.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Sensing with 'touching'",
-      "concept_description": "Using the 'touching' block within an 'if' statement to detect collision with another sprite ('blue') and trigger a final action, such as hiding the sprite.",
+      "concept_name": "Controlling Sprite Visibility ('hide' block)",
+      "concept_description": "Using the 'hide' block to make a sprite invisible on the stage, often used at the end of an animation or interaction.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Boolean 'AND' Operator",
+      "concept_description": "The concept, explained in the transcript, that the 'and' operator requires both conditions on either side of it to be true for the entire expression to be true.",
       "grade_level": "5-8"
     },
     {
       "concept_name": "Binary Logic Representation",
-      "concept_description": "Understanding that conditions in programming evaluate to a true or false state, which can be represented by binary values (1 for true, 0 for false), as explained in the transcript.",
+      "concept_description": "The computational thinking concept, explained in the transcript, of representing logical states as binary values: true as 1 and false as 0.",
+      "grade_level": "9-12"
+    },
+    {
+      "concept_name": "Logical Decomposition",
+      "concept_description": "The practice of breaking down a complex sentence or problem (e.g., 'buy a falooda') into smaller, simple logical conditions that a computer can evaluate.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Code Efficiency",
-      "concept_description": "Recognizing that combining multiple conditions with an 'or' operator is more efficient and results in shorter code than using separate 'if' statements for each condition, as discussed in the transcript.",
-      "grade_level": "5-12"
-    },
-    {
-      "concept_name": "Hiding Sprites with 'hide'",
-      "concept_description": "Using the 'hide' block to make a sprite disappear from the stage, typically as the result of a conditional check, such as when it touches another object.",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Decomposition of Logic",
-      "concept_description": "Breaking down a complex real-world sentence or problem into smaller, simple logical conditions that can be evaluated by a computer using operators like 'and' and 'or'.",
-      "grade_level": "5-12"
+      "concept_name": "Code Efficiency with Boolean Logic",
+      "concept_description": "The principle that using boolean operators like 'or' can make code more efficient and readable by reducing the number of 'if' statements needed to check for multiple conditions.",
+      "grade_level": "9-12"
     }
   ]
 }

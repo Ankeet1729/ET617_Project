@@ -10,6 +10,7 @@ interface QuizSet {
   created_at: string;
   submodule_name?: string;
   is_hidden: boolean;
+  reattempts_allowed?: boolean; // <--- NEW FIELD
 }
 
 interface Grade {
@@ -124,28 +125,23 @@ const SetManager: React.FC = () => {
     }
   };
 
-  const fetchSets = async (grade: number, submoduleCode: string) => {
-    setLoading(true);
-    setError("");
+  const fetchReattemptsAllowed = async (setId: number) => {
     try {
-      const res = await fetch(
-        `http://localhost:5000/admin/quizzes/sets/${grade}/${submoduleCode}`,
-        { credentials: "include" }
+      const res = await fetch(`http://localhost:5000/api/admin/quiz_sets/${setId}/fetch_reattempts_allowed`, {
+        credentials: "include",
+      });
+      if (!res.ok) throw new Error("Failed to fetch reattempts_allowed");
+
+      const data = await res.json();
+
+      // Update the corresponding set in state
+      setSets((prevSets) =>
+        prevSets.map((set) =>
+          set.id === setId ? { ...set, reattempts_allowed: data.reattempts_allowed } : set
+        )
       );
-      if (res.ok) {
-        const data = await res.json();
-        console.log("Sets data:", data);
-        setSets(data && Array.isArray(data) ? data : []);
-      } else {
-        setError("Failed to fetch quiz sets");
-        setSets([]);
-      }
     } catch (err) {
-      console.error("Error fetching sets:", err);
-      setError("Error fetching quiz sets");
-      setSets([]);
-    } finally {
-      setLoading(false);
+      console.error(`Error fetching reattempts_allowed for set ${setId}:`, err);
     }
   };
 
@@ -166,6 +162,77 @@ const SetManager: React.FC = () => {
       }
     } catch (err) {
       console.error("Error toggling visibility:", err);
+    }
+  };
+
+  const fetchSets = async (grade: number, submoduleCode: string) => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(
+        `http://localhost:5000/admin/quizzes/sets/${grade}/${submoduleCode}`,
+        { credentials: "include" }
+      );
+      if (res.ok) {
+        const data = await res.json();
+        console.log("Sets data:", data);
+        setSets(data && Array.isArray(data) ? data : []);
+  
+        // ✅ Fetch initial reattempts_allowed for each set
+        data.forEach((set: any) => {
+          if (set.id) fetchReattemptsAllowed(set.id);
+        });
+      } else {
+        setError("Failed to fetch quiz sets");
+        setSets([]);
+      }
+    } catch (err) {
+      console.error("Error fetching sets:", err);
+      setError("Error fetching quiz sets");
+      setSets([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
+  // Fetch reattempts_allowed for a given setId
+  
+
+  // --- NEW HANDLER FOR RETTEMPTS_ALLOWED ---
+  const handleToggleReattempts = async (
+    setId: number,
+    currentReattemptsAllowed: boolean
+  ) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/admin/quiz_sets/${setId}/reattempts_allowed`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            reattempts_allowed: !currentReattemptsAllowed,
+          }),
+        }
+      );
+  
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || "Failed to update reattempts");
+      }
+  
+      // ✅ Update state locally for instant UI feedback
+      setSets((prevSets) =>
+        prevSets.map((set) =>
+          set.id === setId
+            ? { ...set, reattempts_allowed: !currentReattemptsAllowed }
+            : set
+        )
+      );
+    } catch (err) {
+      console.error("Error toggling reattempts allowed:", err);
+      alert("Failed to toggle reattempts allowed");
     }
   };
 
@@ -596,6 +663,35 @@ const SetManager: React.FC = () => {
                           <strong style={{ color: "#cbd5e1" }}>Created:</strong>{" "}
                           {new Date(set.created_at).toLocaleString()}
                         </p>
+                        {/* Reattempts allowed display and toggle */}
+                        <div style={{ margin: "7px 0" }}>
+                          <strong style={{ color: "#cbd5e1" }}>Reattempts Allowed:</strong>{" "}
+                          <span
+                            style={{
+                              fontWeight: "bold",
+                              color: set.reattempts_allowed ? "#10b981" : "#ef4444",
+                            }}
+                          >
+                            {set.reattempts_allowed ? "Yes" : "No"}
+                          </span>
+                          <button
+                            onClick={() =>
+                              handleToggleReattempts(set.id, !!set.reattempts_allowed)
+                            }
+                            style={{
+                              marginLeft: "12px",
+                              padding: "5px 13px",
+                              backgroundColor: set.reattempts_allowed ? "#f59e0b" : "#10b981",
+                              color: "white",
+                              border: "none",
+                              borderRadius: "5px",
+                              cursor: "pointer",
+                              fontSize: "13px",
+                            }}
+                          >
+                            {set.reattempts_allowed ? "Disable" : "Enable"}
+                          </button>
+                        </div>
                       </div>
                     </div>
                     <div style={{ display: "flex", gap: "10px" }}>
