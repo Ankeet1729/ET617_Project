@@ -15,12 +15,15 @@ interface Module {
   set_count: number;
 }
 
+// Modified QuizSet interface to include attempted and reattempts_allowed
 interface QuizSet {
   id: number;
   name: string;
   question_count: number;
   created_at: string;
   submodule_name: string;
+  attempted?: boolean;
+  reattempts_allowed?: boolean;
 }
 
 interface DashboardProps {
@@ -97,6 +100,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     }
   };
 
+  // fetchQuizSets now expects server to return attempted and reattempts_allowed for each quiz set
   const fetchQuizSets = async (submoduleCode: string) => {
     console.log("📝 [Dashboard] Fetching quiz sets for:", submoduleCode, "grade:", grade);
     setLoading(true);
@@ -109,10 +113,12 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
       if (res.ok) {
         const data = await res.json();
         console.log("✅ [Dashboard] Quiz sets fetched:", data);
+        // Here, data should be an array with attempted and reattempts_allowed present.
         setSets(data);
         setViewLevel("sets");
       } else {
-        console.error("❌ [Dashboard] Failed to fetch quiz sets");
+        const errorText = await res.text();
+        console.error("❌ [Dashboard] Failed to fetch quiz sets:", errorText);
         setMessage("Failed to load quiz sets");
       }
     } catch (error) {
@@ -140,7 +146,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     console.log("🎯 [Dashboard] Starting quiz:", setId);
     setMessage("");
     try {
-      const res = await fetch(`http://localhost:5000/api/fetch_quiz/${setId}`, {
+      const res = await fetch(`http://localhost:5000/api/fetch-quiz/${setId}`, {
         credentials: "include",
       });
       if (res.ok) {
@@ -434,63 +440,90 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
           </div>
           {sets.length > 0 ? (
             <div style={{ display: "grid", gap: "20px" }}>
-              {sets.map((set) => (
-                <div
-                  key={set.id}
-                  style={{
-                    backgroundColor: "#1e293b",
-                    borderRadius: "12px",
-                    padding: "25px",
-                    border: "2px solid #334155",
-                    transition: "all 0.2s",
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.borderColor = "#475569")}
-                  onMouseOut={(e) => (e.currentTarget.style.borderColor = "#334155")}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
-                    <div style={{ flex: 1, minWidth: "250px" }}>
-                      <h3 style={{ color: "#f1f5f9", margin: "0 0 15px 0", fontSize: "20px", fontWeight: "bold" }}>
-                        {set.name}
-                      </h3>
-                      <div style={{ color: "#94a3b8", fontSize: "14px" }}>
-                        <p style={{ margin: "8px 0" }}>
-                          <strong style={{ color: "#cbd5e1" }}>📝 Questions:</strong> {set.question_count}
-                        </p>
-                        <p style={{ margin: "8px 0" }}>
-                          <strong style={{ color: "#cbd5e1" }}>📅 Created:</strong> {new Date(set.created_at).toLocaleDateString()}
-                        </p>
+              {sets.map((set) => {
+                // Checks for attempted and reattempts_allowed property, disables the button if attempted and not allowed
+                const attempted = !!set.attempted;
+                const noReattempts = set.reattempts_allowed === false;
+                const blockReattempt = attempted && noReattempts;
+                return (
+                  <div
+                    key={set.id}
+                    style={{
+                      backgroundColor: "#1e293b",
+                      borderRadius: "12px",
+                      padding: "25px",
+                      border: "2px solid #334155",
+                      transition: "all 0.2s",
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.borderColor = "#475569")}
+                    onMouseOut={(e) => (e.currentTarget.style.borderColor = "#334155")}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
+                      <div style={{ flex: 1, minWidth: "250px" }}>
+                        <h3 style={{ color: "#f1f5f9", margin: "0 0 15px 0", fontSize: "20px", fontWeight: "bold" }}>
+                          {set.name}
+                        </h3>
+                        <div style={{ color: "#94a3b8", fontSize: "14px" }}>
+                          <p style={{ margin: "8px 0" }}>
+                            <strong style={{ color: "#cbd5e1" }}>📝 Questions:</strong> {set.question_count}
+                          </p>
+                          <p style={{ margin: "8px 0" }}>
+                            <strong style={{ color: "#cbd5e1" }}>📅 Created:</strong> {new Date(set.created_at).toLocaleDateString()}
+                          </p>
+                          {blockReattempt && (
+                            <span style={{
+                              display: "inline-block",
+                              padding: "4px 12px",
+                              backgroundColor: "#fde68a",
+                              color: "#92400e",
+                              borderRadius: "8px",
+                              fontWeight: "bold",
+                              marginTop: "8px",
+                              fontSize: "13px"
+                            }}>
+                              Quiz already attempted (no reattempts)
+                            </span>
+                          )}
+                        </div>
                       </div>
+                      <button
+                        onClick={() => handleStartQuiz(set.id, set.name)}
+                        disabled={blockReattempt}
+                        style={{
+                          padding: "16px 32px",
+                          backgroundColor: blockReattempt ? "#a1a1aa" : "#10b981",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "10px",
+                          cursor: blockReattempt ? "not-allowed" : "pointer",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+                          transition: "all 0.2s",
+                          opacity: blockReattempt ? 0.6 : 1,
+                        }}
+                        onMouseOver={blockReattempt ? undefined : (e) => {
+                          e.currentTarget.style.backgroundColor = "#059669";
+                          e.currentTarget.style.transform = "translateY(-2px)";
+                          e.currentTarget.style.boxShadow = "0 6px 12px rgba(0,0,0,0.4)";
+                        }}
+                        onMouseOut={blockReattempt ? undefined : (e) => {
+                          e.currentTarget.style.backgroundColor = "#10b981";
+                          e.currentTarget.style.transform = "translateY(0)";
+                          e.currentTarget.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
+                        }}
+                        title={
+                          blockReattempt
+                            ? "You already attempted this quiz and reattempts are not allowed."
+                            : ""
+                        }
+                      >
+                        {blockReattempt ? "Attempted" : "Start Quiz"}
+                      </button>
                     </div>
-                    <button
-                      onClick={() => handleStartQuiz(set.id, set.name)}
-                      style={{
-                        padding: "16px 32px",
-                        backgroundColor: "#10b981",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "10px",
-                        cursor: "pointer",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
-                        transition: "all 0.2s",
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.backgroundColor = "#059669";
-                        e.currentTarget.style.transform = "translateY(-2px)";
-                        e.currentTarget.style.boxShadow = "0 6px 12px rgba(0,0,0,0.4)";
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.backgroundColor = "#10b981";
-                        e.currentTarget.style.transform = "translateY(0)";
-                        e.currentTarget.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
-                      }}
-                    >
-                      Start Quiz
-                    </button>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div style={{ backgroundColor: "#1e293b", padding: "60px 40px", borderRadius: "16px", textAlign: "center", border: "2px dashed #334155" }}>

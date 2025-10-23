@@ -1227,24 +1227,37 @@ app.get('/api/supermodules/:code/children', async (req, res) => {
 app.get('/api/student/quiz-sets/:grade/:submodule_code', async (req, res) => {
   console.log('📚 [GET /api/student/quiz-sets] Request:', req.params);
   const { grade, submodule_code } = req.params;
+
+  const studentUsername = req.session.username;
+  if (!studentUsername) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+
   
   try {
+
     const result = await pool.query(`
       SELECT 
         qs.id,
         qs.set_name as name,
         qs.created_at,
         s.submodule_name,
-        (SELECT COUNT(*)::integer FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_count
+        (SELECT COUNT(*)::integer FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_count,
+        qs.reattempts_allowed,
+        EXISTS (
+          SELECT 1 FROM quiz_attempts qa 
+          WHERE qa.question_set_id = qs.id AND qa.student_username = $3
+        ) AS attempted
       FROM question_sets qs
       INNER JOIN submodules s ON s.id = qs.submodule_id
       WHERE qs.grade = $1 
         AND s.submodule_code = $2
         AND qs.is_hidden = FALSE
       ORDER BY qs.created_at DESC
-    `, [grade, submodule_code]);
+    `, [grade, submodule_code, studentUsername]);
     
-    console.log('✅ Quiz sets found:', result.rows.length);
+    console.log('✅ Quiz sets found:', result.rows);
     res.json(result.rows);
   } catch (err) {
     console.error('❌ Error fetching quiz sets:', err);
