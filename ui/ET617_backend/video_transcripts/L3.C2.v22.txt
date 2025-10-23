@@ -1,0 +1,5 @@
+Wow, that was intense. We wrote a program to create a karaoke and visualize loops and nested loops by coding using many functions or modules. Let's code for a simple yet fun project now - face filters. Let's see how this works.
+I'm first going to draw some accessories to be able to use them in my face filter project. Let's draw some cool eye glasses first. Then a jokers hat, a jungle hat and moustache and some beautiful jewelry.
+Now that we got all our costumes drawn, we are going to use the video sensing extension from scratch to turn the video on. When the green flag is clicked, the video is turned on. Now all we have to do is try our first face effect. Let's see. But we have a problem, we want to try all the face effects we made. How could we do that? 
+It's time to recall our past lesson on events and actions.
+We want these costumes to change automatically by sensing our motion. We can use the video motion on sprite block to sense the video motion if it's greater than 50. If so we keep changing costume every 3 seconds.  To do this get the forever block from the control palette and use next costume block to change the costume waiting for  3 seconds.

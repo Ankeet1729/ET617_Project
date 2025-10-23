@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L3.C1.v19",
+  "submodule_name": "Catch your thoughts with conditions",
+  "concepts": [
+    {
+      "concept_name": "User Input with 'ask and wait'",
+      "concept_description": "Utilizing the 'ask and wait' block from the Sensing category to prompt the user for text input and pause the script until an answer is provided.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the 'answer' variable",
+      "concept_description": "Storing and retrieving user input using the special 'answer' variable that is automatically updated by the 'ask and wait' block.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Conditional Logic with 'if-then'",
+      "concept_description": "Using 'if-then' blocks to execute a set of commands only if a specific condition, such as the user's answer matching a certain word, is true.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "String Comparison in Conditions",
+      "concept_description": "Using the '=' operator block to compare the 'answer' variable (a string of text) with specific words like 'grateful' or 'bully' inside a conditional statement.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Event Handling with 'when this sprite clicked'",
+      "concept_description": "Triggering a script or a sequence of actions when the user interacts with a sprite by clicking on it. In this project, it is used to start the thought-sorting process.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sprite Animation using 'glide'",
+      "concept_description": "Animating a sprite's movement smoothly to a target location (another sprite like the 'blue' or 'red' bucket) over a specified duration.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Changing Sprite Appearance with 'switch costume'",
+      "concept_description": "Dynamically changing a sprite's costume based on a condition to visually represent a state, such as changing a neutral cloud to a positive or negative one.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Modifying Sprite Size",
+      "concept_description": "Using the 'change size by' block to make a sprite smaller or larger. In the project, the cloud sprite shrinks as it glides into the bucket.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Collision Detection with 'touching'",
+      "concept_description": "Using the 'touching' sensing block within an 'if' statement to detect when a sprite makes contact with another sprite or object, like the cloud touching the bucket.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Controlling Sprite Visibility",
+      "concept_description": "Using the 'show' and 'hide' blocks to make sprites appear and disappear from the stage at specific times, for example, hiding the cloud after it's 'caught' in a bucket.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Nested 'if-else' Logic (If-Else Ladder)",
+      "concept_description": "Structuring multiple conditional checks using a chain of nested 'if-else' blocks to evaluate a series of conditions sequentially and execute the code for the first one that is true.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Program Initialization with 'when green flag clicked'",
+      "concept_description": "Using the 'when green flag clicked' event block to set up the initial state of sprites, including their position, size, and costume, when the program starts.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Boolean Logic in Scratch",
+      "concept_description": "Understanding that conditions inside hexagonal blocks (like 'answer = grateful') evaluate to either 'true' or 'false', which determines the flow of control in 'if-then' blocks.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Using the 'say' block",
+      "concept_description": "Making a sprite display a speech bubble with specific text for a set duration, used here to show the user's typed thought.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Sprite Positioning with 'go to x: y:'",
+      "concept_description": "Setting a sprite's initial position on the stage at the start of the program using specific x and y coordinates.",
+      "grade_level": "5-8"
+    }
+  ]
+}

@@ -1119,6 +1119,77 @@ app.post('/generatequiz', checkAdmin, async (req, res) => {
   }
 });
 
+// ========== SUPERMODULE ROUTES ==========
+
+// GET /api/supermodules - List all supermodules
+app.get('/api/supermodules', async (req, res) => {
+  console.log('🔍 [GET /api/supermodules] Fetching all supermodules');
+  try {
+    const result = await pool.query(`
+      SELECT id, supermodule_code, supermodule_name
+      FROM supermodules
+      ORDER BY supermodule_code;
+    `);
+    console.log('✅ Supermodules found:', result.rows.length);
+    res.json(result.rows);
+  } catch (err) {
+    console.error('❌ Error fetching supermodules:', err);
+    res.status(500).json({ error: 'Failed to fetch supermodules' });
+  }
+});
+
+// GET /api/supermodules/:code/children - Get all submodules under a supermodule
+app.get('/api/supermodules/:code/children', async (req, res) => {
+  const { code } = req.params;
+  console.log('🔍 [GET /api/supermodules/:code/children] Fetching children for:', code);
+  
+  try {
+    const result = await pool.query(`
+      SELECT s.id, s.submodule_code, s.submodule_name, s.image_path
+      FROM submodules s
+      JOIN supermodule_submodules ssm ON s.id = ssm.submodule_id
+      JOIN supermodules sm ON ssm.supermodule_id = sm.id
+      WHERE sm.supermodule_code = $1
+      ORDER BY s.submodule_code;
+    `, [code]);
+    
+    console.log('✅ Children found for', code, ':', result.rows.length);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(`❌ Error fetching children for ${code}:`, err);
+    res.status(500).json({ error: 'Failed to fetch submodules' });
+  }
+});
+
+// GET /api/student/quiz-sets/:grade/:submodule_code - Get visible quiz sets for students
+app.get('/api/student/quiz-sets/:grade/:submodule_code', async (req, res) => {
+  console.log('📚 [GET /api/student/quiz-sets] Request:', req.params);
+  const { grade, submodule_code } = req.params;
+  
+  try {
+    const result = await pool.query(`
+      SELECT 
+        qs.id,
+        qs.set_name as name,
+        qs.created_at,
+        s.submodule_name,
+        (SELECT COUNT(*)::integer FROM question_set_items qsi WHERE qsi.set_id = qs.id) as question_count
+      FROM question_sets qs
+      INNER JOIN submodules s ON s.id = qs.submodule_id
+      WHERE qs.grade = $1 
+        AND s.submodule_code = $2
+        AND qs.is_hidden = FALSE
+      ORDER BY qs.created_at DESC
+    `, [grade, submodule_code]);
+    
+    console.log('✅ Quiz sets found:', result.rows.length);
+    res.json(result.rows);
+  } catch (err) {
+    console.error('❌ Error fetching quiz sets:', err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
 
 // Get concepts for a submodule and grade (for manual question creation)
 app.get('/admin/concepts/:submodule_code/:grade', checkAdmin, async (req, res) => {

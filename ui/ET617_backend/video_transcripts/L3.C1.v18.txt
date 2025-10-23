@@ -1,0 +1,27 @@
+Part 1: Think about our emotions. We are not always happy right? Sometimes sad, sometimes angry (just like Eshal), sometimes balanced and other times compassionate. Our emotions keep changing with time. So emotions are nothing but variables. 
+Part 2: The weather which changes from rainy to sunny to windy is a variable. 
+Part 3: The seasons which change from Spring to Summer to Monsoon to Winter is a variable. 
+Part 4: The number of fruits that you can add in your falooda is a variable. It could be apple, banana and pineapple (three). Or if you add mango and grapes (it becomes five). 
+Part 5: Eshal's emotions and feelings are variables too. Eshal gets 'sad' when he is hungry. His sadness turns into 'anger'. To prevent himself from getting stuck in the infinite loop of anger, he needs to find 'balance' by communicating with his anger and taking deep breaths from his gut to calm down. Once he reaches 'balance', Eshal will focus on how to be 'compassionate' to others. Let's look at how to code for these emotions using variables.
+
+Eshal Balance:
+●  Hide this sprite when the green flag is clicked
+●  When the balance sprite recieves the message, "I'm angry", show the balance sprite and set the emotion variable to "Balance"
+●  When the balance sprite is clicked, say I'm balance using the say block and the join block to join the text and the variable.
+● Use the think block to show the balance sprite thinking "I will find ways to help Rumanzel"
+● Hide the sprite and broadcast the message "I'm emotion" by placing the join block inside the broadcast block. Join the text "I'm" and the variable 'emotion'.
+
+When the angry sprite is clicked, we notice that the angry sprite should be hidden. Let's do that before the sprite broadcasts the message.
+Eshal Compassion:
+
+●  Hide this sprite when the green flag is clicked
+●  When the balance sprite recieves the message, "I am Balance", show the compassion sprite and set the emotion variable to "Compassion"
+●  When the compassion sprite is clicked, say 'I'm compassion' using the say block and use the join block to join the text and the variable.
+● Use the say block to make the compassion sprite say "Hello Rumanzel. Let me know if I can be of any help with your homework"
+● Hide the sprite and broadcast the message "I am emotion" by placing the join block inside the broadcast block. Join the text "I am" and the variable 'emotion'.
+● When Rumanzel receives the message "I am compassion", she shows up and communicates with Eshal. To do this, use the say block to make Rumanzel say "Sure Eshal. I kept you waiting for long. Let's first go for lunch." We also need to add a backdrop for this.  When the code starts, we need to switch the backdrop to blue sky.
+**Not added** AI.S.H.A: What if we don't use the variable to broadcast the emotion Abida? How would the code look like?
+
+Abida: Great question AI.S.H.A. In this case we would have to broadcast different messages to different sprites which will make the coding process trickier. For example the sad sprite will broadcast the message "I'm sad" inside the broadcast block. The anger sprite will broadcast the message "I'm anger". When a variable is created to store the changing emotions, the computer stores this variable in it's memory and only provides the updated value at any given point. So using a variable makes this process easy and convenient. 
+**Not added**
+In this video we saw how a single variable called 'emotion' took so many different values at different times throughout the code and how it made our code easier to work with. And we also learnt a good strategy to escape from the infinite loop of anger and learn to be more compassionate.

@@ -1,0 +1,21 @@
+Let's look at the sentence: "When Rumansel walks past the dessert shop or a restuarant and if it's not raining, she will buy a falooda". It might look like a simple sentence. But when a computer reads it, it will try to evaluate this sentence using only 0's and 1's as inputs and produce an output that is equal to a 0 or a 1. Let's decompose this sentence into different parts and access each simple sentence
+i) When Rumansel walks past the dessert shop 
+or  (any one statement must evaluate to true or 1)
+ii) a restuarant 
+and (both statements must evaluate to true or 1)
+iii) it's not raining - (The negation must evaluate to true or 1)
+Let's look at the possibilities hidden in this sentence to check the outcome of the statements using binary logic: 
+● Rumanzel walks past the dessert shop (1) or restaurant (0) and if it's not raining (1), she will buy a falooda (output is true or 1) 
+1 or 0 = 1 and 1 = 1
+● Rumanzel walks past the dessert shop (0) or restaurant (1) and if it's not raining (0), she will buy a falooda (output is false or 0)
+0 or 1 = 1 and 0 = 0
+Exercises for students to try:
+● Rumanzel walks past the dessert shop (0) or restaurant (1) and if it's not raining (1), she will buy a falooda (output is true or 1)
+0 or 1 = 1 and 1 = 1
+● Rumanzel walks past the dessert shop (1) or restaurant (0) and if it's not raining (0), she will buy a falooda (output is false or 0)
+1 or 0 = 1 and 0 = 0
+● Rumanzel walks past the dessert shop (0) or restaurant (0) and if it's not raining (1), she will buy a falooda (output is false or 0)
+0 or 0 = 0 and 1 = 0
+● Rumanzel walks past the dessert shop (0) or restaurant (0) and if it's not raining (0), she will buy a falooda (output is false or 0)
+Similarly, out of the 60,000 thoughts an average human thinks per day, some are postive and the rest are negative. Instead of checking each thought with an 'if statement', we could check for example if a thought is friendly or grateful or peaceful using a single 'if condition' connected with 'or' statements. So the code we wrote above will translate to:
+Now we have a simple if and else-if condition to check for all four thoughts. Do you also notice that the size of the code has reduced subsequently by coding for the 'or' condition? Through this we also learn that there could be more than one way of coding to achieve the same logic or result. Thr trick is to go for the most efficient way. For example, in this case, we prioritized writing shorter code which checks for as few conditions as possible.

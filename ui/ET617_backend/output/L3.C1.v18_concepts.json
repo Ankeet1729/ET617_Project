@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L3.C1.v18",
+  "submodule_name": "Emotions are variables",
+  "concepts": [
+    {
+      "concept_name": "Using variables to store state",
+      "concept_description": "Creating and using a variable named 'emotion' to store and update the changing state of a character (e.g., 'sad', 'angry', 'balance', 'compassion'). This demonstrates how variables track information that changes during program execution.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Initializing sprite state with 'when green flag clicked'",
+      "concept_description": "Using the 'when green flag clicked' event block to set the initial conditions for sprites, such as hiding them or setting an initial variable value like `set emotion to 'sad'`.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Event handling with 'when this sprite clicked'",
+      "concept_description": "Triggering a sequence of actions, like saying something or broadcasting a message, when a user interacts with a sprite by clicking it.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Inter-sprite communication with 'broadcast' and 'receive'",
+      "concept_description": "Using 'broadcast' and 'when I receive' blocks to enable communication between different sprites, allowing one sprite's actions to trigger another sprite's script.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the 'join' operator to combine text and variables",
+      "concept_description": "Using the 'join' operator block to create dynamic strings by combining static text (e.g., 'I am ') with the current value of a variable. This is used in both 'say' and 'broadcast' blocks.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Dynamic broadcasting with variables",
+      "concept_description": "Creating a broadcast message dynamically by using the 'join' operator and a variable inside the 'broadcast' block (e.g., `broadcast join 'I'm' (emotion)`). This is a more efficient method than broadcasting multiple unique static messages.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Controlling sprite visibility with 'show' and 'hide'",
+      "concept_description": "Using the 'show' and 'hide' blocks to make different emotion sprites appear and disappear at specific times, managing which state is currently active on the stage.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Sequencing with 'broadcast and wait'",
+      "concept_description": "Using the `broadcast [message] and wait` block to send a message and pause the current script until all receiving scripts have finished, ensuring a controlled sequence of events.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Changing backdrops to match a scene",
+      "concept_description": "Using the `switch backdrop to` block to change the stage's background, setting the scene for different parts of the story, such as switching to 'Bedroom 3' when the 'Compassion' sprite appears.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using loops for repetitive action",
+      "concept_description": "Using a 'repeat' loop block to make a sprite perform an action multiple times, as demonstrated by the 'Angry' sprite moving back and forth on the screen.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using 'say' and 'think' blocks for storytelling",
+      "concept_description": "Employing the 'say' and 'think' blocks to display speech and thought bubbles for sprites, which communicates the narrative and the character's internal state to the user.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Combining motion blocks",
+      "concept_description": "Using `move` and `if on edge, bounce` blocks together within a loop to create continuous movement for a sprite, as shown with the angry pony.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Setting sprite position with coordinates",
+      "concept_description": "Using the `go to x: y:` block to place a sprite at a precise location on the stage when it appears, as seen with the 'Compassion' sprite.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sequential script execution",
+      "concept_description": "Arranging code blocks in a specific vertical order within a script to create a defined sequence of actions, such as a sprite speaking, waiting, and then hiding.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Playing sounds to express emotion",
+      "concept_description": "Using the `start sound` block to play a sound effect (like 'Horse' or 'recording1') to enhance the expression of a sprite's emotion, such as anger.",
+      "grade_level": "1-4"
+    }
+  ]
+}

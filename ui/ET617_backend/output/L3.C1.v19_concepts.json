@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L3.C1.v19",
+  "submodule_name": "Catch your thoughts with conditions",
+  "concepts": [
+    {
+      "concept_name": "Event Handling with 'when green flag clicked'",
+      "concept_description": "Using the 'when green flag clicked' block to initiate a script when the program starts. This block is used to set the initial state of the cloud and bucket sprites.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "User Input with 'ask and wait'",
+      "concept_description": "Employing the 'ask' block from the Sensing category to prompt the user for text input and wait for their response. In this project, it's used to ask 'Enter your thought?'.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the 'answer' Sensing Variable",
+      "concept_description": "Accessing the user's input, which is automatically stored in the special 'answer' variable after an 'ask and wait' block is used. This variable is then checked in conditional statements.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Conditional Logic with 'if-then'",
+      "concept_description": "Using the 'if-then' block to execute a set of commands only when a specific condition is met, such as checking if the cloud sprite is touching a bucket.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "String Comparison with Operators",
+      "concept_description": "Using the '=' operator block to compare the 'answer' variable to a specific text string (e.g., 'answer' = 'grateful') to determine if a thought is positive or negative.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sprite Animation with 'glide'",
+      "concept_description": "Using the 'glide' block to create smooth motion for a sprite. The cloud sprite glides towards either the positive or negative bucket over a specified duration.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Controlling Sprite Visibility",
+      "concept_description": "Using the 'show' and 'hide' blocks from the Looks category to control whether a sprite is visible on the stage, for example, hiding the cloud after it enters a bucket.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Changing Sprite Appearance with Costumes",
+      "concept_description": "Using the 'switch costume to' block to change a sprite's appearance. The cloud's costume changes to have a plus or minus sign depending on the thought.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Modifying Sprite Size",
+      "concept_description": "Using the 'change size by' block to dynamically alter the size of a sprite during the animation, such as making the cloud smaller as it glides into the bucket.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Event-driven Communication ('broadcast' and 'receive')",
+      "concept_description": "Using 'broadcast' to send a message (e.g., 'positive' or 'negative') and 'when I receive' to trigger actions in sprites in response to that message, allowing for coordination between different sprites.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Collision Detection with 'touching'",
+      "concept_description": "Using the 'touching' block from the Sensing category as a condition in an 'if-then' statement to detect when one sprite makes contact with another (e.g., when the cloud touches the bucket).",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "If-Else Ladder for Multiple Conditions",
+      "concept_description": "Structuring multiple 'if-then-else' blocks together to efficiently check a series of mutually exclusive conditions. This is used to check the user's answer against a list of possible thoughts ('grateful', 'blaming', 'bully', etc.).",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Sprite Initialization",
+      "concept_description": "Setting a sprite's starting properties, such as position ('go to x: y:'), size ('set size to'), and visibility ('show'/'hide'), at the beginning of the program to ensure a consistent start.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Boolean Logic",
+      "concept_description": "Understanding the concept that conditions within control blocks like 'if-then' evaluate to either true or false. The program's flow changes based on this boolean outcome.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Targeted Motion using Sprites",
+      "concept_description": "Specifying another sprite as the target destination in a motion block, such as 'glide 1 secs to [blue bucket]', which simplifies coding movement towards dynamic objects.",
+      "grade_level": "5-8"
+    }
+  ]
+}

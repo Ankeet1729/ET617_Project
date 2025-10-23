@@ -1,0 +1,76 @@
+{
+  "submodule_code": "L3.C1.v18",
+  "submodule_name": "Emotions are variables",
+  "concepts": [
+    {
+      "concept_name": "Using variables to store state",
+      "concept_description": "Creating and using a variable (e.g., 'emotion') to store and manage the changing state or attribute of a character, such as sad, angry, or happy.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Initializing state with `when green flag clicked`",
+      "concept_description": "Using the 'when green flag clicked' event block to set the initial conditions of the program, such as setting a variable to its starting value, showing the first sprite, and switching to the initial backdrop.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Updating a variable's value",
+      "concept_description": "Using the 'set variable to' block to change the value stored in a variable during the program's execution, based on events like receiving a broadcast message.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Event handling with `when this sprite clicked`",
+      "concept_description": "Triggering a sequence of actions, such as broadcasting a message or making a sprite talk, in response to a user clicking on a sprite.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sprite communication with `broadcast` and `receive`",
+      "concept_description": "Using 'broadcast' and 'when I receive' blocks to enable communication and trigger actions between different sprites, creating a cause-and-effect sequence.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Synchronizing scripts with `broadcast and wait`",
+      "concept_description": "Using the 'broadcast and wait' block to pause the current script until all scripts triggered by the message have completed, ensuring a linear progression of the story.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Creating dynamic text with the `join` operator",
+      "concept_description": "Using the 'join' operator to combine strings (like 'I am ') and the value of a variable (like 'emotion') to create dynamic messages for the 'say' block.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Creating dynamic broadcasts",
+      "concept_description": "Placing a 'join' block inside a 'broadcast' block to send a message that changes based on a variable's value, making the communication more efficient and scalable.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Controlling sprite visibility with `show` and `hide`",
+      "concept_description": "Using the 'show' and 'hide' blocks to control which character is visible on the stage, effectively managing the flow of the narrative from one character to another.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Using `say` and `think` for narration",
+      "concept_description": "Employing the 'say' and 'think' blocks to display speech and thought bubbles, which convey the story and the character's feelings to the user.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Creating motion with loops and boundary detection",
+      "concept_description": "Using a 'repeat' loop containing 'move' and 'if on edge, bounce' blocks to animate a sprite's movement, like making the angry pony pace back and forth.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Changing the scene with `switch backdrop`",
+      "concept_description": "Using the 'switch backdrop to' block to change the background of the stage to match the current part of the story, as seen when changing to 'Bedroom 3'.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Setting a sprite's initial position",
+      "concept_description": "Using 'go to x: y:' and 'point in direction' blocks to precisely place a sprite on the stage when it appears or when the scene changes.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Playing sounds for emphasis",
+      "concept_description": "Using the 'start sound' block to add an audio element to an action, enhancing the emotional expression of a sprite.",
+      "grade_level": "1-8"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "submodule_code": "L3.C1.v20",
+  "submodule_name": "Binary thoughts and boolean logic",
+  "concepts": [
+    {
+      "concept_name": "Boolean Operator 'or'",
+      "concept_description": "Using the 'or' block to create a compound condition that is true if at least one of its sub-conditions is met. The example checks if the user's answer is either 'grateful' or 'friendly'.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Conditional Logic with 'if-then-else'",
+      "concept_description": "Using an 'if-then-else' block to create a branching path in the code. One set of actions runs if the condition is true (positive thoughts), and another set runs if it's false (leading to a check for negative thoughts).",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Nested Conditionals",
+      "concept_description": "Placing an 'if' block inside the 'else' section of another 'if-else' block. This creates an 'if... else if...' structure to check for a second set of conditions (e.g., checking for negative thoughts after confirming it's not a positive one).",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Event Handling with 'when this sprite clicked'",
+      "concept_description": "Using the 'when this sprite clicked' hat block to trigger a script to run when the user interacts with a sprite by clicking on it.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using the 'answer' Variable",
+      "concept_description": "Utilizing the built-in 'answer' variable from the Sensing category to evaluate the text input provided by the user in response to an 'ask and wait' block.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "String Comparison with '=' Operator",
+      "concept_description": "Using the '=' operator to compare a variable (like 'answer') with a specific text string (like 'grateful') to see if they are an exact match.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Changing Sprite Appearance with 'switch costume to'",
+      "concept_description": "Dynamically changing a sprite's costume based on a condition. In the example, the cloud's costume changes to 'cloud2_pos' for positive thoughts and 'cloud2_neg' for negative ones.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Modifying Sprite Size with 'change size by'",
+      "concept_description": "Using the 'change size by' block with a negative value (-50) to decrease the size of the sprite as part of an animation or reaction.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sprite Movement with 'glide'",
+      "concept_description": "Using the 'glide' block to animate a sprite's movement smoothly to a target (another sprite named 'blue' or 'red') over a specified duration.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Sensing with 'touching'",
+      "concept_description": "Using the 'touching' block within an 'if' statement to detect collision with another sprite ('blue') and trigger a final action, such as hiding the sprite.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Binary Logic Representation",
+      "concept_description": "Understanding that conditions in programming evaluate to a true or false state, which can be represented by binary values (1 for true, 0 for false), as explained in the transcript.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Code Efficiency",
+      "concept_description": "Recognizing that combining multiple conditions with an 'or' operator is more efficient and results in shorter code than using separate 'if' statements for each condition, as discussed in the transcript.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Hiding Sprites with 'hide'",
+      "concept_description": "Using the 'hide' block to make a sprite disappear from the stage, typically as the result of a conditional check, such as when it touches another object.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Decomposition of Logic",
+      "concept_description": "Breaking down a complex real-world sentence or problem into smaller, simple logical conditions that can be evaluated by a computer using operators like 'and' and 'or'.",
+      "grade_level": "5-12"
+    }
+  ]
+}

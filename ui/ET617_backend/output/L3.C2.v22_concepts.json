@@ -1,0 +1,76 @@
+{
+  "submodule_code": "L3.C2.v22",
+  "submodule_name": "Funny face filters",
+  "concepts": [
+    {
+      "concept_name": "Using the Video Sensing Extension",
+      "concept_description": "Adding and utilizing the Video Sensing extension in Scratch to interact with a live camera feed.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "turn video on Block",
+      "concept_description": "Using the 'turn video on' block to activate the webcam within a Scratch project, typically triggered by an event like 'when green flag clicked'.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "set video transparency Block",
+      "concept_description": "Using the 'set video transparency to' block to control how visible the live video feed is on the stage. A value of 0 makes it fully opaque.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Creating and Managing Multiple Costumes",
+      "concept_description": "Creating several different costumes for a single sprite using the built-in paint editor to represent various face filters like hats, glasses, and mustaches.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "next costume Block",
+      "concept_description": "Using the 'next costume' block to cycle through a sprite's available costumes in sequence.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "when this sprite clicked Event",
+      "concept_description": "Using the 'when this sprite clicked' event block to trigger an action, such as changing to the next costume, when the user clicks on the sprite.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "forever Loop",
+      "concept_description": "Using a 'forever' loop to make a set of commands run continuously throughout the project's execution, such as constantly checking for video motion.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "wait until Block",
+      "concept_description": "Using the 'wait until' block to pause a script's execution until a specific Boolean condition becomes true, such as waiting for video motion to exceed a certain threshold.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Sensing Video Motion",
+      "concept_description": "Using the 'video motion on sprite' reporter block from the Video Sensing extension to measure the amount of motion detected over a sprite.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Comparison Operators for Sensing",
+      "concept_description": "Using a comparison operator (e.g., '>') to compare a sensor value ('video motion') with a constant number (e.g., 50) to create a conditional statement.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Event-Driven Programming with Sensors",
+      "concept_description": "Designing a program that waits for and reacts to a real-world event (user motion detected by the camera) to trigger a specific action (changing a costume).",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Using the Paint Editor",
+      "concept_description": "Utilizing the tools within the Scratch Paint Editor (like Fill, Outline, Brush) to draw custom graphics for sprite costumes.",
+      "grade_level": "1-12"
+    },
+    {
+      "concept_name": "wait seconds Block",
+      "concept_description": "Using the 'wait <> seconds' block to create a timed delay in a script, for example, to pause for a few seconds before changing to the next filter.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Program Initialization",
+      "concept_description": "Setting up the initial state of the program when the green flag is clicked, such as turning on the video and setting its transparency.",
+      "grade_level": "1-8"
+    }
+  ]
+}

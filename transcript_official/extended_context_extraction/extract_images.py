@@ -1,66 +1,77 @@
 import openpyxl
 import os
+import re
 from openpyxl_image_loader import SheetImageLoader
+from openpyxl.utils.cell import coordinate_from_string # <-- This line is now fixed
 
-def extract_images_from_excel_sorted(xlsx_path):
-    """
-    Iterates over an XLSX file, extracts all images from each sheet,
-    and saves them into subdirectories named after each sheet.
-    The images are named based on their sheet and cell location.
+def sanitize_filename(name):
+    """Removes invalid characters from a string to make it a valid filename."""
+    return re.sub(r'[\\/*?:"<>|]', "", name).strip()
 
-    Args:
-        xlsx_path (str): The file path to the .xlsx file.
+def get_video_name_for_row(sheet, row_num):
     """
-    # --- Create a main directory to save all extracted content ---
-    parent_folder = "extracted_content"
+    Finds the video name for a given row by looking for the last non-empty
+    cell in column A at or before that row.
+    """
+    current_video_name = "Default_Video"
+    for i in range(row_num, 0, -1):
+        cell_value = sheet.cell(row=i, column=1).value
+        if cell_value and str(cell_value).strip():
+            current_video_name = str(cell_value)
+            break
+    return sanitize_filename(current_video_name)
+
+def extract_images_by_video(xlsx_path):
+    """
+    Extracts all images from an XLSX file and sorts them into subdirectories
+    based on their worksheet and a 'video name' derived from column A.
+    """
+    parent_folder = "extracted_content_by_video"
     if not os.path.exists(parent_folder):
         os.makedirs(parent_folder)
-    print(f"Images will be saved in the '{parent_folder}' directory, sorted by sheet name.")
+    print(f"Images will be saved in '{parent_folder}', sorted by sheet and video.")
 
-    # --- Load the workbook ---
     try:
         workbook = openpyxl.load_workbook(xlsx_path)
     except FileNotFoundError:
         print(f"Error: The file '{xlsx_path}' was not found.")
         return
 
-    # --- Iterate through each sheet in the workbook ---
     for sheet_name in workbook.sheetnames:
         sheet = workbook[sheet_name]
         print(f"\nProcessing sheet: '{sheet.title}'...")
 
-        # --- Create a subdirectory for the current sheet ---
-        sheet_output_folder = os.path.join(parent_folder, sheet.title)
-        if not os.path.exists(sheet_output_folder):
-            os.makedirs(sheet_output_folder)
-
-        # Using openpyxl_image_loader to find images
         image_loader = SheetImageLoader(sheet)
-        
         if not image_loader._images:
             print("  - No images found in this sheet.")
             continue
 
-        # The library finds images by their cell location
+        video_image_counts = {}
+
         for cell_number in image_loader._images:
             try:
-                # Get the image from the cell
+                row = coordinate_from_string(cell_number)[1]
+                video_name = get_video_name_for_row(sheet, row)
+
+                video_folder_path = os.path.join(parent_folder, sheet.title, video_name)
+                if not os.path.exists(video_folder_path):
+                    os.makedirs(video_folder_path)
+
                 image = image_loader.get(cell_number)
+                extension = image.format.lower() if image.format else 'png'
 
-                # --- Construct the new filename with the cell number ---
-                extension = image.format.lower() if image.format else 'png' # Default to png if format is not detected
-                new_filename = f"{sheet.title}-{cell_number}.{extension}"
-                save_path = os.path.join(sheet_output_folder, new_filename)
-
-                # --- Save the image ---
+                current_count = video_image_counts.get(video_name, 0) + 1
+                video_image_counts[video_name] = current_count
+                new_filename = f"p{current_count}.{extension}"
+                
+                save_path = os.path.join(video_folder_path, new_filename)
                 image.save(save_path)
-                print(f"  - Saved '{save_path}'")
+                print(f"  - Found image at {cell_number}, saving to '{save_path}'")
 
             except Exception as e:
                 print(f"  - Could not save image from cell {cell_number}. Reason: {e}")
 
 # --- How to use the script ---
 if __name__ == "__main__":
-    # Replace 'extended_context.xlsx' with the name of your Excel file
     excel_file = "extended_context.xlsx" 
-    extract_images_from_excel_sorted(excel_file)
+    extract_images_by_video(excel_file)

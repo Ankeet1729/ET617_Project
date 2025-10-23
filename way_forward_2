@@ -11,3 +11,4 @@ Supermodule (supermodule_name -> list of submodule id)
 			Quiz Set Management -> Grade,
 			Student Management -> Grade -> View Activity
 			
+UPDATE submodules SET image_path = '/uploads/submodules/' || submodule_code || '.png' WHERE submodule_code LIKE 'L3.%';
