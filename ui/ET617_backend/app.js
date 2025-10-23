@@ -503,6 +503,39 @@ app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
   }
 });
 
+app.get('/api/get_last_result/:question_set_id', async (req, res) => {
+  console.log("hello");
+  const { question_set_id } = req.params;
+  const username = req.session.username;
+
+  // console.log("username = " + username);
+  
+  // const user_id = await pool.query(`SELECT id FROM students WHERE username = $1`, [username]);
+  // console.log('id = ' + user_id.rows[0].id);
+
+  let rows = await pool.query(`SELECT id FROM quiz_attempts WHERE question_set_id = $1 AND student_username = $2 ORDER BY submitted_at DESC LIMIT 1`, [question_set_id, username]);
+
+  // console.log("rows = " + JSON.stringify(rows.rows));
+
+
+  const attemptId = rows.rows[0].id;
+  // const attemptResult = await pool.query(`SELECT * FROM attempt_answers WHERE attempt_id = $1`, [attemptId]);
+
+  let detailedResults = await pool.query(`SELECT question_id, chosen_answer, is_correct, concept_id, grade, question_text, question_type, options, correct_answer, bloom_level, image_path, explanation FROM attempt_answers, questions WHERE attempt_id = $1 and attempt_answers.question_id = questions.id`, [attemptId]);
+
+
+
+  if (detailedResults.rows.length === 0) {
+    return res.status(404).json({ error: 'No results found for the given attempt.' });
+    }
+
+    res.json({
+    attempt_id: attemptId,
+    results: detailedResults.rows
+    });
+  
+});
+
 // Evaluate quiz and save attempt
 // Evaluate quiz and save attempt - UPDATED FOR NEW SCHEMA
 app.post('/api/evaluate_quiz', async (req, res) => {

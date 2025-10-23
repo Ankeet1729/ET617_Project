@@ -90,25 +90,25 @@ CREATE TABLE question_set_items (
 );
 
 -- Users: For both students and admins
-CREATE TABLE users (
-  id            SERIAL PRIMARY KEY,
-  username      VARCHAR(50) UNIQUE NOT NULL,
-  email         VARCHAR(100) UNIQUE NOT NULL,
-  password_hash VARCHAR(255) NOT NULL,
-  role          VARCHAR(20) NOT NULL DEFAULT 'student',
-  grade         INTEGER
-);
+-- CREATE TABLE users (
+--   id            SERIAL PRIMARY KEY,
+--   username      VARCHAR(50) UNIQUE NOT NULL,
+--   email         VARCHAR(100) UNIQUE NOT NULL,
+--   password_hash VARCHAR(255) NOT NULL,
+--   role          VARCHAR(20) NOT NULL DEFAULT 'student',
+--   grade         INTEGER
+-- );
 
 -- Attempts: Records each time a user attempts a quiz set
-CREATE TABLE attempts (
-  id              SERIAL PRIMARY KEY,
-  user_id         INTEGER NOT NULL REFERENCES users(id)         ON DELETE CASCADE,
-  set_id          INTEGER NOT NULL REFERENCES question_sets(id) ON DELETE CASCADE,
-  score           INTEGER NOT NULL,
-  total_questions INTEGER NOT NULL,
-  percentage      INTEGER NOT NULL,
-  submitted_at    TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-);
+-- CREATE TABLE attempts (
+--   id              SERIAL PRIMARY KEY,
+--   user_id         INTEGER NOT NULL REFERENCES users(id)         ON DELETE CASCADE,
+--   set_id          INTEGER NOT NULL REFERENCES question_sets(id) ON DELETE CASCADE,
+--   score           INTEGER NOT NULL,
+--   total_questions INTEGER NOT NULL,
+--   percentage      INTEGER NOT NULL,
+--   submitted_at    TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+-- );
 
 -- Attempt_Answers: Records each answer in an attempt
 CREATE TABLE attempt_answers (

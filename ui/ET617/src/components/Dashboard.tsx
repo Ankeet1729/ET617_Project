@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import QuizView from "./QuizView";
+import QuizResults from "./QuizResults";
+
 
 interface Supermodule {
   id: number;
   supermodule_code: string;
   supermodule_name: string;
 }
+
 
 interface Module {
   id: number;
@@ -15,7 +18,7 @@ interface Module {
   set_count: number;
 }
 
-// Modified QuizSet interface to include attempted and reattempts_allowed
+
 interface QuizSet {
   id: number;
   name: string;
@@ -26,14 +29,16 @@ interface QuizSet {
   reattempts_allowed?: boolean;
 }
 
+
 interface DashboardProps {
   username: string;
   grade: number | null;
   onLogout: () => void;
 }
 
+
 const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
-  const [viewLevel, setViewLevel] = useState<"supermodules" | "modules" | "sets" | "quiz">("supermodules");
+  const [viewLevel, setViewLevel] = useState<"supermodules" | "modules" | "sets" | "quiz" | "results">("supermodules");
   const [supermodules, setSupermodules] = useState<Supermodule[]>([]);
   const [modules, setModules] = useState<Module[]>([]);
   const [selectedSupermodule, setSelectedSupermodule] = useState<string | null>(null);
@@ -43,6 +48,8 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   const [selectedQuiz, setSelectedQuiz] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [resultsData, setResultsData] = useState<any>(null);
+
 
   // Fetch supermodules on mount
   useEffect(() => {
@@ -50,6 +57,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
       fetchSupermodules();
     }
   }, [grade]);
+
 
   const fetchSupermodules = async () => {
     console.log("📚 [Dashboard] Fetching supermodules");
@@ -74,6 +82,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
       setLoading(false);
     }
   };
+
 
   const fetchModules = async (supermoduleCode: string) => {
     console.log("📚 [Dashboard] Fetching submodules for:", supermoduleCode);
@@ -100,7 +109,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     }
   };
 
-  // fetchQuizSets now expects server to return attempted and reattempts_allowed for each quiz set
+
   const fetchQuizSets = async (submoduleCode: string) => {
     console.log("📝 [Dashboard] Fetching quiz sets for:", submoduleCode, "grade:", grade);
     setLoading(true);
@@ -113,7 +122,6 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
       if (res.ok) {
         const data = await res.json();
         console.log("✅ [Dashboard] Quiz sets fetched:", data);
-        // Here, data should be an array with attempted and reattempts_allowed present.
         setSets(data);
         setViewLevel("sets");
       } else {
@@ -129,11 +137,13 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     }
   };
 
+
   const handleSupermoduleClick = (supermodule: Supermodule) => {
     console.log("🔘 [Dashboard] Supermodule clicked:", supermodule.supermodule_code);
     setSelectedSupermodule(supermodule.supermodule_code);
     fetchModules(supermodule.supermodule_code);
   };
+
 
   const handleModuleClick = (module: Module) => {
     console.log("🔘 [Dashboard] Module clicked:", module.submodule_code);
@@ -142,11 +152,12 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     fetchQuizSets(module.submodule_code);
   };
 
+
   const handleStartQuiz = async (setId: number, setName: string) => {
     console.log("🎯 [Dashboard] Starting quiz:", setId);
     setMessage("");
     try {
-      const res = await fetch(`http://localhost:5000/api/fetch-quiz/${setId}`, {
+      const res = await fetch(`http://localhost:5000/api/fetch_quiz/${setId}`, {
         credentials: "include",
       });
       if (res.ok) {
@@ -164,6 +175,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     }
   };
 
+
   const handleBackToSupermodules = () => {
     console.log("⬅️ [Dashboard] Back to supermodules");
     setViewLevel("supermodules");
@@ -171,6 +183,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     setModules([]);
     setMessage("");
   };
+
 
   const handleBackToModules = () => {
     console.log("⬅️ [Dashboard] Back to modules");
@@ -181,12 +194,82 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     setMessage("");
   };
 
+
   const handleBackToSets = () => {
     console.log("⬅️ [Dashboard] Back to sets");
     setViewLevel("sets");
     setSelectedQuiz(null);
+    setResultsData(null);
     setMessage("");
   };
+
+
+  const handleShowResults = async (quizSetId: number, quizName: string) => {
+    try {
+      console.log("🔍 [Dashboard] Fetching results for quiz set:", quizSetId);
+      setMessage("Loading results...");
+      setLoading(true);
+      
+      const res = await fetch(
+        `http://localhost:5000/api/get_last_result/${quizSetId}`,
+        { credentials: "include" }
+      );
+
+      console.log(res.status);
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch results");
+      }
+
+      const data = await res.json();
+      console.log("✅ [Dashboard] Last result fetched:", data);
+
+      // Transform the backend data to match QuizResults component expectations
+      const transformedData = {
+        quiz_id: quizSetId,
+        totalQuestions: data.results.length,
+        correctAnswers: data.results.filter((r: any) => r.is_correct).length,
+        percentage: Math.round((data.results.filter((r: any) => r.is_correct).length / data.results.length) * 100),
+        gradeLevel: calculateGradeLevel(data.results),
+        results: data.results.map((r: any, index: number) => ({
+          questionIndex: index + 1,
+          question: r.question_text,
+          userAnswer: r.chosen_answer,
+          correctAnswer: r.correct_answer,
+          isCorrect: r.is_correct,
+          explanation: r.explanation,
+          bloom_level: r.bloom_level,
+          concept: r.concept_id,
+          type: r.question_type,
+          needs_image: !!r.image_path,
+          options: r.options
+        })),
+        submittedAt: new Date().toISOString()
+      };
+
+      setResultsData(transformedData);
+      setViewLevel("results");
+      setMessage("");
+    } catch (error) {
+      console.error("❌ [Dashboard] Error fetching results:", error);
+      setMessage("Failed to load results");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Helper function to calculate grade level
+  const calculateGradeLevel = (results: any[]) => {
+    const correctCount = results.filter((r: any) => r.is_correct).length;
+    const percentage = Math.round((correctCount / results.length) * 100);
+    
+    if (percentage >= 90) return "Excellent";
+    if (percentage >= 80) return "Good";
+    if (percentage >= 70) return "Satisfactory";
+    if (percentage >= 60) return "Below Average";
+    return "Needs Improvement";
+  };
+
 
   if (viewLevel === "quiz" && selectedQuiz) {
     return (
@@ -200,6 +283,17 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
       />
     );
   }
+
+  // ✅ NEW: Render QuizResults view when results are available
+  if (viewLevel === "results" && resultsData) {
+    return (
+      <QuizResults
+        evaluationResult={resultsData}
+        onReturnToDashboard={handleBackToSets}
+      />
+    );
+  }
+
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#0f172a", padding: "20px" }}>
@@ -245,6 +339,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
         </button>
       </div>
 
+
       {/* Message */}
       {message && (
         <div
@@ -261,6 +356,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
           {message}
         </div>
       )}
+
 
       {/* Loading */}
       {loading && (
@@ -280,6 +376,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
+
 
       {/* Supermodules View */}
       {!loading && viewLevel === "supermodules" && (
@@ -327,6 +424,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
           )}
         </div>
       )}
+
 
       {/* Modules View */}
       {!loading && viewLevel === "modules" && (
@@ -410,6 +508,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
         </div>
       )}
 
+
       {/* Quiz Sets View */}
       {!loading && viewLevel === "sets" && (
         <div>
@@ -441,10 +540,10 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
           {sets.length > 0 ? (
             <div style={{ display: "grid", gap: "20px" }}>
               {sets.map((set) => {
-                // Checks for attempted and reattempts_allowed property, disables the button if attempted and not allowed
                 const attempted = !!set.attempted;
                 const noReattempts = set.reattempts_allowed === false;
                 const blockReattempt = attempted && noReattempts;
+                
                 return (
                   <div
                     key={set.id}
@@ -486,40 +585,89 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
                           )}
                         </div>
                       </div>
-                      <button
-                        onClick={() => handleStartQuiz(set.id, set.name)}
-                        disabled={blockReattempt}
-                        style={{
-                          padding: "16px 32px",
-                          backgroundColor: blockReattempt ? "#a1a1aa" : "#10b981",
-                          color: "white",
-                          border: "none",
-                          borderRadius: "10px",
-                          cursor: blockReattempt ? "not-allowed" : "pointer",
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
-                          transition: "all 0.2s",
-                          opacity: blockReattempt ? 0.6 : 1,
-                        }}
-                        onMouseOver={blockReattempt ? undefined : (e) => {
-                          e.currentTarget.style.backgroundColor = "#059669";
-                          e.currentTarget.style.transform = "translateY(-2px)";
-                          e.currentTarget.style.boxShadow = "0 6px 12px rgba(0,0,0,0.4)";
-                        }}
-                        onMouseOut={blockReattempt ? undefined : (e) => {
-                          e.currentTarget.style.backgroundColor = "#10b981";
-                          e.currentTarget.style.transform = "translateY(0)";
-                          e.currentTarget.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
-                        }}
-                        title={
-                          blockReattempt
-                            ? "You already attempted this quiz and reattempts are not allowed."
-                            : ""
-                        }
-                      >
-                        {blockReattempt ? "Attempted" : "Start Quiz"}
-                      </button>
+                      <div style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "14px",
+                        alignItems: "center"
+                      }}>
+                        <button
+                          onClick={() => handleStartQuiz(set.id, set.name)}
+                          disabled={blockReattempt}
+                          style={{
+                            padding: "16px 32px",
+                            backgroundColor: blockReattempt ? "#a1a1aa" : "#10b981",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "10px",
+                            cursor: blockReattempt ? "not-allowed" : "pointer",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+                            transition: "all 0.2s",
+                            opacity: blockReattempt ? 0.6 : 1,
+                          }}
+                          onMouseOver={blockReattempt ? undefined : (e) => {
+                            e.currentTarget.style.backgroundColor = "#059669";
+                            e.currentTarget.style.transform = "translateY(-2px)";
+                            e.currentTarget.style.boxShadow = "0 6px 12px rgba(0,0,0,0.4)";
+                          }}
+                          onMouseOut={blockReattempt ? undefined : (e) => {
+                            e.currentTarget.style.backgroundColor = "#10b981";
+                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
+                          }}
+                          title={
+                            blockReattempt
+                              ? "You already attempted this quiz and reattempts are not allowed."
+                              : ""
+                          }
+                        >
+                          {blockReattempt ? "Attempted" : "Start Quiz"}
+                        </button>
+                        <button
+                          onClick={() => handleShowResults(set.id, set.name)}
+                          disabled={!attempted}
+                          style={{
+                            padding: "16px 32px",
+                            backgroundColor: attempted ? "#3b82f6" : "#a1a1aa",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "10px",
+                            cursor: attempted ? "pointer" : "not-allowed",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+                            opacity: attempted ? 1 : 0.6,
+                            transition: "all 0.2s",
+                          }}
+                          onMouseOver={
+                            attempted
+                              ? (e) => {
+                                  e.currentTarget.style.backgroundColor = "#2563eb";
+                                  e.currentTarget.style.transform = "translateY(-2px)";
+                                  e.currentTarget.style.boxShadow = "0 6px 12px rgba(0,0,0,0.4)";
+                                }
+                              : undefined
+                          }
+                          onMouseOut={
+                            attempted
+                              ? (e) => {
+                                  e.currentTarget.style.backgroundColor = "#3b82f6";
+                                  e.currentTarget.style.transform = "translateY(0)";
+                                  e.currentTarget.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
+                                }
+                              : undefined
+                          }
+                          title={
+                            attempted
+                              ? "View your latest attempt's result"
+                              : "You need to attempt this quiz before viewing results."
+                          }
+                        >
+                          Results
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
@@ -540,5 +688,6 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     </div>
   );
 };
+
 
 export default Dashboard;
