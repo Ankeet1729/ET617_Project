@@ -206,7 +206,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
 
   const handleShowResults = async (quizSetId: number, quizName: string) => {
     try {
-      console.log("🔍 [Dashboard] Fetching results for quiz set:", quizSetId);
+      console.log('🔍 [Dashboard] Fetching results for quiz set:', quizSetId);
       setMessage("Loading results...");
       setLoading(true);
       
@@ -214,39 +214,43 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
         `http://localhost:5000/api/get_last_result/${quizSetId}`,
         { credentials: "include" }
       );
-
-      console.log(res.status);
-
+  
       if (!res.ok) {
         throw new Error("Failed to fetch results");
       }
-
+  
       const data = await res.json();
       console.log("✅ [Dashboard] Last result fetched:", data);
-
-      // Transform the backend data to match QuizResults component expectations
+  
+      // The answers_json already contains detailed results with all fields
+      const results = data.results;
+      const correctAnswers = results.filter((r: any) => r.isCorrect).length;
+      const totalQuestions = results.length;
+      const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+  
+      // Transform to match QuizResults component expectations
       const transformedData = {
         quiz_id: quizSetId,
-        totalQuestions: data.results.length,
-        correctAnswers: data.results.filter((r: any) => r.is_correct).length,
-        percentage: Math.round((data.results.filter((r: any) => r.is_correct).length / data.results.length) * 100),
-        gradeLevel: calculateGradeLevel(data.results),
-        results: data.results.map((r: any, index: number) => ({
-          questionIndex: index + 1,
-          question: r.question_text,
-          userAnswer: r.chosen_answer,
-          correctAnswer: r.correct_answer,
-          isCorrect: r.is_correct,
+        totalQuestions: totalQuestions,
+        correctAnswers: correctAnswers,
+        percentage: percentage,
+        gradeLevel: calculateGradeLevel(results),
+        results: results.map((r: any) => ({
+          questionIndex: r.questionIndex,
+          question: r.question,
+          userAnswer: r.userAnswer,
+          correctAnswer: r.correctAnswer,
+          isCorrect: r.isCorrect,
           explanation: r.explanation,
           bloom_level: r.bloom_level,
-          concept: r.concept_id,
-          type: r.question_type,
+          concept: r.concept,
+          type: r.type,
           needs_image: !!r.image_path,
-          options: r.options
+          options: r.options || []
         })),
-        submittedAt: new Date().toISOString()
+        submittedAt: data.submitted_at
       };
-
+  
       setResultsData(transformedData);
       setViewLevel("results");
       setMessage("");
@@ -257,6 +261,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
       setLoading(false);
     }
   };
+  
 
   // Helper function to calculate grade level
   const calculateGradeLevel = (results: any[]) => {
