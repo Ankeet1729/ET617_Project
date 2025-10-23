@@ -140,7 +140,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
     console.log("🎯 [Dashboard] Starting quiz:", setId);
     setMessage("");
     try {
-      const res = await fetch(`http://localhost:5000/api/fetch-quiz/${setId}`, {
+      const res = await fetch(`http://localhost:5000/api/fetch_quiz/${setId}`, {
         credentials: "include",
       });
       if (res.ok) {
