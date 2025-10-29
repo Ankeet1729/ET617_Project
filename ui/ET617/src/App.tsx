@@ -12,7 +12,6 @@ const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState("");
   const [currentGrade, setCurrentGrade] = useState<number | null>(null);
 
-  // Check for existing student login session on app load
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
     const savedGrade = localStorage.getItem("currentGrade");
@@ -23,7 +22,6 @@ const App: React.FC = () => {
     }
   }, []);
 
-  // Check for existing admin session on app load
   useEffect(() => {
     const isAdmin = localStorage.getItem("isAdmin");
     if (isAdmin) {
@@ -67,7 +65,6 @@ const App: React.FC = () => {
     localStorage.removeItem("isAdmin");
   };
 
-  // If in dashboard mode, render dashboard
   if (mode === "dashboard") {
     return (
       <Dashboard
@@ -78,7 +75,6 @@ const App: React.FC = () => {
     );
   }
 
-  // If in admin mode, render admin dashboard
   if (mode === "admin") {
     return (
       <AdminDashboard
@@ -89,33 +85,53 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>ET617 Learning Platform</h1>
-        <p>{mode === "login" ? "Welcome back! Please login to continue" : mode === "register" ? "Create your account to get started" : "Admin Panel Access"}</p>
-        {mode !== "adminLogin" && (
-          <div className="mode-switcher">
-            <button onClick={() => setMode("login")}>Login</button>
-            <button onClick={() => setMode("register")}>Register</button>
-            {mode !== "login" && <button onClick={() => setMode("adminLogin")}>Admin Login</button>}
-          </div>
-        )}
+      <header className="App-header container" role="banner">
+        <div className="left">
+          <h1>ET617 Learning Platform</h1>
+          <p style={{ color: "var(--text-secondary)" }}>
+            {mode === "login" ? "Welcome back! Please login to continue" : mode === "register" ? "Create your account to get started" : "Admin Panel Access"}
+          </p>
+        </div>
+
+        <div className="right" aria-hidden={mode === "admin"}>
+          <button className="secondary" onClick={() => setMode("login")}>Login</button>
+          <button className="secondary" onClick={() => setMode("register")}>Register</button>
+          {mode !== "login" && <button className="secondary" onClick={() => setMode("adminLogin")}>Admin Login</button>}
+        </div>
       </header>
 
-      <main className="App-main">
-        {mode === "login" && (
-          <div>
-            <LoginForm onLoginSuccess={handleLoginSuccess} />
-            <div className="admin-access">
-              <button onClick={() => setMode("adminLogin")}>Admin Login</button>
-            </div>
+      <main className="container auth-container" role="main">
+        <div className="auth-wrapper" aria-live="polite">
+          <div className="auth-header">
+            <div className="auth-title"> {mode === "login" ? "Student Login" : mode === "register" ? "Create account" : "Admin Login"} </div>
+            <div className="auth-subtitle">Access quizzes, track progress and more.</div>
           </div>
-        )}
-        {mode === "register" && (
-          <RegisterForm onSwitchToLogin={() => setMode("login")} />
-        )}
-        {mode === "adminLogin" && (
-          <AdminLogin onAdminLogin={handleAdminLoginSuccess} />
-        )}
+
+          <div className="auth-form-container">
+            {mode === "login" && (
+              <>
+                <LoginForm onLoginSuccess={handleLoginSuccess} />
+                <div style={{ marginTop: "0.75rem", display: "flex", justifyContent: "center" }}>
+                  <button className="secondary" onClick={() => setMode("adminLogin")}>Admin Login</button>
+                </div>
+              </>
+            )}
+            {mode === "register" && (
+              <RegisterForm onSwitchToLogin={() => setMode("login")} />
+            )}
+            {mode === "adminLogin" && (
+              <AdminLogin onAdminLogin={handleAdminLoginSuccess} />
+            )}
+          </div>
+        </div>
+
+        {/* Optional side panel for wider screens - can be used for tips, logos, or images */}
+        <aside className="auth-side" aria-hidden>
+          <h2>Welcome</h2>
+          <p style={{ color: "var(--text-secondary)", marginTop: "0.5rem" }}>
+            Complete small quizzes to improve your score. The interface is optimized for readability and mobile devices.
+          </p>
+        </aside>
       </main>
     </div>
   );
