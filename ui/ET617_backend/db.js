@@ -17,11 +17,11 @@ import pg from 'pg';
 const { Pool } = pg;
 
 const pool = new Pool({
-  user: 'etuser',
+  user: 'postgres',
   host: 'localhost',
-  database: 'et617_db',
+  database: 'postgres',
   password: 'password123',
-  port: 5433
+  port: 5432
 });
 
 

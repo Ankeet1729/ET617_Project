@@ -1,0 +1,21 @@
+image gen
+
+in the edit question button
+
+beside adding image manually, have a button called 'Suggest Image'
+
+when you press this button, the question text and option would go along with a prompt to give a scratch block which will represent the question and help the student understand the question better -> the output will be text, 
+
+this text will be passed to the scratchblock render, 
+
+which will render the image then 
+
+need to have another field, or perhaps change the image path field?
+
+SCRATCHBLOCK -> 
+
+DONE
+
+TODO:
+-> Human Prompt guiding The 'Suggest Image' feature
+-> Cross button to remove the 'Suggest Image' image
