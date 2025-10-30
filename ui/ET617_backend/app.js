@@ -1937,6 +1937,69 @@ ${transcript}
   }
 }
 
+// Middleware to check admin session
+const checkAdmin = (req, res, next) => {
+  if (req.session.isAdmin) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Admin access required' });
+  }
+};
+
+app.post('/api/generate-scratch-text', checkAdmin, async (req, res) => {
+  const { question_text, options } = req.body;
+
+  console.log("🔍 [/api/generate-scratch-text] Request received for:", question_text);
+
+  if (!question_text || question_text.trim() === "") {
+      return res.status(400).json({ message: 'Question text is required.' });
+  }
+
+  // --- Prompt Construction ---
+  let prompt = `You are an expert Scratch programmer. Your task is to generate Scratch 3.0 block code text that visually represents the core concept of a given quiz question.
+
+### Instructions
+1.  Analyze the provided question text and options.
+2.  Generate the corresponding Scratch 3.0 code text.
+3.  **Crucially, your entire response must ONLY be the raw Scratch block code text.** Do not include any introduction, explanation, or markdown formatting like \`\`\`.
+
+### Question Details
+- **Question:** "${question_text}"`;
+
+  if (options && Array.isArray(options) && options.length > 0 && options.some(opt => opt && opt.trim() !== '')) {
+      const relevantOptions = options.filter(opt => opt && opt.trim() !== '').join('; ');
+      prompt += `\n- **Relevant Options (for context):** "${relevantOptions}"`;
+  }
+
+  console.log("✉️ Sending prompt to Gemini via SDK...");
+
+  // --- API Call and Handling (using your existing 'model' object) ---
+  try {
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const generatedText = response.text();
+
+      if (!generatedText) {
+          console.error('❌ Gemini SDK response was empty.');
+          return res.status(500).json({ message: 'AI response was empty or malformed.' });
+      }
+
+      // Clean up any potential markdown fences the model might add by mistake
+      const cleanedText = generatedText
+          .replace(/^```(?:[a-zA-Z]+\n)?/, '')
+          .replace(/```$/, '')
+          .trim();
+
+      console.log("✨ Generated Scratch Text (cleaned):", cleanedText);
+      res.json({ scratch_text: cleanedText }); // Success
+
+  } catch (error) {
+      console.error('❌ Error generating content with Gemini SDK:', error);
+      // Check for specific error types if needed, otherwise send a generic message
+      res.status(500).json({ message: 'Failed to generate suggestion from AI service.' });
+  }
+});
+
 // NEW: Helper to get next set_index
 async function getNextSetIndex(grade, module) {
   const result = await pool.query(
@@ -1957,14 +2020,6 @@ function getNepGrade(grade) {
   return mapping[String(grade)] || 'middle';
 }
 
-// Middleware to check admin session
-const checkAdmin = (req, res, next) => {
-  if (req.session.isAdmin) {
-    next();
-  } else {
-    res.status(401).json({ error: 'Admin access required' });
-  }
-};
 
 // ==================== HELPER FUNCTION FOR CONCEPT STATS ====================
 
@@ -2209,7 +2264,7 @@ app.get('/api/student/quiz_sets/:grade/:submodule_code', async (req, res) => {
   }
 });
 
-// Fetch specific quiz for student (without answers)
+// Fetch specific quiz for student (now with scratch_text and options parsing)
 app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
   console.log('🔍 [/api/fetch_quiz] Request for set:', req.params.question_set_id);
   const { question_set_id } = req.params;
@@ -2230,24 +2285,46 @@ app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
     
     const questionSet = setResult.rows[0];
     
-    // Fetch all questions (without correct answers for students)
+    // Fetch all questions
+    // --- MODIFIED SQL: Added q.scratch_text ---
     const questionsResult = await pool.query(`
-      SELECT q.id, q.question_text, q.question_type, q.options, q.correct_answer, q.bloom_level, q.image_path, q.grade, q.explanation, c.concept_name as concept, c.id as concept_id
+      SELECT q.id, q.question_text, q.question_type, q.options, q.correct_answer, 
+             q.bloom_level, q.image_path, q.scratch_text, q.grade, q.explanation, 
+             c.concept_name as concept, c.id as concept_id
       FROM questions q
       INNER JOIN question_set_items qsi ON qsi.question_id = q.id
       INNER JOIN concepts c ON c.id = q.concept_id
       WHERE qsi.set_id = $1
       ORDER BY q.id
     `, [question_set_id]);
+    // --- END MODIFY SQL ---
     
     
     console.log('✅ Questions fetched:', questionsResult.rows.length);
+
+    // --- NEW: Parse 'options' field from JSON string (if needed) ---
+    // This assumes 'options' is stored as a JSON string in your 'questions' table
+    const questionsWithParsedOptions = questionsResult.rows.map(q => {
+        let parsedOptions = q.options;
+        if (typeof q.options === 'string') {
+            try {
+                // Parse the JSON string into an object/array
+                parsedOptions = JSON.parse(q.options);
+            } catch (e) {
+                console.warn(`Could not parse options for question ${q.id}:`, q.options);
+                // Fallback to an empty object if parsing fails
+                parsedOptions = (q.question_type === 'MCQ') ? {} : []; 
+            }
+        }
+        return { ...q, options: parsedOptions };
+    });
+    // --- END NEW ---
     
     res.json({
       set_id: questionSet.id,
       set_name: questionSet.name,
       submodule_name: questionSet.submodule_name,
-      questions: questionsResult.rows
+      questions: questionsWithParsedOptions // --- MODIFIED: Send parsed questions
     });
   } catch (err) {
     console.error('❌ Error fetching quiz:', err);
@@ -2721,6 +2798,7 @@ app.get('/admin/quiz_attempts', checkAdmin, async (req, res) => {
 });
 
 
+// --- MODIFIED ROUTE ---
 // Get full question set details (for viewing/editing)
 app.get('/admin/question_set/:id', checkAdmin, async (req, res) => {
   console.log('🔍 [/admin/question_set/:id] Request for set:', req.params.id);
@@ -2728,6 +2806,7 @@ app.get('/admin/question_set/:id', checkAdmin, async (req, res) => {
   const { id } = req.params;
   
   try {
+    // Fetch Set Details (No change needed here)
     const setResult = await pool.query(`
       SELECT qs.id, qs.set_name as name, qs.created_at, qs.grade,
              s.submodule_code, s.submodule_name
@@ -2743,23 +2822,42 @@ app.get('/admin/question_set/:id', checkAdmin, async (req, res) => {
     const questionSet = setResult.rows[0];
     
     // Fetch all questions in this set
+    // --- MODIFY SQL: Add q.scratch_text ---
     const questionsResult = await pool.query(`
       SELECT q.id, q.question_text, q.question_type, q.options, q.correct_answer,
-             q.bloom_level, q.image_path, q.grade,
-             c.concept_name as concept
-      FROM questions q
-      INNER JOIN question_set_items qsi ON qsi.question_id = q.id
-      INNER JOIN concepts c ON c.id = q.concept_id
-      WHERE qsi.set_id = $1
+             q.bloom_level, q.image_path, q.scratch_text, q.grade, 
+             c.concept_name as concept 
+      FROM questions q 
+      INNER JOIN question_set_items qsi ON qsi.question_id = q.id 
+      INNER JOIN concepts c ON c.id = q.concept_id 
+      WHERE qsi.set_id = $1 
       ORDER BY q.id
     `, [id]);
+    // --- END MODIFY SQL ---
     
     console.log('✅ Question set fetched:', questionSet.name);
     console.log('🔍 Questions count:', questionsResult.rows.length);
     
+    // --- Parse options (PostgreSQL returns JSONB/JSON as objects, TEXT needs parsing) ---
+    // Assuming your 'options' column is TEXT storing JSON string or similar
+    const questionsWithParsedOptions = questionsResult.rows.map(q => {
+        let parsedOptions = q.options;
+        if (typeof q.options === 'string') {
+            try {
+                parsedOptions = JSON.parse(q.options);
+            } catch (e) {
+                console.warn(`Could not parse options for question ${q.id}:`, q.options);
+                // Keep it as a string or set to empty array/object based on expected type
+                parsedOptions = []; // Example fallback
+            }
+        }
+        return { ...q, options: parsedOptions };
+    });
+    // --- End Parse Options ---
+
     res.json({
       ...questionSet,
-      questions: questionsResult.rows
+      questions: questionsWithParsedOptions // Send questions with potentially parsed options
     });
   } catch (err) {
     console.error('❌ [ERROR] Error fetching question set:', err);
@@ -2770,55 +2868,107 @@ app.get('/admin/question_set/:id', checkAdmin, async (req, res) => {
   }
 });
 
+// --- MODIFIED ROUTE ---
+// Add a question to a specific set
 app.post('/admin/question_set/:setId/add_question', checkAdmin, upload.single('image'), async (req, res) => {
   const { setId } = req.params;
   const {
     question_text,
     question_type,
-    options,
-    correct_answer,
+    options, // Expecting stringified JSON or object
+    correct_answer, // Expecting string or stringified JSON based on type
     bloom_level,
     concept_id,
-    grade
+    grade,
+    scratch_text // <-- Destructure the new field
   } = req.body;
   
-  console.log('🔍 [POST /admin/question_set/add_question] Adding to set:', setId);
+  // --- Determine image path (use path relative to server root if needed) ---
+  const uploaded_image_path = req.file ? `/uploads/${req.file.filename}` : null; // Use relative path for consistency
   
+  console.log('🔍 [POST /admin/question_set/add_question] Adding to set:', setId);
+
+  // --- NEW LOGIC: Determine final image/scratch values ---
+  let final_scratch_text = scratch_text || null;
+  let final_image_path = uploaded_image_path || null;
+
+  if (final_scratch_text && final_scratch_text.trim() !== "") {
+      final_image_path = null; // Prioritize scratch text
+  } else if (final_image_path) {
+      final_scratch_text = null; // Image provided, clear scratch
+  }
+  // --- END NEW LOGIC ---
+
+  // Basic validation (Add more checks as needed)
+  if (!question_text || !question_type || !concept_id || !grade) {
+      console.error('❌ Missing required fields for adding question.');
+      return res.status(400).json({ error: 'Missing required fields for question.' });
+  }
+
   try {
     // Insert the new question
+    // --- MODIFY SQL: Add scratch_text column ($9) ---
     const questionResult = await pool.query(`
       INSERT INTO questions (
         concept_id, grade, question_text, question_type, options,
-        correct_answer, bloom_level, image_path
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        correct_answer, bloom_level, image_path, scratch_text 
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
       RETURNING id
     `, [
       concept_id,
       grade,
       question_text,
       question_type,
-      typeof options === 'string' ? options : JSON.stringify(options),
-      correct_answer,
+      // Ensure options is always stored as a JSON string (or TEXT equivalent)
+      typeof options === 'object' ? JSON.stringify(options) : options,
+      correct_answer, // Ensure this is stored appropriately (might need JSON.stringify too?)
       bloom_level,
-      req.file ? req.file.path : null
+      final_image_path, // Use determined path
+      final_scratch_text // Use determined scratch text
     ]);
+    // --- END MODIFY SQL ---
     
     const questionId = questionResult.rows[0].id;
     
-    // Add to question_set_items
+    // Add to question_set_items (associates question with the set)
     await pool.query(`
       INSERT INTO question_set_items (set_id, question_id)
       VALUES ($1, $2)
     `, [setId, questionId]);
     
     console.log('✅ Question added to set:', questionId);
-    res.json({ success: true, question_id: questionId });
+    
+    // --- Fetch the newly created question with all details to return ---
+    // (This helps the frontend update its state without another fetch)
+     const newQuestion = await pool.query(`
+       SELECT q.id, q.question_text, q.question_type, q.options, q.correct_answer,
+              q.bloom_level, q.image_path, q.scratch_text, q.grade, 
+              c.concept_name as concept 
+       FROM questions q 
+       INNER JOIN concepts c ON c.id = q.concept_id 
+       WHERE q.id = $1
+     `, [questionId]);
+    
+    res.status(201).json({ 
+        success: true, 
+        question: newQuestion.rows[0] // Return the full question object
+    });
+    // --- END Fetch ---
+
   } catch (err) {
     console.error('❌ Error adding question:', err);
+     // Clean up uploaded file if DB insert fails
+     if (req.file) {
+         try {
+             fs.unlinkSync(req.file.path);
+             console.log('🧹 Cleaned up failed upload:', req.file.filename);
+         } catch (unlinkErr) {
+             console.error('❌ Error cleaning up upload:', unlinkErr);
+         }
+     }
     res.status(500).json({ error: 'Server error', message: err.message });
   }
 });
-
 
 // Generate quiz using Python script
 // Generate quiz using Python script - UPDATED FOR YOUR SCHEMA
@@ -3137,78 +3287,138 @@ app.post('/admin/create_manual_set', checkAdmin, async (req, res) => {
 });
 
 
+// --- MODIFIED ROUTE ---
 // Edit a question
 app.put('/admin/question/:id', checkAdmin, upload.single('image'), async (req, res) => {
   const { id } = req.params;
-  const { 
-    question_text, 
-    question_type, 
-    options, 
-    correct_answer, 
-    bloom_level, 
+  const {
+    question_text,
+    question_type,
+    options, // Expecting stringified JSON or object
+    correct_answer, // Expecting string or stringified JSON based on type
+    bloom_level,
     concept_id,
-    grade 
+    grade,
+    scratch_text, // <-- Destructure the new field
+    // Determine if the client wants to keep the existing image
+    // Add a field like 'keep_existing_image' or check if image_path is sent back
+    // For now, let's assume if no new image and no scratch_text, the client sends existing image path
+    image_path: existingImagePathFromClient // Client might send this if no new image uploaded
   } = req.body;
-  
+
+  let uploaded_image_path = req.file ? `/uploads/${req.file.filename}` : null; // Relative path for new uploads
+
   console.log('🔍 [PUT /admin/question] Updating question:', id);
-  console.log('🔍 Data:', { question_text, question_type, concept_id });
-  
+  console.log('🔍 Received data:', { question_text, question_type, concept_id, scratch_text, image_path: existingImagePathFromClient, new_file: !!req.file });
+
+  let oldImagePath = null; // Variable to store path of image to potentially delete
+
+  // --- NEW LOGIC: Determine final image/scratch values ---
+  let final_scratch_text = scratch_text || null;
+  let final_image_path = uploaded_image_path || existingImagePathFromClient || null; // Start with new upload or existing path
+
   try {
-    const updateFields = [];
-    const values = [];
-    let paramCount = 1;
-    
-    if (question_text) {
-      updateFields.push(`question_text = $${paramCount++}`);
-      values.push(question_text);
-    }
-    if (question_type) {
-      updateFields.push(`question_type = $${paramCount++}`);
-      values.push(question_type);
-    }
-    if (options !== undefined) {
-      updateFields.push(`options = $${paramCount++}`);
-      values.push(typeof options === 'string' ? options : JSON.stringify(options));
-    }
-    if (correct_answer) {
-      updateFields.push(`correct_answer = $${paramCount++}`);
-      values.push(correct_answer);
-    }
-    if (bloom_level) {
-      updateFields.push(`bloom_level = $${paramCount++}`);
-      values.push(bloom_level);
-    }
-    if (concept_id) {
-      updateFields.push(`concept_id = $${paramCount++}`);
-      values.push(concept_id);
-    }
-    if (grade) {
-      updateFields.push(`grade = $${paramCount++}`);
-      values.push(grade);
-    }
-    if (req.file) {
+      // Fetch the current image path before updating, if we might need to delete it
+      if (req.file || (final_scratch_text && final_scratch_text.trim() !== "") || (!final_image_path && !final_scratch_text) ) {
+          const currentQuestion = await pool.query('SELECT image_path FROM questions WHERE id = $1', [id]);
+          if (currentQuestion.rows.length > 0) {
+              oldImagePath = currentQuestion.rows[0].image_path;
+          }
+      }
+
+      if (final_scratch_text && final_scratch_text.trim() !== "") {
+          final_image_path = null; // Prioritize scratch text
+          // oldImagePath is now set if an image existed before
+      } else if (uploaded_image_path) { // A new image was uploaded
+          final_scratch_text = null; // New image provided, clear scratch
+          final_image_path = uploaded_image_path; // Ensure we use the new path
+          // oldImagePath is set if an image existed before
+      } else if (existingImagePathFromClient) { // Keeping existing image
+           final_scratch_text = null;
+           final_image_path = existingImagePathFromClient;
+           oldImagePath = null; // Don't delete the image we're keeping
+      } else {
+           // Neither scratch nor image specified, clear both
+           final_scratch_text = null;
+           final_image_path = null;
+           // oldImagePath is set if an image existed before
+      }
+      // --- END NEW LOGIC ---
+
+      // Dynamically build the UPDATE query
+      const updateFields = [];
+      const values = [];
+      let paramCount = 1;
+
+      // Add fields present in the request body
+      if (question_text !== undefined) { updateFields.push(`question_text = $${paramCount++}`); values.push(question_text); }
+      if (question_type !== undefined) { updateFields.push(`question_type = $${paramCount++}`); values.push(question_type); }
+      if (options !== undefined) { updateFields.push(`options = $${paramCount++}`); values.push(typeof options === 'object' ? JSON.stringify(options) : options); }
+      if (correct_answer !== undefined) { updateFields.push(`correct_answer = $${paramCount++}`); values.push(correct_answer); }
+      if (bloom_level !== undefined) { updateFields.push(`bloom_level = $${paramCount++}`); values.push(bloom_level); }
+      if (concept_id !== undefined) { updateFields.push(`concept_id = $${paramCount++}`); values.push(concept_id); }
+      if (grade !== undefined) { updateFields.push(`grade = $${paramCount++}`); values.push(grade); }
+
+      // --- Always include image_path and scratch_text in the update ---
       updateFields.push(`image_path = $${paramCount++}`);
-      values.push(req.file.path);
-    }
-    
-    if (updateFields.length === 0) {
-      return res.status(400).json({ error: 'No fields to update' });
-    }
-    
-    values.push(id);
-    const query = `UPDATE questions SET ${updateFields.join(', ')} WHERE id = $${paramCount} RETURNING *`;
-    
-    const result = await pool.query(query, values);
-    
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Question not found' });
-    }
-    
-    console.log('✅ Question updated successfully');
-    res.json(result.rows[0]);
+      values.push(final_image_path);
+      updateFields.push(`scratch_text = $${paramCount++}`);
+      values.push(final_scratch_text);
+      // --- End Include ---
+
+      if (updateFields.length <= 2) { // Only image/scratch fields, nothing else to update?
+          // Allow updating just image/scratch? If so, remove this check.
+          // If other fields are mandatory for an update, keep this check.
+          // For now, assume we always want to update something else or image/scratch
+          // return res.status(400).json({ error: 'No fields to update' });
+          console.log("No specific fields to update, but maybe image/scratch changed.");
+      }
+
+      values.push(id); // Add the question ID for the WHERE clause
+      const query = `UPDATE questions SET ${updateFields.join(', ')} WHERE id = $${paramCount} RETURNING *`;
+
+      const result = await pool.query(query, values);
+
+      if (result.rows.length === 0) {
+          // If a new file was uploaded but the question wasn't found, clean up
+          if (req.file) {
+              try { fs.unlinkSync(req.file.path); } catch (e) { console.error("Error cleaning up upload for non-existent question:", e);}
+          }
+          return res.status(404).json({ error: 'Question not found' });
+      }
+
+      // --- Delete old image file if necessary ---
+      if (oldImagePath && oldImagePath !== final_image_path) { // If there was an old path and it's different now
+           try {
+              // Construct full path (assuming '/uploads/' corresponds to 'uploads/' directory relative to app.js)
+              const fullOldPath = path.join(__dirname, oldImagePath); // Use path.join for correct separators
+              if (fs.existsSync(fullOldPath)) {
+                  fs.unlinkSync(fullOldPath);
+                  console.log('🧹 Deleted old image:', oldImagePath);
+              } else {
+                  console.warn('⚠️ Old image not found for deletion:', oldImagePath);
+              }
+          } catch (unlinkErr) {
+              console.error('❌ Error deleting old image:', oldImagePath, unlinkErr);
+          }
+      }
+      // --- End Delete ---
+
+      console.log('✅ Question updated successfully:', id);
+      res.json(result.rows[0]); // Return the updated question
+
   } catch (err) {
-    console.error('❌ Error updating question:', err);
-    res.status(500).json({ error: 'Server error', message: err.message });
+      console.error('❌ Error updating question:', err);
+       // Clean up newly uploaded file if DB update failed
+      if (req.file) {
+          try {
+              fs.unlinkSync(req.file.path);
+              console.log('🧹 Cleaned up failed update upload:', req.file.filename);
+          } catch (unlinkErr) {
+              console.error('❌ Error cleaning up failed update upload:', unlinkErr);
+          }
+      }
+      res.status(500).json({ error: 'Server error', message: err.message });
   }
 });
 

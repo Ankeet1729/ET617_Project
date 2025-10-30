@@ -452,9 +452,17 @@
 // };
 
 // export default QuizView;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import QuizResults from "./QuizResults";
 
+// --- Imports for Scratchblocks ---
+import scratchblocks from 'scratchblocks';
+import 'scratchblocks/locales/all';
+
+// --- Base URL for images ---
+const API_BASE_URL = 'http://localhost:5000';
+
+// --- UPDATED Question Interface ---
 interface Question {
   id: number;
   question_text: string;
@@ -463,7 +471,9 @@ interface Question {
   bloom_level: string;
   concept: string;
   image_path: string | null;
+  scratch_text?: string | null; // <-- ADDED
 }
+// --- END UPDATED ---
 
 interface QuizViewProps {
   quizName: string;
@@ -488,6 +498,40 @@ const QuizView: React.FC<QuizViewProps> = ({ quizName, quizData, quizId, usernam
   const allQuestions = quizData.questions || [];
   const currentQuestion = allQuestions[currentQuestionIndex];
 
+  // --- *** UPDATED *** useEffect for Scratchblocks ---
+  useEffect(() => {
+    if (currentQuestion && currentQuestion.scratch_text) {
+      
+      const elementId = `quiz-scratch-block-${currentQuestion.id}`;
+      
+      // Use a timeout to ensure React has rendered the element
+      setTimeout(() => {
+        const targetElement = document.getElementById(elementId);
+
+        if (targetElement) {
+          // 1. Prepare the element with the raw text
+          targetElement.innerHTML = '';
+          targetElement.textContent = currentQuestion.scratch_text;
+
+          // 2. Define the *selector string*
+          const selector = `#${elementId}`; // e.g., "#quiz-scratch-block-123"
+
+          // 3. Render using the selector string
+          try {
+            scratchblocks.renderMatching(selector, {
+              style: 'scratch3',
+              scale: 0.85,
+            });
+          } catch (renderError) {
+            console.error("Scratchblocks rendering failed:", renderError);
+            targetElement.textContent = `[Error rendering visual]`;
+          }
+        }
+      }, 0);
+    }
+  }, [currentQuestion]); // Dependency: Re-run when currentQuestion changes
+  // --- *** END UPDATED *** ---
+
   const handleAnswerSelect = (questionId: number, answer: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
   };
@@ -505,7 +549,7 @@ const QuizView: React.FC<QuizViewProps> = ({ quizName, quizData, quizId, usernam
   const submitQuiz = async () => {
     setIsSubmitting(true);
     try {
-      const response = await fetch("http://localhost:5000/api/evaluate_quiz", {
+      const response = await fetch(`${API_BASE_URL}/api/evaluate_quiz`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -641,9 +685,28 @@ const QuizView: React.FC<QuizViewProps> = ({ quizName, quizData, quizId, usernam
 
             <h2 style={{ marginTop: 0, color: 'var(--text-primary)', lineHeight: 1.6 }}>{currentQuestion.question_text}</h2>
 
-            {currentQuestion.image_path && (
-              <img src={`http://localhost:5000/${currentQuestion.image_path}`} alt="question" style={{ maxWidth: '100%', height: 'auto', borderRadius: 8, marginBottom: 12 }} />
-            )}
+            {/* --- UPDATED VISUALS SECTION --- */}
+            <div className="question-visual-container" style={{ margin: '16px 0', minHeight: '50px', display: 'flex', justifyContent: 'center' }}>
+              
+              {currentQuestion.image_path && (
+                <img 
+                  src={`${API_BASE_URL}${currentQuestion.image_path}`}
+                  alt="Question visual" 
+                  style={{ maxWidth: '100%', height: 'auto', borderRadius: 8, marginBottom: 12 }} 
+                />
+              )}
+              
+              {currentQuestion.scratch_text && !currentQuestion.image_path && (
+                <pre 
+                  // The unique ID for the useEffect to find
+                  id={`quiz-scratch-block-${currentQuestion.id}`} 
+                  className="blocks"
+                >
+                  {currentQuestion.scratch_text}
+                </pre>
+              )}
+            </div>
+            {/* --- END VISUALS SECTION --- */}
 
             <div style={{ display: 'grid', gap: 10 }}>
               {currentQuestion.question_type === "MCQ" && questionOptions && Object.entries(questionOptions).map(([key, value]) => {

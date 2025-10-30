@@ -408,10 +408,17 @@
 //   );
 // };
 
-// export default QuestionSetViewer;
 import React, { useState, useEffect } from "react";
 import QuestionEditor from "./QuestionEditor";
 
+// --- Imports for Scratchblocks ---
+import scratchblocks from 'scratchblocks';
+import 'scratchblocks/locales/all';
+
+// --- Base URL for images ---
+const API_BASE_URL = 'http://localhost:5000';
+
+// --- UPDATED Question Interface ---
 interface Question {
   id: number;
   question_text: string;
@@ -422,8 +429,10 @@ interface Question {
   concept: string;
   concept_id: number;
   image_path: string | null;
+  scratch_text?: string | null; // <-- ADDED
   grade: number;
 }
+// --- END UPDATED ---
 
 interface QuestionSet {
   id: number;
@@ -446,6 +455,48 @@ const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) 
   const [editingQuestionId, setEditingQuestionId] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
 
+  // --- *** UPDATED *** useEffect for Scratchblocks ---
+  // This hook runs every time the 'questionSet' data changes
+  useEffect(() => {
+    // We only need to render if the set has questions and is not loading
+    if (questionSet && questionSet.questions.length > 0) {
+      
+      // We use a timeout to let React render the list *first*
+      setTimeout(() => {
+        
+        // 1. Define the *selector string* for all blocks in this list
+        const selector = ".admin-question-list-scratch";
+
+        // 2. Find all elements that match
+        const elements = document.querySelectorAll(selector);
+        
+        if (elements.length > 0) {
+          // 3. We must manually prepare each element
+          elements.forEach(el => {
+            const pre = el as HTMLPreElement;
+            // Get the raw text from the 'data-text' attribute we add in the JSX
+            const text = pre.dataset.text; 
+            if (text) {
+              pre.innerHTML = '';
+              pre.textContent = text;
+            }
+          });
+
+          // 4. Now, render all matching elements at once using the selector string
+          try {
+            scratchblocks.renderMatching(selector, {
+              style: 'scratch3',
+              scale: 0.7, // A bit smaller for the list view
+            });
+          } catch (renderError) {
+            console.error("Scratchblocks rendering failed for list:", renderError);
+          }
+        }
+      }, 100); // 100ms delay to be safe and ensure DOM is ready
+    }
+  }, [questionSet, editingQuestionId, showAddForm]); // Re-run when set data changes or we exit edit/add mode
+  // --- *** END UPDATED *** ---
+
   useEffect(() => {
     fetchQuestionSet();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -454,7 +505,7 @@ const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) 
   const fetchQuestionSet = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/admin/question_set/${setId}`, { credentials: "include" });
+      const res = await fetch(`${API_BASE_URL}/admin/question_set/${setId}`, { credentials: "include" });
       if (res.ok) {
         const data = await res.json();
         setQuestionSet(data);
@@ -472,7 +523,7 @@ const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) 
   const handleDeleteQuestion = async (questionId: number) => {
     if (!window.confirm("Are you sure you want to delete this question?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/admin/question/${questionId}`, { method: "DELETE", credentials: "include" });
+      const res = await fetch(`${API_BASE_URL}/admin/question/${questionId}`, { method: "DELETE", credentials: "include" });
       if (res.ok) {
         alert("Question deleted successfully!");
         fetchQuestionSet();
@@ -488,7 +539,7 @@ const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) 
   const handleSaveComplete = () => {
     setEditingQuestionId(null);
     setShowAddForm(false);
-    fetchQuestionSet();
+    fetchQuestionSet(); // This will re-fetch and re-trigger the scratchblocks useEffect
   };
 
   if (loading) return <div className="container" style={{ padding: 16 }}>Loading...</div>;
@@ -519,16 +570,20 @@ const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) 
 
       {showAddForm && (
         <div style={{ marginBottom: 12 }}>
+          {/* QuestionEditor component is already updated and will work here */}
           <QuestionEditor mode="add" submoduleCode={questionSet.submodule_code} grade={questionSet.grade} setId={setId} onSave={handleSaveComplete} onCancel={() => setShowAddForm(false)} />
         </div>
       )}
 
+      {/* --- This is the list of questions --- */}
       <div style={{ display: "grid", gap: 12 }}>
         {questionSet.questions.map((question, index) => (
           <div key={question.id} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: 12 }}>
             {editingQuestionId === question.id ? (
+              // The editor component will render its own scratchblocks
               <QuestionEditor mode="edit" questionData={question} submoduleCode={questionSet.submodule_code} grade={questionSet.grade} setId={setId} onSave={handleSaveComplete} onCancel={() => setEditingQuestionId(null)} />
             ) : (
+              // This is the read-only view for the list
               <>
                 <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
                   <div style={{ flex: 1 }}>
@@ -541,11 +596,26 @@ const QuestionSetViewer: React.FC<QuestionSetViewerProps> = ({ setId, onBack }) 
 
                     <p style={{ margin: 0, color: "var(--text-primary)" }}>{question.question_text}</p>
 
-                    {question.image_path && (
-                      <div style={{ marginTop: 8 }}>
-                        <img src={`http://localhost:5000/${question.image_path}`} alt="q" style={{ maxWidth: 320, borderRadius: 8, border: "1px solid var(--border)" }} />
-                      </div>
-                    )}
+                    {/* --- UPDATED VISUALS SECTION (for list view) --- */}
+                    <div style={{ marginTop: 8 }}>
+                      {question.image_path && (
+                        <img 
+                          src={`${API_BASE_URL}${question.image_path}`} 
+                          alt="q" 
+                          style={{ maxWidth: 320, borderRadius: 8, border: "1px solid var(--border)" }} 
+                        />
+                      )}
+                      {question.scratch_text && !question.image_path && (
+                        <pre 
+                          className="admin-question-list-scratch" // Class for useEffect to find
+                          data-text={question.scratch_text} // Store raw text here
+                          style={{ overflow: 'auto', background: '#f0f0f0', padding: '5px' }}
+                        >
+                          {/* We set text content via useEffect */}
+                        </pre>
+                      )}
+                    </div>
+                    {/* --- END VISUALS SECTION --- */}
 
                     {question.question_type === "MCQ" && (
                       <div style={{ marginTop: 8 }}>
