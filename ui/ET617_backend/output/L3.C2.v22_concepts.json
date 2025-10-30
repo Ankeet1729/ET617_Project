@@ -3,74 +3,74 @@
   "submodule_name": "Funny face filters",
   "concepts": [
     {
-      "concept_name": "Using Scratch Extensions",
-      "concept_description": "Adding new categories of blocks to the project by selecting an extension. In this case, adding the 'Video Sensing' extension to interact with the webcam.",
+      "concept_name": "Video Sensing Extension",
+      "concept_description": "Using the Scratch Video Sensing extension to incorporate live camera input into a project. This involves adding the extension and using its specific blocks.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Event Handling: Green Flag",
-      "concept_description": "Using the 'when green flag clicked' block to start the main script of the program, which initializes the video feed.",
-      "grade_level": "1-4"
+      "concept_name": "Event Handling (`when green flag clicked`)",
+      "concept_description": "Using the 'when green flag clicked' event block to initialize the program, such as turning on the video feed and setting its properties.",
+      "grade_level": "1-8"
     },
     {
-      "concept_name": "Video Sensing: Activating Camera",
-      "concept_description": "Using the 'turn video on' block from the Video Sensing extension to activate the user's webcam and display its feed on the Scratch stage.",
+      "concept_name": "Infinite Loops (`forever` block)",
+      "concept_description": "Using a 'forever' block to create a script that runs continuously throughout the program, allowing for constant checking of conditions like video motion.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Video Sensing: Setting Transparency",
-      "concept_description": "Using the 'set video transparency to' block to control how visible the webcam feed is. Setting it to 0 makes it fully opaque.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Infinite Loops: Forever Block",
-      "concept_description": "Using the 'forever' block to create a loop that continuously checks for video motion and changes costumes.",
-      "grade_level": "5-8"
+      "concept_name": "Conditional Wait (`wait until` block)",
+      "concept_description": "Using the 'wait until' control block to pause a script's execution until a specific boolean condition is met, such as waiting for detected motion to exceed a threshold.",
+      "grade_level": "5-12"
     },
     {
       "concept_name": "Sensing Video Motion",
-      "concept_description": "Using the 'video motion on sprite' block to get a numerical value representing the amount of movement detected by the camera on the sprite.",
+      "concept_description": "Using the 'video motion on sprite' block to get a numerical value representing the amount of motion detected by the camera over the sprite's area.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Comparison Operators (`>` block)",
+      "concept_description": "Using the greater than '>' operator to compare the sensed video motion value to a fixed number (e.g., 50), creating a true/false condition.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Comparison Operators: Greater Than",
-      "concept_description": "Using the '>' operator block to check if the detected video motion value is greater than a specific threshold (e.g., 50).",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Conditional Wait: Wait Until Block",
-      "concept_description": "Using the 'wait until' block to pause the script's execution until a certain condition is true, such as 'video motion > 50'.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Costume Management: Next Costume",
-      "concept_description": "Using the 'next costume' block to switch the sprite's appearance to the next one in its costume list, creating the filter-changing effect.",
-      "grade_level": "1-4"
-    },
-    {
-      "concept_name": "Timing Control: Wait Block",
-      "concept_description": "Using the 'wait () seconds' block to pause the program for a specific amount of time between actions, such as keeping a filter on for 3 seconds before changing.",
-      "grade_level": "1-4"
-    },
-    {
-      "concept_name": "Paint Editor: Creating Costumes",
-      "concept_description": "Utilizing the built-in Scratch Paint Editor to draw custom graphics, such as hats, glasses, and mustaches, to be used as costumes for a sprite.",
+      "concept_name": "Managing Sprite Costumes",
+      "concept_description": "Creating and organizing multiple costumes for a single sprite, where each costume represents a different visual state or filter (e.g., a hat, glasses, a moustache).",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Event Handling: On Sprite Click",
-      "concept_description": "Using the 'when this sprite clicked' event block as an alternative way to trigger an action, specifically to change to the next costume manually.",
-      "grade_level": "1-4"
+      "concept_name": "Changing Costumes (`next costume`)",
+      "concept_description": "Using the 'next costume' block from the Looks palette to programmatically cycle through a sprite's list of costumes in sequence.",
+      "grade_level": "1-8"
     },
     {
-      "concept_name": "Program Sequencing in a Loop",
-      "concept_description": "Understanding the specific order of operations inside a 'forever' loop: wait for motion, change costume, wait for a fixed time. This sequence determines the program's behavior.",
+      "concept_name": "Timing and Delays (`wait` block)",
+      "concept_description": "Using the 'wait' block to pause the script for a specified duration, controlling the pace at which costumes (filters) change.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Using the Paint Editor",
+      "concept_description": "Utilizing the built-in Scratch Paint Editor to draw and design custom graphics to be used as sprite costumes for the face filters.",
+      "grade_level": "1-12"
+    },
+    {
+      "concept_name": "Controlling Video Properties",
+      "concept_description": "Using the 'set video transparency to' block to adjust the visibility of the camera feed on the stage.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Project Initialization",
-      "concept_description": "Setting up the initial conditions for the project, such as turning the video on and setting its transparency, right after the green flag is clicked.",
+      "concept_name": "Event Handling (`when this sprite clicked`)",
+      "concept_description": "Using the 'when this sprite clicked' event as a way to allow user interaction, such as manually changing to the next costume with a mouse click.",
       "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sequencing within a Loop",
+      "concept_description": "Arranging blocks in a specific order inside a loop to create a desired behavior, such as waiting for motion, then changing a costume, then waiting for a period of time.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Sensor-based Interaction",
+      "concept_description": "Creating a program that reacts to physical input from a sensor (the camera detecting motion) rather than just keyboard or mouse input.",
+      "grade_level": "5-12"
     }
   ]
 }

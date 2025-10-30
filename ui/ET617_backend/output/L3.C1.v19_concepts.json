@@ -3,79 +3,79 @@
   "submodule_name": "Catch your thoughts with conditions",
   "concepts": [
     {
-      "concept_name": "User Input with 'ask and wait'",
-      "concept_description": "Using the 'ask [question] and wait' block from the Sensing palette to prompt the user for text input and pause the script until an answer is provided. In the project, this is used to get the user's 'thought'.",
+      "concept_name": "User Input with `ask and wait`",
+      "concept_description": "Using the `ask [question] and wait` block from the Sensing category to prompt the user for text input and pause the script until an answer is provided.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Using the 'answer' Sensing Block",
-      "concept_description": "Accessing the user's most recent text input, which is automatically stored in the built-in 'answer' variable. This variable is then used within conditional statements to check its value.",
+      "concept_name": "Using the `answer` variable",
+      "concept_description": "Accessing the user's most recent input by using the built-in `answer` variable from the Sensing category. This variable is used in conditional checks.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Conditional Logic with 'if-then'",
-      "concept_description": "Using 'if-then' blocks to create a piece of code that only runs if a specified condition is true. The project uses this to check if the user's thought is positive or negative.",
+      "concept_name": "Conditional Logic: `if-then` block",
+      "concept_description": "Using an `if-then` block to execute a set of commands only if a specific condition, such as comparing the user's `answer` to a word, is true.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "String Comparison with '=' Operator",
-      "concept_description": "Using the '=' operator to compare two text strings. This is used as the condition inside an 'if-then' block to check if the 'answer' variable is equal to a specific word like 'grateful' or 'bully'.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Event Handling with 'when green flag clicked'",
-      "concept_description": "Using the 'when green flag clicked' event block to trigger a script and start the program's main sequence of actions.",
-      "grade_level": "1-4"
-    },
-    {
-      "concept_name": "Sprite Motion with 'glide'",
-      "concept_description": "Using the 'glide' block to animate a sprite's movement smoothly from its current position to a target location (another sprite or coordinates) over a specified time. The cloud glides into the appropriate bucket.",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Collision Detection with 'touching?'",
-      "concept_description": "Using the 'touching [sprite]?' block as a condition to detect when a sprite makes contact with another sprite. The project uses this to make the cloud sprite hide after it reaches a bucket.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Controlling Sprite Appearance ('switch costume')",
-      "concept_description": "Changing a sprite's look by using the 'switch costume to' block. The cloud sprite changes its costume to a positive or negative version based on the user's input.",
-      "grade_level": "1-4"
-    },
-    {
-      "concept_name": "Controlling Sprite Visibility ('show'/'hide')",
-      "concept_description": "Using the 'show' and 'hide' blocks to make sprites appear or disappear from the stage at specific times in the program.",
-      "grade_level": "1-4"
-    },
-    {
-      "concept_name": "Initializing Sprite State",
-      "concept_description": "Setting a sprite's starting properties like position, size, and costume at the beginning of a script, typically under a 'when green flag clicked' block.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "If-Else Logic and Else-if Ladders",
-      "concept_description": "Understanding the 'if-then-else' block and how nesting them can create an 'else-if' structure. This is taught as a more efficient way to check multiple mutually exclusive conditions.",
+      "concept_name": "Conditional Logic: `if-then-else` ladder",
+      "concept_description": "Structuring multiple conditions using a chain of `if-then-else` blocks. This allows the program to check for several mutually exclusive possibilities efficiently.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Boolean Logic",
-      "concept_description": "The fundamental concept that a condition, such as 'answer = grateful' or 'touching blue?', evaluates to one of two possible outcomes: true or false. The transcript explicitly mentions this term.",
+      "concept_name": "String Comparison with `equals` operator",
+      "concept_description": "Using the `=` operator block to compare the `answer` variable to a specific text string (e.g., 'grateful' or 'bully') to create a true/false condition.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Displaying Text with 'say'",
-      "concept_description": "Using the 'say [text] for [secs]' block to make a sprite display a speech bubble on the stage. The cloud sprite says the user's thought before it starts moving.",
-      "grade_level": "1-4"
+      "concept_name": "Collision Detection with `touching`",
+      "concept_description": "Using the `touching [sprite]?` block as a condition within an `if-then` block to detect when one sprite makes contact with another, triggering an action like hiding.",
+      "grade_level": "5-8"
     },
     {
-      "concept_name": "Changing Sprite Size",
-      "concept_description": "Modifying a sprite's size using blocks like 'set size to %' for initialization or 'change size by' for dynamic effects. The cloud shrinks as it glides towards the bucket.",
+      "concept_name": "Event Handling: `when green flag clicked`",
+      "concept_description": "Using the `when green flag clicked` event block to initialize a sprite's state (e.g., position, size, visibility) at the start of the program.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Sprite Initialization with 'go to x: y:'",
-      "concept_description": "Using the 'go to x: y:' block to set a sprite's starting position on the stage at the beginning of the program.",
+      "concept_name": "Sprite Animation with `glide` to sprite",
+      "concept_description": "Using the `glide [secs] to [sprite]` block to create smooth animated movement for a sprite towards a target sprite, such as a cloud gliding to a bucket.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Changing Sprite Appearance with `switch costume`",
+      "concept_description": "Using the `switch costume to [costume]` block to dynamically change a sprite's image based on a condition, like showing a positive or negative thought cloud.",
       "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sprite Visibility Control with `show` and `hide`",
+      "concept_description": "Using the `show` and `hide` blocks to control when a sprite is visible on the stage, often for initialization or after an interaction.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Dynamic Sizing with `change size by`",
+      "concept_description": "Using the `change size by []` block with a negative value to decrease a sprite's size, creating a visual effect as it moves.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Absolute Positioning with `go to x: y:`",
+      "concept_description": "Setting a sprite's initial position on the stage using specific X and Y coordinates with the `go to x: y:` block.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Boolean Logic in Conditions",
+      "concept_description": "Understanding that conditions within control blocks (like `if-then`) evaluate to a Boolean value (true or false), which dictates the program's execution flow.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Outputting Variable Content with `say`",
+      "concept_description": "Using the `say` block to display the content of the `answer` variable in a speech bubble, providing feedback to the user.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sprite Initialization",
+      "concept_description": "The process of setting up a sprite's initial state (position, size, costume, visibility) using a `when green flag clicked` script to ensure the program starts consistently.",
+      "grade_level": "5-8"
     }
   ]
 }

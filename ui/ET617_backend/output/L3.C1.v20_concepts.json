@@ -3,79 +3,74 @@
   "submodule_name": "Binary thoughts and boolean logic",
   "concepts": [
     {
-      "concept_name": "Boolean OR Operator",
-      "concept_description": "Using the 'or' block to create a condition that is true if at least one of its two sub-conditions is true. For example, the code checks if the 'answer' is 'grateful' OR 'friendly'.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Nested Conditionals",
-      "concept_description": "Placing an 'if' block inside the 'else' section of an 'if-else' block. This creates a chain of logic to check for a second condition if the first one is false.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "if-else Statement",
-      "concept_description": "Using an 'if-else' block to create two different paths of execution. One path runs if the condition is true, and the other path runs if the condition is false.",
-      "grade_level": "5-8"
-    },
-    {
       "concept_name": "Event Handling with 'when this sprite clicked'",
-      "concept_description": "Initiating a script or a sequence of actions when a user interacts with a sprite by clicking on it.",
+      "concept_description": "Using the 'when this sprite clicked' hat block to trigger a script when a user interacts with a sprite by clicking on it.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Evaluating User Input ('answer' block)",
-      "concept_description": "Using the value stored in the special 'answer' variable, which holds the most recent user input from an 'ask and wait' block, as part of a conditional check.",
+      "concept_name": "Using the 'if-then-else' block",
+      "concept_description": "Implementing conditional logic to execute one of two different sets of commands based on whether a condition is true or false. In the image, this block separates the logic for positive and negative thoughts.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "String Comparison with '=' operator",
-      "concept_description": "Using the '=' operator block to compare the text stored in a variable (like 'answer') to a specific string of text (like 'grateful').",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Changing Costumes ('switch costume to' block)",
-      "concept_description": "Programmatically changing a sprite's appearance to a different costume to reflect a change in its state, such as 'cloud2_pos' for a positive thought.",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Modifying Sprite Size ('change size by' block)",
-      "concept_description": "Using the 'change size by' block with a negative value (-50) to decrease the size of a sprite as part of an animation or effect.",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Sprite Motion with 'glide to' block",
-      "concept_description": "Animating a sprite by making it move smoothly from its current position to a target location (represented by another sprite named 'blue' or 'red') over a specified period.",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Sensing Contact ('touching' block)",
-      "concept_description": "Using the 'touching' block within a conditional statement to check if a sprite is making physical contact with a specific color or another sprite.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Controlling Sprite Visibility ('hide' block)",
-      "concept_description": "Using the 'hide' block to make a sprite invisible on the stage, often used at the end of an animation or interaction.",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Boolean 'AND' Operator",
-      "concept_description": "The concept, explained in the transcript, that the 'and' operator requires both conditions on either side of it to be true for the entire expression to be true.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Binary Logic Representation",
-      "concept_description": "The computational thinking concept, explained in the transcript, of representing logical states as binary values: true as 1 and false as 0.",
-      "grade_level": "9-12"
-    },
-    {
-      "concept_name": "Logical Decomposition",
-      "concept_description": "The practice of breaking down a complex sentence or problem (e.g., 'buy a falooda') into smaller, simple logical conditions that a computer can evaluate.",
+      "concept_name": "Using the 'or' boolean operator",
+      "concept_description": "Combining multiple conditions with the 'or' operator. The entire expression is true if at least one of the individual conditions is true. The script uses it to check for multiple positive or negative words.",
       "grade_level": "5-12"
     },
     {
-      "concept_name": "Code Efficiency with Boolean Logic",
-      "concept_description": "The principle that using boolean operators like 'or' can make code more efficient and readable by reducing the number of 'if' statements needed to check for multiple conditions.",
-      "grade_level": "9-12"
+      "concept_name": "String comparison using the '=' operator",
+      "concept_description": "Using the '=' operator to check if a variable (like 'answer') contains a specific string of text (e.g., 'grateful').",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the 'answer' sensing block",
+      "concept_description": "The 'answer' block is a special variable that stores the user's most recent typed input from an 'ask and wait' block. The script uses it to evaluate the user's thought.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Nested conditional statements",
+      "concept_description": "Placing an 'if' block inside the 'else' section of an 'if-then-else' block to create a multi-level decision-making structure.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Changing sprite appearance with 'switch costume to'",
+      "concept_description": "Using the 'switch costume to' block to change a sprite's visual look. The script uses different costumes for positive ('cloud2_pos') and negative ('cloud2_neg') outcomes.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Modifying sprite size with 'change size by'",
+      "concept_description": "Using the 'change size by' block to increase or decrease the size of a sprite. In the script, the size is decreased by 50.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Motion with the 'glide to' block",
+      "concept_description": "Using the 'glide...secs to...' block to move a sprite smoothly to the location of another sprite or a specific point over a set amount of time.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Using the 'if-then' block",
+      "concept_description": "Implementing a simple conditional statement that executes a set of commands only if its condition is met. The script uses this at the end to check if the sprite is touching a color.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Sensing color contact with 'touching color?'",
+      "concept_description": "Using the 'touching color?' boolean block as a condition to detect if a sprite is in contact with a specific color on the stage or another sprite.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Making sprites disappear with the 'hide' block",
+      "concept_description": "Using the 'hide' block from the Looks category to make a sprite invisible on the stage.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Boolean Logic Evaluation",
+      "concept_description": "Understanding that conditions in Scratch (like 'answer = grateful') evaluate to a true or false value, which the transcript relates to the binary concepts of 1 and 0.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Code Efficiency with Logical Operators",
+      "concept_description": "Recognizing that using boolean operators like 'or' can simplify code and make it more efficient than writing multiple, separate 'if' statements to check for similar conditions.",
+      "grade_level": "5-12"
     }
   ]
 }

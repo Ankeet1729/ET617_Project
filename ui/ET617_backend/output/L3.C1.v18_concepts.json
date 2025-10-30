@@ -3,79 +3,79 @@
   "submodule_name": "Emotions are variables",
   "concepts": [
     {
-      "concept_name": "Creating and Using Variables",
-      "concept_description": "A variable named 'emotion' is created to store the character's current emotional state as a text string (e.g., 'sad', 'angry', 'balance'). This demonstrates how variables can hold and change data during program execution.",
+      "concept_name": "Using Variables to Store State",
+      "concept_description": "A variable named 'emotion' is used to store and track the character's current emotional state (e.g., 'sad', 'angry', 'balance'). This allows the program to know which emotion is active.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Setting Variable Value",
-      "concept_description": "Using the 'set [variable] to [value]' block to assign or update the value of the 'emotion' variable. For example, 'set emotion to sad' at the start, and later 'set emotion to angry'.",
-      "grade_level": "5-8"
-    },
-    {
-      "concept_name": "Event Handling: 'when this sprite clicked'",
-      "concept_description": "Initiating a sequence of actions when a user clicks on a sprite. This is used to trigger the transition from one emotional state to the next.",
+      "concept_name": "Initializing Program State",
+      "concept_description": "Using the 'when green flag clicked' event to set the initial conditions of the program, such as setting the starting backdrop, hiding most sprites, showing the first sprite, and setting the initial value of the 'emotion' variable.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Event Handling: 'when I receive message'",
-      "concept_description": "Using the 'when I receive' block to trigger a script on a sprite when a specific broadcast message is received. This coordinates the actions between different sprites representing emotions.",
+      "concept_name": "Updating Variable Values",
+      "concept_description": "Using the 'set variable to' block to change the value of the 'emotion' variable as the story progresses from one emotional state to the next.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Sprite Communication with 'broadcast and wait'",
-      "concept_description": "Using the 'broadcast [message] and wait' block to send a message to all sprites and pause the current script until all receiving scripts have completed. This ensures a sequential flow of the story.",
+      "concept_name": "Event Handling with 'when this sprite clicked'",
+      "concept_description": "Triggering a sequence of actions, such as speaking and broadcasting a message, when the user clicks on a specific sprite.",
+      "grade_level": "1-4"
+    },
+    {
+      "concept_name": "Communication between Sprites using Broadcast/Receive",
+      "concept_description": "Using 'broadcast' and 'when I receive' blocks to enable sprites to communicate and trigger actions in one another, creating a cause-and-effect sequence.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Using the 'join' Operator",
-      "concept_description": "Using the 'join' block from the Operators category to combine text strings with the value of a variable. For instance, 'join [I am] [emotion]' creates a dynamic message.",
+      "concept_name": "String Concatenation with 'join' operator",
+      "concept_description": "Using the 'join' block to combine a text string (e.g., 'I am ') with the value of the 'emotion' variable to create dynamic messages in 'say' or 'broadcast' blocks.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "Dynamic Broadcasting Messages",
-      "concept_description": "Creating and sending a broadcast message that is dynamically constructed using the 'join' block and a variable, such as 'broadcast (join [I'm] [emotion])'. This makes the code more efficient.",
+      "concept_name": "Synchronizing Scripts with 'broadcast and wait'",
+      "concept_description": "Using the 'broadcast and wait' block to ensure that the receiving scripts complete their actions before the broadcasting script continues, which helps control the flow of the animation.",
       "grade_level": "5-12"
     },
     {
       "concept_name": "Controlling Sprite Visibility",
-      "concept_description": "Using the 'show' and 'hide' blocks to control which sprite is visible on the stage at any given time, managing the focus of the story on the current emotion.",
+      "concept_description": "Using the 'show' and 'hide' blocks to make different sprites appear and disappear, so that only the sprite representing the current emotion is visible on the stage.",
       "grade_level": "1-4"
     },
     {
       "concept_name": "Using 'say' and 'think' Blocks for Narration",
-      "concept_description": "Using the 'say for seconds' and 'think for seconds' blocks to display speech and thought bubbles for sprites, conveying the narrative and the character's internal state.",
+      "concept_description": "Displaying speech or thought bubbles for a specified duration to convey a character's dialogue or internal thoughts as part of the story.",
       "grade_level": "1-4"
     },
     {
-      "concept_name": "Initializing State with 'when green flag clicked'",
-      "concept_description": "Using the 'when green flag clicked' event to set up the initial state of the project, including setting the initial backdrop, hiding inactive sprites, showing the first sprite, and setting the initial value of the 'emotion' variable.",
+      "concept_name": "Scene Management with Backdrops",
+      "concept_description": "Using the 'switch backdrop to' block to change the stage's background image to reflect a change in location or mood in the story.",
       "grade_level": "1-8"
     },
     {
-      "concept_name": "Changing Backdrops",
-      "concept_description": "Using the 'switch backdrop to' block to change the stage background to match the mood or scene, such as changing to 'Bedroom 3' when the 'Compassion' sprite appears.",
-      "grade_level": "1-8"
-    },
-    {
-      "concept_name": "Using Loops for Repetitive Action",
-      "concept_description": "Applying a 'repeat' loop to make a sprite perform an action multiple times. The 'Angry' sprite uses a repeat loop to move back and forth continuously.",
+      "concept_name": "Using a 'repeat' Loop for Animation",
+      "concept_description": "Employing the 'repeat' block to execute a set of motion blocks multiple times, creating a continuous movement effect for the 'Angry' sprite.",
       "grade_level": "5-8"
     },
     {
       "concept_name": "Conditional Motion with 'if on edge, bounce'",
-      "concept_description": "Using the 'if on edge, bounce' block inside a loop to keep a sprite within the visible stage area by reversing its direction when it hits the edge.",
+      "concept_description": "Using the 'if on edge, bounce' block inside a loop to make a sprite change direction automatically when it reaches the boundary of the stage.",
       "grade_level": "5-8"
     },
     {
-      "concept_name": "State Management via Variables",
-      "concept_description": "The core computational idea of using a single variable to represent and manage the 'state' of the program. The value of the 'emotion' variable dictates which sprite is active and what messages are broadcast.",
-      "grade_level": "5-12"
+      "concept_name": "Sprite Positioning with Coordinates",
+      "concept_description": "Using the 'go to x: y:' block to set a sprite's precise starting position on the stage when it appears.",
+      "grade_level": "5-8"
     },
     {
-      "concept_name": "Setting Sprite Position",
-      "concept_description": "Using the 'go to x: y:' block to place a sprite at a specific coordinate on the stage when it appears.",
-      "grade_level": "5-8"
+      "concept_name": "Controlling Script Timing with 'wait' block",
+      "concept_description": "Using the 'wait' block to introduce pauses into a script, controlling the timing and pacing of the animation and dialogue.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Playing Sounds on Event",
+      "concept_description": "Using the 'start sound' block to play a sound effect when a specific event occurs, such as when the 'Angry' sprite appears.",
+      "grade_level": "1-8"
     }
   ]
 }
