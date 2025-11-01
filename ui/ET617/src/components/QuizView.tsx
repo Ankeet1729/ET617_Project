@@ -69,7 +69,7 @@
 //     console.log("🔍 [QuizView] Submitting quiz with answers:", answers);
     
 //     try {
-//       const response = await fetch("http://localhost:5000/api/evaluate_quiz", {
+//       const response = await fetch(`${API_BASE_URL}/api/evaluate_quiz`, {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -460,7 +460,7 @@ import scratchblocks from 'scratchblocks';
 import 'scratchblocks/locales/all';
 
 // --- Base URL for images ---
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.BACKEND_URL || "http://localhost:5000";
 
 // --- UPDATED Question Interface ---
 interface Question {

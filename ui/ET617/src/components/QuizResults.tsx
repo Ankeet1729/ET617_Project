@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const API_BASE_URL = import.meta.env.BACKEND_URL || "http://localhost:5000";
+
 interface QuizResult {
   questionIndex: number;
   question: string;
