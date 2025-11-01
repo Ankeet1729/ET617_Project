@@ -34,7 +34,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   const fetchSupermodules = async () => {
     setLoading(true); setMessage("");
     try {
-      const res = await fetch(`${API_BASE_URL}/api/supermodules", { credentials: "include` });
+      const res = await fetch(`${API_BASE_URL}/api/supermodules`, { credentials: "include" });
       if (res.ok) {
         const data = await res.json();
         setSupermodules(data);
