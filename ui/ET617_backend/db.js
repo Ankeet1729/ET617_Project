@@ -1,30 +1,19 @@
 // db.js (ESM version)
 import pg from 'pg';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
 const { Pool } = pg;
 
 const pool = new Pool({
-  user: 'kali',       // PostgreSQL username
-  host: 'localhost',
-  database: 'kali',
-  password: 'qwerty',
-  port: 5432
+  user: process.env.user,       // PostgreSQL username
+  host: process.env.host,
+  database: process.env.database,
+  password: process.env.password,
+  port: process.env.port || 5432
 });
 
 export default pool;
-
-// db.js (ESM) - env-driven
-// import pg from 'pg';
-// const { Pool } = pg;
-
-// const pool = new Pool({
-//   user: 'postgres',
-//   host: 'localhost',
-//   database: 'postgres',
-//   password: 'password123',
-//   port: 5432
-// });
-
-
-
-// export default pool;
 
