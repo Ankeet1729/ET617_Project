@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import QuestionSetViewer from "./QuestionSetViewer";
 import ManualSetCreator from "./ManualSetCreator";
 
-const API_BASE_URL = import.meta.env.BACKEND_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 interface QuizSet {
   id: number;

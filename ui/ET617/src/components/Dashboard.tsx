@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import QuizView from "./QuizView";
 import QuizResults from "./QuizResults";
 
-const API_BASE_URL = import.meta.env.BACKEND_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 interface Supermodule { id: number; supermodule_code: string; supermodule_name: string; }
 interface Module { id: number; submodule_code: string; submodule_name: string; image_path: string | null; set_count: number; }

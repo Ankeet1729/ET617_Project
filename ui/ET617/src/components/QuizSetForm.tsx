@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_BASE_URL = import.meta.env.BACKEND_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 interface QuizSetFormProps {
   type: 'ai' | 'manual';
