@@ -107,7 +107,7 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({ student, on
     try {
       // fetch children submodules
       const submodules = await apiFetch(
-        `http://localhost:5000/api/supermodules/${supermoduleCode}/children`
+        `${API_BASE_URL}/api/supermodules/${supermoduleCode}/children`
       );
       const submoduleCodes: string[] = Array.isArray(submodules)
         ? submodules.map((s: any) => s.submodule_code).filter(Boolean)
@@ -115,7 +115,7 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({ student, on
 
       // fetch all activities for student
       const allActivities = await apiFetch(
-        `http://localhost:5000/admin/student_activity/${student.username}/${student.grade}`
+        `${API_BASE_URL}/admin/student_activity/${student.username}/${student.grade}`
       );
 
       const activitiesArray: Activity[] = Array.isArray(allActivities) ? allActivities : [];
@@ -143,7 +143,7 @@ const StudentActivityPanel: React.FC<StudentActivityPanelProps> = ({ student, on
     try {
       // API expects comma separated ids
       const res = await apiFetch(
-        `http://localhost:5000/admin/quiz_attempts?ids=${attemptIds.join(",")}`
+        `${API_BASE_URL}/admin/quiz_attempts?ids=${attemptIds.join(",")}`
       );
       setAttempts(Array.isArray(res) ? res : []);
     } catch (err: any) {

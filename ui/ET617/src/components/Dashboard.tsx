@@ -49,7 +49,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   const fetchModules = async (supermoduleCode: string) => {
     setLoading(true); setMessage("");
     try {
-      const res = await fetch(`http://localhost:5000/api/supermodules/${supermoduleCode}/children`, { credentials: "include" });
+      const res = await fetch(`${API_BASE_URL}/api/supermodules/${supermoduleCode}/children`, { credentials: "include" });
       if (res.ok) {
         const data = await res.json();
         setModules(data);
@@ -62,7 +62,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   const fetchQuizSets = async (submoduleCode: string) => {
     setLoading(true); setMessage("");
     try {
-      const res = await fetch(`http://localhost:5000/api/student/quiz-sets/${grade}/${submoduleCode}`, { credentials: "include" });
+      const res = await fetch(`${API_BASE_URL}/api/student/quiz-sets/${grade}/${submoduleCode}`, { credentials: "include" });
       if (res.ok) {
         const data = await res.json();
         setSets(data);
@@ -86,7 +86,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   const handleStartQuiz = async (setId: number, setName: string) => {
     setMessage(""); setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/fetch_quiz/${setId}`, { credentials: "include" });
+      const res = await fetch(`${API_BASE_URL}/api/fetch_quiz/${setId}`, { credentials: "include" });
       if (res.ok) {
         const quizData = await res.json();
         setSelectedQuiz({ id: setId, name: setName, data: quizData });
@@ -99,7 +99,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
   const handleShowResults = async (quizSetId: number) => {
     setMessage("Loading results..."); setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/get_last_result/${quizSetId}`, { credentials: "include" });
+      const res = await fetch(`${API_BASE_URL}/api/get_last_result/${quizSetId}`, { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch results");
       const data = await res.json();
       const results = data.results || [];
@@ -253,7 +253,7 @@ const Dashboard: React.FC<DashboardProps> = ({ username, grade, onLogout }) => {
                   <article key={m.submodule_code} style={{ borderRadius: 12, overflow: "hidden", background: "var(--surface)", border: "1px solid var(--border)" }}>
                     {m.image_path && (
                       <div style={{ width: "100%", height: 160, overflow: "hidden" }}>
-                        <img src={`http://localhost:5000${m.image_path}`} alt={m.submodule_name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={`${API_BASE_URL}${m.image_path}`} alt={m.submodule_name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                     )}
                     <div style={{ padding: 16 }}>

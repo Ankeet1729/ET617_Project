@@ -25,41 +25,35 @@ const allowedOrigins = new Set([
 ]);
 
 app.use(cors({
-  origin: [FRONTEND_URL], // <-- your Render frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  origin: function (origin, callback) {
+    // allow non-browser tools (curl, Postman) or same-origin requests having no origin header
+    if (!origin) return callback(null, true);
+
+    // Normalize IPv6 loopback that some browsers use
+    // Replace http://[::1]:5173 -> http://localhost:5173
+    let normalized = origin;
+    try {
+      normalized = origin.replace('http://[::1]', 'http://localhost').replace('https://[::1]', 'https://localhost');
+    } catch (e) {
+      // fallback to origin itself
+      normalized = origin;
+    }
+
+    // strip trailing slash for safe comparison
+    const normNoSlash = (u) => u && u.replace(/\/$/, '');
+
+    if (allowedOrigins.has(normNoSlash(normalized))) {
+      return callback(null, true);
+    }
+
+    console.warn('CORS blocked origin:', origin, '-> normalized:', normalized);
+    // Reject by returning false (not an Error) so express will send a proper CORS response
+    return callback(null, false);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
 }));
-
-// app.use(cors({
-//   origin: function (origin, callback) {
-//     // allow non-browser tools (curl, Postman) or same-origin requests having no origin header
-//     if (!origin) return callback(null, true);
-
-//     // Normalize IPv6 loopback that some browsers use
-//     // Replace http://[::1]:5173 -> http://localhost:5173
-//     let normalized = origin;
-//     try {
-//       normalized = origin.replace('http://[::1]', 'http://localhost').replace('https://[::1]', 'https://localhost');
-//     } catch (e) {
-//       // fallback to origin itself
-//       normalized = origin;
-//     }
-
-//     // strip trailing slash for safe comparison
-//     const normNoSlash = (u) => u && u.replace(/\/$/, '');
-
-//     if (allowedOrigins.has(normNoSlash(normalized))) {
-//       return callback(null, true);
-//     }
-
-//     console.warn('CORS blocked origin:', origin, '-> normalized:', normalized);
-//     // Reject by returning false (not an Error) so express will send a proper CORS response
-//     return callback(null, false);
-//   },
-//   credentials: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
-// }));
 
 // Short-circuit OPTIONS requests early so other middleware doesn't block preflight
 app.use((req, res, next) => {

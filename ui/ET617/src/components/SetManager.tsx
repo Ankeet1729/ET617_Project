@@ -106,7 +106,7 @@ const SetManager: React.FC = () => {
     setError("");
     try {
       const data = await apiFetch(
-        `http://localhost:5000/api/supermodules/${supermoduleCode}/children`
+        `${API_BASE_URL}/api/supermodules/${supermoduleCode}/children`
       );
       setModules(Array.isArray(data) ? data : []);
     } catch (err: any) {
@@ -123,7 +123,7 @@ const SetManager: React.FC = () => {
     setError("");
     try {
       const data = await apiFetch(
-        `http://localhost:5000/admin/quizzes/sets/${grade}/${submoduleCode}`
+        `${API_BASE_URL}/admin/quizzes/sets/${grade}/${submoduleCode}`
       );
       const arr = Array.isArray(data) ? data : [];
       setSets(arr);
@@ -144,7 +144,7 @@ const SetManager: React.FC = () => {
   const fetchReattemptsAllowed = async (setId: number) => {
     try {
       const data = await apiFetch(
-        `http://localhost:5000/api/admin/quiz_sets/${setId}/fetch_reattempts_allowed`
+        `${API_BASE_URL}/api/admin/quiz_sets/${setId}/fetch_reattempts_allowed`
       );
       setSets((prev) => prev.map((s) => (s.id === setId ? { ...s, reattempts_allowed: !!data?.reattempts_allowed } : s)));
     } catch (err) {
@@ -159,7 +159,7 @@ const SetManager: React.FC = () => {
     // optimistic update
     setSets((prev) => prev.map((s) => (s.id === setId ? { ...s, is_hidden: !currentHiddenStatus } : s)));
     try {
-      await apiFetch(`http://localhost:5000/api/admin/quiz_sets/${setId}/visibility`, {
+      await apiFetch(`${API_BASE_URL}/api/admin/quiz_sets/${setId}/visibility`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ is_hidden: !currentHiddenStatus }),
@@ -176,7 +176,7 @@ const SetManager: React.FC = () => {
     // optimistic update
     setSets((prev) => prev.map((s) => (s.id === setId ? { ...s, reattempts_allowed: !currentReattemptsAllowed } : s)));
     try {
-      await apiFetch(`http://localhost:5000/api/admin/quiz_sets/${setId}/reattempts_allowed`, {
+      await apiFetch(`${API_BASE_URL}/api/admin/quiz_sets/${setId}/reattempts_allowed`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reattempts_allowed: !currentReattemptsAllowed }),
@@ -218,7 +218,7 @@ const SetManager: React.FC = () => {
   const deleteSet = async (setId: number) => {
     if (!window.confirm("Are you sure you want to delete this quiz set?")) return;
     try {
-      await apiFetch(`http://localhost:5000/admin/question_set/${setId}`, { method: "DELETE" });
+      await apiFetch(`${API_BASE_URL}/admin/question_set/${setId}`, { method: "DELETE" });
       alert("Quiz set deleted successfully!");
       if (selectedGrade && selectedModule) fetchSets(selectedGrade, selectedModule);
     } catch (err) {

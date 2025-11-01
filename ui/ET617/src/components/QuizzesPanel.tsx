@@ -47,7 +47,7 @@ const QuizzesPanel: React.FC = () => {
   const fetchModules = async (grade: number) => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/admin/quizzes/grades/modules?grade=${grade}`, {
+      const res = await fetch(`${API_BASE_URL}/admin/quizzes/grades/modules?grade=${grade}`, {
         credentials: 'include',
       });
       if (!res.ok) throw new Error(`Failed to fetch modules: ${res.statusText}`);
@@ -65,7 +65,7 @@ const QuizzesPanel: React.FC = () => {
   const fetchSets = async (grade: number, module: number) => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/admin/quizzes/${grade}/${module}/sets`, {
+      const res = await fetch(`${API_BASE_URL}/admin/quizzes/${grade}/${module}/sets`, {
         credentials: 'include',
       });
       if (!res.ok) throw new Error(`Failed to fetch sets: ${res.statusText}`);

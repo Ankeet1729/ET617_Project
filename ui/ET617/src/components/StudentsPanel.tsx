@@ -76,7 +76,7 @@ const StudentsPanel: React.FC = () => {
     setError(null);
 
     try {
-      const data = await apiFetch(`http://localhost:5000/admin/students/${grade}`);
+      const data = await apiFetch(`${API_BASE_URL}/admin/students/${grade}`);
       setStudents(Array.isArray(data) ? data : []);
       setSelectedGrade(grade);
     } catch (err: any) {
