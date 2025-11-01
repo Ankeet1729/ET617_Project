@@ -14,15 +14,13 @@ dotenv.config();
 
 const app = express();
 
-const FRONTEND_URL = 'abcd';
-const BACKEND_URL = 'efgh';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3000';
 
 // ------------------ CORS (MUST BE BEFORE session & auth) ------------------
 const allowedOrigins = new Set([
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
+  FRONTEND_URL,
+  BACKEND_URL
   // add other dev origins here if needed
 ]);
 
