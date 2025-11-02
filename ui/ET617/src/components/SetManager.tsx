@@ -60,6 +60,7 @@ const SetManager: React.FC = () => {
   const [error, setError] = useState("");
   const [showGenerateForm, setShowGenerateForm] = useState(false);
   const [setName, setSetName] = useState("");
+  const [additionalInstructions, setAdditionalInstructions] = useState("");
   const [generating, setGenerating] = useState(false);
   const [viewingSetId, setViewingSetId] = useState<number | null>(null);
   const [showManualCreator, setShowManualCreator] = useState(false);
@@ -200,12 +201,14 @@ const SetManager: React.FC = () => {
           submodule_code: selectedModule,
           grade: selectedGrade,
           set_name: setName || undefined,
+          additionalInstructions: additionalInstructions || ".",
         }),
       });
 
       alert(`Quiz generated successfully! ${data?.question_count ?? 0} questions created.`);
       setShowGenerateForm(false);
       setSetName("");
+      setAdditionalInstructions("");
       fetchSets(selectedGrade, selectedModule);
     } catch (err: any) {
       console.error("handleGenerateQuiz error:", err);
@@ -370,9 +373,26 @@ const SetManager: React.FC = () => {
                 onChange={(e) => setSetName(e.target.value)}
                 style={{ width: "100%", padding: 10, marginBottom: 12, borderRadius: 6, border: "1px solid #475569", background: "#0f172a", color: "#f1f5f9" }}
               />
+              <textarea
+                placeholder="Additional Instructions (optional) - e.g., 'Focus on debugging concepts' or 'Include more practical examples'"
+                value={additionalInstructions}
+                onChange={(e) => setAdditionalInstructions(e.target.value)}
+                rows={4}
+                style={{ 
+                  width: "100%", 
+                  padding: 10, 
+                  marginBottom: 12, 
+                  borderRadius: 6, 
+                  border: "1px solid #475569", 
+                  background: "#0f172a", 
+                  color: "#f1f5f9",
+                  fontFamily: "inherit",
+                  resize: "vertical"
+                }}
+              />
               <div style={{ display: "flex", gap: 8 }}>
                 <button onClick={handleGenerateQuiz} className="btn green" disabled={generating}>{generating ? "Generating..." : "Generate Quiz"}</button>
-                <button onClick={() => { setShowGenerateForm(false); setSetName(""); }} className="btn red">Cancel</button>
+                <button onClick={() => { setShowGenerateForm(false); setSetName(""); setAdditionalInstructions(""); }} className="btn red">Cancel</button>
               </div>
             </div>
           )}

@@ -153,6 +153,14 @@ You are an expert AI quiz generator for a Scratch programming curriculum. Your t
 
 8. Do not explicitly use the word "transcript" or "image" in the questions or explanations.
 
+9. The question should not be strictly from the course content only - only the concepts need to match, no need to quiz on the exact examples given in the video - only concept matters - be creative and flexible in the questions generated
+
+10. set a max limit of 13 questions if concept count > max limit, then favour the concepts which are crucial and more important. if concept count < max limit, then add more questions around the same concepts but do not repeat the same question.
+
+11. there should be at max only 2 questions from remembering and understanding in bloom's taxonomy. There should be more focus on the higher bloom levels.
+
+12. do not make the answer too obvious in the options. Have a few distractor options but do not make it confusing either. Find a balance.
+
 IMPORTANT RULES FOR EXPLANATIONS:
 - Each explanation MUST be 2-4 sentences
 - FIRST sentence: Explain WHY the correct answer is right
@@ -1338,7 +1346,7 @@ app.post('/admin/question_set/:setId/add_question', checkAdmin, upload.single('i
 // Generate quiz using Python script
 // Generate quiz using Python script - UPDATED FOR YOUR SCHEMA
 app.post('/generatequiz', checkAdmin, async (req, res) => {
-  const { submodule_code, grade, set_name } = req.body;
+  const { submodule_code, grade, set_name, additionalInstructions } = req.body;
   
   console.log('═══════════════════════════════════════════');
   console.log('🔍 [/generatequiz] Request received');
@@ -1390,7 +1398,10 @@ app.post('/generatequiz', checkAdmin, async (req, res) => {
       .replace('{concept_details}', conceptDetails);
     
     // Add transcript to the full prompt
-    const fullPrompt = `${prompt}\n\n### Submodule Transcript:\n${context.transcript}`;
+    let fullPrompt = `${prompt}\n\n### Submodule Transcript:\n${context.transcript}`;
+    if (additionalInstructions && additionalInstructions.length >= 5) {
+      fullPrompt += "Additional Instructions:\n\n" + additionalInstructions;
+    }
     
     console.log('🤖 Calling Gemini API...');
     
