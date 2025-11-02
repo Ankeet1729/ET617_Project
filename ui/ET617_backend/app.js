@@ -10,9 +10,11 @@ import path from 'path';
 import fs from 'fs';
 import { spawn } from 'child_process';
 
+
 dotenv.config();
 
 const app = express();
+const fsPromises = fs.promises;
 
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3000';
@@ -113,101 +115,190 @@ const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
 // ==================== HELPER FUNCTIONS ====================
 
 // Function to generate quiz using Gemini AI (YOUR EXISTING - UNCHANGED)
-async function generateQuizWithGemini(transcript, grade, no_of_mcq = 7, no_of_tf = 3) {
-  const prompt = `
-You are an expert in educational psychology and curriculum design.
-Your task is to generate a pedagogically sound quiz from the provided learning material,
-keeping the learner's cognitive development in mind.
+const PROMPT_B = `
+You are an expert AI quiz generator for a Scratch programming curriculum. Your task is to create a set of questions for a specific grade and submodule based on the provided learning materials.
 
-### Input Parameters
-1. Grade Level: ${grade}
-2. Transcript: Provided at the end.
+### Input Context
+- **Submodule Code:** {submodule_code}
+- **Grade:** {grade}
+- **Submodule Transcript:** The full text content for the submodule.
+- **Submodule Image:** A visual aid providing context.
+
+### Concepts to Cover (MANDATORY: Generate ONE question for EACH concept listed below)
+
+{concept_details}
 
 ### Instructions
-1. Read the entire transcript to understand the core concepts.
-2. Generate a quiz with exactly:
-   - ${no_of_mcq} Multiple Choice Questions (4 options each, one correct).
-   - ${no_of_tf} True/False Questions.
 
-3. **Grade-Level Adaptation (Based on NEP 5+3+3+4 System):**
-   - **foundational (Grades 1-2):** Use very simple language. Questions should be direct and concrete. Focus on "Remembering."
-   - **preparatory (Grades 3-5):** Use simple, clear language. Introduce questions that require basic "Understanding" and connections.
-   - **middle (Grades 6-8):** Use standard terminology. Questions should test "Application" of concepts and basic "Analysis."
-   - **secondary (Grades 9-12):** Use precise, academic language. Questions should challenge learners with "Analysis," "Evaluation," and synthesis of information.
+1. **CRITICAL:** Generate EXACTLY one unique question for **each and every concept** listed above.
 
-4. **Cognitive Diversity (Based on Bloom's Taxonomy):**
-   - Structure the quiz to have a gradual increase in cognitive demand.
-   - Start with Lower-Order Thinking Skills (LOTS) and move to Higher-Order Thinking Skills (HOTS).
-   - Distribute questions across these levels as appropriate for the grade:
-     - **Remembering:** Recalling facts and basic concepts.
-     - **Understanding:** Explaining ideas or concepts.
-     - **Applying:** Using information in new situations.
-     - **Analyzing:** Drawing connections among ideas.
-     - **Evaluating:** Justifying a stand or decision.
+2. The question type should be either 'MCQ' (Multiple Choice with 4 options) or 'BOOLEAN' (True/False). Aim for 1-2 BOOLEAN questions if possible.
 
-5. **Question Quality:**
-   - Ensure questions are unambiguous and directly based on the transcript's terminology.
-   - The goal is to test comprehension and critical thinking, not just rote memorization.
+3. For BOOLEAN questions:
+   - Use "correct_answer": "True" or "correct_answer": "False" (NOT "A" or "B")
+   - Set "options": {} (empty object)
 
-6. Provide a concise explanation for each answer, referencing the core concept from the transcript.
+4. For MCQ questions:
+   - Provide exactly 4 options labeled A, B, C, D
+   - Set "correct_answer" to the letter of the correct option
 
-7. No need to put A., B., C., D. before options in MCQs output.
+5. Each question MUST:
+   - Relate directly to the concept's description provided above
+   - Reference the submodule's transcript and image context
+   - Have an appropriate Bloom's Taxonomy level
 
-8. Also have a field called "needs_image" in each question object, set it to true if the question would benefit from an accompanying image, else false.
+6. Use the exact concept name as provided in the list above.
 
-9. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<start_time>X</start_time> <end_time>Y</end_time> ... ". So you should only generate the quiz for the part between <start_time> and <end_time>, but keep the context of the entire transcript.
-10. At the start of the transcript it will be mentioned from which part to which part of the transcript the quiz should be generated, example: "<Snippet 1> ... <Snippet 2>". So you should only generate the quiz for the part between <Snippet 1> and <Snippet 2>, but keep the context of the entire transcript.
-11. Do not keep any ambiguous options in MCQs where 2 or more answers could be correct.
-12. In the questions, do not explicitly use the word "transcript" anywhere.
+7. Follow the specified JSON output format precisely - NO extra text, NO markdown formatting.
 
-### Output Format (Strict JSON)
+8. Do not explicitly use the word "transcript" or "image" in the questions or explanations.
+
+IMPORTANT RULES FOR EXPLANATIONS:
+- Each explanation MUST be 2-4 sentences
+- FIRST sentence: Explain WHY the correct answer is right
+- SECOND sentence: Briefly mention why 1-2 wrong answers are incorrect
+- Use simple, grade-appropriate language
+- Be specific and educational
+
+### Output Format (Strict JSON - No extra text or markdown)
+
 {
-  "multiple_choice": [
+  "questions": [
     {
-      "question": "...",
-      "options": ["A", "B", "C", "D"],
-      "answer": "B",
-      "explanation": "...",
-      "bloom_level": "Remembering",
-      "concept": "...",
-      "needs_image": false,
-      "grade": grade_level
-    }
-  ],
-  "true_false": [
+      "concept": "Exact concept name from the list",
+      "grade": {grade},
+      "type": "MCQ",
+      "question_text": "The full text of the question?",
+      "options": {
+        "A": "Option A text",
+        "B": "Option B text",
+        "C": "Option C text",
+        "D": "Option D text"
+      },
+      "correct_answer": "A",
+      "bloom_level": "Applying",
+      "explanation": "A brief explanation of the correct answer."
+    },
     {
-      "question": "...",
-      "answer": "True",
-      "explanation": "...",
+      "concept": "Another exact concept name",
+      "grade": {grade},
+      "type": "BOOLEAN",
+      "question_text": "True or False: Statement about the concept?",
+      "options": {},
+      "correct_answer": "True",
       "bloom_level": "Understanding",
-      "concept": "...",
-      "needs_image": true,
-      "grade": grade_level
+      "explanation": "A brief explanation of the correct answer."
     }
   ]
 }
-
-### Important points to be noted
-1. Do not explicitly mention the word "transcript" in any question or answer or explanation. Think of it like a student sees the video and then directly sees the questions.
-2. In one or two words, mention the concept tested from the video/transcript under "concept" in json.
-3. Include 60% of the questions from "apply" and above from Bloom's Taxonomy. [i.e. apply, analyze, evaluate, create/synthesize]
-
-### Transcript:
-${transcript}
 `;
 
+// Helper function to fetch generation context
+async function fetchGenerationContext(pool, submodule_code, grade) {
   try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    let text = response.text();
-    text = text.slice(7, -3);
-
-    // Parse the JSON response
-    const quizData = JSON.parse(text);
-    return quizData;
+    // Fetch submodule data
+    const submoduleResult = await pool.query(
+      'SELECT transcript, image_path FROM submodules WHERE submodule_code = $1',
+      [submodule_code]
+    );
+    
+    if (submoduleResult.rows.length === 0) {
+      return null;
+    }
+    
+    const context = {
+      transcript: submoduleResult.rows[0].transcript,
+      image_path: submoduleResult.rows[0].image_path
+    };
+    
+    // Fetch concepts with full details
+    const conceptsResult = await pool.query(
+      `SELECT c.concept_name, c.description, c.ct_concepts
+       FROM concepts c
+       JOIN concept_grade_mapping cgm ON c.id = cgm.concept_id
+       JOIN submodules s ON c.submodule_id = s.id
+       WHERE s.submodule_code = $1 AND cgm.grade = $2
+       ORDER BY c.concept_name`,
+      [submodule_code, grade]
+    );
+    
+    context.concepts = conceptsResult.rows;
+    
+    return context;
   } catch (error) {
-    console.error('Error generating quiz with Gemini:', error);
-    throw new Error('Failed to generate quiz');
+    console.error('Error fetching generation context:', error);
+    throw error;
+  }
+}
+
+// Helper function to fix boolean questions
+function fixBooleanQuestions(questionsData) {
+  if (!questionsData || !questionsData.questions) {
+    return questionsData;
+  }
+  
+  for (const q of questionsData.questions) {
+    if (q.type === 'BOOLEAN' || q.type === 'Boolean') {
+      q.type = 'BOOLEAN';
+      
+      // Fix correct_answer if it's A or B
+      if (q.correct_answer === 'A') {
+        q.correct_answer = 'True';
+      } else if (q.correct_answer === 'B') {
+        q.correct_answer = 'False';
+      }
+      
+      // Ensure options is empty for boolean
+      q.options = {};
+    }
+  }
+  
+  return questionsData;
+}
+
+// Helper function to send to Gemini
+async function sendToGemini(promptText, imagePath) {
+  try {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    
+    const contentParts = [{ text: promptText }];
+    
+    // Add image if available
+    if (imagePath) {
+      try {
+        const imageBuffer = await fs.readFile(imagePath);
+        const imageData = await sharp(imageBuffer)
+          .resize(1024, 1024, { fit: 'inside' })
+          .toBuffer();
+        
+        contentParts.push({
+          inlineData: {
+            data: imageData.toString('base64'),
+            mimeType: 'image/jpeg'
+          }
+        });
+        console.log('✅ Image loaded and added to prompt');
+      } catch (imgError) {
+        console.warn('⚠️ Could not load image:', imgError.message);
+      }
+    }
+    
+    const result = await model.generateContent(contentParts);
+    const response = await result.response;
+    let text = response.text().trim();
+    
+    // Remove markdown code blocks if present
+    if (text.startsWith('```json')) {
+      text = text.slice(7, -3).trim();
+    } else if (text.startsWith('```')) {
+      text = text.slice(3, -3).trim();
+    }
+    
+    return text;
+  } catch (error) {
+    console.error('Gemini API error:', error);
+    throw error;
   }
 }
 
@@ -1270,125 +1361,133 @@ app.post('/generatequiz', checkAdmin, async (req, res) => {
     
     const submodule_id = submoduleResult.rows[0].id;
     console.log('🔍 Submodule ID:', submodule_id);
-    console.log('🔍 Starting Python script...');
+    console.log('🔍 Fetching generation context...');
     
-    // Call Python script
-    const pythonProcess = spawn('python3', [
-      'generate_questions.py',
-      submodule_code,
-      grade.toString()
-    ]);
+    // Fetch context from database
+    const context = await fetchGenerationContext(pool, submodule_code, grade);
     
-    let dataString = '';
-    let errorString = '';
+    if (!context || !context.concepts || context.concepts.length === 0) {
+      return res.status(404).json({ 
+        error: `Could not find concepts for submodule '${submodule_code}' and grade ${grade}` 
+      });
+    }
     
-    pythonProcess.stdout.on('data', (data) => {
-      dataString += data.toString();
-    });
+    console.log(`🔍 Found ${context.concepts.length} concepts for this submodule/grade`);
     
-    pythonProcess.stderr.on('data', (data) => {
-      errorString += data.toString();
-      console.error('🔴 Python stderr:', data.toString());
-    });
+    // Build detailed concept list
+    const conceptDetails = context.concepts.map(concept => {
+      const ctList = Array.isArray(concept.ct_concepts) ? concept.ct_concepts : [];
+      const ctString = ctList.length > 0 ? ctList.join(', ') : 'N/A';
+      const description = concept.description || 'No detailed description available.';
+      
+      return `**${concept.concept_name}**\n  Description: ${description}\n  Computational Thinking Concepts: ${ctString}`;
+    }).join('\n\n');
     
-    pythonProcess.on('close', async (code) => {
-      if (code !== 0) {
-        console.error('❌ Python script failed with code:', code);
-        console.error('❌ Error:', errorString);
-        return res.status(500).json({ 
-          error: 'Question generation failed', 
-          details: errorString 
-        });
+    // Format the prompt
+    const prompt = PROMPT_B
+      .replace('{submodule_code}', submodule_code)
+      .replace(/{grade}/g, grade)
+      .replace('{concept_details}', conceptDetails);
+    
+    // Add transcript to the full prompt
+    const fullPrompt = `${prompt}\n\n### Submodule Transcript:\n${context.transcript}`;
+    
+    console.log('🤖 Calling Gemini API...');
+    
+    // Send to Gemini
+    const responseText = await sendToGemini(fullPrompt, context.image_path);
+    
+    // Parse the response
+    let generatedData;
+    try {
+      generatedData = JSON.parse(responseText);
+      generatedData = fixBooleanQuestions(generatedData);
+    } catch (parseError) {
+      console.error('❌ Failed to parse Gemini response:', parseError);
+      console.error('❌ Raw response:', responseText);
+      return res.status(500).json({ 
+        error: 'Failed to parse generated questions',
+        details: parseError.message
+      });
+    }
+    
+    if (generatedData.error) {
+      return res.status(500).json({ error: generatedData.error });
+    }
+    
+    if (!generatedData.questions || generatedData.questions.length === 0) {
+      return res.status(500).json({ error: 'No questions were generated' });
+    }
+    
+    console.log('🔍 Generated', generatedData.questions.length, 'questions');
+    
+    // Create question set first
+    const finalSetName = set_name || `${submodule_code} - Grade ${grade} Quiz`;
+    const setResult = await pool.query(`
+      INSERT INTO question_sets (submodule_id, grade, set_name, created_at, is_hidden)
+      VALUES ($1, $2, $3, NOW(), TRUE)
+      RETURNING id
+    `, [submodule_id, grade, finalSetName]);
+    
+    const questionSetId = setResult.rows[0].id;
+    console.log('✅ Question set created with ID:', questionSetId);
+    
+    // Insert questions and map to set
+    let insertedCount = 0;
+    for (const q of generatedData.questions) {
+      // Get concept_id from concept name
+      const conceptResult = await pool.query(`
+        SELECT id FROM concepts 
+        WHERE submodule_id = $1 AND concept_name = $2
+      `, [submodule_id, q.concept]);
+      
+      if (conceptResult.rows.length === 0) {
+        console.warn('⚠️ Concept not found:', q.concept);
+        continue;
       }
       
-      try {
-        console.log('🔍 Parsing Python output...');
-        const generatedData = JSON.parse(dataString);
-        
-        if (generatedData.error) {
-          return res.status(500).json({ error: generatedData.error });
-        }
-        
-        console.log('🔍 Generated', generatedData.questions.length, 'questions');
-        
-        // Create question set first
-        const finalSetName = set_name || `${submodule_code} - Grade ${grade} Quiz`;
-        const setResult = await pool.query(`
-          INSERT INTO question_sets (submodule_id, grade, set_name, created_at, is_hidden)
-          VALUES ($1, $2, $3, NOW(), TRUE)
-          RETURNING id
-        `, [submodule_id, grade, finalSetName]);
-        
-        const questionSetId = setResult.rows[0].id;
-        console.log('✅ Question set created with ID:', questionSetId);
-        
-        // Insert questions and map to set
-        let insertedCount = 0;
-        for (const q of generatedData.questions) {
-          // Get concept_id from concept name
-          const conceptResult = await pool.query(`
-            SELECT id FROM concepts 
-            WHERE submodule_id = $1 AND concept_name = $2
-          `, [submodule_id, q.concept]);
-          
-          if (conceptResult.rows.length === 0) {
-            console.warn('⚠️ Concept not found:', q.concept);
-            continue;
-          }
-          
-          const concept_id = conceptResult.rows[0].id;
-          
-          // Insert question with explanation
-          const questionResult = await pool.query(`
-            INSERT INTO questions (
-              concept_id, grade, question_text, question_type, options, 
-              correct_answer, bloom_level, image_path, explanation
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-            RETURNING id
-          `, [
-            concept_id,
-            grade,
-            q.question_text || q.question,
-            q.type || 'MCQ',
-            JSON.stringify(q.options || {}),
-            q.correct_answer || q.answer,
-            q.bloom_level,
-            q.image_path || null,
-            q.explanation || ''  // Add explanation field
-          ]);
-
-          
-          const questionId = questionResult.rows[0].id;
-          
-          // Map question to set
-          await pool.query(`
-            INSERT INTO question_set_items (set_id, question_id)
-            VALUES ($1, $2)
-          `, [questionSetId, questionId]);
-          
-          insertedCount++;
-        }
-        
-        console.log('✅ Quiz generated successfully!');
-        console.log('🔍 Question Set ID:', questionSetId);
-        console.log('🔍 Questions inserted:', insertedCount);
-        console.log('═══════════════════════════════════════════');
-        
-        res.json({
-          success: true,
-          message: 'Quiz generated successfully',
-          question_set_id: questionSetId,
-          question_count: insertedCount
-        });
-        
-      } catch (parseError) {
-        console.error('❌ Failed to parse or insert questions:', parseError);
-        console.error('❌ Raw Python output:', dataString);
-        res.status(500).json({ 
-          error: 'Failed to process generated questions',
-          details: parseError.message
-        });
-      }
+      const concept_id = conceptResult.rows[0].id;
+      
+      // Insert question with explanation
+      const questionResult = await pool.query(`
+        INSERT INTO questions (
+          concept_id, grade, question_text, question_type, options, 
+          correct_answer, bloom_level, image_path, explanation
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        RETURNING id
+      `, [
+        concept_id,
+        grade,
+        q.question_text || q.question,
+        q.type || 'MCQ',
+        JSON.stringify(q.options || {}),
+        q.correct_answer || q.answer,
+        q.bloom_level,
+        q.image_path || null,
+        q.explanation || ''
+      ]);
+      
+      const questionId = questionResult.rows[0].id;
+      
+      // Map question to set
+      await pool.query(`
+        INSERT INTO question_set_items (set_id, question_id)
+        VALUES ($1, $2)
+      `, [questionSetId, questionId]);
+      
+      insertedCount++;
+    }
+    
+    console.log('✅ Quiz generated successfully!');
+    console.log('🔍 Question Set ID:', questionSetId);
+    console.log('🔍 Questions inserted:', insertedCount);
+    console.log('═══════════════════════════════════════════');
+    
+    res.json({
+      success: true,
+      message: 'Quiz generated successfully',
+      question_set_id: questionSetId,
+      question_count: insertedCount
     });
     
   } catch (err) {
