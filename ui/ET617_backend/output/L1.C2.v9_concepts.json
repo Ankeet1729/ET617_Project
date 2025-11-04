@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L1.C2.v9",
+  "submodule_name": "Problem Solving with Computers",
+  "concepts": [
+    {
+      "concept_name": "Internet Cookies",
+      "concept_description": "Internet cookies are small pieces of data stored on a user's computer by websites. They contain a unique user ID and are used to track browsing activity and preferences, allowing websites to identify and remember users.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "First-party vs. Third-party Cookies",
+      "concept_description": "First-party cookies are set by the website a user is directly visiting, while third-party cookies are set by a different domain, often for advertising or tracking across multiple sites. Blocking third-party cookies can enhance user privacy.",
+      "grade_level": "7-11"
+    },
+    {
+      "concept_name": "Cookie Policies",
+      "concept_description": "Cookie policies are statements by websites that explain what types of cookies they use, why they use them, and how users can manage their cookie preferences. Users should review cookie policies before agreeing to allow a website to use cookies.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Browser Security Settings",
+      "concept_description": "Web browsers offer security settings that allow users to control how cookies are handled, including blocking third-party cookies or clearing existing cookies. These settings help users manage their online privacy.",
+      "grade_level": "7-10"
+    },
+    {
+      "concept_name": "Privacy Browser Extensions",
+      "concept_description": "Privacy browser extensions like Privacy Badger and Ghostery block trackers and third-party cookies that collect user data without explicit consent. These extensions can enhance online privacy and security.",
+      "grade_level": "7-11"
+    },
+    {
+      "concept_name": "Cookies for Login Information",
+      "concept_description": "Cookies can store login details for websites, allowing users to automatically log in without re-entering their credentials each time. This saves time and provides a more convenient browsing experience.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Big Data",
+      "concept_description": "Big data refers to extremely large and complex datasets that are analyzed to reveal patterns, trends, and associations. Examples include Google searches, social media posts, location data, and online shopping history.",
+      "grade_level": "8-12"
+    },
+    {
+      "concept_name": "Data Monetization",
+      "concept_description": "Data monetization is the process of turning data into revenue. This can be achieved through targeted advertising, personalized recommendations, and other data-driven services.",
+      "grade_level": "9-12"
+    },
+    {
+      "concept_name": "Algorithms for Pattern Recognition",
+      "concept_description": "Algorithms are used to analyze large datasets and identify patterns in user behavior and preferences. These patterns can then be used to predict future behavior and personalize user experiences.",
+      "grade_level": "9-12"
+    },
+    {
+      "concept_name": "Potential Privacy Concerns with Big Data",
+      "concept_description": "The collection and analysis of big data raise privacy concerns, as it can reveal sensitive information about individuals and potentially lead to misuse or discrimination. Balancing the benefits of big data with the need for privacy is a critical challenge.",
+      "grade_level": "8-12"
+    },
+    {
+      "concept_name": "Phishing Detection",
+      "concept_description": "Phishing messages are deceptive attempts to acquire sensitive information like usernames, passwords, and credit card details by disguising as a trustworthy entity. These often use manipulative language and trigger a sense of urgency or fear.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Spam Triggers in Emails",
+      "concept_description": "Certain words and phrases, such as 'unbelievable discounts' or language that creates a sense of urgency, can trigger spam filters. Spelling errors and bad formatting are also common spam triggers.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Browser Cache",
+      "concept_description": "Browser cache is a storage location on a computer's hard drive that is used to store frequently accessed web page elements. This allows faster loading times on subsequent visits to the same site, improving browsing experience.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Clearing Cookies vs. Clearing Cache",
+      "concept_description": "Clearing cookies removes website data used for tracking and preferences, requiring you to log in again. Clearing the cache removes temporary files used for faster loading, potentially slowing down initial page loads but freeing up disk space.",
+      "grade_level": "7-10"
+    },
+    {
+      "concept_name": "AI and Machine Learning Applications",
+      "concept_description": "Artificial intelligence (AI) and machine learning are being used in various applications, including assisting people with disabilities, helping with anxiety and depression, and improving computer science education. These technologies offer potential benefits for humanity.",
+      "grade_level": "8-12"
+    }
+  ]
+}

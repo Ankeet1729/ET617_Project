@@ -1,0 +1,66 @@
+{
+  "submodule_code": "L1.C1.v1",
+  "submodule_name": "Introduction to Computer Components",
+  "concepts": [
+    {
+      "concept_name": "Computer Definition",
+      "concept_description": "A computer is a machine that can perform calculations and other tasks based on instructions. It consists of different components that work together to process information.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "CPU (Central Processing Unit)",
+      "concept_description": "The CPU is the 'brain' of the computer that executes instructions.  It performs arithmetic operations and controls the other components of the system.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "RAM (Random Access Memory)",
+      "concept_description": "RAM is a temporary storage space that holds data and instructions that the CPU is actively using.  It is faster than storage drives but loses its data when the computer is turned off.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "OS (Operating System)",
+      "concept_description": "The Operating System manages the computer's hardware and software resources. It acts as an intermediary between the user and the hardware, allowing multiple programs to run simultaneously.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Drive (Storage)",
+      "concept_description": "A storage drive, like a hard drive or SSD, stores data persistently, even when the computer is off. It holds files, programs, and the operating system itself.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "GPU (Graphics Processing Unit)",
+      "concept_description": "The GPU is responsible for rendering images and videos on the display screen. It excels at parallel processing, making it suitable for graphics-intensive tasks.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Cache Memory",
+      "concept_description": "Cache memory is a small, fast memory that stores frequently accessed data. This allows the CPU to access information more quickly than retrieving it from RAM, improving performance.",
+      "grade_level": "7-10"
+    },
+    {
+      "concept_name": "Computer Components Collaboration",
+      "concept_description": "Different computer components (CPU, RAM, GPU, Storage, etc.) work together to complete tasks. Each component has a specific role and interacts with others to process information efficiently.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Role of CPU as Controller",
+      "concept_description": "The CPU acts as the central controller, directing the activities of other computer components.  It dictates what the other components do and when they do it to ensure the correct execution of tasks.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Temporary vs. Permanent Storage",
+      "concept_description": "RAM provides temporary storage for data actively being used, while storage drives provide permanent storage. Data in RAM is lost when power is off, but data on storage drives persists.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "The relationship between RAM and CPU",
+      "concept_description": "The CPU needs RAM to quickly access instructions and data. RAM provides the CPU with the necessary information for computations, thus allowing it to perform its tasks.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Importance of Teamwork in Computer Operation",
+      "concept_description": "A computer operates efficiently because its components work together as a team. Each part plays a specific role, and their combined efforts result in completing complex tasks.",
+      "grade_level": "3-7"
+    }
+  ]
+}

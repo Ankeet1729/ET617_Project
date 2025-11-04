@@ -1,0 +1,61 @@
+{
+  "submodule_code": "L2.C2.v14",
+  "submodule_name": "Sound and Events in Scratch",
+  "concepts": [
+    {
+      "concept_name": "Algorithm Definition",
+      "concept_description": "An algorithm is a step-by-step set of instructions to solve a problem or achieve a specific outcome. The video demonstrates this by creating instructions to draw a square, highlighting the importance of clear, ordered steps.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Decomposition",
+      "concept_description": "Decomposition is the process of breaking down a complex problem or task into smaller, more manageable sub-tasks. This makes the overall problem easier to understand and solve, as demonstrated by dividing the wild edibles app development into categories like fruits, leaves, roots, and seeds.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Abstraction",
+      "concept_description": "Abstraction involves focusing on the essential details of a problem while ignoring or hiding unnecessary complexity. In the context of the wild edibles app, Yahya used abstraction by focusing only on wild edibles in Kashmir, ignoring those in other regions of India.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Pattern Recognition",
+      "concept_description": "Pattern recognition is the ability to identify recurring similarities or structures in data or problems. Yahya used pattern recognition to categorize wild edibles into fruits, leaves, roots, and seeds to organize his digital library.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Sequencing",
+      "concept_description": "Sequencing involves arranging instructions or events in a specific order to achieve a desired outcome. The algorithm for drawing a square demonstrates sequencing, with each step (draw a line, turn 90 degrees) needing to be executed in the correct order.",
+      "grade_level": "3-6"
+    },
+    {
+      "concept_name": "Computational Thinking",
+      "concept_description": "Computational thinking is a problem-solving approach that involves breaking down complex problems, recognizing patterns, abstracting essential details, and designing algorithms. The development of the wild edibles app is a practical example of applying computational thinking skills.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Generalization",
+      "concept_description": "Generalization is the process of creating a solution that can be applied to a broader range of similar problems. Yahya's wild edibles app design can be generalized to create similar apps for other localities.",
+      "grade_level": "7-11"
+    },
+    {
+      "concept_name": "Algorithm for App Design",
+      "concept_description": "The algorithm for the wild edibles app outlines the steps for creating the app, including designing a home screen, adding buttons for categories, and creating pages for each category with relevant information. This provides a structured approach to app development.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Using Scratch for Coding",
+      "concept_description": "Scratch is a visual programming language that can be used to create interactive stories, games, and animations. Yahya used Scratch to code his wild edibles app, demonstrating its suitability for developing educational and practical applications.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Design Thinking & Computational Thinking",
+      "concept_description": "Design thinking focuses on understanding user needs and creating a precise solution, while computational thinking formulates that solution so it can be effectively implemented on a computer. The video highlights that the wild edibles app required the integration of design thinking and computational thinking principles.",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "Abstraction of Details",
+      "concept_description": "When creating an algorithm for drawing a square, details such as the size and color of the square can be abstracted out. This allows the algorithm to focus on the essential steps of drawing a square, regardless of these specific details.",
+      "grade_level": "5-9"
+    }
+  ]
+}

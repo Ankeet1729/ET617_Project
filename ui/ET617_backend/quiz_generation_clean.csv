@@ -1,0 +1,697 @@
+Video Number,Concepts_Grade_5,Questions_Grade_5,Concepts_Grade_6,Questions_Grade_6,Concepts_Grade_7,Questions_Grade_7,Concepts_Grade_8,Questions_Grade_8
+1,"1. Computer Definition
+2. CPU (Central Processing Unit)
+3. RAM (Random Access Memory)
+4. Drive (Storage)
+5. Computer Components Collaboration
+6. Temporary vs. Permanent Storage
+7. The relationship between RAM and CPU
+8. Importance of Teamwork in Computer Operation","Q: Imagine you are writing a story on a computer. You need a place to quickly access and change your words as you type. Which part of the computer helps you do this temporarily, before you save the story?
+
+A. The Storage Drive (like a hard drive)
+B. The RAM (Random Access Memory)
+C. The Monitor (screen)
+D. The CPU (Central Processing Unit)
+
+Correct Answer: B
+Explanation: RAM is used for temporary storage of information that the computer is actively working with, like your story while you are typing it. Storage drives save things permanently, the monitor displays information, and the CPU processes instructions.","1. Computer Definition
+2. CPU (Central Processing Unit)
+3. RAM (Random Access Memory)
+4. OS (Operating System)
+5. Drive (Storage)
+6. GPU (Graphics Processing Unit)
+7. Computer Components Collaboration
+8. Role of CPU as Controller
+9. Temporary vs. Permanent Storage
+10. The relationship between RAM and CPU
+11. Importance of Teamwork in Computer Operation","Q: When you are playing a video game on a computer, where are the game's instructions and your character's current position temporarily stored so the CPU can quickly access them?
+
+A. Hard Drive
+B. RAM
+C. Operating System
+D. Graphics Card
+
+Correct Answer: B
+Explanation: RAM (Random Access Memory) provides the CPU with quick access to frequently used data, like game instructions and character positions, which it needs to process in real-time. A hard drive is used for long-term storage, the operating system manages resources, and the graphics card renders images.","1. Computer Definition
+2. CPU (Central Processing Unit)
+3. RAM (Random Access Memory)
+4. OS (Operating System)
+5. Drive (Storage)
+6. GPU (Graphics Processing Unit)
+7. Cache Memory
+8. Computer Components Collaboration
+9. Role of CPU as Controller
+10. Temporary vs. Permanent Storage
+11. The relationship between RAM and CPU
+12. Importance of Teamwork in Computer Operation","Q: Imagine you are writing a report on your computer. You need to be able to quickly access and edit the document. Where is the report temporarily stored so the CPU can get to it quickly?
+
+A. On the hard drive (storage)
+B. In the RAM (Random Access Memory)
+C. In the GPU (Graphics Processing Unit)
+D. On a USB flash drive
+
+Correct Answer: B
+Explanation: RAM provides the CPU with fast, temporary storage for the data and instructions it is currently using. The hard drive is for permanent storage, the GPU handles graphics, and a USB drive is for portable storage.","1. CPU (Central Processing Unit)
+2. RAM (Random Access Memory)
+3. OS (Operating System)
+4. Drive (Storage)
+5. GPU (Graphics Processing Unit)
+6. Cache Memory
+7. Computer Components Collaboration
+8. Role of CPU as Controller
+9. Temporary vs. Permanent Storage
+10. The relationship between RAM and CPU","Q: When you are working on a school project and need to quickly access and edit a document, which type of memory is primarily used to store the document while you are working on it?
+
+A. Hard Drive
+B. RAM (Random Access Memory)
+C. GPU (Graphics Processing Unit)
+D. Operating System
+
+Correct Answer: B
+Explanation: RAM is the correct answer because it provides fast, temporary storage for data that the CPU is actively using. The other options are incorrect: a hard drive provides permanent storage, the GPU handles graphics, and the operating system manages resources but does not store the active project data."
+6,"1. Input-Process-Output Model
+2. The Internet
+3. Packets of Information
+4. Wireless (Wi-Fi) Connection
+5. Mobile Data/Cellular Connection
+6. Web Browser
+7. Search Engine","Q: Imagine you want to find information about elephants for a school project. Which of the following tools would be BEST for finding lots of different websites with information about elephants?
+
+A. A web browser to visit your favorite website.
+B. A search engine like Google or DuckDuckGo.
+C. A wireless (Wi-Fi) connection to connect to a network.
+D. A mobile data connection on your phone.
+
+Correct Answer: B
+Explanation: A search engine is specifically designed to find information on the internet by searching through many different websites. Web browsers are used to visit specific sites, while Wi-Fi and mobile data only provide the connection, not the search function.  A mobile data connection may allow connection to the internet, but not a search for content.","1. Input-Process-Output Model
+2. The Internet
+3. Packets of Information
+4. Routers
+5. Wireless (Wi-Fi) Connection
+6. Mobile Data/Cellular Connection
+7. Web Browser
+8. Search Engine
+9. Client-Server Model
+10. Client
+11. Server","Q: When you search for information on the internet using a tool like Google or DuckDuckGo, what is the name of this tool?
+
+A. Web Browser
+B. Search Engine
+C. Router
+D. Wireless Connection
+
+Correct Answer: B
+Explanation: A search engine is designed specifically to help you find information online. A web browser is used to view websites, a router directs internet traffic, and a wireless connection is how devices connect to the internet without wires.","1. Input-Process-Output Model
+2. The Internet
+3. Packets of Information
+4. Routers
+5. TCP/IP Protocol
+6. Wireless (Wi-Fi) Connection
+7. Mobile Data/Cellular Connection
+8. Web Browser
+9. Search Engine
+10. Client-Server Model
+11. Client
+12. Server
+13. Web Server
+14. Mail Server
+15. File Server","Q: When you type a question into Google using a web browser on your computer, which of the following describes the roles of your computer and Google's computers?
+
+A. Your computer is the server, and Google's computers are the client.
+B. Your computer is the client, and Google's computers are the server.
+C. Both your computer and Google's computers are servers.
+D. Both your computer and Google's computers are clients.
+
+Correct Answer: B
+Explanation: Your computer, acting as the client, sends a request to Google's servers when you search. Google's computers act as servers by processing your search and sending back the results. Therefore, the other options are incorrect because they misrepresent which device initiates the request and which provides the service.","1. The Internet
+2. Packets of Information
+3. Routers
+4. TCP/IP Protocol
+5. Wireless (Wi-Fi) Connection
+6. Mobile Data/Cellular Connection
+7. Client-Server Model
+8. Client
+9. Server
+10. Web Server
+11. Mail Server
+12. File Server","Q: You are creating a website to share your artwork. Which of the following server types would be MOST suitable for hosting your website and making it accessible to visitors?
+
+A. A mail server, to handle email communication related to your artwork.
+B. A web server, to store and deliver the HTML, CSS, and image files of your website.
+C. A file server, to store the original high-resolution versions of your artwork.
+D. A database server, to keep track of the number of website visitors.
+
+Correct Answer: B
+Explanation: A web server is designed to host websites and deliver web pages to clients. It handles requests from web browsers and provides the necessary files for displaying the website content. A mail server handles email, a file server stores files for network sharing, and a database server manages structured data, making them unsuitable for directly hosting a website."
+9,"1. Phishing Detection
+2. Spam Triggers in Emails","Q: Which of the following is the MOST important thing to check when you receive an email that seems to be from a company asking for your password?
+
+A. If the email has the company's logo and looks official.
+B. If the email asks you to click a link to update your information immediately.
+C. If the email uses a lot of big, fancy words to impress you.
+D. If the email includes a phone number to call for help.
+
+Correct Answer: B
+Explanation: The correct answer is B because phishing emails often create a false sense of urgency to trick you into acting quickly without thinking. Options A, C, and D are incorrect because while a logo or phone number might seem trustworthy, phishers can easily copy these details, and big words are not a reliable sign of legitimacy. The key is recognizing manipulative language and urgent requests for personal information.","1. Internet Cookies
+2. Cookie Policies
+3. Cookies for Login Information
+4. Phishing Detection
+5. Spam Triggers in Emails
+6. Browser Cache","Q: Why is it important to read a website's cookie policy before clicking 'Agree' or 'Accept'?
+
+A. To make sure the website is using the correct spelling and grammar.
+B. To understand what types of cookies the website uses, why they use them, and how you can manage your cookie preferences.
+C. To check if the website has your favorite colors and images.
+D. To ensure the website is giving away free items or discounts.
+
+Correct Answer: B
+Explanation: Reading the cookie policy helps you understand how a website uses cookies and manage your privacy. The cookie policy informs you about the types of cookies used, their purpose, and provides options to control your preferences; options A, C, and D, have nothing to do with internet cookies and are not related to online safety.","1. Internet Cookies
+2. First-party vs. Third-party Cookies
+3. Cookie Policies
+4. Browser Security Settings
+5. Privacy Browser Extensions
+6. Cookies for Login Information
+7. Phishing Detection
+8. Spam Triggers in Emails
+9. Browser Cache
+10. Clearing Cookies vs. Clearing Cache","Q: You visit a website to research new gaming consoles. Later, you notice advertisements for similar consoles on a social media site you often use. Which of the following is the MOST likely reason for this?
+
+A. The gaming console website directly shared your search history with the social media company.
+B. The gaming console website used third-party cookies that tracked your browsing activity and allowed the social media site to show relevant ads.
+C. Your computer's operating system automatically sends browsing data to social media companies to personalize your experience.
+D. The social media site is able to guess your interests based on your age and location.
+
+Correct Answer: B
+Explanation: Third-party cookies are often used to track user activity across different websites, allowing for targeted advertising. Sharing data violates privacy policies, operating systems do not share browsing data, and although age and location provide useful information about an individual, they are not enough to target individuals with specific ads about gaming consoles.","1. Internet Cookies
+2. First-party vs. Third-party Cookies
+3. Cookie Policies
+4. Browser Security Settings
+5. Privacy Browser Extensions
+6. Cookies for Login Information
+7. Big Data
+8. Potential Privacy Concerns with Big Data
+9. Phishing Detection
+10. Spam Triggers in Emails
+11. Browser Cache
+12. Clearing Cookies vs. Clearing Cache
+13. AI and Machine Learning Applications","Q: A website uses cookies to remember your login information. What happens when you clear cookies in your browser settings?
+
+A. The website will load faster the next time you visit it.
+B. You will need to re-enter your username and password on that website.
+C. All of your browsing history will be permanently deleted.
+D. The website will no longer be able to track your activity on other sites.
+
+Correct Answer: B
+Explanation: Clearing cookies removes the stored login information, so you have to log in again. Loading times are associated with cache, not cookies; browsing history is a separate setting; and the ability to track across other sites depends on third-party cookies, not just the cookies from one particular website."
+11,"1. Empathize in Design Thinking
+2. Sketch Q&A in Design Thinking
+3. Story Frames in Design Thinking
+4. Creating a Model in Design Thinking
+5. Problem Solving with Design Thinking
+6. Information Gathering Techniques
+7. Community Involvement in Problem Solving
+8. Prototype Creation","Q: Imagine you want to improve a local park. Which of the following is the BEST first step to take using Design Thinking?
+
+A. Drawing a detailed plan of the park with new playground equipment.
+B. Asking people who use the park what they like and dislike about it.
+C. Building a small model of what you think the new park should look like.
+D. Searching the internet for pictures of beautiful parks in other cities.
+
+Correct Answer: B
+Explanation: The best first step is to empathize with the users of the park by asking for their opinions. This helps you understand their needs and perspectives, which is the core of the Empathize phase in Design Thinking. The other options involve designing or researching without first understanding the users' needs.","1. Empathize in Design Thinking
+2. Sketch Q&A in Design Thinking
+3. Story Frames in Design Thinking
+4. Creating a Model in Design Thinking
+5. Review and Re-create in Design Thinking
+6. Problem Solving with Design Thinking
+7. Importance of Addressing Malnutrition
+8. Information Gathering Techniques
+9. Iterative Design Process
+10. Community Involvement in Problem Solving
+11. Prototype Creation","Q: A team is using Design Thinking to improve a local park. After observing children playing and talking to their parents, which of the following would be the BEST next step for the team?
+
+A. Immediately start building a new playground based on what they think children would like.
+B. Research park designs online and sketch out questions and answers to better understand park usage and its impact.
+C. Ask the local council for permission to add more park benches and picnic tables.
+D. Present their initial observations to the community and ask for immediate funding to start construction.
+
+Correct Answer: B
+Explanation: The best next step is to research and sketch Q&A because this is the 'Sketch Q&A' phase of design thinking and allows for a better understanding of the problem and its context. Starting to build (A) skips important steps, asking the council (C) is premature, and asking for funding (D) is not the immediate next step in design thinking.","1. Empathize in Design Thinking
+2. Sketch Q&A in Design Thinking
+3. Story Frames in Design Thinking
+4. Creating a Model in Design Thinking
+5. Review and Re-create in Design Thinking
+6. Problem Solving with Design Thinking
+7. Importance of Addressing Malnutrition
+8. Impact of COVID-19 on Food Systems
+9. Information Gathering Techniques
+10. Iterative Design Process
+11. Community Involvement in Problem Solving
+12. Prototype Creation","Q: A group of students is using the Design Thinking process to address the issue of food waste in their school cafeteria. After empathizing with the cafeteria staff and students, what is the NEXT step they should take?
+
+A. Immediately implement a new system for composting all food scraps.
+B. Create story frames that propose multiple solutions, such as reducing portion sizes or donating leftovers.
+C. Sketch Q&A to research the causes and impact of food waste, gathering data and insights.
+D. Build a model of a smaller cafeteria to demonstrate how less food would be wasted.
+
+Correct Answer: C
+Explanation: Sketch Q&A involves researching the problem, framing questions, and sketching out answers to understand the impact and context of the food waste issue. Jumping to story frames or model creation without proper research would not be effective. Implementing a new system without research ignores the Design Thinking process.","1. Empathize in Design Thinking
+2. Sketch Q&A in Design Thinking
+3. Story Frames in Design Thinking
+4. Creating a Model in Design Thinking
+5. Review and Re-create in Design Thinking
+6. Problem Solving with Design Thinking
+7. Importance of Addressing Malnutrition
+8. Impact of COVID-19 on Food Systems
+9. Information Gathering Techniques
+10. Iterative Design Process
+11. Community Involvement in Problem Solving
+12. Prototype Creation","Q: A group of students is using the Design Thinking process to address the issue of limited access to clean water in their community. After interviewing residents and observing water collection practices, what would be the MOST effective next step?
+
+A. Immediately begin building a water filtration system using readily available materials.
+B. Research the causes and effects of water scarcity, and develop questions to further understand the problem's impact.
+C. Present their initial observations to the local government and request funding for a large-scale water treatment plant.
+D. Create a detailed technical drawing of a potential water purification device, focusing on engineering specifications.
+
+Correct Answer: B
+Explanation: The correct answer is B because after empathizing, the next logical step is to define the problem through research and question development, which is Sketch Q&A. Option A skips the problem definition phase. Option C jumps to implementation without proper planning and research. Option D focuses too early on a specific solution without exploring the problem thoroughly."
+14,"1. Algorithm Definition
+2. Decomposition
+3. Pattern Recognition
+4. Sequencing
+5. Using Scratch for Coding
+6. Abstraction of Details","Q: Imagine you want to explain to a robot how to make a sandwich. Which of the following is the MOST important thing to include in your instructions?
+
+A. Use your favorite type of bread.
+B. Say the steps in the correct order.
+C. Add your favorite toppings.
+D. Cut the sandwich into triangles.
+
+Correct: B
+Concept: Sequencing
+Explanation: Saying the steps in the correct order is the most important part of instructions because it will let the robot know how to assemble the sandwich correctly. Leaving out the correct order of steps means the instructions are incorrect. ","1. Algorithm Definition
+2. Decomposition
+3. Abstraction
+4. Pattern Recognition
+5. Sequencing
+6. Computational Thinking
+7. Algorithm for App Design
+8. Using Scratch for Coding
+9. Abstraction of Details","Q: A chef is creating a database of recipes. To make it easier to find recipes that use specific ingredients, the chef groups them into categories like 'Soups', 'Salads', 'Main Courses', and 'Desserts'. This is an example of:
+
+A. Abstraction of details
+B. Algorithmic efficiency
+C. Decomposition
+D. Computational modeling
+
+Correct: C
+Concept: Decomposition
+Explanation: Decomposition is when you break down a large, complex problem into smaller, easier-to-manage parts. The chef is breaking down the large task of organizing recipes into smaller groups (Soups, Salads, etc.). The other options aren't directly relevant to the act of categorization.","1. Algorithm Definition
+2. Decomposition
+3. Abstraction
+4. Pattern Recognition
+5. Computational Thinking
+6. Generalization
+7. Algorithm for App Design
+8. Using Scratch for Coding
+9. Design Thinking & Computational Thinking
+10. Abstraction of Details","Q: A company wants to create an app that helps people identify birds in their backyard. They start by focusing only on birds common to their local state, and plan to expand later. What computational thinking skill are they using?
+
+A. Abstraction
+B. Pattern Recognition
+C. Generalization
+D. Decomposition
+
+Correct: A
+Concept: Abstraction
+Explanation: Abstraction is focusing on the necessary details and ignoring unnecessary complexity, by ignoring the birds in the rest of the world, the company simplifies the task of creating a local bird identification app. The other options describe other computational thinking skills, but don't fit the specific act of simplification described in the question.","1. Decomposition
+2. Abstraction
+3. Pattern Recognition
+4. Computational Thinking
+5. Generalization
+6. Algorithm for App Design
+7. Using Scratch for Coding
+8. Design Thinking & Computational Thinking
+9. Abstraction of Details","Q: A team is designing a self-driving car. They need to develop a system that can identify different types of road signs (stop signs, speed limit signs, etc.). Which computational thinking skill would be MOST helpful in creating this system?
+
+A. Decomposition
+B. Abstraction
+C. Generalization
+D. Pattern Recognition
+
+Correct: D
+Concept: Pattern Recognition
+Explanation: Pattern recognition involves identifying similarities and differences in data, which would be crucial for the car to distinguish between different road signs based on their shapes, colors, and symbols. While other skills like decomposition and abstraction are important in the broader design, pattern recognition is key for the specific task of road sign identification."
+17,"1. Infinite loops (`forever` block)
+2. Finite loops (`repeat` block)
+3. Event handling (`when green flag clicked`)
+4. Boundary checking (`if on edge, bounce`)
+5. Sprite orientation (`set rotation style`)
+6. Variable creation and initialization
+7. Changing variable values
+8. Sprite communication (`broadcast` and `receive`)
+9. User interaction (`when this sprite clicked`)
+10. String manipulation (`join` operator)
+11. Managing sprite visibility (`show` and `hide`)
+12. Decomposition","Q: A baker wants to decorate cupcakes. They want to put a candy on each cupcake, and they have 20 cupcakes. Which block should they use to repeat the action of placing a candy 20 times?
+
+A. A 'forever' block
+B. A 'repeat' block
+C. An 'if' block
+D. A 'hide' block
+
+Correct: B
+Concept: Finite loops (`repeat` block)
+Explanation: A 'repeat' block is used to execute a set of commands a specific number of times, in this case, 20 times. A 'forever' block would repeat the actions endlessly, which isn't what the baker needs.","1. Infinite loops (`forever` block)
+2. Finite loops (`repeat` block)
+3. Event handling (`when green flag clicked`)
+4. Boundary checking (`if on edge, bounce`)
+5. Sprite orientation (`set rotation style`)
+6. Variable creation and initialization
+7. Changing variable values
+8. Sprite communication (`broadcast` and `receive`)
+9. User interaction (`when this sprite clicked`)
+10. String manipulation (`join` operator)
+11. Managing sprite visibility (`show` and `hide`)
+12. Decomposition","Q: You have two sprites, Sprite A and Sprite B. You want Sprite B to disappear when Sprite A is clicked. Which of the following approaches is the MOST efficient way to achieve this?
+
+A. Place a 'hide' block inside Sprite A's 'when this sprite clicked' block.
+B. Place a 'hide' block inside Sprite B's 'when this sprite clicked' block.
+C. Use 'broadcast' and 'when I receive' blocks so that when Sprite A is clicked, it broadcasts a message that Sprite B receives and then hides itself.
+D. Use 'broadcast' and 'when I receive' blocks so that when Sprite A is clicked, it broadcasts a message that Sprite B receives and then hides.
+
+Correct: D
+Concept: Sprite communication (`broadcast` and `receive`)
+Explanation: Using 'broadcast' and 'when I receive' allows Sprite A to signal Sprite B to hide, which efficiently coordinates the action between sprites. Placing the hide block in Sprite A will result in Sprite A being hidden rather than Sprite B, and placing it in Sprite B with 'when this sprite clicked' would require the user to click on sprite B to hide it.","1. Infinite loops (`forever` block)
+2. Finite loops (`repeat` block)
+3. Event handling (`when green flag clicked`)
+4. Boundary checking (`if on edge, bounce`)
+5. Sprite orientation (`set rotation style`)
+6. Variable creation and initialization
+7. Changing variable values
+8. Sprite communication (`broadcast` and `receive`)
+9. User interaction (`when this sprite clicked`)
+10. String manipulation (`join` operator)
+11. Managing sprite visibility (`show` and `hide`)
+12. Decomposition","Q: A programmer wants to create a greeting that changes based on the time of day. They have a variable called 'time' that stores the current hour (e.g., 7 for 7 AM, 14 for 2 PM). Which of the following code snippets will correctly display a greeting like 'Good morning, user!' or 'Good afternoon, user!'?
+
+A. join('Good morning/afternoon/evening, user!', '!')
+B. join('Good', 'morning/afternoon/evening, user!')
+C. join('Good morning, user!', emotion)
+D. join('Good morning, user!', join('Good afternoon, user!', 'Good evening, user!'))
+
+Correct: C
+Concept: String manipulation (`join` operator)
+Explanation: This answer correctly uses 'join' to combine a text string with a variable that represents the dynamic part of the message. The other options either don't use a variable, or they improperly nest the join operations.","1. Infinite loops (`forever` block)
+2. Finite loops (`repeat` block)
+3. Event handling (`when green flag clicked`)
+4. Boundary checking (`if on edge, bounce`)
+5. Sprite orientation (`set rotation style`)
+6. Variable creation and initialization
+7. Changing variable values
+8. Sprite communication (`broadcast` and `receive`)
+9. User interaction (`when this sprite clicked`)
+10. String manipulation (`join` operator)
+11. Managing sprite visibility (`show` and `hide`)
+12. Decomposition","Q: A game designer is creating a complex game with many different characters and storylines. They decide to break down the game into smaller parts, with each character having their own set of scripts and behaviors. What is the primary benefit of this approach?
+
+A. It makes the code run faster because it's divided into smaller sections.
+B. It allows multiple programmers to work on the game simultaneously and more efficiently.
+C. It reduces the overall amount of code needed for the game.
+D. It simplifies debugging and makes the code easier to understand and manage.
+
+Correct: D
+Concept: Decomposition
+Explanation: Decomposition is a problem solving strategy where a complex problem is broken down into smaller, manageable parts making debugging and code management simpler. While other answers are plausible, decomposition's main goal is to make the development process easier and more understandable, leading to more robust code."
+19,"1. User Input with `ask and wait`
+2. Using the `answer` variable
+3. Conditional Logic: `if-then` block
+4. Conditional Logic: `if-then-else` ladder
+5. String Comparison with `equals` operator
+6. Collision Detection with `touching`
+7. Event Handling: `when green flag clicked`
+8. Sprite Animation with `glide` to sprite
+9. Changing Sprite Appearance with `switch costume`
+10. Sprite Visibility Control with `show` and `hide`
+11. Dynamic Sizing with `change size by`
+12. Absolute Positioning with `go to x: y:`
+13. Boolean Logic in Conditions
+14. Outputting Variable Content with `say`
+15. Sprite Initialization","Q: A sprite named 'Ball' should disappear when it touches a sprite named 'Wall'. Which code block would you use to make the 'Ball' sprite disappear when it touches the 'Wall' sprite?
+
+A. when green flag clicked
+hide
+B. if <touching [Wall] ?> then
+show
+C. if <touching [Wall] ?> then
+hide
+D. touching [Wall] ?
+
+Correct: C
+Concept: Collision Detection with `touching`
+Explanation: The 'if <touching [Wall] ?> then hide' block checks if the 'Ball' sprite is touching the 'Wall' sprite, and if it is, the 'Ball' sprite will hide. Option A only hides the ball at the start and B shows the ball, which is the opposite of what we want, and D doesn't do anything since it isn't attached to an if statement.","1. User Input with `ask and wait`
+2. Using the `answer` variable
+3. Conditional Logic: `if-then` block
+4. Conditional Logic: `if-then-else` ladder
+5. String Comparison with `equals` operator
+6. Collision Detection with `touching`
+7. Event Handling: `when green flag clicked`
+8. Sprite Animation with `glide` to sprite
+9. Changing Sprite Appearance with `switch costume`
+10. Sprite Visibility Control with `show` and `hide`
+11. Dynamic Sizing with `change size by`
+12. Absolute Positioning with `go to x: y:`
+13. Boolean Logic in Conditions
+14. Outputting Variable Content with `say`
+15. Sprite Initialization","Q: A program asks the user 'What is your favorite color?'. Which of the following code segments will display the user's answer in a speech bubble for 3 seconds?
+
+A. ask [What is your favorite color?] and wait
+say [Hello!] for (3) seconds
+B. ask [What is your favorite color?] and wait
+say (join[Your answer is: ] (answer)) for (3) seconds
+C. say [What is your favorite color?] for (3) seconds
+D. ask [What is your favorite color?] and wait
+think (answer) for (3) seconds
+
+Correct: B
+Concept: Outputting Variable Content with `say`
+Explanation: The correct answer uses the 'ask and wait' block to get the user's input, stores it in the 'answer' variable, and then uses the 'say' block to display the 'answer' variable concatenated with a string for 3 seconds. Option A only says 'Hello!', option C doesn't wait for an answer, and option D uses 'think' which displays a thought bubble instead of a speech bubble.","1. User Input with `ask and wait`
+2. Using the `answer` variable
+3. Conditional Logic: `if-then` block
+4. Conditional Logic: `if-then-else` ladder
+5. String Comparison with `equals` operator
+6. Collision Detection with `touching`
+7. Event Handling: `when green flag clicked`
+8. Sprite Animation with `glide` to sprite
+9. Changing Sprite Appearance with `switch costume`
+10. Sprite Visibility Control with `show` and `hide`
+11. Dynamic Sizing with `change size by`
+12. Absolute Positioning with `go to x: y:`
+13. Boolean Logic in Conditions
+14. Outputting Variable Content with `say`
+15. Sprite Initialization","Q: A sprite named 'Score' needs to start at the top-right corner of the stage (x: 200, y: 150) whenever the green flag is clicked. Which code block initializes the sprite correctly?
+
+A. when green flag clicked
+go to x: (200) y: (150)
+B. go to x: (200) y: (150)
+C. when this sprite clicked
+go to x: (200) y: (150)
+D. when backdrop switches to [backdrop1] v
+go to x: (200) y: (150)
+
+Correct: A
+Concept: Sprite Initialization
+Explanation: The 'when green flag clicked' block ensures the code runs when the program starts, and 'go to x: (200) y: (150)' sets the sprite's position. Option B won't do anything without an event, option C will only move the sprite when the sprite is clicked, and option D only happens when a backdrop is changed, not at the start.","1. User Input with `ask and wait`
+2. Using the `answer` variable
+3. Conditional Logic: `if-then` block
+4. Conditional Logic: `if-then-else` ladder
+5. String Comparison with `equals` operator
+6. Collision Detection with `touching`
+7. Event Handling: `when green flag clicked`
+8. Sprite Animation with `glide` to sprite
+9. Changing Sprite Appearance with `switch costume`
+10. Sprite Visibility Control with `show` and `hide`
+11. Dynamic Sizing with `change size by`
+12. Absolute Positioning with `go to x: y:`
+13. Boolean Logic in Conditions
+14. Outputting Variable Content with `say`
+15. Sprite Initialization","Q: A program uses an 'if-then-else' ladder to determine what message a sprite displays based on the value of the variable 'temperature'. Which of the following scenarios best demonstrates the benefit of using an 'if-then-else' ladder instead of multiple independent 'if-then' blocks?
+
+A. The program needs to perform a complex calculation based on the temperature.
+B. The program needs to display different messages for a wide range of possible temperatures.
+C. Only one message should be displayed, corresponding to the first condition that evaluates to 'true'.
+D. The program needs to display all messages that correspond to conditions that evaluate to 'true'.
+
+Correct: C
+Concept: Conditional Logic: `if-then-else` ladder
+Explanation: The benefit of 'if-then-else' is that it stops checking conditions once it finds one that is true, while using separate 'if-then' statements will continue checking conditions, even if one is already true. Option A is not related to conditional logic, Option B is applicable to both structures, and Option D is what happens when you don't use 'else'."
+22,"1. Video Sensing Extension
+2. Event Handling (`when green flag clicked`)
+3. Infinite Loops (`forever` block)
+4. Conditional Wait (`wait until` block)
+5. Sensing Video Motion
+6. Comparison Operators (`>` block)
+7. Managing Sprite Costumes
+8. Changing Costumes (`next costume`)
+9. Timing and Delays (`wait` block)
+10. Using the Paint Editor
+11. Controlling Video Properties
+12. Event Handling (`when this sprite clicked`)
+13. Sequencing within a Loop
+14. Sensor-based Interaction","Q: You want your Scratch program to start using the video camera as soon as someone clicks the green flag. Which block would you use to begin this process?
+
+A. The 'when this sprite clicked' block.
+B. The 'when green flag clicked' block.
+C. The 'forever' block.
+D. The 'next costume' block.
+
+Correct: B
+Concept: Event Handling (`when green flag clicked`)
+Explanation: The 'when green flag clicked' block is specifically designed to start a script when the green flag is pressed. The other blocks have different functions; 'when this sprite clicked' responds to sprite clicks, 'forever' creates a loop, and 'next costume' changes the sprite's appearance.","1. Video Sensing Extension
+2. Event Handling (`when green flag clicked`)
+3. Infinite Loops (`forever` block)
+4. Conditional Wait (`wait until` block)
+5. Sensing Video Motion
+6. Comparison Operators (`>` block)
+7. Managing Sprite Costumes
+8. Changing Costumes (`next costume`)
+9. Timing and Delays (`wait` block)
+10. Using the Paint Editor
+11. Controlling Video Properties
+12. Event Handling (`when this sprite clicked`)
+13. Sequencing within a Loop
+14. Sensor-based Interaction","Q: Imagine you are creating a face filter project. You want a funny hat to appear on screen only when the camera sees a lot of movement. Which block would you use to check for the amount of motion?
+
+A. 'set video transparency to' block.
+B. 'next costume' block.
+C. 'video motion on sprite' block.
+D. 'wait' block.
+
+Correct: C
+Concept: Sensing Video Motion
+Explanation: The 'video motion on sprite' block measures the amount of movement detected by the camera over a sprite. The other blocks control the visibility of the camera ('set video transparency to'), change the sprite's appearance ('next costume'), or pause the script ('wait').","1. Video Sensing Extension
+2. Event Handling (`when green flag clicked`)
+3. Infinite Loops (`forever` block)
+4. Conditional Wait (`wait until` block)
+5. Sensing Video Motion
+6. Comparison Operators (`>` block)
+7. Managing Sprite Costumes
+8. Changing Costumes (`next costume`)
+9. Timing and Delays (`wait` block)
+10. Using the Paint Editor
+11. Controlling Video Properties
+12. Event Handling (`when this sprite clicked`)
+13. Sequencing within a Loop
+14. Sensor-based Interaction","Q: You are making a project where a virtual mask appears on a person's face when they wave their hand in front of the camera. The mask should only appear when the 'video motion on sprite' value is greater than 60. Which of the following blocks, used together with the 'video motion on sprite' block, would achieve this?
+
+A. A 'wait until <video motion on sprite > 60>' block
+B. A 'wait 1 seconds' block placed after a 'next costume' block.
+C. A 'forever' block containing only the 'next costume' block.
+D. An 'if <touching mouse pointer?> then' block.
+
+Correct: A
+Concept: Conditional Wait (`wait until` block)
+Explanation: Using 'wait until <video motion on sprite > 60>' ensures that the program waits until the motion detected is greater than 60 before proceeding, allowing the mask to appear when there is sufficient motion. The other options don't react to video motion or don't control when the next action occurs based on video input.","1. Video Sensing Extension
+2. Event Handling (`when green flag clicked`)
+3. Infinite Loops (`forever` block)
+4. Conditional Wait (`wait until` block)
+5. Sensing Video Motion
+6. Comparison Operators (`>` block)
+7. Managing Sprite Costumes
+8. Changing Costumes (`next costume`)
+9. Timing and Delays (`wait` block)
+10. Using the Paint Editor
+11. Controlling Video Properties
+12. Event Handling (`when this sprite clicked`)
+13. Sequencing within a Loop
+14. Sensor-based Interaction","Q: You are creating a face filter project in Scratch that changes filters (costumes) based on the amount of motion detected by the camera. You want the filters to change smoothly and not too quickly. Which of the following code structures would best accomplish this, assuming that video sensing is set up and functioning?
+
+A. forever { next costume }
+B. when green flag clicked { forever { next costume } }
+C. forever { wait until <video motion on sprite > 50> next costume }
+D. forever { wait until <video motion on sprite > 50> next costume wait (0.5) seconds }
+
+Correct: D
+Concept: Sequencing within a Loop
+Explanation: Option D provides the most control by combining motion detection using 'wait until <video motion on sprite > 50>', costume changes with 'next costume', and a brief pause using 'wait (0.5) seconds'. This ensures that the filter only changes when there is sufficient motion and also prevents it from changing too rapidly. Option A would change costumes constantly, Option B is similar but starts when the green flag is clicked which is required, and Option C would change costumes immediately after motion is detected without a delay."
+23,"1. Using Variables for State Management
+2. Creating Custom Blocks (My Blocks)
+3. Custom Blocks with Parameters
+4. Conditional Logic for Selection
+5. Pen Extension for Drawing
+6. Using Operators for Geometric Calculations
+7. Event-Driven Programming (Mouse Click)
+8. Click Detection within a Loop
+9. Creating a Cyclical Sequence
+10. Program Initialization
+11. Procedural Decomposition
+12. Sensing Mouse Position","Q: A program uses a variable called 'shape_number'. If 'shape_number' is 1, the program draws a square. If it is 2, the program draws a circle. What does this show about the variable?
+
+A. The variable 'shape_number' tells the program how many times to draw the shapes.
+B. The variable 'shape_number' controls which shape the program will draw.
+C. The variable 'shape_number' controls the size of the shape.
+D. The variable 'shape_number' controls the color of the shape.
+
+Correct: B
+Concept: Using Variables for State Management
+Explanation: The correct answer is 'The variable 'shape_number' controls which shape the program will draw.' because the value of the variable directly determines the shape that is drawn. Options A, C, and D are incorrect because the question states the variable determines the *type* of shape, not how many, the size, or the color.","1. Using Variables for State Management
+2. Creating Custom Blocks (My Blocks)
+3. Custom Blocks with Parameters
+4. Conditional Logic for Selection
+5. Pen Extension for Drawing
+6. Using Operators for Geometric Calculations
+7. Event-Driven Programming (Mouse Click)
+8. Click Detection within a Loop
+9. Creating a Cyclical Sequence
+10. Program Initialization
+11. Procedural Decomposition
+12. Sensing Mouse Position","Q: You have a custom block called 'DrawFlower' that draws a flower. You want to be able to change the size of the flower each time you use the block. How would you modify the 'DrawFlower' block to do this?
+
+A. Add an 'if' statement inside the 'DrawFlower' block to check the time of day and change the size.
+B. Create a new custom block for each size of flower you want to draw.
+C. Add an input parameter called 'size' to the 'DrawFlower' block, so you can set the size when you use the block.
+D. Use a 'forever' loop to continuously increase the size of the flower while it is being drawn.
+
+Correct: C
+Concept: Custom Blocks with Parameters
+Explanation: Adding an input parameter, like 'size', allows you to pass a different size value each time you use the 'DrawFlower' block. Option A is incorrect because the time of day is irrelevant to the size. Option B is incorrect because creating many blocks is inefficient. Option D is incorrect because the size would constantly change while drawing, not just be a different size each time the block is used.","1. Using Variables for State Management
+2. Creating Custom Blocks (My Blocks)
+3. Custom Blocks with Parameters
+4. Conditional Logic for Selection
+5. Pen Extension for Drawing
+6. Using Operators for Geometric Calculations
+7. Event-Driven Programming (Mouse Click)
+8. Click Detection within a Loop
+9. Creating a Cyclical Sequence
+10. Program Initialization
+11. Procedural Decomposition
+12. Sensing Mouse Position","Q: A program draws a different shape each time the mouse is clicked. The program uses a variable called 'shapeCount' to keep track of how many times the mouse has been clicked. After every 3 clicks, the program resets 'shapeCount' back to 1. Which of the following code snippets would accomplish this?
+
+A. if (shapeCount > 3) { shapeCount = 1; }
+B. if (shapeCount = 3) { shapeCount = 1; }
+C. if (shapeCount < 3) { shapeCount = 1; }
+D. if (shapeCount != 3) { shapeCount = 1; }
+
+Correct: A
+Concept: Creating a Cyclical Sequence
+Explanation: The correct code `if (shapeCount > 3) { shapeCount = 1; }` resets the counter only when it exceeds 3.  Option B uses the assignment operator (=) instead of the comparison operator (== or === in some languages), and also only triggers *when* it is 3, so will never increase past 1. Option C resets the count if it's *less* than 3, so it will always be 1. Option D resets if it's *not* 3, so it will only allow 3 to appear once.","1. Using Variables for State Management
+2. Creating Custom Blocks (My Blocks)
+3. Custom Blocks with Parameters
+4. Conditional Logic for Selection
+5. Pen Extension for Drawing
+6. Using Operators for Geometric Calculations
+7. Event-Driven Programming (Mouse Click)
+8. Click Detection within a Loop
+9. Creating a Cyclical Sequence
+10. Program Initialization
+11. Procedural Decomposition
+12. Sensing Mouse Position","Q: You are designing a program that draws a complex pattern on the screen. You decide to break the pattern down into smaller, reusable parts like 'drawCircle', 'drawSquare', and 'drawLine'. What is the primary benefit of using this approach, called procedural decomposition?
+
+A. It makes the program run faster because each part is simpler.
+B. It reduces the amount of code needed to write the program.
+C. It makes the code easier to understand, debug, and reuse.
+D. It allows the program to automatically create different versions of the pattern.
+
+Correct: C
+Concept: Procedural Decomposition
+Explanation: Procedural decomposition breaks down complex tasks into smaller, manageable, and reusable sub-tasks, which makes the code easier to understand, debug, and reuse. Option A is incorrect because procedural decomposition doesn't necessarily make the program run faster. Option B is partially true but not the primary benefit; it improves organization more than reducing code amount drastically. Option D is incorrect because procedural decomposition doesn't automatically create different versions; it simplifies creating variations by using the reusable parts."

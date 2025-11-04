@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L1.C2.v6",
+  "submodule_name": "Introduction to Programming",
+  "concepts": [
+    {
+      "concept_name": "Input-Process-Output Model",
+      "concept_description": "The input-process-output model describes how a computer works. It involves taking input, processing that input, and then producing an output. This is a fundamental concept in computer science and programming.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "The Internet",
+      "concept_description": "The internet is a global network of interconnected computers. It allows devices to communicate and share information with each other across vast distances, using various protocols and hardware.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Packets of Information",
+      "concept_description": "Data transmitted over the internet is broken down into smaller units called packets. These packets are sent individually and reassembled at the destination. This allows for efficient and reliable data transfer.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Routers",
+      "concept_description": "Routers are network devices that direct data packets between networks. They examine the destination address of each packet and forward it along the optimal path. Routers are essential for the internet to function.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "TCP/IP Protocol",
+      "concept_description": "TCP/IP (Transmission Control Protocol/Internet Protocol) is a suite of protocols that govern how data is transmitted over the internet. It defines how data is broken down into packets, addressed, transmitted, routed, and reassembled.",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "Wireless (Wi-Fi) Connection",
+      "concept_description": "A wireless connection (Wi-Fi) allows devices to connect to a network without physical cables, using radio waves. Wi-Fi is typically used for short-range connections within a home or office, providing convenient internet access.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Mobile Data/Cellular Connection",
+      "concept_description": "Mobile data or cellular connection provides internet access through a mobile network provider, using cellphone towers. This allows devices to connect to the internet over a wider area, but often incurs charges based on data usage.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Web Browser",
+      "concept_description": "A web browser is a software application used to access and view web pages on the internet. It interprets HTML code and displays the content in a user-friendly format, allowing users to navigate websites and interact with web applications.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Search Engine",
+      "concept_description": "A search engine is a tool that allows users to search for information on the internet by entering keywords or phrases. It indexes web pages and provides a list of relevant results based on the search query. Examples include Google and DuckDuckGo.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Client-Server Model",
+      "concept_description": "The client-server model is a distributed computing architecture where a client (e.g., a web browser) requests services from a server. The server processes the request and sends a response back to the client, enabling communication and data exchange between different systems.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Client",
+      "concept_description": "In the client-server model, the client is the entity that initiates a request for a service or resource.  For example, a web browser on your computer is a client when it requests a webpage from a web server.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Server",
+      "concept_description": "In the client-server model, a server is a computer or software system that provides services or resources to clients.  Examples include web servers (serving web pages), database servers (managing data), and mail servers (handling email).",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Web Server",
+      "concept_description": "A web server is a type of server that delivers web pages and related content to clients (web browsers) over the internet. It handles requests for web resources and responds with the appropriate HTML, CSS, JavaScript, and other files.",
+      "grade_level": "7-11"
+    },
+    {
+      "concept_name": "Mail Server",
+      "concept_description": "A mail server is a server that manages and delivers email messages. It receives emails from clients, routes them to the appropriate destination, and stores emails for later retrieval.  It utilizes protocols like SMTP, POP3, and IMAP.",
+      "grade_level": "7-11"
+    },
+    {
+      "concept_name": "File Server",
+      "concept_description": "A file server is a server that stores and manages files, allowing clients on a network to access and share them. It provides centralized file storage and access control, simplifying file management and collaboration.",
+      "grade_level": "7-11"
+    }
+  ]
+}
