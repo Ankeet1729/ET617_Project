@@ -1,0 +1,56 @@
+Scene 1:
+Part 1: So far, we have seen what's inside a computer and how a computer works using the input-process-output model. We also got a sneak peak into machine learning and who learns Computer Science. Up next, let's meet our friends Rumanzel and Eshal to learn more.
+
+Part 2: 
+Abida: Meet Rumanzel, the girl with an exceptionally long dark hair, and sweet voice. She is spirited, super-enthusiastic and independent. And Eshal, the pet sheep, he is Rumanzel's confident and self-appointed protector. 
+
+Part 3: 
+Abida: Ever since the lockdown, Rumanzel couldn't go to school, but she's not too much worried. Because she has a whole new mystical world through which she's connected with her friends, family and everybody else. 
+
+Rumansel's pet sheep Eshal: The only time Rumansel is worried is when she couldn't access her magic net. Oh, she hates when I say it like that. She calls it the 'internet'.
+Part 4: 
+Abida: Wait, wondering  if this is the mystical world which Rumansel gets into, whenever she feels lonely or excited? It's a world where all of our computers, mobile phones, TVs or even some watches and cars are connected together. 
+Part 5:
+Rumansel's computer can easily talk to her friend who resides in the other corner of the world. 
+Part 6: That's how she sends her pictures, emails and even calls to see her friends. 
+
+part 7: AI.S.H.A:
+But how do computers talk even from such a long distance? And how do they do it super fast? 
+
+part 8: Narrator:
+Good question AI.S.H.A. Rumansel's computer and her friend's computer are connected to the 'Internet'. But what's caught in that net? Not fishes, but packets of information that we send and recieve. Imagine how big the problem is when billions of computers can talk to each other at the same time with several billions of users sending and receiving information? How is the internet handling this alone?
+Scene 2: (Redressing the Digital-divide:)
+(Peace enters the room. She is an absolute new-bee to computers and internet)
+
+Part 1: Peace: Rumansel, what are you doing? I’m not sure what you do with this magic box all the time! Do you talk to it? Also people say a lot about internet these days. I don’t know what it is and I have never really used it. 
+
+Part 2 Eshal: Oh, Peace, come on! Are you saying you never really used a computer or browsed the internet? This is silly!
+
+Rumansel: Please stop mocking at her Eshal. It’s not her fault. Access to computers and internet is still a far cry in many parts of our country.
+
+Part 3: AI.S.H.A: I can give you some statistics: 
+•  Just 4% of the rural households have access to computers as compared to 23% in urban areas - national statistical office, 2020
+•  Little over 15% of rural households have access to internet services - 2017-’18 National Sample Survey.
+•  Only 28% woman have access to the internet when compared to 72% of men - Internet and Mobile Association of India report, in 2019,
+
+Part 4: Abida: You can see, there is a gender digital divide too. It has been increasingly difficult for woman to gain access to technology. Just because peace doesn’t own a computer or lacks access to internet doesn’t mean she lacks skills. She doesn't have to feel left out. We are there to teach her, right?
+Scene 3: 
+Part 1: Eshal (Surges in): I know how to make her understand. Rumansel explained me and I could perfectly relate to what an internet is. (Eshal starts narrating to Peace) I live in farm A. There are hay trucks which goes from farm to farm to feed the sheeps. There is an incharge at every farm to make sure these trucks reach the correct farm. The farm incharge routes the trucks to the correct destination by checking the truck's destination address. That's how me and my friends receive hay from far away places.
+Part 2:
+Eshal: If you are thinking how this relates to the internet, it's really easy. The hay is the packet of information (in binary) you send or recieve through the internet. The trucks are the cables which carry the packets of information. The farm incharge are the routers.  Routers are network devices that route packets of data to the router of the correct destination computer. So if you have a router installed in your home or school, it allows many computers or phones to access the internet at the same time just like my friends in farm B who are able to recieve their share of hay. 
+Part 3:
+Abida: Thanks Eshal for the relatable analogy on the internet. Also, there's something super important to remember. Just like the traffic police who makes sure that the traffic rules are not broken, our internet has some rules too. It's called the Transmission Control Protocol and Internet Protocol (TCP/IP) which governs all the routers, cables, packets and files we access through the internet.
+Scene 4: 
+Part 1:
+AISHA: Well then could computers communicate without wires and cables? 
+Part 2:
+Abida: The answer is yes. 
+ Through radio waves. And that's what is called a wireless (wifi) connection. But a wifi connection is accessible for short distances or range (within a home or office). When you use a mobile data connection or cellular connection, the data is broadcasted from a cellphone tower and is broadcasted across the nation. When you use a mobile data, you are charged by your mobile network provider.
+Scene 5 part 1:
+Well let me check Rumansel, she's been into something for quite a while.
+What are you upto Rumansel? 
+Part 2: Rumansel: I'm searching for something which my teacher asked me to read about! You see this is called a web browser. It is a computer program - a software that is used to request and browse webpages like (Diksha, Pi Jam or almost anything) on the internet. Sending emails, talking to your friend, attending classes, watching videos. The requests can be versatile.
+Eshal: Well then just like me. You know, we are browsers too. But we browse different kinds of grass.
+Rumansel: (Insert a puzzled emoji look on her face) Oh Eshal, can you see that I'm doing a google search for metaphors and simileys. This is called a search engine. You can ask anything to it and it replies to you in a fraction of a second. 
+
+Rumansel:  All these requests can be made by a computer or phone to the internet. Since my computer makes the request, it is called the client. The computers in the internet that are responding to my requests are called the Servers. There are dedicated servers for handling specific tasks like web servers, database server, mail server etc.

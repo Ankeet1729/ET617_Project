@@ -1,0 +1,15 @@
+--- Video 15 Contd : When sprites talk to each other - events and actions ---
+Now that we know about the scratch platform, let's get started by creating our first sprite. Sprites are characters that we will use in our code or program. We could use multiple sprites in our code and each sprite can be coded a different behavior. We could also setup a backdrop to go with the sprites. Meet Bahir, the stag. Stags are endangered species of Red Deer, endemic to Kashmir. It's famous for it's spreading antlers and rich brownish red coat. 
+Amara is always fascinated by deers. She finally gets to meet with one of them. 
+Sprites: Amara & Bahir (from Scratch library)
+Backdrop: Forest (From Scratch library)
+Let's code and visualize how that looks like:
+Scene 3: I have chosen a sprite of a girl and named her Amara and placed the sprite in a desired location on the stage. We can adjust the size of each sprite using the size option.
+●  When the green flag is clicked, we want Amara to go to (X: -182, Y: -59). Let's place Bahir at (X: 95, Y: -70) by changing the X and Y co-ordinate of the sprite. 
+Events denote user's interaction with the computer. For example, when you turn on the light switch, the light is ON. When you turn it off, the light is turned OFF. The action of turning ON and OFF the switch is called the event and the light being turned On and OFF is the action. 
+Similarly when Bahir is clicked, as a result of this event, we want him to communicate the message "Hello I'm Bahir, how are you?" The Bahir sprite also broadcasts the message "How are you" and waits. 
+When Amara sprite receives the message, "How are you", she replies with "Hi Bahir, I'm fine. Nice to meet you". To do this drag the "when sprite receives" event block and the say block from the looks section. 
+Also get the glide block from the motion palette and make Amara glide closer to Bahir. To find out where Amara will glide to, drag the sprite to the exact location and use the glide block with the updated x and y values.
+Similarly, when the green flag is clicked, we have made Amara go to a specific location on the screen using the go to x and y block. X denotes the horizontal position or X co-ordinate of the sprite and Y denotes the vertical position or Y co-ordinate of the sprite. The center of the stage represents the position (X:0, Y:0). 
+Wait, looks like there is a problem. Amara replies and then glides closer to Bahir. But it should be the other way. To make him glide first, move the glide block above the say block. Let's check now.
+● We could also set a voice for each of our sprites using the 'set voice to' block and let them speak out loud to each other using the 'speak' block. Note that the text to speech blocks are only available to use with an active internet connection which uses the text-to-speech software provided by Amazon Web Services. This software uses deep learning technology which is a form of machine learning to synthesize natural sounding human speech. Do give it a try!

@@ -1,0 +1,45 @@
+Abida: Now that we learnt about computers, what they do and how they could learn from humans to help the society, could you think about who needs to learn Computer Science? 
+AI.S.H.A: mmmmh, may be a computer scientist? or a farmer who wants to pick apples? or perhaps a teacher like you and me?
+
+Scene 2: Abida: Good guess AI.S.H.A. The answer is, EVERYONE! You could imagine your future self to be a doctor who diagnoses diseases and uses her knowledge to train a computer or an engineer who uses computer science to build electric and self-driving cars, manage natural resources efficiently to save energy and reduce carbon emissions. 
+You could be a farmer who uses software and hardware developed by technologists to grow quality food or a space scientist who experiments and controls a mars rover in space. You could be an animator who uses software or code to create movies. You could be an educator who uses computer science to create personalized learning for students or a fashion desginer who creates  computer-aided-designs for textiles. Computer Science is a surprising choice for everyone and not just computer scientists!
+Role Models in Computer Science & STEM: 
+Computer Science and STEM is often portrayed as a far-fetched pursuit. But there are so many people who are breaking the stereotypes associated with learning Science, Technology, Engineering, Mathematics and computer science. We just saw that there is no limitation to who can learn Computer Science.  World's first programmers were also poets and mathematicians. Some early computer scientists were serving the navy. There are some girls who got their flying license at the age of 16. Some are fixing gender and racial bias in computer algorithms and some are teaching children how to code. Let's look at some of the role models in Computer Science and STEM.
+ 
+(Four in one frame - total 3 frames) 
+1. Ada Lovelace (10 December 1815 – 27 November 1852)
+First computer programmer, Published the first algorithm, Writer, Mathematician, Poetical scientist
+2. Kalpana Chawla (March 17, 1962 – February 1, 2003), Aerospace engineer, first Indian born woman to go to space twice and 
+primary robotic arm operator
+3. Charles Babbage (26 December 1791 – 18 October 1871), Mathematician, Mechanical Engineer, Philosopher, 
+Invented the first Mechanical computer
+4. Grace Hopper (December 9, 1906 – January 1, 1992), United States Navy Rear Admiral, 
+Mathematics Professor, Computer Scientist
+
+5. Gitanjali Rao, 2005, Times kid of the year 2020, Scientist, Author, STEM promotor at age 15, Invented a device to detect lead in water through carbon nano-tube sensor
+6. Mawya Sudan, 2007, First Female Fighter Pilot from Kashmir in 2021, 12th woman fighter pilot in the Indian Air Force
+7. Ayesha Aziz, Youngest Female Pilot in Kashmir, Acquired flying license at age of 16
+8. Joy Buolamwini, 1989, Algorithmic Bias Researcher, Poet of Code, Studies racial & Gender Bias in computer algorithms
+
+9. Elon Musk (June 28, 1971), CEO of SpaceX and Tesla, Enterpreneur and Business magnet, started programming at age 9.
+10. Debjani Ghosh (30 October 1988), Delhi, President, NASSCOM - Electrical & Electronics engineering, currently working on zero emission of electric airlines
+11. Reshma Saujani (November 18, 1975), Indian American Lawyer, Politician, Civil Servant, Founder of non-profit Girls who code. reshma's vision is to teach girls how to code
+12. Sundar Pitchai, 1972, CEO of Google & Alphabet Inc, Material science, Developed Chrome OS, Gmail, Google Drive
+11. Ashni Dwarkadas, Mumbai, Co-founder, Hackberry - Investment banker, MBA from Carnegie Mellon University, Teaches young children how to code
+8. 
+12. 
+14. Roselin Rosario-Meléndez, Cosmetic Chemist, Developed the world's best selling Lipstick, Advocate of Gender Equality in STEM 
+15. Mark Zuckerberg (May 14, 1984), Internet Enterpreneur, Philanthropist, Cofounded Meta platforms (previously Facebook), Found facebook at age 19.
+16. Vandana Verma, Chief Engineer, Robotic operations for NASA Mars mission, co-wrote a coding langauge for Mars Rover
+17. A.P.J. Abdul Kalam (Born October 15, 1931, Pilgrimage centre, Rameswaram, India—died July 27, 2015, Shillong) is an Indian scientist, Professor, Missile man, President of India from 2002 to 2007)
+18. Ratan Tata (28 December 1937), Indian industrialist, philanthropist, Chairman of Tata Group including TCS, a multi-national IT services & software company 
+19. 
+20. 
+21. Malala Yousafzai, born 12 July 1997, World's youngest Nobel Prize laureate, Activist for Girls Education
+1. Which one of the following do you think can be a computer? Could you come up with an Input-Process-Output model for your selections? List the Input, Process and Output parts of your computer. A car, toothbrush, mobile phone, Washing machine, TV, a ball
+
+2. Identify a scenario where machine learning could be used to perform better than humans. Analyze and evaluate how machines perform better than humans in this scenario, stating and explaining possible human biases. 
+
+3. Computer Science and technology are infused in every field. If you were to imagine your future-self using and creating with technology, how would it look like? Write in 200 to 500 words about which profession you would choose (like an artist or musician or doctor, teacher, engineer etc) and how computer science will help you solve a problem in that field. 
+
+4. Could you identify any three role-models (in your chosen profession), who have made a positive impact to the society by using computer science and technology.

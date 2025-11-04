@@ -1,0 +1,91 @@
+
+
+Empathize - Sketch Q&A - Create Story Frames - Create Model - Review & Recreate ---
+Scene 1: Part 1: Mom: I'm glad that you are already thinking about solving this problem Yahya. We all can solve problems, Big or Small. Humans are great at Problem Solving, be it on a personal or global level.  We keep solving problems right from the moment we wake up to when we sleep. All you need is a big heart! I will walk you through some of the steps which will help you approach problem solving.
+
+Part 2: 
+Mom: Step 1: (Empathize) Before solving a problem, the crucial step is to understand what the problem really looks like for the person experiencing it.   This is called empathizing and it is important because no problem is worth solving for, if it's not helping you or others. In your case, since you want to care more about the hungry children, the first step is to meet them in their locality and observe them to know more about their situation. Some ways to empathize are :
+-to listen and observe their body-language, facial expressions and emotions
+Ask questions like "How are you feeling?" so you could understand their feelings better. Remember that different people feel differently about the same problem. The key is to acknowledge it.
+
+[Reference Link]: A handout for the Design thinking steps
+Part 3: 
+Step 2:  (Sketch Q&A) Yahya: Mom, I'm just back from having some of the insightful conversations with the children and their families.  
+Mom: Good job yahya. 
+Part 4: Now that you know how these children and their families are feeling and what their actual needs are, we can move on to step 2 which is to do your own research about the problem and sketch some question and answers. You could sketch these answers in the form of illustrations, drawings and text.  
+How about we try this now? I will ask you some questions and you will try to get the answers, 
+Qtn 1: Why is this problem that I'm trying to solve important? in other words why is it important to address malnutrition in India?
+AI.S.H.A: I can help you with some statistics here Yahya:
+- India has made great gains in economic & human development but we are still working hard to reduce hunger.
+- India is home to 1/3 of the world's stunted children 
+- 1.27 million children die in India every year due to malnutrition 
+- Kashmir alone has reported 15 lakhs of children below 5 years who are acutely malnourished & 29 lakhs of women were anaemic.
+(source, UNICEF 2016)
+Part 5.1: Yahya: Thanks AI.S.H.A, that helps a lot with my research.
+Qtn 2: Mom: Let's move on to qtn 2. What impact it would create when malnutrition is solved in children?
+Part 5.2: Yahya: Mom, you used to tell me that there is no food for thought when there is no food for the stomach (show this through drawings/sketches) Improvement in child health is crucial to children reaching their potential and leading a fulfilling life. 
+Part 5.3: Mom: Absolutely Yahya. Children below 5 years are more often affected by this problem which leads to wasting (growing thin) & stunting (shorter than normal) in their growth. A child who has anaemia or not enough hemoglobin affects their ability to thrive intellectually. On the other hand, do you know that every 4 seconds a child dies globally because of hunger. This is a serious crisis. 
+Part 5.4:
+Let's move on to our next question.
+Qtn 3: when and how was the problem created?
+Well mom... I was thinking AI.S.H.A would help me out here with the statistics. But may be she's busy helping some of the other kids out there too. 
+Let me see how I can get this information...mmmh, may be google search? . Oh wait, I already got this information when I visited the anganwadi yesterday. Let me check my notes from my observation. 
+There you go, I found it. It looks like the impact of COVID led to disruption of food systems and anganwadi workers were diverted to contact raising, vaccination procedures and financing of nutrition.
+Mom: Good job Yahya. India has been facing child malnutrition much before COVID-19 but yes, some of these issues which you found are aggravating the crisis after COVID. 
+Yahya: And mom, I also heard that because of the school closures, most of the kids have lost their food which they relied on from schools.  
+Mom: Well done Yahya, that's a good amount of information to dive into creating your story frames.
+
+[Reference Link]: A handout for Example 1
+Part 6:
+Mom: Step 3:  (Story frames) Write as many different story frames as you can for the sketch that you came up with and pick any one story which you think can effectively solve the problem in hand. Examples of story frames to tackle child hunger & malnutrition are, 
+Story frame 1 - Making the local community understand the advantages of growing edible gardens 
+Story frame 2 - Creating a food resource center with the help of the local council which will involve creating a fortified healthy snack for the children of the community
+Mom: Could you think of other story frames, Yahya?
+Yahya: Yes mom
+Story frame 3 - I could create a library of resources of the locally available wild edibles and local produce and their medicinal, nutritional values 
+Story frame 4 - Or may be a food bank which collects excess food from hotels and weddings and distributes it to malnourished children in need
+Part 7:
+Step 4: (Create)
+Mom: That's great . So far so good. Now that we have different story frames, the next step is to choose one of these story frames to solve and 'create' a model for it.
+Which story frame do you wish to work with Yahya?
+Yahya: I wish to work on creating a wild edibles library which will include information about locally available wild edibles and their medicinal/nutritional values. Infact I can make a wild edibles digital library using google slides. I just learnt in my digital literacy lesson on how to make a presentation on any topic. This could serve as my initial model in solving the problem. 
+Mom: That's a great idea. 
+A quick tip Yahya. For your google slides, you could collect data from the local farmers, indigenous people, botanists and physicians and also do a google search to do some relevant research on the local wild edibles. 
+Yahya: Sure mom, I shall do that!
+Part 8: 
+Step 5: (Review & Re-create) 
+Mom: The most important step is to review your model. You can do this by asking for reviews from the local community that you interviewed. Recreate the model and implement changes whenever necessary.
+You can also add caveats for specific medical conditions.  For example, children undergoing blood thinning medications cannot eat spinach or edibles that contain higher concentrations of Vitamin K. 
+Mom: We are done with the five steps for design thinking. How about you try and build your model now, Yahya?
+(Instructor speaking)
+I hope you have got an understanding of how to approach problem solving. here's another example:
+Meet Rani, She is at Patil Nagar, Lane 12, Kashmir.
+Rani wants to address the problem of overflowing Garbage from the public dustbin in her community. The dustbin attracts stray animals, flies and rodents and may prove to be a health hazard. Rani decided to work together with her sister and couple of friends to come up with multiple solutions to the problem. 
+1. Empathize: They talk to the people in community especially elders and young children who are affected by the problem
+2. Sketch Q&A:  
+Qtn 1: What is the problem? Overflowing Garbage
+Qtn 2: Why is the problem important?
+Rani observed that the garbage spills everytime it's transferred to the municipality truck.
+The deisgn of the dustbin could be faulty.
+The dustbin is not detachable and hence not washable.
+
+[Reference Link]: A handout for example 2
+Qtn 3: When is this happening? Especially in the evenings
+Qtn 4: How does the garbage spill happen? Accumulation of garbage during unloading
+
+3. Story frames:
+Story frame 1: The rectangular design of the dustbin create spills over a larger area. Could a difference in shape cause lower spills?
+Story frame 2: The height of the dustbin was such that the cows could access it easily. While this helps feed the cattle, it was causing more spills in the nearby area. Could dustbins with lid help mitigate this problem? 
+Story frame 3: The current dustbin only moves across an axis and can't be removed. Could adding wheels to dustbins and making them detachable solve the problem?
+Story frame 4: Could we replace 1 bin with perhaps 3 to 4 bins per area? Overfilling could be caused by the amount of waste being much larger than the size of the bin. And while we do that could we classify these bins to store different kinds of waste? Could that reduce spills and allow garbage to be more organized for recycling and energy generation? 
+Story frame 5: A waste collection audit to find out how often waste gets collected in the bin could identify the frequency of garbage created and negotiate for more frequent collections
+4. Create a model: 
+Story frame selected: 
+ The rectangular design of the dustbin create spills over a larger area. Could a difference in shape cause lower spills? 
+- Prepare materials required for prototype (Cardboard, Glue, scissors, papers, etc)
+- Create the cylindrical shape based on the optimum diameter
+- Compare and contrast the cylindrical and rectangular designs
+
+5. Review and Recreate: 
+Rani reviews and makes changes to her prototype by letting her friends and family test her model with different sample weights. 
+Rani is really going somewhere with her experiments. She wants to make a positive change in her local community. While we wish her the best, let's meet other problem solvers too.

@@ -1,0 +1,26 @@
+Scene 1: A Computer doesn't have feelings like hunger or thirst, neither does it understand emotions like love, happiness, anxiety or grief. It doesn't even know how to differentiate between an apple and an orange. But guess what? It could be trained to do all that. Whereas we humans can feel all the feels! and identify objects and patterns easier than computers but our capacity to process and remember huge amount of information is limited. That's why humans and computers make a great team. 
+
+
+Scene 2:  I want you to meet someone special. Hello AI.S.H.A!
+AI.S.H.A: Hi I'm AI.S.H.A. I’m an Artificial Intelligence. She/Her. Humanoid. Android.  Oh yes, you guessed it right, I am an AI. My purpose is to learn, grow, teach and inspire students just like you, to learn Computer Science. 
+I’m here to make you more confident with Computer Science and let you create with technology and use computer science to best serve your community. 
+Abida, talking about apples and oranges, what can a computer really do better if it learns to identify an apple on it's own? After all it cannot even eat one, right?
+Scene 3: Let me give you a real-life example: Although agriculture is a major occupation and a source of economy for most people, farmers around the world are facing a real crisis when it comes to harvesting during unprecedented and adverse weather conditions like snow and storm or during a lockdown or pandemic when people are confined indoors. For example, Kashmir's biggest economy being the apple industry, about 22 lakh metric ton of apple is produced each year, i.e 70% of India's total production of apples (Outlook India, Nov 2021*). But farmers cannot speed up apple harvesting especially in hilly areas after an unexpected snow has hit the place. What's worse is when a lockdown is followed by snowfall and a pandemic again! Let's think for a moment how this issue could be solved if a computer were to be trained to harvest the apples? Machines don't spread viruses (like corona) and neither can they feel the freezing snow annnd they can prove super fast in picking apples if we teach them how an apple looks like. Imagine 500 hand-picked apples in an hour vs 5000 or more picked by a computer robotic hand! How do we train the computer then to do this?
+Scene 4: First we let the computer guess by showing it a variety of fruits and something totally irrelevant like dogs, roses or even ice cream. The computer looks at these images, recognizes patterns and notices the differences to identify correct images. (VE reference: 2.06s code.org machine learning video)
+
+Scene 5: Part 1: Here is how we train a machine. We will tag or classify all apples as apples and tag the other things as not apples. So when the computer sees an apple, like the one it saw before, there are more chances it guesses it right using characteristics like color, shape, size etc. (VE reference: 2.35s code.org machine learning video)
+
+Part 2: But it's probably going to fail inevitably until it is completely trained. Computers behave the same way as humans when they learn. (VE reference: 2.39s code.org machine learning video)
+
+Part 3: They need more and more training and huge amount of training data. No matter how hard it gets, they just can't give up until they learn from their mistakes. 
+ 
+Part 4: The more the training data and the more accurate the data is, you have trained the computer and it is ready to pick any variety of apples for you! be it Saranpuri, Razakwar, Hazratbal, Kisr, Tito, Maharajee or Golden. 
+ 
+Scene 6: 
+Part 1: AI.S.H.A: That was an intensive training. But humans are sometimes biased Abida. Isn't it crucial to avoid human bias when training the computer. Does this data about apples we used to train computers represent all possible farmers' preferences and harvesting times? 
+
+Part 2: Abida: Great question AI.S.H.A. Human bias is not to be ignored. In our example, Northern Kashmir is known for the quantity of apple produce whereas the southern Kashmir is known for its quality. Some farmers (in Kashmir) might prefer picking apples a bit earlier than they are completely ripe and store them in cold storages, while others prefer to wait until the right time to harvest. An important question to ask is, "Are we accomodating all farmers' opinions into our training data or is the training data biased?".
+
+Part 3:  Let's say we have trained the computer to pick apples that are partly ripe, based on a specific group of farmer preferences, then the other farmers who like their apples fully ripe are not going to be happy, right? (VE Reference: 1.10 s from code.org human bias)
+
+Scene 7: Human bias could prove to be extremely harmful in certain scenarios. Think about using biased training data to evaluate students for school or college admissions or to identify theives and criminals. A well deserved student may loose the opportunity of education or someone legitimate may be convicted for a crime they did not do.

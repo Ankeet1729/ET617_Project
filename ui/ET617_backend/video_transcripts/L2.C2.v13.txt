@@ -1,0 +1,23 @@
+--- Video 13: Include, Ignore, Divide and Conquer - the roti making ---
+Scene 1:
+Part 1: Abida: Welcome problem solvers. 
+A quick recap - we learnt how to create a working model of the problem that you are trying to solve. We saw how a computer software like google slides can be used to create a model for solving a problem.  Remember our theory from before? Computers and humans make a great team and can prove to be more efficient in solving problems together. But to make the best use of a computer, we humans should learn how to think computationally. 
+Part 2:
+Well what is computational thinking? We will get to that part sooner. But before that, I want you to think about some of the simple things that we do every single day. Let's take an example of making a Roti (chapathi). What are the steps involved? 
+(Abida's algorithm for making Roti)
+1. Take one cup of Atta (wheat flour) and add a pinch of salt to the Atta 
+2. Add water to the dough and knead the dough until it starts to pull together
+3. Make smaller balls out of dough and dust the balls both sides with flour
+4. Roll it until it's evened out in all the sides
+5. Cook the roti on high heat and quickly flip it after 10 seconds on a heated tawa or pan.
+6. Once you see bubbles put the roti directly on fire to puff it up. 
+There you go! The roti is ready to be served
+Part 3: Abida: You can see that these step by step instructions have to be followed in a sequence in the specific order, one after the other to make fluffy perfectly cooked rotis. We call these steps the algorithm. 
+Part 4: Include-Ignore: When we write algorithms, we need to ignore the unnecessary details and include only the details that are most relevant to the problem. For example, my algorithm for rotis didn't include details about the color of the container I used or how fast I needed the dough or rolled the rotis. This is not most relevant to making rotis. This process is known as abstraction. 
+Part 5: After abstraction, we break down the process into simple steps. This process is known as decomposition. 
+When we write algorithms for computers, these algorithms have to be precise and accurate if we want the correct results from the computer.  These algorithms are lated translated to code which the computer will run. 
+Part 6: For example, meet the world's most popular food robot, the rotimatic. It's a fully automatic roti making machine build by two Indians Pranoti and Rishi - a mechanical engineer and software engineer graduates from the National University of Singapore. Rotimatic has a 32-bit microprocessor (in other words a computer on a single chip) with the CPU processing and control, 10 active motors, 15 smart sensors to sense temperature, position and consistency and 300 parts. 
+Part 6: (VE reference: Add clip 7 to 28 s to our video: https://in.video.search.yahoo.com/search/video?fr=mcafee&ei=UTF-8&p=rotimatic+video&type=E210IN826G0#id=3&vid=a691d3c02215855978561deb3b891769&action=click)
+The rotimatic machine uses an algorithm to make fluffy and nutritritious rotis, 1 roti a minute.  And what more, it uses machine learning to learn more about the doughballs every single time it makes it and uses this information to improve the next doughball. 
+
+Part 7: Abida: Now, imagine what happens when the algorithm fed into such a machine is not written in precise order? We can't expect the machine to make fluffy rotis right? Arranging instructions in precise order is called sequencing. Sequencing is crucial to ensure correctness of any algorithm. In the next video we will see another example of an algorithm.

@@ -1,0 +1,41 @@
+Scene 1:Abida:
+Part 1: Don't give all your cookies to the mouse!
+
+Have you heard of this story, "If you give a mouse a cookie" by Laura Joffe Numeroff?
+https://www.youtube.com/watch?v=d1Z-uxgFUTM
+
+Story from the book -
+"If you give a mouse a cookie, he is going to ask for a glass of milk
+When you give him the milk, he will probably ask you for a straw,
+when he's finished, he'll ask for a napkin
+then he want to look in the mirror to make sure he doesn't have a milk moustache
+When he looks into the mirror, he might notice that his hair needs a trim
+So he will probably ask for a pair of nail scissors
+and the cycle continues....
+Looking at the refrigerator will remind him again to ask for a glass of milk 
+And chances are if he asks for a glass of milk
+He's going to want a cookie to go with it!!!!"
+
+So, makes sense right? Don't give all your cookies to the mouse!
+Part 2: 
+AI.S.H.A: But wait Abida, what is an internet cookie and how is it different then? 
+Abida: Good question AI.S.H.A. A Cookie is a small piece of data containing a unique user id obtained from a specific website. The cookie gets stored in a users' computer in their hard disk drive while they are browsing the web. Through cookies the website can easily track and identify each one of it's user. The more cookies you give away to many people, the more data is known about you and your online preferences
+Part 3: How do cookies work? Let's look at an example. Rumansel is using an online store to place order for a traditional Kashmiri woolen pheran, because it's getting way too cold. She is specifically looking for the one with multi-colored embroidery but couldn't choose one. Later the same day, she sees several ads of woolen pherans with embroidery popping up on her social media website. How is this possible? Rumansel's computer stored cookies which kept track of all her shopping cart information and the dresses she clicked to view, to show her more related ads in the future. 
+Part 4.1: 
+Cookies are supposed to be specific for a site right? How then Rumansel's cookies got sneaked by social media from the online store? Because the online shopping site had a facebook 'like' and 'share' button which downloaded software from the facebook site (a third party site) for it to function well. During this communication, the facebook site gets access to the cookies stored in Rumansel's computer. 
+Part 4.2:
+As a user we could block these third parties and websites taking away the cookies from us by blocking third party cookies in browser security settings - > Block third party cookies and clear cookies demonstrated as a screen share.
+Part 5.1:
+So, the next time, if you see some cookie boxes asking for your permission to agree, then don't simply agree before you read about their cookie policy and know why and how they use your cookies. 
+Part 5.2: We could also install browser extensions such as Privacy Badger or Ghostery. These extensions help by blocking illegimate trackers of information. 
+
+Part 6: Cookies are not all bad. They also have simple yet useful functions like remembering your login details for specific websites, like facebook or gmail. So you don't have to enter your login details again every single time. The cookie contains a unique identifier to remember your identity. This is good and it saves a lot of our time.
+Part 7: Eshal: Well the social networking sites then should also know where we live and the shops we visited because Rumansel had her device location turned on while she was looking at her google maps. Probably that's why the other day, there were ads in her facebook showing the best restaurants in Kashmir.
+Part 8: Abida:   A google search, a social media post, online shopping history, a location tracker, a voice message, these are all examples of big data that can be collected online, analyzed and monetized. Because, remember? Machines or computers can be trained to learn patterns from huge amount of data and use algorithms or software to predict who you are and what you will be in the future. Does this mean our privacy will become obsolete with Big Data? Or will it be a progressive step ahead to take informed, safe and more efficient decisions? 
+
+AI.S.H.A: Well Abida, I think big data and Artificial Intelligence like me if used well could be of great service to the humanity. Look at me, I'm helping you teach Computer Science in your classroom. There are some of my robot friends who even help disabled people or people with special abilities. And some who help with anxiety and depression too by reading the mind patterns of people. Isn't that amazing?
+
+Abida: Yes AI.S.H.A, looking at robots like you, it seems like there is more hope for AI and machine learning in the future.
+1. Handout: Identify the phishing messages out of the legitimate ones and reason out your choices
+2. Scam emails contain trigger words that trigger a sense of urgency and fear, use manipulative language or claim unbelievable discounts. Sometimes even legitimate emails get tagged as a 'scam' by scam filtering software. This is because these use scam trigger words, spelling errors or bad formatting. Check for the scam folder in your (or parent/gaurdian's) gmail. Are there any scam emails? What kind of emails are in the scam folder? Spot and list the spam triggers
+3. When you are opening a website, both cookies and caches are in action. Open the 'settings' option from any browser that you use and go to 'privacy & security'. You will find an option to clear browsing data with a sub-option to clear cookies vs cached images and files. After clearing both cookies and cache, let's say you are trying to log in to an online shopping site or any account that you are registered with, what effect does clearing a cookie vs clearing a cache will have on your next website browsing experience?

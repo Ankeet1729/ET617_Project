@@ -1,0 +1,42 @@
+--- Video 14: Sequencing & Algorithms - the wild edibles app ---
+Scene 2: Part 1: Let's get to another example of an algorithm. Let's say you want to give instructions to someone to draw a square. What would that look like? 
+Step 1: Start by facing right and draw a straight line.
+Step 2: Turn 90 degrees right
+Step 3: Draw a straight line
+Step 4: Turn 90 degrees right
+Step 5: Draw a straight line
+Step 6: Turn 90 degrees right
+Step 7: Draw a straight line
+Part 2: That's great. We did draw a square with our algorithm by decomposing it into simple steps to work with, one at a time. 
+Part 3: But did the algorithm say how big the square needs to be? Or what color the square needs to be? Yes! these details were ignored or abstracted out so we could write an algorithm which will help make the computer draw a simple square.
+Scene 3:
+Part 1: Abida: Let's understand how to think computationally using another familiar example.. Remember Yahya who has created a digital library of wild edibles? He had been trying to address a complex and overwhelming problem of reducing children's hunger and malnutrition. One problem the users might face is not being able to easily search or navigate the slides to find the information about specific wild edibles they might be looking for.  
+A digital application (App) that could deliver the same details on the go could be a handy tool for local people to access and identify information on plants and edibles. 
+Here is the challenge for Yahya.
+How would he know if he has covered all varieties of wild edibles? It's time for Yahya to do some research to aid him in this process. 
+
+Part 2: First Yahya recognizes the pattern in which the wild edibles are divided into different types like fruits, leaves, roots and seeds. This technique is called pattern recognition. If Yahya could sort his library in this way, he could ensure he has covered multiple varieties in his app. In addition to that, people using his app would also be able to look for just the edible fruits which could be eaten raw or explicity look for the leaves or seeds. 
+
+Part 3: Yahya and his friends work on each plant part first and then group them together to get the complete list of edibles in Kashmir. This method of finding patterns to divide a complex problem into smaller tasks makes the problem easier to solve. It is known as decomposition.
+Part 4: Abida: Are we missing on something? Let's see! There are 1403 wild edible species in India  You see, including all 1403 species seems almost impossible for Yahya and his group now. Yahya ignores details about other cities while he is working to build his app. He only includes information about the wild edibles in Kashmir valley. This allows Yahya's group to abstract away the unnecessary complexity of searching for details about many species at the same time. This is known as abstraction. Yet another important computational thinking skill.
+Part 5: After recognizing the patterns, abstracting out the complex details and decomposing the tasks into subtasks, the next step is to write an algorithm to formulate the solution and carry it out using a computer. Yahya has written his own rules for designing his app. Let's see how he built his app by coding for it. 
+Yahya used a software called scratch to code for his wild edibles app.
+
+Algorithm for designing the wild edibles app 
+(Screen sharing - wild edibles app)
+Step 1: Design a homescreen for wildedibles in Kashmir
+Step 2: Add buttons to sort the edibles into Fruits, Leaves, Seeds, Root and Flowers
+Step 3: When the Fruits button is clicked, open a new page and add photos of all wild edible fruits in Kashmir with their local name, scientific name and nutritional value. 
+Step 4: Add a home button at the top left corner of each page to go back to the home screen
+Step 5: Repeat step 4 for seeds, leaves, roots and flowers
+Step 6: Add a next button to navigate to the next page if there are more than one pages
+Part 6: (Yahya's mom approaches him)
+Yahya, I'm so proud of you. It seems to me that you are already close to achieving your goal of helping the hungry children. Every parent can refer to your app for affordable and nutritious sources of food in our loacity.
+Part 7:
+Abida: Now, the great thing about Yahya's app is that, anybody can re-use this design to create a custom wild edibles library of their locality. So his solution can be generalized for similar apps. 
+7.2
+In the last chapter, we learnt about solving problems using a dual approach of design thinking and computational thinking. Design thinking helped in choosing and creating a precise solution from different story frames and computational thinking helped to formulate this solution such that it can be effectively carried out using a computer and later generalized for similar problems.
+In the next chapter, we will get started with learning to code, so you can create and code solutions to your problems like Yahya did.
+Now it's your turn! Start out by writing algorithms for simple sketches. May be to draw a hexagon or a triangle? Once you get a hang of writing your own algorithm, revisit the model that you have been working on in the previous chapter. Does it seem like a huge problem to explore?  It's time to divide your model into smaller parts to make the model simple to work with. Just like Yahya did. Research more on each part to see if you can find any similar or differentiating patterns. Abstract out the unnecessary complexity and focus on the most relevant parts of the problem. Write an algorithm to use a computer to solve the problem. 
+
+Hurray!, if you are done with the above steps, then you are ready to get started with coding your algorithms to let the computer do the job for you.
