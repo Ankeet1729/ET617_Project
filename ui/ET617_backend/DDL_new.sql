@@ -166,10 +166,7 @@ CREATE TABLE student_concept_stats (
   UNIQUE(student_username, concept_id, grade, submodule_id)
 );
 
-UPDATE supermodules SET supermodule_name = 'Just be, Just code - Code your emotions' WHERE supermodule_code = 'L3.C1';
-UPDATE supermodules SET supermodule_name = 'Code, for the love of..' WHERE supermodule_code = 'L3.C2';
-UPDATE supermodules SET supermodule_name = 'Code with purpose' WHERE supermodule_code = 'L3.C3';
-UPDATE submodules SET image_path = '/uploads/submodules/' || submodule_code || '.png' WHERE submodule_code LIKE 'L3.%';
+
 -- Indexes for performance
 CREATE INDEX idx_concepts_submodule         ON concepts(submodule_id);
 CREATE INDEX idx_questions_concept          ON questions(concept_id);

@@ -56,7 +56,13 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
 }));
+// A simple test endpoint
+app.get('/', (req, res) => {
+  console.log('✅ [DEBUG] ROOT / ENDPOINT HIT');
+  res.send('Hello! The server is running!');
+});
 
+// ==================== AUTH ROUTES ====================
 // Short-circuit OPTIONS requests early so other middleware doesn't block preflight
 app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
@@ -501,6 +507,8 @@ app.post('/register', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
 
 // Student Login
 app.post('/login', async (req, res) => {

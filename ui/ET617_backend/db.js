@@ -7,13 +7,13 @@ dotenv.config();
 
 const { Pool } = pg;
 
+// [FIXED] Use the correct process.env variable names
 const pool = new Pool({
-  user: process.env.user,       // PostgreSQL username
-  host: process.env.host,
-  database: process.env.database,
-  password: process.env.password,
-  port: process.env.port || 5432
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT || 5432
 });
 
 export default pool;
-
