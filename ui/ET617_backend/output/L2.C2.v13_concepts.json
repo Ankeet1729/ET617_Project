@@ -1,0 +1,76 @@
+{
+  "submodule_code": "L2.C2.v13",
+  "submodule_name": "Include, Ignore, Divide and Conquer - The roti making",
+  "concepts": [
+    {
+      "concept_name": "Modeling Problems with Software",
+      "concept_description": "This concept explains how software tools, like Google Slides, can be used to create visual or functional models of real-world problems. It emphasizes that building a model helps in understanding and planning a solution before implementing it.",
+      "grade_level": "4-7"
+    },
+    {
+      "concept_name": "Human-Computer Collaboration",
+      "concept_description": "This highlights the efficiency and effectiveness achieved when humans and computers work together to solve problems. It suggests that combining human thinking with computer processing power leads to better outcomes.",
+      "grade_level": "3-6"
+    },
+    {
+      "concept_name": "Introduction to Computational Thinking",
+      "concept_description": "Computational thinking is introduced as a way for humans to approach problems in a manner that makes them solvable by computers. It's presented as a crucial skill for effectively utilizing computers.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Algorithms as Step-by-Step Instructions",
+      "concept_description": "An algorithm is defined as a precise set of step-by-step instructions that must be followed in a specific order to achieve a desired outcome. The process of making roti serves as a concrete, relatable example of an algorithm.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Sequencing in Algorithms",
+      "concept_description": "Sequencing refers to arranging instructions in a precise and specific order within an algorithm. It is crucial to ensure that the algorithm produces the correct and expected results, as demonstrated by the potential failure of making rotis if steps are out of order.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Abstraction",
+      "concept_description": "Abstraction is the process of simplifying a problem by ignoring unnecessary details and focusing only on the most relevant information. This helps in creating clearer and more effective algorithms, as seen when writing a roti-making algorithm that omits trivial details.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Decomposition",
+      "concept_description": "Decomposition involves breaking down a complex problem or process into smaller, more manageable steps. This strategy makes the problem easier to understand and solve, especially when developing algorithms for computers.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Precision in Algorithms for Computers",
+      "concept_description": "When writing algorithms for computers, it is essential that the instructions are precise and accurate. Any ambiguity or inaccuracy can lead to incorrect results, emphasizing the strict nature of computer instructions.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Translating Algorithms to Code",
+      "concept_description": "This concept explains that algorithms, once designed, are translated into code that a computer can understand and execute. This forms the fundamental link between computational thinking and programming.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Microprocessors and CPUs",
+      "concept_description": "A microprocessor is introduced as a 'computer on a single chip,' with the CPU (Central Processing Unit) being responsible for processing information and controlling operations. The Rotimatic machine provides a real-world example of this hardware component.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Role of Sensors in Robotics",
+      "concept_description": "Sensors are presented as devices that gather information from the environment, such as temperature, position, and consistency. In the Rotimatic, smart sensors enable the machine to adapt and make decisions during the roti-making process.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Role of Motors in Robotics",
+      "concept_description": "Motors are described as components that provide movement and control in automated systems. In the Rotimatic machine, motors are crucial for performing actions like kneading dough and rolling rotis.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Automation and Robotics Applications",
+      "concept_description": "This concept illustrates how algorithms and hardware are combined to create automated machines like the Rotimatic. It shows how robotics can solve real-world problems by performing complex tasks efficiently and automatically.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Introduction to Machine Learning",
+      "concept_description": "Machine learning is briefly introduced as a capability where machines can learn from data to improve their performance over time. The Rotimatic's ability to learn about doughballs to make better rotis is used as an accessible example.",
+      "grade_level": "7-12"
+    }
+  ]
+}

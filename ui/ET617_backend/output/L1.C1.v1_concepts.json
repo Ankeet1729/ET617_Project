@@ -1,66 +1,61 @@
 {
   "submodule_code": "L1.C1.v1",
-  "submodule_name": "Introduction to Computer Components",
+  "submodule_name": "Let's cook a computer story",
   "concepts": [
     {
-      "concept_name": "Computer Definition",
-      "concept_description": "A computer is a machine that can perform calculations and other tasks based on instructions. It consists of different components that work together to process information.",
+      "concept_name": "Core Function of a Computer",
+      "concept_description": "A computer is a complex system of interconnected parts designed to process information and execute tasks efficiently. The lesson uses a cooking analogy to introduce how different components work together to achieve an overall goal.",
       "grade_level": "3-7"
     },
     {
-      "concept_name": "CPU (Central Processing Unit)",
-      "concept_description": "The CPU is the 'brain' of the computer that executes instructions.  It performs arithmetic operations and controls the other components of the system.",
-      "grade_level": "5-8"
+      "concept_name": "Central Processing Unit (CPU) Role",
+      "concept_description": "The CPU, depicted as the 'master chef,' is the brain of the computer, responsible for executing instructions, performing calculations, and controlling other hardware components. It handles the core computational and logical operations.",
+      "grade_level": "4-9"
     },
     {
-      "concept_name": "RAM (Random Access Memory)",
-      "concept_description": "RAM is a temporary storage space that holds data and instructions that the CPU is actively using.  It is faster than storage drives but loses its data when the computer is turned off.",
-      "grade_level": "5-8"
+      "concept_name": "Random Access Memory (RAM) Function",
+      "concept_description": "RAM acts as the computer's short-term memory, holding data and program instructions that the CPU needs to access quickly. It is like a recipe book that is open and readily available to the master chef but has limited space.",
+      "grade_level": "5-10"
     },
     {
-      "concept_name": "OS (Operating System)",
-      "concept_description": "The Operating System manages the computer's hardware and software resources. It acts as an intermediary between the user and the hardware, allowing multiple programs to run simultaneously.",
-      "grade_level": "6-9"
+      "concept_name": "Operating System (OS) as a Manager",
+      "concept_description": "The OS, personified as the 'sous-chef,' enables the CPU to manage and switch between multiple tasks (or 'recipes') simultaneously without confusion. It oversees the overall flow of operations and resources within the computer.",
+      "grade_level": "5-10"
     },
     {
-      "concept_name": "Drive (Storage)",
-      "concept_description": "A storage drive, like a hard drive or SSD, stores data persistently, even when the computer is off. It holds files, programs, and the operating system itself.",
-      "grade_level": "5-8"
+      "concept_name": "Cache Memory for Speed Optimization",
+      "concept_description": "Cache memory, the 'superwoman,' stores frequently used data and instructions in a very fast, small memory located close to the CPU. This allows the CPU to access crucial information almost instantly, reducing wait times.",
+      "grade_level": "6-12"
     },
     {
-      "concept_name": "GPU (Graphics Processing Unit)",
-      "concept_description": "The GPU is responsible for rendering images and videos on the display screen. It excels at parallel processing, making it suitable for graphics-intensive tasks.",
-      "grade_level": "6-9"
+      "concept_name": "Graphics Processing Unit (GPU) Specialization",
+      "concept_description": "The GPU, represented by a character specializing in 'plating and presentation,' is a dedicated processor designed to handle visual computations. It is crucial for rendering graphics, videos, and complex visual data quickly and efficiently.",
+      "grade_level": "6-12"
     },
     {
-      "concept_name": "Cache Memory",
-      "concept_description": "Cache memory is a small, fast memory that stores frequently accessed data. This allows the CPU to access information more quickly than retrieving it from RAM, improving performance.",
-      "grade_level": "7-10"
+      "concept_name": "Persistent Storage (Drive) vs. Temporary Memory",
+      "concept_description": "The Drive serves as the computer's long-term storage, capable of holding vast amounts of data like photos and documents persistently, even when the computer is off. It contrasts with RAM, which is faster but temporary and limited in capacity.",
+      "grade_level": "4-9"
     },
     {
-      "concept_name": "Computer Components Collaboration",
-      "concept_description": "Different computer components (CPU, RAM, GPU, Storage, etc.) work together to complete tasks. Each component has a specific role and interacts with others to process information efficiently.",
-      "grade_level": "4-8"
+      "concept_name": "Interdependency of Computer Components",
+      "concept_description": "The lesson emphasizes that all computer hardware components work together as a cohesive team, each with specialized roles. No single component can perform all tasks effectively, highlighting the importance of system integration.",
+      "grade_level": "4-9"
     },
     {
-      "concept_name": "Role of CPU as Controller",
-      "concept_description": "The CPU acts as the central controller, directing the activities of other computer components.  It dictates what the other components do and when they do it to ensure the correct execution of tasks.",
-      "grade_level": "6-9"
+      "concept_name": "Trade-offs in Hardware Design (Speed vs. Capacity)",
+      "concept_description": "The comparison between RAM (fast, limited) and Drive (slower, high capacity) illustrates that computer hardware involves trade-offs. Different components are optimized for specific purposes, balancing factors like speed, storage size, and cost.",
+      "grade_level": "7-12"
     },
     {
-      "concept_name": "Temporary vs. Permanent Storage",
-      "concept_description": "RAM provides temporary storage for data actively being used, while storage drives provide permanent storage. Data in RAM is lost when power is off, but data on storage drives persists.",
+      "concept_name": "Analogies as Learning Tools",
+      "concept_description": "The 'cooking story' analogy is used to simplify complex technical concepts about computer hardware into relatable everyday experiences. This demonstrates how analogies can make abstract ideas more accessible and easier to understand.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Introduction to Computer Science",
+      "concept_description": "The video implicitly defines computer science by differentiating it from other academic subjects like biology, physics, or art. It sets the stage for understanding computer science as a distinct field focused on computational thinking and technology.",
       "grade_level": "5-9"
-    },
-    {
-      "concept_name": "The relationship between RAM and CPU",
-      "concept_description": "The CPU needs RAM to quickly access instructions and data. RAM provides the CPU with the necessary information for computations, thus allowing it to perform its tasks.",
-      "grade_level": "5-9"
-    },
-    {
-      "concept_name": "Importance of Teamwork in Computer Operation",
-      "concept_description": "A computer operates efficiently because its components work together as a team. Each part plays a specific role, and their combined efforts result in completing complex tasks.",
-      "grade_level": "3-7"
     }
   ]
 }

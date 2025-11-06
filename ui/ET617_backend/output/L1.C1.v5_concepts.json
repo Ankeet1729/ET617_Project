@@ -1,0 +1,81 @@
+{
+  "submodule_code": "L1.C1.v5",
+  "submodule_name": "Who learns Computer Science? Role models in CS & STEM",
+  "concepts": [
+    {
+      "concept_name": "Universal Relevance of Computer Science",
+      "concept_description": "Computer Science is a foundational skill that extends beyond traditional tech roles, empowering individuals in diverse professions like medicine, agriculture, and education to solve problems and innovate. It is relevant for virtually everyone in the modern world.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Diverse Professional Applications of Computer Science",
+      "concept_description": "Computer science enables advancements in various professional fields, such as engineers building self-driving cars, space scientists controlling rovers, animators creating movies, and fashion designers using computer-aided designs. These examples showcase the practical impact of CS across industries.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Importance of Role Models in STEM",
+      "concept_description": "Role models in Science, Technology, Engineering, and Mathematics (STEM) inspire individuals, especially younger learners, by demonstrating that success in these fields is achievable for people from all backgrounds. They help to normalize and encourage participation in STEM careers.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Challenging STEM Stereotypes",
+      "concept_description": "Many individuals are actively breaking down traditional stereotypes associated with STEM fields, showing that interests like poetry or art can coexist with scientific pursuits, and that gender, race, or age do not limit one's ability to learn Computer Science. This promotes inclusivity in tech.",
+      "grade_level": "4-9"
+    },
+    {
+      "concept_name": "Pioneering Figures in Computer Science History",
+      "concept_description": "Key historical figures like Ada Lovelace, recognized as the first computer programmer, and Charles Babbage, who conceived the first mechanical computer, laid the foundational theoretical and practical groundwork for modern computing. Their contributions are fundamental to the field's development.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Contributions of Women in Computing",
+      "concept_description": "Women have played crucial roles in the history of computing, from Ada Lovelace's early algorithms to Grace Hopper's innovative work in programming languages and military computing. Recognizing these contributions highlights the diverse origins and development of computer science.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Understanding Algorithmic Bias",
+      "concept_description": "Algorithmic bias occurs when computer programs, especially those using artificial intelligence, reflect and amplify human biases present in their training data, leading to unfair or inaccurate outcomes. Researchers like Joy Buolamwini work to identify and mitigate these ethical issues in AI.",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "Computer Science in Space Exploration",
+      "concept_description": "Computer science is integral to space missions, enabling everything from the remote control and programming of Mars rovers to data analysis and mission planning. Pioneers like Kalpana Chawla and engineers like Vandana Verma exemplify its critical role in advancing our understanding of the universe.",
+      "grade_level": "5-10"
+    },
+    {
+      "concept_name": "Computer Science for Entrepreneurship and Innovation",
+      "concept_description": "Entrepreneurs such as Elon Musk and Mark Zuckerberg have leveraged computer science to create groundbreaking companies and technologies, demonstrating how coding and computational thinking are essential skills for innovation and business leadership. They show the path from ideas to global impact.",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "The Input-Process-Output (IPO) Model",
+      "concept_description": "The IPO model describes the fundamental operation of all computer systems: data is received (Input), manipulated according to instructions (Process), and then a result is generated (Output). This model is a core concept for understanding how computers solve problems.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Introduction to Machine Learning",
+      "concept_description": "Machine learning is a field of artificial intelligence where computers learn patterns from data without explicit programming, allowing them to make predictions or decisions. It can be applied in scenarios where machines perform tasks more efficiently or accurately than humans, such as complex data analysis.",
+      "grade_level": "6-11"
+    },
+    {
+      "concept_name": "Computer Science for Social Impact",
+      "concept_description": "Computer science is a powerful tool for addressing global challenges and achieving social good, from Gitanjali Rao's inventions solving environmental problems to non-profits like 'Girls Who Code' founded by Reshma Saujani, aiming to increase diversity in tech education. It highlights the positive societal contributions of CS.",
+      "grade_level": "5-10"
+    },
+    {
+      "concept_name": "Defining STEM Fields",
+      "concept_description": "STEM stands for Science, Technology, Engineering, and Mathematics, representing a crucial interdisciplinary approach to education and problem-solving. These fields are interconnected and foundational for innovation in the modern world.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Creative Applications of Computer Science",
+      "concept_description": "Computer science is not limited to technical fields but also powers creative industries. Animators use software to create movies and characters, while fashion designers employ computer-aided design (CAD) to develop new textiles and apparel, blending art with technology.",
+      "grade_level": "4-9"
+    },
+    {
+      "concept_name": "Computer Science Education and Literacy",
+      "concept_description": "The importance of teaching computer science to children and students is highlighted by initiatives like Ashni Dwarkadas's Hackberry and Reshma Saujani's Girls Who Code. This ensures future generations are equipped with essential coding and computational thinking skills for a technology-driven world.",
+      "grade_level": "4-9"
+    }
+  ]
+}

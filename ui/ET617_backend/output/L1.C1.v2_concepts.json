@@ -1,0 +1,76 @@
+{
+  "submodule_code": "L1.C1.v2",
+  "submodule_name": "What's inside the magic box?",
+  "concepts": [
+    {
+      "concept_name": "Computer Hardware",
+      "concept_description": "Hardware refers to the physical, tangible components of a computer system that you can see and touch. These parts are essential for the computer's operation and include input devices like keyboards, output devices like monitors, and internal components such as the CPU and memory.",
+      "grade_level": "1-5"
+    },
+    {
+      "concept_name": "Computer Software",
+      "concept_description": "Software refers to the intangible instructions, programs, and data that tell the hardware what to do. Unlike hardware, you cannot physically touch software, but you interact with it through applications, operating systems, and games displayed on a screen.",
+      "grade_level": "1-5"
+    },
+    {
+      "concept_name": "Binary (Machine Language)",
+      "concept_description": "Binary is a computer's native language, representing all software instructions and data using only two symbols: 0 and 1. This 'machine language' is the basic form into which all higher-level code is converted for the computer's CPU to understand and execute.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Central Processing Unit (CPU)",
+      "concept_description": "The CPU, or Central Processing Unit, is often called the 'brain' of the computer. It performs all arithmetic and logic operations, processes instructions, and controls the flow of information between all other computer components.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Random Access Memory (RAM)",
+      "concept_description": "RAM is the primary, main memory of a computer where the CPU temporarily stores instructions and data it is actively working on. It acts as a fast workspace, allowing quick access to information needed for current tasks, similar to a chef's cutting board.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Volatility of RAM",
+      "concept_description": "RAM is a type of volatile memory, meaning that any data or instructions stored within it are lost as soon as the computer's power supply is turned off. This temporary nature makes RAM ideal for active work, but not for long-term storage.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Data Storage Units",
+      "concept_description": "Computer memory capacity is measured using specific units, starting with a bit (binary digit, 0 or 1) as the smallest unit. Eight bits form a byte, which can store a single character, and larger units like Gigabytes (GB) represent billions of bytes.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Read Only Memory (ROM) and BIOS",
+      "concept_description": "ROM is a type of permanent memory where data is written once and can be read multiple times, persisting even when the power is off. It stores essential instructions, such as the Basic Input Output System (BIOS), which helps the computer start up and load the operating system.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Operating System (OS)",
+      "concept_description": "The Operating System (OS) is crucial software that manages all hardware and software resources, acting as a bridge between applications and the computer's physical components. It allocates memory, schedules tasks for the CPU, and provides a user interface for interaction.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Cache Memory",
+      "concept_description": "Cache memory is a small, very fast memory integrated into or near the CPU, used to store frequently accessed instructions and data. It helps the CPU access information much quicker than retrieving it from main memory (RAM), reducing processing time.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Graphics Processing Unit (GPU)",
+      "concept_description": "A GPU is a specialized electronic circuit designed to rapidly manipulate and alter memory to accelerate the creation of images, videos, and animations. It works alongside the CPU to handle computationally intensive graphical tasks, making games and visual applications run smoothly.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Secondary Storage (Drives)",
+      "concept_description": "Secondary storage refers to permanent data storage devices in a computer, like hard disk drives or solid-state drives, used for storing large amounts of files and programs. Unlike RAM, data on secondary storage persists even after the computer is turned off, providing long-term data retention.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Hard Disk Drives (HDD) vs. Solid State Drives (SSD)",
+      "concept_description": "HDDs store data magnetically on spinning platters using a read/write head, making them slower due to mechanical parts. SSDs, conversely, use flash memory, offering significantly faster data access times and greater durability as they have no moving parts.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Instructions and Data in Memory",
+      "concept_description": "Computer memory, like RAM, stores both the step-by-step commands (instructions) that make up a program and the actual values (data) that those instructions operate on. The provided image illustrates this by showing Scratch-like blocks as instructions and variable values as data stored in memory.",
+      "grade_level": "3-7"
+    }
+  ]
+}

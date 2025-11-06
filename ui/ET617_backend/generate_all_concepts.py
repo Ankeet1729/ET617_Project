@@ -25,35 +25,31 @@ if not GEMINI_API_KEY:
 genai.configure(api_key=GEMINI_API_KEY)
 
 # ---
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# !! YOUR ACTION REQUIRED HERE
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#
-# Please update the 11 video names that are marked "TODO: Add name..."
-#
 # This list defines all 24 videos, their official names,
 # and the `submodule_code` used to find their transcript and image files.
 #
+# All names have been filled in from your provided list.
+# ---
 MASTER_VIDEO_DATA = [
     # --- Level 1: Computer Science Principles (Videos 1-9) ---
-    {'code': 'L1.C1.v1', 'name': 'Introduction to Computer Components'},
-    {'code': 'L1.C1.v2', 'name': 'TODO: Add name for Video 2'},
-    {'code': 'L1.C1.v3', 'name': 'TODO: Add name for Video 3'},
-    {'code': 'L1.C1.v4', 'name': 'TODO: Add name for Video 4'},
-    {'code': 'L1.C1.v5', 'name': 'TODO: Add name for Video 5'},
-    {'code': 'L1.C2.v6', 'name': 'Introduction to Programming'},
-    {'code': 'L1.C2.v7', 'name': 'TODO: Add name for Video 7'},
-    {'code': 'L1.C2.v8', 'name': 'TODO: Add name for Video 8'},
-    {'code': 'L1.C2.v9', 'name': 'Problem Solving with Computers'},
+    {'code': 'L1.C1.v1', 'name': 'Let\'s cook a computer story'},
+    {'code': 'L1.C1.v2', 'name': 'What\'s inside the magic box?'},
+    {'code': 'L1.C1.v3', 'name': 'The Input-Process-Output model'},
+    {'code': 'L1.C1.v4', 'name': 'Do computers think, feel and learn like humans? A sneak peak into Machine Learning'},
+    {'code': 'L1.C1.v5', 'name': 'Who learns Computer Science? Role models in CS & STEM'},
+    {'code': 'L1.C2.v6', 'name': 'Internet, What\'s caught in the net?'},
+    {'code': 'L1.C2.v7', 'name': 'Digital literacy - Keeping away from Plagiarism'},
+    {'code': 'L1.C2.v8', 'name': 'Multi-factor Authentication'},
+    {'code': 'L1.C2.v9', 'name': 'BigData Poor Privacy'},
 
     # --- Level 2: Problem Solving & Thinking Skills (Videos 10-16) ---
-    {'code': 'L2.C1.v10', 'name': 'TODO: Add name for Video 10'},
-    {'code': 'L2.C1.v11', 'name': 'Scratch Interface and Blocks'},
-    {'code': 'L2.C1.v12', 'name': 'TODO: Add name for Video 12'},
-    {'code': 'L2.C1.v13', 'name': 'TODO: Add name for Video 13'},
-    {'code': 'L2.C2.v14', 'name': 'Sound and Events in Scratch'},
-    {'code': 'L2.C2.v15', 'name': 'TODO: Add name for Video 15'},
-    {'code': 'L2.C2.v16', 'name': 'TODO: Add name for Video 16'},
+    {'code': 'L2.C1.v10', 'name': 'Little acts of kindness makes a huge difference'},
+    {'code': 'L2.C1.v11', 'name': 'Let\'s solve problems Big or Small - Design thinking approach'},
+    {'code': 'L2.C1.v12', 'name': 'A sneak peak into the wild edibles digital library'},
+    {'code': 'L2.C2.v13', 'name': 'Include, Ignore, Divide and Conquer - The roti making'},
+    {'code': 'L2.C2.v14', 'name': 'Sequencing & Algorithms - The wild edibles app demo'},
+    {'code': 'L2.C3.v15', 'name': 'Introduction to the scratch coding platform - sprites, costumes and code'},
+    {'code': 'L2.C3.v16', 'name': 'Nature\'s best algorithms - coding for the metamorphosis'},
 
     # --- Level 3: Let's Code (Videos 17-24) ---
     {'code': 'L3.C1.v17', 'name': 'Infinite loops of anger & kindness'},
@@ -62,18 +58,14 @@ MASTER_VIDEO_DATA = [
     {'code': 'L3.C1.v20', 'name': 'Binary thoughts and boolean logic'},
     {'code': 'L3.C2.v21', 'name': 'Let\'s karaoke'},
     {'code': 'L3.C2.v22', 'name': 'Funny face filters'},
-    {'code': 'L3.C2.v23', 'name': 'Let\'s summon some magic patterns'},
-    {'code': 'L3.C3.v24', 'name': 'Code for the net-zero - Planting Trees'},
+    {'code': 'L3.C2.v23', 'name': 'Let\'s create some patterns with shapes'},
+    {'code': 'L3.C3.v24', 'name': 'Code for the net-zero - Planting trees'},
 ]
 
 # Submodule configuration (builds automatically from MASTER_VIDEO_DATA)
 SUBMODULES = {}
 for video in MASTER_VIDEO_DATA:
     key = video['code']
-    if "TODO" in video['name']:
-        print(f"⚠️ Skipping video {key}: Name is a TODO.")
-        continue
-    
     SUBMODULES[key] = {
         "transcript": f"video_transcripts/{key}.txt",
         "image":      f"submodule_images/{key}.png",
@@ -165,7 +157,7 @@ def send_to_gemini(prompt_text, image_object=None):
     """Sends prompt to Gemini API and returns cleaned JSON text."""
     try:
         # Using the gemini-2.5-pro model for best results
-        model = genai.GenerativeModel('gemini-2.5-pro')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         content_parts = [prompt_text]
         if image_object:
             content_parts.append(image_object)
@@ -219,6 +211,12 @@ def main():
     for submodule_code, info in SUBMODULES.items():
         print(f"\n📚 Processing Submodule: {submodule_code} ({info['name']})")
         
+        # Check if the JSON file already exists
+        output_file = Path("output") / f"{submodule_code}_concepts.json"
+        if output_file.exists():
+            print(f"   ↪️  Skipping {submodule_code}: JSON file already exists.")
+            continue
+
         transcript = read_file_content(info['transcript'])
         img_object = open_image(info['image'])
         

@@ -1,0 +1,66 @@
+{
+  "submodule_code": "L1.C1.v3",
+  "submodule_name": "The Input-Process-Output model",
+  "concepts": [
+    {
+      "concept_name": "Input-Process-Output (IPO) Model",
+      "concept_description": "The fundamental framework describing how all computing machines operate. It outlines the three sequential stages: data is received (Input), manipulated or calculated (Process), and then presented as a result (Output). This model is a core concept in understanding computational thinking.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Input Devices",
+      "concept_description": "Hardware components that provide data and instructions to a computer system. These can range from manual entry tools like a keyboard and mouse to automated data collectors such as various types of sensors that detect real-world conditions.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Output Devices",
+      "concept_description": "Hardware components that communicate the results of a computer's processing to the user or to another system. This can involve displaying information on a screen, printing documents, or physical actions performed by actuators.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Sensors",
+      "concept_description": "Specialized input devices that detect and measure physical properties or conditions from the real world, such as temperature, pressure, light, or sound. Sensors translate these real-world phenomena into digital data that a computer can interpret and use.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Actuators",
+      "concept_description": "Specialized output devices that convert electrical signals from a computer into physical motion or action. Actuators enable computers to interact with their physical environment by performing tasks like sounding an alarm, moving a robotic arm, or controlling vehicle steering.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Real-World Data Sensing",
+      "concept_description": "The ability of computer systems, through their sensors, to gather diverse types of information directly from their surroundings. This includes detecting various environmental parameters like temperature, smoke, touch, speed, and direction, which is then fed into the system for processing.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Embedded Computers",
+      "concept_description": "Small, specialized computer systems integrated within larger products or machines to perform dedicated control functions. Unlike general-purpose computers, they are designed for specific tasks and may not possess all the typical hardware components, yet they still operate using the IPO model.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Computer Dependence on Human Instructions",
+      "concept_description": "A foundational principle in computing that highlights how computers, despite their speed, cannot think or make decisions independently. They require precise, step-by-step instructions (programs) and relevant data provided by humans to accomplish any task.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "The 'Process' Stage in IPO",
+      "concept_description": "The core operational stage within the Input-Process-Output model where the computer performs computations, manipulations, or transformations on the received input data. This internal work converts raw data into meaningful information or actions according to the programmed instructions.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Human Role in Programming and Data Provision",
+      "concept_description": "The essential function of humans in creating the detailed instructions (programs or 'recipes') and supplying the necessary initial data for a computer to execute. Without human input in this form, a computer would not be able to function or achieve any desired outcome.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Examples of Specific Input Devices",
+      "concept_description": "Concrete examples of devices that serve as entry points for data into a computer system. These include familiar tools like a keyboard and mouse for user input, and specialized sensors such as infrared temperature sensors or proximity sensors for automatic data collection.",
+      "grade_level": "1-5"
+    },
+    {
+      "concept_name": "Examples of Specific Output Devices",
+      "concept_description": "Concrete examples of devices that display or perform actions based on a computer's processed information. This category covers a wide range from visual displays like a monitor screen or printed paper, to physical actions such as sounding an alarm or controlling a robotic arm.",
+      "grade_level": "1-5"
+    }
+  ]
+}

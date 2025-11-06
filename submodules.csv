@@ -1,0 +1,672 @@
+id,submodule_code,submodule_name,image_path,transcript
+1,L1.C1.v1,Let's cook a computer story,/uploads/submodules/L1.C1.v1.png,"Scene 1: What is a computer? How does it work? What is computer science? Does this mean coding? Is this subject teaching me science like Biology and physics? Or is this teaching me arts like painting or writing poetry? What is inside that magic box called a computer which everybody uses to do almost everything these days?These are some of the overarching questions you might have.
+
+Scene 2: Let's understand what is a computer by using a simple yet familiar example - Cooking.
+A group of six friends, CPU (boy), OS (girl), RAM (boy), Drive (boy), GPU (girl) and Cache (girl) decide to cook together for their friend, Sensor's birthday party. CPU is the master chef. He is an expert in cooking and baking all kinds of dishes, be it Khambir, Rajma, Modur Pulav, Rogan Josh or Falooda. He is great at arithmetic, be it adding, subtracting flavours to hit the taste mark or doing logical comparisons of spices while tossing the right amount of it to make the dish stand out. Being a master-chef, he also gets to control what the other friends do and when they do it. But CPU cannot remember all the recipes on his own and has to always ask for the recipe and ingredients list from his friend RAM who keeps a list of the steps, ingredients and the groceries. But wait!, it is not a single dish that is going to be served, right? CPU can't manage to cook several dishes at the same time. And that's were OS helps him. She is the sous-chef with a special ability to help CPU switch between different recipes at the same time without messing any of the recipes.
+It might look like the Drive, GPU and Cache are left with no work. But don't be quick to judge! All dishes have to be completed at the earliest by 12pm and this is impossible to achieve without Cache. 
+Correction for Abida: Cache is the superwoman who stores all the recently used ingredients and ingredients that are used together for a recipe in a special recipe box and quickly passes it to CPU. 
+
+So now, CPU doesn't have to wait long to get it all the way from RAM. But there is only so much even a superwoman can handle. When CPU couldn't find the ingredients he's looking from cache, he got to go get it from RAM.  GPU is another boss, just like the CPU, but she specializes so much more in plating and presentation. She not only knows how to serve the food right but also captures it well with her stunning photography skills. Annnd, finally, the sumptuous dinner is served in big tables. GPU takes hundreds of georgeous photos of the party and passes it to Drive to save Sensor's photo album. You might be wondering, why Drive to store the photos? RAM is the one storing and handling (recipe) files, right? We all have our own limitations and so does RAM. He is fast and can be accessed any time but slows down if he handles more requests. On the other hand, Drive can store several hundreds to thousands of photos but is slower than RAM. They make an amazing group of friends with varied skillsets but excellent team spirit, Don't they? 
+Followed the story? If you did, Voila!, you have got what a computer actually is and how it works too. Before we could see how the computer story translates to what is inside the computer, I will let you think about the story for a while. 
+In the next video, we will see what is inside the magic box that we call the computer."
+2,L1.C1.v2,What's inside the magic box?,/uploads/submodules/L1.C1.v2.png,"Scene 3:  In the last video we heard a story about a group of friends cooking. How does it relate to what is inside a computer?
+To understand this, let's understand what's a hardware and software first: 
+
+Hardware: The mechanical parts that you can see outside a computer. Examples: wires, keyboard, mouse, sensors(Input devices), speaker, monitor, printer, actuators (Output devices), CPU, memory, circuits, chips, etc
+
+Software: The parts that you cannot see from outside but can see through the monitor (computer screen). Example: instruction, code or programs, apps, webpages, videos, games, operating system etc. The recipes in the recipe book translates to the different kinds of software that are stored and processed by CPU and computer memory. On a deeper level these recipes are all converted to a basic form of software called binary (0's & 1's) for the computer to understand. Binary is also called machine language or computer's language. 
+
+Scene 4: 
+CPU: Remember the master chef? A CPU (Central Processing Unit) is the master chip and hardware part of the computer which performs all the operations and processing - arithmetic & Logic and also controls all other computer parts by sending and receiving signals to and from the memory and other computer parts.  
+
+RAM is the Random Access Memory which is the main memory/primary memory hardware of a computer. It stores instructions and data processed by the CPU. Instructions are precisely the code or the software that we write. Just like recipes in recipe books. Data is just like the ingredients. Random Access Memory (RAM) is the temporary memory whose data is lost when the power supply is turned off. RAM can be accessed for both reading and writing and can store huge amount of information. You might have heard people saying ""I have a 4GB RAM""(GB is Gigabyte). What's that? Let's understand. 8 bits = 1 byte . A byte is the smallest unit of information needed to store a character and 1GB = 10^9 bytes.  Today's computers and mobile phones can have a RAM of 1 GB to 64 GB or more.  See how big the RAM is? But not as big as a human brain, right? (laughs). 
+Infact there is another type of memory called Read Only Memory (ROM). As the name says, information in ROM is only written once but can be read as many times. It is the permanent storage and doesn't get erased with accidental power cuts. ROM is smaller and slower than RAM. In fact ROM stores all the instructions 
+for the input output system or BIOS for loading the computer hardware. 
+Illustration - BIOS (Basic Input Output System)
+ROM also helps load the operating system (OS) for the computer to get started and running.
+OS: Our Sous-chef with exceptional management and scheduling skills. The Operating System acts as a bridge between the software (apps, browsers, chats, music, games) and hardware (memory, CPU and Input/Output and so on). OS decides the amount of memory to allocate for a specific application or to monitor the status of the tasks executed by the CPU. It is responsible for switching between the different tasks or software that is run on a computer. Some most common operating systems include Windows, Mac and Linux. And android and ios for mobiles.
+
+Cache: Remember the superwoman who tosses those ingredients to CPU in lightining speed. CPUs have caches inbuilt in them. Caches allow faster access to instruction and data compared to fetching it from main memory but they are limited in their capacity when compared to RAM. If the CPU cannot find the data or instructions in the cache memory, it experiences a cache miss and then decides to make a request to the main memory. Cache stores the most recently used data or instructions because they are likely to be used by the program again. This is called temporal locality. It also stores the sequence of data or instructions that are likely to be accessed together again in blocks. This is called spatial locality. 
+
+GPU:  How could we forget this girl with her mindblowing presentation skills and keen eye for imagery? GPU, the Graphics Processing Unit performs multiple productive tasks. GPU works in close co-ordination with the CPU to process specific tasks like graphics processing and render videos and games much faster than what a stand-alone CPU would do. Today's CPUs come with built-in GPUs. The GPUs perform specialized graphical functions that are computationally intensive and that could be run in parallel.  The rest of the code runs in the CPU. Hence there are specific applications that can benefit from running both in a CPU and a GPU.  
+
+Drive: Oh boy! he is the one with the magic wand hand! The hard disk drive. Disk drives are secondary storage in a computer used to store large amount of files as an alternative to main memory. The hard disk drive has a moving arm and read/write head which reads or writes data to the platter through magnetic storage. Each platter has two surfaces and each surface has several tracks and sectors. Every sector can store typically 512 bytes of data.  Drives are slower than main memory because it has moving parts. There are two types of Drives. Hard disk drive and Solid State Drive. Most computers today prefer solid state drives because of their faster access time compared to hard disk drive. 
+
+I hope you all enjoyed the computer story and learnt about the different parts of a computer and their functions. Learning about computer science becomes more meaningful if we know what's inside this magic box, right?"
+3,L1.C1.v3,The Input-Process-Output model,/uploads/submodules/L1.C1.v3.png,"Scene 1:  The computer story was great isn't it? But wait, wondering where is the birthday boy, Sensor? Well, he's busy smelling, tasting and appreciating the dinner. That's what sensors are there for. Sensors are input devices which can sense and receive real world information such as temperature, pressure, light, smoke, color, flow, sound, touch, speed, direction etc and feed it to the computer for some processing and output. For example, all offices and industries are equipped with smoke sensors to detect smoke and sound an alarm through actuators. See how this is a computer on it's own? Infra-red temperature sensors in thermometers are used to sense body temperature or fever by sensing infra-red energy radiated by the body, one of the important symptoms of pandemics like corona virus.  Proximity sensors are used in vehicle parking systems. Burglar alarms, GPS navigation, wearable LED dresses in fashion industry, mobile phones, smart watches, cars, a toothbrush, a barbie doll or a plush unicorn toy who could repeat what you say, are all much more examples of computers sensing all around us. After processing, the output is communicated to the user through actuators like an actuator arm in a hard disk drive, steering in self-driving cars or a robotic arm that picks an object. They might not have all hardware and software of a typical computer, but they are still mini embedded computers which can get their job done. 
+
+Scene 2: (Show the figure of an Input-Process-Output model of a computer)
+Let's take a look at the basic input process output model of a computer. This is how every computing machine works. The input to a computer system could be from sensors like the temperature or touch or it could be from devices like keyboard and mouse which is used to type a code or program. Did you ever wonder who wrote that recipe book and all the ingredients list in the computer story? It's definitely not CPU, RAM, Drive, GPU, OS or Cache. Who then? It's a real human (Insert a wink here). Because computers cannot think on their own. They are unimaginably faster than humans but they need precise instructions and data to accomplish a task - just like the recipe book and the recipes. This is called the input.
+The output is the result of the processing that users observe through different kinds of actuators like robotic arms, motors or simply through output devices such as monitor screen or printer.
+Remember when I said computers cannot think on their own? Well that could be an understatement. In the next video we will find the answer to whether computers can be trained to think like humans, or not!"
+4,L1.C1.v4,"Do computers think, feel and learn like humans? A sneak peak into Machine Learning",/uploads/submodules/L1.C1.v4.png,"Scene 1: A Computer doesn't have feelings like hunger or thirst, neither does it understand emotions like love, happiness, anxiety or grief. It doesn't even know how to differentiate between an apple and an orange. But guess what? It could be trained to do all that. Whereas we humans can feel all the feels! and identify objects and patterns easier than computers but our capacity to process and remember huge amount of information is limited. That's why humans and computers make a great team. 
+
+
+Scene 2:  I want you to meet someone special. Hello AI.S.H.A!
+AI.S.H.A: Hi I'm AI.S.H.A. I’m an Artificial Intelligence. She/Her. Humanoid. Android.  Oh yes, you guessed it right, I am an AI. My purpose is to learn, grow, teach and inspire students just like you, to learn Computer Science. 
+I’m here to make you more confident with Computer Science and let you create with technology and use computer science to best serve your community. 
+Abida, talking about apples and oranges, what can a computer really do better if it learns to identify an apple on it's own? After all it cannot even eat one, right?
+Scene 3: Let me give you a real-life example: Although agriculture is a major occupation and a source of economy for most people, farmers around the world are facing a real crisis when it comes to harvesting during unprecedented and adverse weather conditions like snow and storm or during a lockdown or pandemic when people are confined indoors. For example, Kashmir's biggest economy being the apple industry, about 22 lakh metric ton of apple is produced each year, i.e 70% of India's total production of apples (Outlook India, Nov 2021*). But farmers cannot speed up apple harvesting especially in hilly areas after an unexpected snow has hit the place. What's worse is when a lockdown is followed by snowfall and a pandemic again! Let's think for a moment how this issue could be solved if a computer were to be trained to harvest the apples? Machines don't spread viruses (like corona) and neither can they feel the freezing snow annnd they can prove super fast in picking apples if we teach them how an apple looks like. Imagine 500 hand-picked apples in an hour vs 5000 or more picked by a computer robotic hand! How do we train the computer then to do this?
+Scene 4: First we let the computer guess by showing it a variety of fruits and something totally irrelevant like dogs, roses or even ice cream. The computer looks at these images, recognizes patterns and notices the differences to identify correct images. (VE reference: 2.06s code.org machine learning video)
+
+Scene 5: Part 1: Here is how we train a machine. We will tag or classify all apples as apples and tag the other things as not apples. So when the computer sees an apple, like the one it saw before, there are more chances it guesses it right using characteristics like color, shape, size etc. (VE reference: 2.35s code.org machine learning video)
+
+Part 2: But it's probably going to fail inevitably until it is completely trained. Computers behave the same way as humans when they learn. (VE reference: 2.39s code.org machine learning video)
+
+Part 3: They need more and more training and huge amount of training data. No matter how hard it gets, they just can't give up until they learn from their mistakes. 
+ 
+Part 4: The more the training data and the more accurate the data is, you have trained the computer and it is ready to pick any variety of apples for you! be it Saranpuri, Razakwar, Hazratbal, Kisr, Tito, Maharajee or Golden. 
+ 
+Scene 6: 
+Part 1: AI.S.H.A: That was an intensive training. But humans are sometimes biased Abida. Isn't it crucial to avoid human bias when training the computer. Does this data about apples we used to train computers represent all possible farmers' preferences and harvesting times? 
+
+Part 2: Abida: Great question AI.S.H.A. Human bias is not to be ignored. In our example, Northern Kashmir is known for the quantity of apple produce whereas the southern Kashmir is known for its quality. Some farmers (in Kashmir) might prefer picking apples a bit earlier than they are completely ripe and store them in cold storages, while others prefer to wait until the right time to harvest. An important question to ask is, ""Are we accomodating all farmers' opinions into our training data or is the training data biased?"".
+
+Part 3:  Let's say we have trained the computer to pick apples that are partly ripe, based on a specific group of farmer preferences, then the other farmers who like their apples fully ripe are not going to be happy, right? (VE Reference: 1.10 s from code.org human bias)
+
+Scene 7: Human bias could prove to be extremely harmful in certain scenarios. Think about using biased training data to evaluate students for school or college admissions or to identify theives and criminals. A well deserved student may loose the opportunity of education or someone legitimate may be convicted for a crime they did not do."
+5,L1.C1.v5,Who learns Computer Science? Role models in CS & STEM,/uploads/submodules/L1.C1.v5.png,"Abida: Now that we learnt about computers, what they do and how they could learn from humans to help the society, could you think about who needs to learn Computer Science? 
+AI.S.H.A: mmmmh, may be a computer scientist? or a farmer who wants to pick apples? or perhaps a teacher like you and me?
+
+Scene 2: Abida: Good guess AI.S.H.A. The answer is, EVERYONE! You could imagine your future self to be a doctor who diagnoses diseases and uses her knowledge to train a computer or an engineer who uses computer science to build electric and self-driving cars, manage natural resources efficiently to save energy and reduce carbon emissions. 
+You could be a farmer who uses software and hardware developed by technologists to grow quality food or a space scientist who experiments and controls a mars rover in space. You could be an animator who uses software or code to create movies. You could be an educator who uses computer science to create personalized learning for students or a fashion desginer who creates  computer-aided-designs for textiles. Computer Science is a surprising choice for everyone and not just computer scientists!
+Role Models in Computer Science & STEM: 
+Computer Science and STEM is often portrayed as a far-fetched pursuit. But there are so many people who are breaking the stereotypes associated with learning Science, Technology, Engineering, Mathematics and computer science. We just saw that there is no limitation to who can learn Computer Science.  World's first programmers were also poets and mathematicians. Some early computer scientists were serving the navy. There are some girls who got their flying license at the age of 16. Some are fixing gender and racial bias in computer algorithms and some are teaching children how to code. Let's look at some of the role models in Computer Science and STEM.
+ 
+(Four in one frame - total 3 frames) 
+1. Ada Lovelace (10 December 1815 – 27 November 1852)
+First computer programmer, Published the first algorithm, Writer, Mathematician, Poetical scientist
+2. Kalpana Chawla (March 17, 1962 – February 1, 2003), Aerospace engineer, first Indian born woman to go to space twice and 
+primary robotic arm operator
+3. Charles Babbage (26 December 1791 – 18 October 1871), Mathematician, Mechanical Engineer, Philosopher, 
+Invented the first Mechanical computer
+4. Grace Hopper (December 9, 1906 – January 1, 1992), United States Navy Rear Admiral, 
+Mathematics Professor, Computer Scientist
+
+5. Gitanjali Rao, 2005, Times kid of the year 2020, Scientist, Author, STEM promotor at age 15, Invented a device to detect lead in water through carbon nano-tube sensor
+6. Mawya Sudan, 2007, First Female Fighter Pilot from Kashmir in 2021, 12th woman fighter pilot in the Indian Air Force
+7. Ayesha Aziz, Youngest Female Pilot in Kashmir, Acquired flying license at age of 16
+8. Joy Buolamwini, 1989, Algorithmic Bias Researcher, Poet of Code, Studies racial & Gender Bias in computer algorithms
+
+9. Elon Musk (June 28, 1971), CEO of SpaceX and Tesla, Enterpreneur and Business magnet, started programming at age 9.
+10. Debjani Ghosh (30 October 1988), Delhi, President, NASSCOM - Electrical & Electronics engineering, currently working on zero emission of electric airlines
+11. Reshma Saujani (November 18, 1975), Indian American Lawyer, Politician, Civil Servant, Founder of non-profit Girls who code. reshma's vision is to teach girls how to code
+12. Sundar Pitchai, 1972, CEO of Google & Alphabet Inc, Material science, Developed Chrome OS, Gmail, Google Drive
+11. Ashni Dwarkadas, Mumbai, Co-founder, Hackberry - Investment banker, MBA from Carnegie Mellon University, Teaches young children how to code
+8. 
+12. 
+14. Roselin Rosario-Meléndez, Cosmetic Chemist, Developed the world's best selling Lipstick, Advocate of Gender Equality in STEM 
+15. Mark Zuckerberg (May 14, 1984), Internet Enterpreneur, Philanthropist, Cofounded Meta platforms (previously Facebook), Found facebook at age 19.
+16. Vandana Verma, Chief Engineer, Robotic operations for NASA Mars mission, co-wrote a coding langauge for Mars Rover
+17. A.P.J. Abdul Kalam (Born October 15, 1931, Pilgrimage centre, Rameswaram, India—died July 27, 2015, Shillong) is an Indian scientist, Professor, Missile man, President of India from 2002 to 2007)
+18. Ratan Tata (28 December 1937), Indian industrialist, philanthropist, Chairman of Tata Group including TCS, a multi-national IT services & software company 
+19. 
+20. 
+21. Malala Yousafzai, born 12 July 1997, World's youngest Nobel Prize laureate, Activist for Girls Education
+1. Which one of the following do you think can be a computer? Could you come up with an Input-Process-Output model for your selections? List the Input, Process and Output parts of your computer. A car, toothbrush, mobile phone, Washing machine, TV, a ball
+
+2. Identify a scenario where machine learning could be used to perform better than humans. Analyze and evaluate how machines perform better than humans in this scenario, stating and explaining possible human biases. 
+
+3. Computer Science and technology are infused in every field. If you were to imagine your future-self using and creating with technology, how would it look like? Write in 200 to 500 words about which profession you would choose (like an artist or musician or doctor, teacher, engineer etc) and how computer science will help you solve a problem in that field. 
+
+4. Could you identify any three role-models (in your chosen profession), who have made a positive impact to the society by using computer science and technology."
+6,L1.C2.v6,"Internet, What's caught in the net?",/uploads/submodules/L1.C2.v6.png,"Scene 1:
+Part 1: So far, we have seen what's inside a computer and how a computer works using the input-process-output model. We also got a sneak peak into machine learning and who learns Computer Science. Up next, let's meet our friends Rumanzel and Eshal to learn more.
+
+Part 2: 
+Abida: Meet Rumanzel, the girl with an exceptionally long dark hair, and sweet voice. She is spirited, super-enthusiastic and independent. And Eshal, the pet sheep, he is Rumanzel's confident and self-appointed protector. 
+
+Part 3: 
+Abida: Ever since the lockdown, Rumanzel couldn't go to school, but she's not too much worried. Because she has a whole new mystical world through which she's connected with her friends, family and everybody else. 
+
+Rumansel's pet sheep Eshal: The only time Rumansel is worried is when she couldn't access her magic net. Oh, she hates when I say it like that. She calls it the 'internet'.
+Part 4: 
+Abida: Wait, wondering  if this is the mystical world which Rumansel gets into, whenever she feels lonely or excited? It's a world where all of our computers, mobile phones, TVs or even some watches and cars are connected together. 
+Part 5:
+Rumansel's computer can easily talk to her friend who resides in the other corner of the world. 
+Part 6: That's how she sends her pictures, emails and even calls to see her friends. 
+
+part 7: AI.S.H.A:
+But how do computers talk even from such a long distance? And how do they do it super fast? 
+
+part 8: Narrator:
+Good question AI.S.H.A. Rumansel's computer and her friend's computer are connected to the 'Internet'. But what's caught in that net? Not fishes, but packets of information that we send and recieve. Imagine how big the problem is when billions of computers can talk to each other at the same time with several billions of users sending and receiving information? How is the internet handling this alone?
+Scene 2: (Redressing the Digital-divide:)
+(Peace enters the room. She is an absolute new-bee to computers and internet)
+
+Part 1: Peace: Rumansel, what are you doing? I’m not sure what you do with this magic box all the time! Do you talk to it? Also people say a lot about internet these days. I don’t know what it is and I have never really used it. 
+
+Part 2 Eshal: Oh, Peace, come on! Are you saying you never really used a computer or browsed the internet? This is silly!
+
+Rumansel: Please stop mocking at her Eshal. It’s not her fault. Access to computers and internet is still a far cry in many parts of our country.
+
+Part 3: AI.S.H.A: I can give you some statistics: 
+•  Just 4% of the rural households have access to computers as compared to 23% in urban areas - national statistical office, 2020
+•  Little over 15% of rural households have access to internet services - 2017-’18 National Sample Survey.
+•  Only 28% woman have access to the internet when compared to 72% of men - Internet and Mobile Association of India report, in 2019,
+
+Part 4: Abida: You can see, there is a gender digital divide too. It has been increasingly difficult for woman to gain access to technology. Just because peace doesn’t own a computer or lacks access to internet doesn’t mean she lacks skills. She doesn't have to feel left out. We are there to teach her, right?
+Scene 3: 
+Part 1: Eshal (Surges in): I know how to make her understand. Rumansel explained me and I could perfectly relate to what an internet is. (Eshal starts narrating to Peace) I live in farm A. There are hay trucks which goes from farm to farm to feed the sheeps. There is an incharge at every farm to make sure these trucks reach the correct farm. The farm incharge routes the trucks to the correct destination by checking the truck's destination address. That's how me and my friends receive hay from far away places.
+Part 2:
+Eshal: If you are thinking how this relates to the internet, it's really easy. The hay is the packet of information (in binary) you send or recieve through the internet. The trucks are the cables which carry the packets of information. The farm incharge are the routers.  Routers are network devices that route packets of data to the router of the correct destination computer. So if you have a router installed in your home or school, it allows many computers or phones to access the internet at the same time just like my friends in farm B who are able to recieve their share of hay. 
+Part 3:
+Abida: Thanks Eshal for the relatable analogy on the internet. Also, there's something super important to remember. Just like the traffic police who makes sure that the traffic rules are not broken, our internet has some rules too. It's called the Transmission Control Protocol and Internet Protocol (TCP/IP) which governs all the routers, cables, packets and files we access through the internet.
+Scene 4: 
+Part 1:
+AISHA: Well then could computers communicate without wires and cables? 
+Part 2:
+Abida: The answer is yes. 
+ Through radio waves. And that's what is called a wireless (wifi) connection. But a wifi connection is accessible for short distances or range (within a home or office). When you use a mobile data connection or cellular connection, the data is broadcasted from a cellphone tower and is broadcasted across the nation. When you use a mobile data, you are charged by your mobile network provider.
+Scene 5 part 1:
+Well let me check Rumansel, she's been into something for quite a while.
+What are you upto Rumansel? 
+Part 2: Rumansel: I'm searching for something which my teacher asked me to read about! You see this is called a web browser. It is a computer program - a software that is used to request and browse webpages like (Diksha, Pi Jam or almost anything) on the internet. Sending emails, talking to your friend, attending classes, watching videos. The requests can be versatile.
+Eshal: Well then just like me. You know, we are browsers too. But we browse different kinds of grass.
+Rumansel: (Insert a puzzled emoji look on her face) Oh Eshal, can you see that I'm doing a google search for metaphors and simileys. This is called a search engine. You can ask anything to it and it replies to you in a fraction of a second. 
+
+Rumansel:  All these requests can be made by a computer or phone to the internet. Since my computer makes the request, it is called the client. The computers in the internet that are responding to my requests are called the Servers. There are dedicated servers for handling specific tasks like web servers, database server, mail server etc."
+7,L1.C2.v7,Digital literacy - Keeping away from Plagiarism,/uploads/submodules/L1.C2.v7.png,"Title page: Cyber-security & Cyber-bullying - Be kind Online (VE Reference for title page https://www.youtube.com/watch?v=mCq8-xTH7jA&t=4s)
+Illustrations for this video: https://drive.google.com/drive/folders/1QXDAnnQjgG718dbAeXZ84D8c8xHBsFQy?usp=sharing
+Scene 1: Part 1: Rumansel: Oh Eshal! ..... (Rumansel continues browsing and becomes sad) Oh no...Could you please leave me alone? 
+
+Part 2: Abida:  Rumansel is sad. She had shared the poem she wrote online (showing facebook or instagram with a photo of Kashmir and Rumansel's poem in her page) and there are some mean comment threads on it made by the Bully brothers. She is not that kind who hurts people back. And telling Eshal is possibly not going to help too. What should Rumansel do?   
+(VE reference: Kashmir photo - https://drive.google.com/drive/folders/10ZeJl9sh5DBx2s-o1iIZp5ogUfSAGoRf?usp=sharing, social media post - https://drive.google.com/drive/folders/1eW-FOBicof3_jC-NJb31TmqcDdIE8JaH?usp=sharing) 
+        
+Part 3.1: Abida: Rumanzel is asking help from her brother (Cyber). Cyber is a super digital citizen and a long time righteous user of the internet. He is kind and considerate and knows his limits online 
+Part 3.2: Cyber: Hey Rumanzel, I can feel you. It's quite common for haters to spread hate over the internet. It's nothing to do with your poem. I loved it. Let's go and report it to our school so the trolls are punished.  The Bully brothers hadn't probably realized about the consequences of hate speech online. Even if they delete their comments, we could easily track them down. 
+
+Part 4: AI.S.H.A: You might also want to check out some statistics about the cyber-bullying:
+“1 in 3 people get rejected at job interviews because of what they have posted online in the past” (Adecco, 2015)
+“40% of college admission officers look at your online digital footprint before granting admission” (Kaplan Test Prep, 2016)
+
+Part 5: Cyber: Thanks AI.SHA. I would like to add some of the best practices to be followed when you are using the internet:"
+8,L1.C2.v8,Multi-factor Authentication,/uploads/submodules/L1.C2.v8.png,"(Eshal comes to Rumansel with a bleating cry)
+Scene 1
+Part 1: Eshal: Rumansel, you forget everything when you sit with your mobile phone. I'm hungry! And yet again you lost track of your lunch time. Didn't you?
+Rumansel: Oh yes! You should be hungry and I just realized that my stomach is making those crazing sounds too!
+
+Part 2: Abida: Rumansel is now an expert in not just creating digital artifacts like google slides but she is also an aspiring super digital citizen who treds carefully in the internet world. But is this enough to ensure her digital health and wellbeing? Is Rumansel using the social media compulsively and addictively? Does she feel like she's being controlled by technology? How Is this affecting her every day life?  
+
+Part 3: Some of the ways through which Rumansel can make sure that she is in control of technology are:
+Rumansel can set screen-free times throughout the day and make sure she doesn't use technology during those times. She could simply take a walk with Eshan or spend time with family replacing her screen time. 
+
+Part 4: Rumansel could practice taking regular digital breaks while she is taking a class or working on an assignment or while playing or watching a movie online. This could include simple stretching, breathing and eye exercises.
+
+Part 5: 
+AI.S.H.A: Why don't you follow me for some quick stretches? 
+(AI.S.H.A demonstrates some stretches and breathing techniques)
+Chair Pose: Bend through both knees and sit back as if you are sitting on a chair. Lift arms above your head. Stay in this pose for 10 seconds.
+Forward bend fairy: flip yourself upside down and feel the heaviness in your head and hands. Slightly bend your knees, and clasp your hands (or wings!) behind your back by bringing your arms over your head.  Breathe in, and breathe out for few seconds. Feel the stretch between your shoulder blades and thighs and then with hands on hips, slowly come back up and stand.
+Turtle Pose: Sit on floor and spread your legs straight, take a nice big inhale, and on the exhale bend forward stretches your hands back. Close your eyes, rest your head on floor  and breathe as slowly and deeply as you can.  
+Lion's breath: Put one hand on your belly, take a deep breath in through your nose until your lungs are completely full. You will feel your belly grow big. Keep your chest up while exhaling through your mouth with your tongue out by making a 'ha' sound. Repeat the same for 5 times.
+Part 6: Abida:
+Besides practicing digital well-being and staying safe online, Rumansel could also talk about this to her friends at school and her community to spread the word about responsible digital citizenship.
+Finally, do checkoout (can we recommend TV channels specific for Kashmiri context?) quality age-appropriate media like TV shows, games and more.  And while you do that, don't forget to take digital breaks!"
+9,L1.C2.v9,BigData Poor Privacy,/uploads/submodules/L1.C2.v9.png,"Scene 1:Abida:
+Part 1: Don't give all your cookies to the mouse!
+
+Have you heard of this story, ""If you give a mouse a cookie"" by Laura Joffe Numeroff?
+https://www.youtube.com/watch?v=d1Z-uxgFUTM
+
+Story from the book -
+""If you give a mouse a cookie, he is going to ask for a glass of milk
+When you give him the milk, he will probably ask you for a straw,
+when he's finished, he'll ask for a napkin
+then he want to look in the mirror to make sure he doesn't have a milk moustache
+When he looks into the mirror, he might notice that his hair needs a trim
+So he will probably ask for a pair of nail scissors
+and the cycle continues....
+Looking at the refrigerator will remind him again to ask for a glass of milk 
+And chances are if he asks for a glass of milk
+He's going to want a cookie to go with it!!!!""
+
+So, makes sense right? Don't give all your cookies to the mouse!
+Part 2: 
+AI.S.H.A: But wait Abida, what is an internet cookie and how is it different then? 
+Abida: Good question AI.S.H.A. A Cookie is a small piece of data containing a unique user id obtained from a specific website. The cookie gets stored in a users' computer in their hard disk drive while they are browsing the web. Through cookies the website can easily track and identify each one of it's user. The more cookies you give away to many people, the more data is known about you and your online preferences
+Part 3: How do cookies work? Let's look at an example. Rumansel is using an online store to place order for a traditional Kashmiri woolen pheran, because it's getting way too cold. She is specifically looking for the one with multi-colored embroidery but couldn't choose one. Later the same day, she sees several ads of woolen pherans with embroidery popping up on her social media website. How is this possible? Rumansel's computer stored cookies which kept track of all her shopping cart information and the dresses she clicked to view, to show her more related ads in the future. 
+Part 4.1: 
+Cookies are supposed to be specific for a site right? How then Rumansel's cookies got sneaked by social media from the online store? Because the online shopping site had a facebook 'like' and 'share' button which downloaded software from the facebook site (a third party site) for it to function well. During this communication, the facebook site gets access to the cookies stored in Rumansel's computer. 
+Part 4.2:
+As a user we could block these third parties and websites taking away the cookies from us by blocking third party cookies in browser security settings - > Block third party cookies and clear cookies demonstrated as a screen share.
+Part 5.1:
+So, the next time, if you see some cookie boxes asking for your permission to agree, then don't simply agree before you read about their cookie policy and know why and how they use your cookies. 
+Part 5.2: We could also install browser extensions such as Privacy Badger or Ghostery. These extensions help by blocking illegimate trackers of information. 
+
+Part 6: Cookies are not all bad. They also have simple yet useful functions like remembering your login details for specific websites, like facebook or gmail. So you don't have to enter your login details again every single time. The cookie contains a unique identifier to remember your identity. This is good and it saves a lot of our time.
+Part 7: Eshal: Well the social networking sites then should also know where we live and the shops we visited because Rumansel had her device location turned on while she was looking at her google maps. Probably that's why the other day, there were ads in her facebook showing the best restaurants in Kashmir.
+Part 8: Abida:   A google search, a social media post, online shopping history, a location tracker, a voice message, these are all examples of big data that can be collected online, analyzed and monetized. Because, remember? Machines or computers can be trained to learn patterns from huge amount of data and use algorithms or software to predict who you are and what you will be in the future. Does this mean our privacy will become obsolete with Big Data? Or will it be a progressive step ahead to take informed, safe and more efficient decisions? 
+
+AI.S.H.A: Well Abida, I think big data and Artificial Intelligence like me if used well could be of great service to the humanity. Look at me, I'm helping you teach Computer Science in your classroom. There are some of my robot friends who even help disabled people or people with special abilities. And some who help with anxiety and depression too by reading the mind patterns of people. Isn't that amazing?
+
+Abida: Yes AI.S.H.A, looking at robots like you, it seems like there is more hope for AI and machine learning in the future.
+1. Handout: Identify the phishing messages out of the legitimate ones and reason out your choices
+2. Scam emails contain trigger words that trigger a sense of urgency and fear, use manipulative language or claim unbelievable discounts. Sometimes even legitimate emails get tagged as a 'scam' by scam filtering software. This is because these use scam trigger words, spelling errors or bad formatting. Check for the scam folder in your (or parent/gaurdian's) gmail. Are there any scam emails? What kind of emails are in the scam folder? Spot and list the spam triggers
+3. When you are opening a website, both cookies and caches are in action. Open the 'settings' option from any browser that you use and go to 'privacy & security'. You will find an option to clear browsing data with a sub-option to clear cookies vs cached images and files. After clearing both cookies and cache, let's say you are trying to log in to an online shopping site or any account that you are registered with, what effect does clearing a cookie vs clearing a cache will have on your next website browsing experience?"
+10,L2.C1.v10,Little acts of kindness makes a huge difference,/uploads/submodules/L2.C1.v10.png,"Scene 1: 
+Part 1: (Yahya, a 12 year old and his mom are on a conversation while having their lunch)
+Yahya: Mom, I'm done. I couldn't finish these carrots.
+Mom: Yahya, I thought I served you the right portions. Have you ever thought how lucky we are to get to eat food everyday? Wasting food is not only bad for you because you loose energy if you don't eat well, but it's also detrimental to the society. 
+Yahya: (Insert puzzled look here) Mom, I don't understand. How does me wasting the food affect the society? 
+Mom: Do you know that there are so many people in the world who are starving every single day because they don't get any food to eat. 
+Part 2: More than 33 lakh children in India are malnourished. And because of COVID-19, the situation is even worse. It is tough for some children to get even a single meal per day. 
+Yahya: (Insert anxious look here) Oh no, that sounds like a nightmare!
+Part 3: Mom: And when you are wasting food, remember that you are also wasting all the energy put into growing, processing and shipping the food which in turn contributes to climate change. That's why we should prefer eating more seasonal fruits and vegetables. Climate change poses so many risks to humans, like frequent storms, flooding and landslides.
+Yahya: (Insert anxious look here) Mom, I didn't realize that the food wasted has so many consequences. I truly wish I should do something about the hungry children."
+11,L2.C1.v11,Let's solve problems Big or Small - Design thinking approach,/uploads/submodules/L2.C1.v11.png,"
+
+Empathize - Sketch Q&A - Create Story Frames - Create Model - Review & Recreate ---
+Scene 1: Part 1: Mom: I'm glad that you are already thinking about solving this problem Yahya. We all can solve problems, Big or Small. Humans are great at Problem Solving, be it on a personal or global level.  We keep solving problems right from the moment we wake up to when we sleep. All you need is a big heart! I will walk you through some of the steps which will help you approach problem solving.
+
+Part 2: 
+Mom: Step 1: (Empathize) Before solving a problem, the crucial step is to understand what the problem really looks like for the person experiencing it.   This is called empathizing and it is important because no problem is worth solving for, if it's not helping you or others. In your case, since you want to care more about the hungry children, the first step is to meet them in their locality and observe them to know more about their situation. Some ways to empathize are :
+-to listen and observe their body-language, facial expressions and emotions
+Ask questions like ""How are you feeling?"" so you could understand their feelings better. Remember that different people feel differently about the same problem. The key is to acknowledge it.
+
+[Reference Link]: A handout for the Design thinking steps
+Part 3: 
+Step 2:  (Sketch Q&A) Yahya: Mom, I'm just back from having some of the insightful conversations with the children and their families.  
+Mom: Good job yahya. 
+Part 4: Now that you know how these children and their families are feeling and what their actual needs are, we can move on to step 2 which is to do your own research about the problem and sketch some question and answers. You could sketch these answers in the form of illustrations, drawings and text.  
+How about we try this now? I will ask you some questions and you will try to get the answers, 
+Qtn 1: Why is this problem that I'm trying to solve important? in other words why is it important to address malnutrition in India?
+AI.S.H.A: I can help you with some statistics here Yahya:
+- India has made great gains in economic & human development but we are still working hard to reduce hunger.
+- India is home to 1/3 of the world's stunted children 
+- 1.27 million children die in India every year due to malnutrition 
+- Kashmir alone has reported 15 lakhs of children below 5 years who are acutely malnourished & 29 lakhs of women were anaemic.
+(source, UNICEF 2016)
+Part 5.1: Yahya: Thanks AI.S.H.A, that helps a lot with my research.
+Qtn 2: Mom: Let's move on to qtn 2. What impact it would create when malnutrition is solved in children?
+Part 5.2: Yahya: Mom, you used to tell me that there is no food for thought when there is no food for the stomach (show this through drawings/sketches) Improvement in child health is crucial to children reaching their potential and leading a fulfilling life. 
+Part 5.3: Mom: Absolutely Yahya. Children below 5 years are more often affected by this problem which leads to wasting (growing thin) & stunting (shorter than normal) in their growth. A child who has anaemia or not enough hemoglobin affects their ability to thrive intellectually. On the other hand, do you know that every 4 seconds a child dies globally because of hunger. This is a serious crisis. 
+Part 5.4:
+Let's move on to our next question.
+Qtn 3: when and how was the problem created?
+Well mom... I was thinking AI.S.H.A would help me out here with the statistics. But may be she's busy helping some of the other kids out there too. 
+Let me see how I can get this information...mmmh, may be google search? . Oh wait, I already got this information when I visited the anganwadi yesterday. Let me check my notes from my observation. 
+There you go, I found it. It looks like the impact of COVID led to disruption of food systems and anganwadi workers were diverted to contact raising, vaccination procedures and financing of nutrition.
+Mom: Good job Yahya. India has been facing child malnutrition much before COVID-19 but yes, some of these issues which you found are aggravating the crisis after COVID. 
+Yahya: And mom, I also heard that because of the school closures, most of the kids have lost their food which they relied on from schools.  
+Mom: Well done Yahya, that's a good amount of information to dive into creating your story frames.
+
+[Reference Link]: A handout for Example 1
+Part 6:
+Mom: Step 3:  (Story frames) Write as many different story frames as you can for the sketch that you came up with and pick any one story which you think can effectively solve the problem in hand. Examples of story frames to tackle child hunger & malnutrition are, 
+Story frame 1 - Making the local community understand the advantages of growing edible gardens 
+Story frame 2 - Creating a food resource center with the help of the local council which will involve creating a fortified healthy snack for the children of the community
+Mom: Could you think of other story frames, Yahya?
+Yahya: Yes mom
+Story frame 3 - I could create a library of resources of the locally available wild edibles and local produce and their medicinal, nutritional values 
+Story frame 4 - Or may be a food bank which collects excess food from hotels and weddings and distributes it to malnourished children in need
+Part 7:
+Step 4: (Create)
+Mom: That's great . So far so good. Now that we have different story frames, the next step is to choose one of these story frames to solve and 'create' a model for it.
+Which story frame do you wish to work with Yahya?
+Yahya: I wish to work on creating a wild edibles library which will include information about locally available wild edibles and their medicinal/nutritional values. Infact I can make a wild edibles digital library using google slides. I just learnt in my digital literacy lesson on how to make a presentation on any topic. This could serve as my initial model in solving the problem. 
+Mom: That's a great idea. 
+A quick tip Yahya. For your google slides, you could collect data from the local farmers, indigenous people, botanists and physicians and also do a google search to do some relevant research on the local wild edibles. 
+Yahya: Sure mom, I shall do that!
+Part 8: 
+Step 5: (Review & Re-create) 
+Mom: The most important step is to review your model. You can do this by asking for reviews from the local community that you interviewed. Recreate the model and implement changes whenever necessary.
+You can also add caveats for specific medical conditions.  For example, children undergoing blood thinning medications cannot eat spinach or edibles that contain higher concentrations of Vitamin K. 
+Mom: We are done with the five steps for design thinking. How about you try and build your model now, Yahya?
+(Instructor speaking)
+I hope you have got an understanding of how to approach problem solving. here's another example:
+Meet Rani, She is at Patil Nagar, Lane 12, Kashmir.
+Rani wants to address the problem of overflowing Garbage from the public dustbin in her community. The dustbin attracts stray animals, flies and rodents and may prove to be a health hazard. Rani decided to work together with her sister and couple of friends to come up with multiple solutions to the problem. 
+1. Empathize: They talk to the people in community especially elders and young children who are affected by the problem
+2. Sketch Q&A:  
+Qtn 1: What is the problem? Overflowing Garbage
+Qtn 2: Why is the problem important?
+Rani observed that the garbage spills everytime it's transferred to the municipality truck.
+The deisgn of the dustbin could be faulty.
+The dustbin is not detachable and hence not washable.
+
+[Reference Link]: A handout for example 2
+Qtn 3: When is this happening? Especially in the evenings
+Qtn 4: How does the garbage spill happen? Accumulation of garbage during unloading
+
+3. Story frames:
+Story frame 1: The rectangular design of the dustbin create spills over a larger area. Could a difference in shape cause lower spills?
+Story frame 2: The height of the dustbin was such that the cows could access it easily. While this helps feed the cattle, it was causing more spills in the nearby area. Could dustbins with lid help mitigate this problem? 
+Story frame 3: The current dustbin only moves across an axis and can't be removed. Could adding wheels to dustbins and making them detachable solve the problem?
+Story frame 4: Could we replace 1 bin with perhaps 3 to 4 bins per area? Overfilling could be caused by the amount of waste being much larger than the size of the bin. And while we do that could we classify these bins to store different kinds of waste? Could that reduce spills and allow garbage to be more organized for recycling and energy generation? 
+Story frame 5: A waste collection audit to find out how often waste gets collected in the bin could identify the frequency of garbage created and negotiate for more frequent collections
+4. Create a model: 
+Story frame selected: 
+ The rectangular design of the dustbin create spills over a larger area. Could a difference in shape cause lower spills? 
+- Prepare materials required for prototype (Cardboard, Glue, scissors, papers, etc)
+- Create the cylindrical shape based on the optimum diameter
+- Compare and contrast the cylindrical and rectangular designs
+
+5. Review and Recreate: 
+Rani reviews and makes changes to her prototype by letting her friends and family test her model with different sample weights. 
+Rani is really going somewhere with her experiments. She wants to make a positive change in her local community. While we wish her the best, let's meet other problem solvers too."
+12,L2.C1.v12,A sneak peak into the wild edibles digital library,/uploads/submodules/L2.C1.v12.png,"Part 9: (Yahya shows the google slides he made on wild edibles)
+Yahya: Mom, look at the model I created for my digital library on wild edibles. I have collected the data from research papers on wild edibles in Kashmir. I have also interviewed friends, family and people from the community to add inputs to my model. 
+Part 10:
+(screensharing)
+I didn't know that there are so many varieties of wild edibles which are abundant sources of vitamins and minerals. These fruits, leaves, seeds and even roots could be a great dietary supplement for children and could reduce the impact of stunting and wasting too.  For example, the Chandheer fruit is a rich source of Vitamin C; a handful of walnuts can provide children with the omega 3 fatty acids that they need for the entire day. The Socchal leaves are a great source of phytonutrients and the mulberry fruit improves digestive health and controls blood sugar levels. And look I have added all the references from which I took up these pictures and information. I'm currently reviewing my model to add tha caveats and implement changes. This should be done soon.   
+Part 11:
+Mom: Well done Yahya! Proud of you! You are a design thinker already and you know what it takes to model a specific solution or story frame for a seemingly vast and challenging problem. 
+Part 12: 
+Abida:  
+We saw how yahya used a design thinking approach to create a digital library of resources for solving malnutrition in children. 
+There are other examples of solving problems too. 
+Part 12.1: Nitya is working on a paper boat that doesn't sink easily while teaching her brother about origami paper folding.
+Part 12.2: Rani wants to address the problem of overflowing Garbage from the public dustbin in her community. She is working on recreating the rectangular shape of the bin which created spills. 
+(Use the below pointers for illustration purpose)
+- Prepare materials required for prototype (Cardboard, Glue, scissors, papers, etc)
+- Create the cylindrical shape based on the optimum diameter
+- Compare and contrast the cylindrical and rectangular designs
+Part 12.3: Vishesh wants to amuse his little sister with his problem solving and logical thinking skills. He is working on creating as many objects as he could, using 5 triangles, 2 rectangles and 1 pentagon. 
+Now it's your turn. You could be a problem solver too!
+Now it's your turn! You could be a problem solver too. All you need to do is pick a problem close to your heart, empathize, sketch questions, imagine story frames, choose one and create a model to review and recreate a better solution. Record a video discussing about your problem, the steps you followed to arrive at the solution such as the interviews you conducted, the story frames and finally describe the model or prototype that you created."
+13,L2.C2.v13,"Include, Ignore, Divide and Conquer - The roti making",/uploads/submodules/L2.C2.v13.png,"--- Video 13: Include, Ignore, Divide and Conquer - the roti making ---
+Scene 1:
+Part 1: Abida: Welcome problem solvers. 
+A quick recap - we learnt how to create a working model of the problem that you are trying to solve. We saw how a computer software like google slides can be used to create a model for solving a problem.  Remember our theory from before? Computers and humans make a great team and can prove to be more efficient in solving problems together. But to make the best use of a computer, we humans should learn how to think computationally. 
+Part 2:
+Well what is computational thinking? We will get to that part sooner. But before that, I want you to think about some of the simple things that we do every single day. Let's take an example of making a Roti (chapathi). What are the steps involved? 
+(Abida's algorithm for making Roti)
+1. Take one cup of Atta (wheat flour) and add a pinch of salt to the Atta 
+2. Add water to the dough and knead the dough until it starts to pull together
+3. Make smaller balls out of dough and dust the balls both sides with flour
+4. Roll it until it's evened out in all the sides
+5. Cook the roti on high heat and quickly flip it after 10 seconds on a heated tawa or pan.
+6. Once you see bubbles put the roti directly on fire to puff it up. 
+There you go! The roti is ready to be served
+Part 3: Abida: You can see that these step by step instructions have to be followed in a sequence in the specific order, one after the other to make fluffy perfectly cooked rotis. We call these steps the algorithm. 
+Part 4: Include-Ignore: When we write algorithms, we need to ignore the unnecessary details and include only the details that are most relevant to the problem. For example, my algorithm for rotis didn't include details about the color of the container I used or how fast I needed the dough or rolled the rotis. This is not most relevant to making rotis. This process is known as abstraction. 
+Part 5: After abstraction, we break down the process into simple steps. This process is known as decomposition. 
+When we write algorithms for computers, these algorithms have to be precise and accurate if we want the correct results from the computer.  These algorithms are lated translated to code which the computer will run. 
+Part 6: For example, meet the world's most popular food robot, the rotimatic. It's a fully automatic roti making machine build by two Indians Pranoti and Rishi - a mechanical engineer and software engineer graduates from the National University of Singapore. Rotimatic has a 32-bit microprocessor (in other words a computer on a single chip) with the CPU processing and control, 10 active motors, 15 smart sensors to sense temperature, position and consistency and 300 parts. 
+Part 6: (VE reference: Add clip 7 to 28 s to our video: https://in.video.search.yahoo.com/search/video?fr=mcafee&ei=UTF-8&p=rotimatic+video&type=E210IN826G0#id=3&vid=a691d3c02215855978561deb3b891769&action=click)
+The rotimatic machine uses an algorithm to make fluffy and nutritritious rotis, 1 roti a minute.  And what more, it uses machine learning to learn more about the doughballs every single time it makes it and uses this information to improve the next doughball. 
+
+Part 7: Abida: Now, imagine what happens when the algorithm fed into such a machine is not written in precise order? We can't expect the machine to make fluffy rotis right? Arranging instructions in precise order is called sequencing. Sequencing is crucial to ensure correctness of any algorithm. In the next video we will see another example of an algorithm."
+14,L2.C2.v14,Sequencing & Algorithms - The wild edibles app demo,/uploads/submodules/L2.C2.v14.png,"--- Video 14: Sequencing & Algorithms - the wild edibles app ---
+Scene 2: Part 1: Let's get to another example of an algorithm. Let's say you want to give instructions to someone to draw a square. What would that look like? 
+Step 1: Start by facing right and draw a straight line.
+Step 2: Turn 90 degrees right
+Step 3: Draw a straight line
+Step 4: Turn 90 degrees right
+Step 5: Draw a straight line
+Step 6: Turn 90 degrees right
+Step 7: Draw a straight line
+Part 2: That's great. We did draw a square with our algorithm by decomposing it into simple steps to work with, one at a time. 
+Part 3: But did the algorithm say how big the square needs to be? Or what color the square needs to be? Yes! these details were ignored or abstracted out so we could write an algorithm which will help make the computer draw a simple square.
+Scene 3:
+Part 1: Abida: Let's understand how to think computationally using another familiar example.. Remember Yahya who has created a digital library of wild edibles? He had been trying to address a complex and overwhelming problem of reducing children's hunger and malnutrition. One problem the users might face is not being able to easily search or navigate the slides to find the information about specific wild edibles they might be looking for.  
+A digital application (App) that could deliver the same details on the go could be a handy tool for local people to access and identify information on plants and edibles. 
+Here is the challenge for Yahya.
+How would he know if he has covered all varieties of wild edibles? It's time for Yahya to do some research to aid him in this process. 
+
+Part 2: First Yahya recognizes the pattern in which the wild edibles are divided into different types like fruits, leaves, roots and seeds. This technique is called pattern recognition. If Yahya could sort his library in this way, he could ensure he has covered multiple varieties in his app. In addition to that, people using his app would also be able to look for just the edible fruits which could be eaten raw or explicity look for the leaves or seeds. 
+
+Part 3: Yahya and his friends work on each plant part first and then group them together to get the complete list of edibles in Kashmir. This method of finding patterns to divide a complex problem into smaller tasks makes the problem easier to solve. It is known as decomposition.
+Part 4: Abida: Are we missing on something? Let's see! There are 1403 wild edible species in India  You see, including all 1403 species seems almost impossible for Yahya and his group now. Yahya ignores details about other cities while he is working to build his app. He only includes information about the wild edibles in Kashmir valley. This allows Yahya's group to abstract away the unnecessary complexity of searching for details about many species at the same time. This is known as abstraction. Yet another important computational thinking skill.
+Part 5: After recognizing the patterns, abstracting out the complex details and decomposing the tasks into subtasks, the next step is to write an algorithm to formulate the solution and carry it out using a computer. Yahya has written his own rules for designing his app. Let's see how he built his app by coding for it. 
+Yahya used a software called scratch to code for his wild edibles app.
+
+Algorithm for designing the wild edibles app 
+(Screen sharing - wild edibles app)
+Step 1: Design a homescreen for wildedibles in Kashmir
+Step 2: Add buttons to sort the edibles into Fruits, Leaves, Seeds, Root and Flowers
+Step 3: When the Fruits button is clicked, open a new page and add photos of all wild edible fruits in Kashmir with their local name, scientific name and nutritional value. 
+Step 4: Add a home button at the top left corner of each page to go back to the home screen
+Step 5: Repeat step 4 for seeds, leaves, roots and flowers
+Step 6: Add a next button to navigate to the next page if there are more than one pages
+Part 6: (Yahya's mom approaches him)
+Yahya, I'm so proud of you. It seems to me that you are already close to achieving your goal of helping the hungry children. Every parent can refer to your app for affordable and nutritious sources of food in our loacity.
+Part 7:
+Abida: Now, the great thing about Yahya's app is that, anybody can re-use this design to create a custom wild edibles library of their locality. So his solution can be generalized for similar apps. 
+7.2
+In the last chapter, we learnt about solving problems using a dual approach of design thinking and computational thinking. Design thinking helped in choosing and creating a precise solution from different story frames and computational thinking helped to formulate this solution such that it can be effectively carried out using a computer and later generalized for similar problems.
+In the next chapter, we will get started with learning to code, so you can create and code solutions to your problems like Yahya did.
+Now it's your turn! Start out by writing algorithms for simple sketches. May be to draw a hexagon or a triangle? Once you get a hang of writing your own algorithm, revisit the model that you have been working on in the previous chapter. Does it seem like a huge problem to explore?  It's time to divide your model into smaller parts to make the model simple to work with. Just like Yahya did. Research more on each part to see if you can find any similar or differentiating patterns. Abstract out the unnecessary complexity and focus on the most relevant parts of the problem. Write an algorithm to use a computer to solve the problem. 
+
+Hurray!, if you are done with the above steps, then you are ready to get started with coding your algorithms to let the computer do the job for you."
+15,L2.C3.v15,"Introduction to the scratch coding platform - sprites, costumes and code",/uploads/submodules/L2.C3.v15.png,"--- Video 15 Contd : When sprites talk to each other - events and actions ---
+Now that we know about the scratch platform, let's get started by creating our first sprite. Sprites are characters that we will use in our code or program. We could use multiple sprites in our code and each sprite can be coded a different behavior. We could also setup a backdrop to go with the sprites. Meet Bahir, the stag. Stags are endangered species of Red Deer, endemic to Kashmir. It's famous for it's spreading antlers and rich brownish red coat. 
+Amara is always fascinated by deers. She finally gets to meet with one of them. 
+Sprites: Amara & Bahir (from Scratch library)
+Backdrop: Forest (From Scratch library)
+Let's code and visualize how that looks like:
+Scene 3: I have chosen a sprite of a girl and named her Amara and placed the sprite in a desired location on the stage. We can adjust the size of each sprite using the size option.
+●  When the green flag is clicked, we want Amara to go to (X: -182, Y: -59). Let's place Bahir at (X: 95, Y: -70) by changing the X and Y co-ordinate of the sprite. 
+Events denote user's interaction with the computer. For example, when you turn on the light switch, the light is ON. When you turn it off, the light is turned OFF. The action of turning ON and OFF the switch is called the event and the light being turned On and OFF is the action. 
+Similarly when Bahir is clicked, as a result of this event, we want him to communicate the message ""Hello I'm Bahir, how are you?"" The Bahir sprite also broadcasts the message ""How are you"" and waits. 
+When Amara sprite receives the message, ""How are you"", she replies with ""Hi Bahir, I'm fine. Nice to meet you"". To do this drag the ""when sprite receives"" event block and the say block from the looks section. 
+Also get the glide block from the motion palette and make Amara glide closer to Bahir. To find out where Amara will glide to, drag the sprite to the exact location and use the glide block with the updated x and y values.
+Similarly, when the green flag is clicked, we have made Amara go to a specific location on the screen using the go to x and y block. X denotes the horizontal position or X co-ordinate of the sprite and Y denotes the vertical position or Y co-ordinate of the sprite. The center of the stage represents the position (X:0, Y:0). 
+Wait, looks like there is a problem. Amara replies and then glides closer to Bahir. But it should be the other way. To make him glide first, move the glide block above the say block. Let's check now.
+● We could also set a voice for each of our sprites using the 'set voice to' block and let them speak out loud to each other using the 'speak' block. Note that the text to speech blocks are only available to use with an active internet connection which uses the text-to-speech software provided by Amazon Web Services. This software uses deep learning technology which is a form of machine learning to synthesize natural sounding human speech. Do give it a try!"
+16,L2.C3.v16,Nature's best algorithms - coding for the metamorphosis,/uploads/submodules/L2.C3.v16.png,"--- Video 16: Nature's best algorithms - coding for the metamorphosis ---
+Nature has some of the best algorithms of all. The life cycle of an insect - familiarly called as metamorphosis is a great example of a sequence of steps involved in an algorithm. Starting from a egg, the hungry caterpillar eats eats and eats and becomes a big caterpillar, 1000 times it's birth weight. He then builds a small house around himself called a cocoon and pushes his way out into a beautiful butterfly. Algorithm: ● Egg ● Caterpillar or Larva stage ● Pupa or chrysalis stage ● The adult butterfly
+To code for projects like these, we follow the computational thinking concept called decomposition, i.e to break down the project into simple tasks to work with. Let first select the butterfly sprite and egg sprite. Let's delete the other costume of the egg sprite and place these sprites in the correct position on stage. Since the caterpillar sprite is missing in the sprite library, we will draw a caterpillar sprite. We will use the paint tool to paint our sprite as needed. Similarly we will draw a cocoon sprite and give name to our sprites. We will also select a backdrop for our project.
+Now to the code. When the green flag is clicked, we will let the egg sprite to change costume to egg-a. When green flag is clicked, we need to hide the other sprites. When the egg sprite is clicked, we need to broadcast the message ""egg hatched"". When the caterpillar sprite receives the message ""egg hatched"", he needs to show up right next to the egg sprite. For this purpose, we will drag the caterpillar sprite closer to egg and use the go to block to set the caterpillar location. We will set the size to 50% to make the caterpillar look small. Use the glide block to make the caterpillar glide to the left corner and use the change size block to make the caterpillar grow in size. 
+When the caterpillar sprite is clicked, we broadcast the message, ""big fat caterpillar"". When the cocoon sprite receives the message ""big fat caterpillar"", it shows up. 
+When the cocoon sprite is clicked, we broadcast the message, ""cocoon"". When the caterpillar sprite receives the message ""cocoon"", the butterfly shows up. Also when the green flag is clicked we want the butterfly to go to a position near by the cocoon.  When the butterfly is clicked, we want it to glide to the right corner of the screen. Let's check this out now. Wonderful! That works! We have just coded for the metamorphosis.
+(The below script is not included) 
+Have you ever thought about how water keeps moving in different ways on, above and below the surface of the earth? Water from the surface of the water bodies evaporates or rises to the air to form water vapour. This process is called evaporation. Due to low temperatures in high altitudes, these vapours become tiny droplets of water and ice forming clouds. This process is known as condensation. When more water droplets merge  together, they fall out of the clouds to the ground as rainfall. This process is known as precipitation. When the air pressure is low or when the weather is too cold, the droplets freeze to form snow. The water from the rainfall flows down to the moutain and hills forming rivers and gets collected in water bodies. This process is known as collection. These sequence of steps are what we call as the water cycle. 
+Algorithm:
+● Evaporation
+● Condensation
+● Precipitation
+● Collection"
+17,L3.C1.v17,Infinite loops of anger & kindness,/uploads/submodules/L3.C1.v17.png,"Scene 1: Part 1:
+In the last video, we learnt how to code for events and use a broadcast event to code for one of the nature's best algorithms - metamorphosis.  In this video, we will learn about infinite loops and how to code for one in scratch. But first, let's discuss some emotions. Anger is a completely normal human emotion. Infact, scientists like Charles Darwin proposed that animals developed emotions for survival and to prevent themselves from underisable situations. Emotions like disgust for example prevented them from eating food that's bad for them. Fear helped them protect them from predators. But when these emotions go beyond one's control, it consumes us instead of protecting us. 
+Part 2: The emotion of anger, for example, when not controlled could extend for a prolonged period of time and cause harmful effects on health, mind and overall quality of life. This is called the infinite loop of anger (Show the infinite loop of anger diagram)
+Part 3: Our planet earth rotates on an infinite loop around the sun. The waterfalls flowing continuously from up above the mountains, our heart beating indefinitely from our mother's womb, jumping on trampolines or even walking are all examples of infinite loops. The same action keep on repeating continuosly. If we were to write an algorithm for walking, then we would put it inside an infinite loop or 'forever loop' which would look like this,
+In case we want to walk only a specific number of steps, then we will use a repeat block as follows by specifying the number of times to repeat the action.
+Now, let's get to code for an infinite loop. Remember Eshal, the pet sheep of Rumanzel? Eshal gets sad and angry when Rumanzel doesn't feed him on time. When Eshal is angry, his heart races and he goes into an infinite loop of running up and down the living room. Let's see how to code for this in scratch,
+When the green flag is clicked, we want Eshal to walk infinitely. To do this, we use the when flag clicked block and the forever block from the control palette.  
+We will use the 'move steps' block from the 'Motion' section and latch it inside the forever loop. But this will make Eshal walk past the screen. 
+To make him bounce back when he reaches the edge, we use the 'If on edge bounce' block from the motion section. But doing this will make Eshal flip upside down. 
+To correct this, use the set rotation style block from the motions palette and select the rotation style as left-right.
+You will now see that Eshal doesn't flip upside down but he strides infinitely. This is not good for Eshal. 
+
+Escaping from the infinite loop of anger: 
+I have created four different sprites for Eshal each representing an emotion - Sad, Angry, Balance and Compassion. To let the sprites communicate with each other, we will use the sending and receiving broadcast events. To show these emotions in a sequence, we will use specific broadcast messages as events to trigger specific emotions. When each sprite is clicked, the sprite communicates it's emotion using the variable 'emotion' whose value keep changing throughout the code. The current emotion is broadcast as a variable and used to trigger the subsequent emotion. Let's divide the code for each sprite and work on one sprite at a time (This is precisely called as decomposition or dividing the problem into smaller tasks to work with and working on one task at a time to later combine the solution for a bigger problem. Even professional coders or programmers today use this technique while working on bigger projects).
+Sad Eshal: 
+
+ ● When green flag is clicked, we want the sad Eshal to show up and say that he's sad. At the same time, we want to hide all other sprites. 
+ ● Let's also choose a backdrop for our project. 
+ ● Click on 'Make a variable' from the Variables palette and create a new variable called 'emotion'. (It's a good programming convention to create meaningful variable names. ● Drag the 'set count to 0' block from the variables section. This will initialize the variable value to 0. Initializing means giving a value to the variable. We will initialize the value of emotion variable to 'sad'. As Eshal is initially sad because he is hungry. ● Drag a 'think' block from the 'looks' palette and make Eshal think 'I'm exhausted and hungry' for 3 seconds. Let's check this out. That works. When green flag is clicked, Eshal thinks ""I'm exhausted and hungry""
+
+When the Eshal sprite is clicked, he needs to say ""I am sad"". To do this, get the 'when this sprite clicked' block from the events palette. Get the 'say' block from the 'looks' palette. We want Eshal to communicate his emotions whenever we click on him. To do this, get the join block from the 'operators' palette. Write the text ""I am"" in the space on left. Drag the emotion block from the variables section and put it in the space on the right. ● Make the sad Eshal wait for 3 s before we hide him ● Hide the sprite and broadcast the message ""I'm emotion"" by placing the join block inside the broadcast block. Join the text ""I am"" and the variable 'emotion'. When you click on the sad Eshal, he will say ""I am sad"".
+
+Angry Eshal:
+
+● We want the angry Eshal to show up when he receives the message, ""I am sad"". Drag the ""When I receive"" block from the events palette and the show block from the 'looks' palette.
+● Set emotion variable to the value 'angry'.
+● Instead of running into an infinite loop of anger, Eshal needs to stop striding after sometime. To do this, we use a repeat block and set the number to 250. This will make Eshal repeat moving 10 steps for 250 times. He will also bounce if he is touching the edge as we add the if on edge bounce block. 
+● When Eshal is clicked, he will say ""I am angry"". Follow the same procedure to print the emotion variable using the set and join blocks.
+● We want Eshal to take atleast 3 long deep breaths to calm down and communicate with anger. Use the 'think' block from the 'looks' palette to make Eshal say, ""Let me take some deep breaths"" for 2 seconds and hide the sprite for Angry Eshal. 
+● Broadcast the message ""I'm emotion"" by placing the join block inside the broadcast block. Join the text ""I'm"" and the variable 'emotion'.
+We are faced with a similar problem now. The Eshal sprite flips upside down again. Let's fix it by using the set rotation style block again and set it to left-right.
+"
+18,L3.C1.v18,Emotions are variables,/uploads/submodules/L3.C1.v18.png,"Part 1: Think about our emotions. We are not always happy right? Sometimes sad, sometimes angry (just like Eshal), sometimes balanced and other times compassionate. Our emotions keep changing with time. So emotions are nothing but variables. 
+Part 2: The weather which changes from rainy to sunny to windy is a variable. 
+Part 3: The seasons which change from Spring to Summer to Monsoon to Winter is a variable. 
+Part 4: The number of fruits that you can add in your falooda is a variable. It could be apple, banana and pineapple (three). Or if you add mango and grapes (it becomes five). 
+Part 5: Eshal's emotions and feelings are variables too. Eshal gets 'sad' when he is hungry. His sadness turns into 'anger'. To prevent himself from getting stuck in the infinite loop of anger, he needs to find 'balance' by communicating with his anger and taking deep breaths from his gut to calm down. Once he reaches 'balance', Eshal will focus on how to be 'compassionate' to others. Let's look at how to code for these emotions using variables.
+
+Eshal Balance:
+●  Hide this sprite when the green flag is clicked
+●  When the balance sprite recieves the message, ""I'm angry"", show the balance sprite and set the emotion variable to ""Balance""
+●  When the balance sprite is clicked, say I'm balance using the say block and the join block to join the text and the variable.
+● Use the think block to show the balance sprite thinking ""I will find ways to help Rumanzel""
+● Hide the sprite and broadcast the message ""I'm emotion"" by placing the join block inside the broadcast block. Join the text ""I'm"" and the variable 'emotion'.
+
+When the angry sprite is clicked, we notice that the angry sprite should be hidden. Let's do that before the sprite broadcasts the message.
+Eshal Compassion:
+
+●  Hide this sprite when the green flag is clicked
+●  When the balance sprite recieves the message, ""I am Balance"", show the compassion sprite and set the emotion variable to ""Compassion""
+●  When the compassion sprite is clicked, say 'I'm compassion' using the say block and use the join block to join the text and the variable.
+● Use the say block to make the compassion sprite say ""Hello Rumanzel. Let me know if I can be of any help with your homework""
+● Hide the sprite and broadcast the message ""I am emotion"" by placing the join block inside the broadcast block. Join the text ""I am"" and the variable 'emotion'.
+● When Rumanzel receives the message ""I am compassion"", she shows up and communicates with Eshal. To do this, use the say block to make Rumanzel say ""Sure Eshal. I kept you waiting for long. Let's first go for lunch."" We also need to add a backdrop for this.  When the code starts, we need to switch the backdrop to blue sky.
+**Not added** AI.S.H.A: What if we don't use the variable to broadcast the emotion Abida? How would the code look like?
+
+Abida: Great question AI.S.H.A. In this case we would have to broadcast different messages to different sprites which will make the coding process trickier. For example the sad sprite will broadcast the message ""I'm sad"" inside the broadcast block. The anger sprite will broadcast the message ""I'm anger"". When a variable is created to store the changing emotions, the computer stores this variable in it's memory and only provides the updated value at any given point. So using a variable makes this process easy and convenient. 
+**Not added**
+In this video we saw how a single variable called 'emotion' took so many different values at different times throughout the code and how it made our code easier to work with. And we also learnt a good strategy to escape from the infinite loop of anger and learn to be more compassionate.
+"
+19,L3.C1.v19,Catch your thoughts with conditions,/uploads/submodules/L3.C1.v19.png,"Part 1: We wrote some code that helped Eshal control his anger and be more compassionate. But wait! Thoughts fuel our emotions and emotions shape our thinking. Thoughts and feelings are closely connected.
+AI.S.H.A: Oh yes Abida. I have some information you would like to know about thoughts. 
+The average person has about 12,000 to 60,000 thoughts per day. Of those, 80% are negative (National Science Foundation, 2005)
+Abida: Absolutely AI.S.H.A. So many negative thoughts, right? Negativity is everywhere! But so is our ability to focus on the positive. If we are able to catch our thoughts and identify them as positive or negative, it becomes easier to consciously choose our emotions. Let's see if we could write some code to catch our thoughts.
+
+(screensharing starts)
+Let's imagine that a thought is like a cloud. It's always passing by. 
+● We choose a cloud sprite to represent a thought. Let's duplicate this sprite one for the positive thought and one for negative thought.
+To mimic that we are catching a thought, let's choose a bucket sprite into which the thought is captured. 
+● Let's duplicate this sprite and change the color of the bucket. The blue bucket is to catch a positive thought and the red bucket is to catch a negative thought.
+When the green flag is clicked, the cloud sprite asks to ""enter your thought?"" and waits for your answer. To do this, 
+● Use the 'ask and wait' block from the sensing palette and type in the question inside the block.
+● A text box pops up to enter the answer.
+● Once the answer is entered, use the say block from the looks palette to make the cloud say the answer for 2 sec.
+● Show the cloud sprite using the show block from the looks palette and make it go to the specific location on the screen using the go to block from the motion palette.
+Let's check this out. That works!
+Likewise, when the green flag is clicked, the positive cloud and the negative cloud goes to a specific position but is initially hidden.
+Now if a thought is positive, it goes to the positive bucket and if negative, it goes to the negative bucket. 
+
+If the thought is positive such as grateful, then we need to broadcast a positive message. To check if a thought is 'grateful', get the if then block from the control palette and broadcast positive if the condition is true. Similarly check if the thought is 'friendly'. If it is, then broadcast positive again.
+If the thought is negative such as blaming, then we need to broadcast a negative message. 'Similarly check if the thought is 'bully'. If it is, then broadcast negative again.
+So the positive cloud needs to show up only when it receives a positive broadcast message and hide when it receives a negative broadcast message.
+The positive cloud after receiving the message also changes it's size by -50 and glides towards the blue bucket, i.e takeout. If the positive cloud touches the blue bucket, it must hide. To do this we use the if then block from the control palette.
+For the negative cloud, we repeat the same steps as the positive cloud. 
+Also it's a good practice to add comments to your code to make it more understandable. Code to catch thoughts, code that receives positive thoughts and code that recieves negative thoughts
+Let's check if this is working! Positive thoughts like grateful go to the positive bucket and negative thoughts go to the negative bucket. Glad! That works!
+We are processing conditions literally in every part of our daily lives, not just to catch thoughts. Some basic examples of If conditions are,
+● If you go out
+      wear a mask
+● If it is rainy
+      take an umberella
+● If you are hungry
+      have some food
+● If it is winter
+      wear a hoodie 
+
+If conditions either return the output as 'true' or it returns the output as 'false'. This type of output is called as boolean since it can only have two possible outputs.
+AI.S.H.A: Wow Abida, we process so many conditions in a single day. But you got me thinking. Let's say I wish to write the code to classify people into different generations based on their age groups, do I have to write many 'If blocks' to achieve this? There would be lots of conditions to check for each person.
+If age = 10 to 25
+    Gen Z
+If age = 26 to 41
+    Millenials
+If age = 42 to 57
+    Gen X
+If age = 58 to 76
+    Baby boomers
+If age = 77 to 94
+    Silent generation
+Abida: Great question AI.S.H.A. And hey, I could see your tone of voice has improved too. 
+AI.S.H.A: Thanks Abida. I have been learning a lot from the way you speak. As an A.I, that's what I'm good at. And what not, we have been doing more lessons on emotions and thoughts recently. I've been recently working on them too. Do I sound more like a human?
+Abida: (Giving a puzzled look) Well, looks like you are getting closer)
+Okay, let's see. You have come up with a great example for if conditions. But not every time each and every condition needs to be checked. For example, a single person cant be of age 11 and age 57 at the same time (unless you are time travelling). So it's not useful to check all those if conditions at the same time. Only one condition could be true for a single person. In this case, instead of using a 'if condition', we could use an 'else-if' condition,
+If age = 10 to 25
+    Gen Z
+else If age = 26 to 41
+    Millenials
+else If age = 42 to 57
+    Gen X
+else If age = 58 to 76
+    Baby boomers
+else
+    Silent generation
+
+In this case, only the first if block needs to be checked always. If this condition is false, only then the proceeding else-if blocks are checked. If none of the else-if conditions are true, then the else block is executed. 
+In our case we could translate the code to something like this using the if-else ladder
+"
+20,L3.C1.v20,Binary thoughts and boolean logic,/uploads/submodules/L3.C1.v20.png,"Let's look at the sentence: ""When Rumansel walks past the dessert shop or a restuarant and if it's not raining, she will buy a falooda"". It might look like a simple sentence. But when a computer reads it, it will try to evaluate this sentence using only 0's and 1's as inputs and produce an output that is equal to a 0 or a 1. Let's decompose this sentence into different parts and access each simple sentence
+i) When Rumansel walks past the dessert shop 
+or  (any one statement must evaluate to true or 1)
+ii) a restuarant 
+and (both statements must evaluate to true or 1)
+iii) it's not raining - (The negation must evaluate to true or 1)
+Let's look at the possibilities hidden in this sentence to check the outcome of the statements using binary logic: 
+● Rumanzel walks past the dessert shop (1) or restaurant (0) and if it's not raining (1), she will buy a falooda (output is true or 1) 
+1 or 0 = 1 and 1 = 1
+● Rumanzel walks past the dessert shop (0) or restaurant (1) and if it's not raining (0), she will buy a falooda (output is false or 0)
+0 or 1 = 1 and 0 = 0
+Exercises for students to try:
+● Rumanzel walks past the dessert shop (0) or restaurant (1) and if it's not raining (1), she will buy a falooda (output is true or 1)
+0 or 1 = 1 and 1 = 1
+● Rumanzel walks past the dessert shop (1) or restaurant (0) and if it's not raining (0), she will buy a falooda (output is false or 0)
+1 or 0 = 1 and 0 = 0
+● Rumanzel walks past the dessert shop (0) or restaurant (0) and if it's not raining (1), she will buy a falooda (output is false or 0)
+0 or 0 = 0 and 1 = 0
+● Rumanzel walks past the dessert shop (0) or restaurant (0) and if it's not raining (0), she will buy a falooda (output is false or 0)
+Similarly, out of the 60,000 thoughts an average human thinks per day, some are postive and the rest are negative. Instead of checking each thought with an 'if statement', we could check for example if a thought is friendly or grateful or peaceful using a single 'if condition' connected with 'or' statements. So the code we wrote above will translate to:
+Now we have a simple if and else-if condition to check for all four thoughts. Do you also notice that the size of the code has reduced subsequently by coding for the 'or' condition? Through this we also learn that there could be more than one way of coding to achieve the same logic or result. Thr trick is to go for the most efficient way. For example, in this case, we prioritized writing shorter code which checks for as few conditions as possible.
+"
+21,L3.C2.v21,Let's karaoke,/uploads/submodules/L3.C2.v21.png,"2. Can we create some music aswell using our code? Let's try!
+AISHA do you remember the computer song that we wrote together the other day? What if we could code for a Karaoke for this song? 
+3. AISHA: Oh how could I forget the computer song!
+First we need to create some karaoke tunes for this song. Let's see how to do this. First we will create music for stanza 1.
+There are 12 beats in first stanza.
+Then we will create music for stanza2. Stanza 2 has 6 notes repeating twice for 2 lines. These 2 lines repeat together one more time. In this case, we will need a nested loop for the second stanza, like the one shown below
+We will then proceed with the last stanza same way
+Wait, to test if the second stanza is working properly, we should have to wait for the first stanza to get over. And for the third, we need to wait for both second and first to complete. Can we do something to test for the 2nd stanza without having to wait for the previous one? Yes we have a way to divide this code into modules or functions to avoid the complexity of working with huge blocks of code. In this case, we can write different functions for each stanza and call that function separately to test our code. Just like this.
+Once we defined all three functions to play music for the three stanzas, we define another function called 'play music' which calls for functions stanza1, stanza2 and stanza3 music. To call a function we use the function name block shown in pink.  We then use a repeat block to repeat the entire music twice resting for 0.5 beats in between.
+See how functions make the code modular and easy to work with? Now let's say if somebody else wants to add more lyrics to the song and create karaoke for the same. They could perhaps find a way to reuse the tones and notes that we have created and the functions that we have written are greatly helping for modifying and reusing parts of the code.
+Now that we have music, we want to guide people to sing along just like in the karaokes. Let's introduce an arrow sprite for this and make it move in sync with the notes.
+Now that we have learnt a easy way to code and check for each of our music stanza's we can build our code for the arrow movement the same way. One stanza at a time and one separate function for each stanza like this and call a single function for moving the arrow for all three stanzas.
+Up next is another interesting visualization. Let's consider that we are in a fairy tale world for now and let's say that for every stanza or line that is repeated, two flowers bloom in the garden right next to each other. Let's code for this now.
+"
+22,L3.C2.v22,Funny face filters,/uploads/submodules/L3.C2.v22.png,"Wow, that was intense. We wrote a program to create a karaoke and visualize loops and nested loops by coding using many functions or modules. Let's code for a simple yet fun project now - face filters. Let's see how this works.
+I'm first going to draw some accessories to be able to use them in my face filter project. Let's draw some cool eye glasses first. Then a jokers hat, a jungle hat and moustache and some beautiful jewelry.
+Now that we got all our costumes drawn, we are going to use the video sensing extension from scratch to turn the video on. When the green flag is clicked, the video is turned on. Now all we have to do is try our first face effect. Let's see. But we have a problem, we want to try all the face effects we made. How could we do that? 
+It's time to recall our past lesson on events and actions.
+We want these costumes to change automatically by sensing our motion. We can use the video motion on sprite block to sense the video motion if it's greater than 50. If so we keep changing costume every 3 seconds.  To do this get the forever block from the control palette and use next costume block to change the costume waiting for  3 seconds.
+"
+23,L3.C2.v23,Let's summon some magic patterns,/uploads/submodules/L3.C2.v23.png,"Part 1: Abida: In the past videos, we wrote algorithms to draw geometric shapes like squares. How about we write some code now to draw different geometric patterns just as we tap on the screen? We will create three shapes - triangle, square and hexagon. Let's work on these shapes one at a time. 
+
+To draw a shape, we need the length of each line of the shape and the angle of rotation. The angle of rotation is 360 degrees/no of edges. If it's a square, it's 360/4. If it's a triangle, it's 360/3. For a hexagon, it is 360/6. Alright, we know how to draw these shapes. But how do we draw a different shape everytime we tap on the screen? Just like this? 
+Triangle Square Hexagon 
+Triangle Square Hexagon 
+
+And how do we automate this process through our code such that if someone else wants to draw a different shape, they can still achieve this with our code with minor changes. Let's see how?  
+
+Part 2: That was fun. Now, what if we could summon some magic patterns when we tap on the screen using the same logic? This time, may be a 
+snowflake, a honeycomb, Kite (saw it out loud)
+snowflake, a honeycomb, Kite (just do actions)
+snowflake, a honeycomb, Kite (just do actions)
+Let's create some patterns with shapes part 1 (Start to 1.17s) Let's first try drawing a square by replacing the sprite. We will use the pen extension to draw our shapes. When the pen is down, we draw the shape (30 s)
+(1.17 to 6.14s) As we discussed, we could draw different shapes by changing the edge value. (30s)
+(6.08 to 6.58s) Instead of changing these values every single time, what if we could automate this process. First, I want to be able to draw any shape by re-using the logic that we just wrote. Writing functions are a great way to re-use our code. So let's write a function called drawShape. What if I want to draw a shape of any length? In this case, we can create a function with parameter or input called 'length' and define the function. (30s)
+
+(7.24s to 11.08s) But wait, we didn't mention when to draw a square or a triangle or hexagon when we tap on the screen. To do this, let's create another function called chooseShape which automates this process. This function defines that if it's the first tap, i.e if count variable =1, then we draw a triangle, 2 a square and 3 a hexagon. Since we will keep up incrementing the count value, a count of four will reset to 1 and set the edge as 3  (30s)
+
+
+(11.41s to 15.15s) Now when the green flag is clicked, we erase everything from the last run, we initialize the count to 1 and use a forever block to check for a full tap, i.e when the mouse or your finger touches the screen, the shape is drawn. We also call the choose shape function we defined before to choose the shape to draw and play a pop sound as we draw. Let's check if it works so far. We have a problem. 
+
+(15.16s to 16.50s) We need to make the pen go up after drawing every shape until the next tap. Let's fix this. That works! 
+
+(16.51s to end) But we still don't get different shapes. Let's see what we are missing. There we go, this is because we haven't changed the count variable by 1. Also let's set the pen color and try tapping our shapes.
+When green flag is clicked, we first choose the shape, pen down, wait for a full mouse click or a tap and go to the mouse pointer. The next step is to call the draw shape function and then we are done.
+We need these patterns to appear only when we tap on the screen. And how do we know which pattern should be drawn upon tapping on the screen. We want these patterns to appear exactly in the same order everytime. First the triangle, then the square and then on the third tap we want the hexagon. How could we achieve this? We can write a function which initially chooses which shape to draw. If it's the first time we are tapping on the stage, we draw a triangle, second time square and so on. And if the count reaches 4, we reset the count and start drawing a triangle again.
+Let's try and create some magic patterns with the same logic. First we create a function to choose the pattern based on the tap count.
+We then define functions to specify the characteristic of each magic pattern. For example, a value of (4,150, 30) for the (edge, angle, length). If it's the first time the screen is tapped or at the first instance of the mouse click, a snowflake should be summoned. We set the pen color to be white. Similarly we define other two functions honeycomb and kite.  
+Once we choose the shape to draw and define the characteristics of a pattern, we need to draw the pattern. So we define a draw pattern function which will draw the shape.  We create clones corresponding to number of edges and draw a pattern of specific length. And then we create clones for each clone turning at specific angles and drawing patterns, extending this for 5 levels. After every pattern is drawn, we delete the clones for that pattern to make sure we don't run out of clones in scratch. There we go, let's check this out! We got a beautiful pattern of snowflake, honeycomb and kite. And we could repeat this forever to create something that looks like a wallpaper.
+"
+24,L3.C3.v24,Code for the net-zero - Planting Trees,/uploads/submodules/L3.C3.v24.png,"That's nice. We simulated planting some trees. A great step ahead in creating awareness about global warming.  
+How about we also simulate how these trees help with reducing the climate change? Trees absorb carbon-di-oxide from the atmosphere to make their food and are later converted into wood and buried deep in the ground through the roots. These roots can later be converted into charcoal which is a stable form of carbon which doesn't easily release into the air. This is commonly known as natural sequestration.
+Other artificial way of achieving sequestration is by absorbing carbon from the atmosphere and storing it underground. Let's see how to code for carbon sequestration.
+
+Abida: We have so far coded for some of the things that we love doing and are passionate about. How about coding for something the world needs the most?
+AI.S.H.A: There are more pressing issues in today's world. One of the problems that I could think of over the last decade is Global warming - Melting glaciers, dying animals and plants, snow storms and extreme weather conditions. The global warming effect is caused by harmful gases mostly carbon which traps heat from the sun and stops it from leaving our earth's atmosphere. Do you think we could do anything about this Abida?
+Abida: You are right AI.S.H.A. We all can do our part in reducing the effects of climate change. Little things like turning off the lights when not in use, reducing food waste and planting more trees can help in removing the same amount of carbon-di-oxide which is being released into our atmosphere. This is known as achieving net-zero emissions. How about we code to create some awareness about the net zero and global warming?
+AISHA: Smoke and pollutants from industries and vehicles produce carbon (gases like carbon di-oxide and carbon monoxide which gets trapped in the earth's atmosphere. Our planet earth is literally on fire and couldn't bear with the heat anymore. Could we do a simulation to blow off this heat?
+
+To do this, once we create the sprites, we simple blow off the heat by blowing into our microphone. If the loudness level is above a certain level, the fire sprite should start shrinking and then disappear when it's size is less than 5. Once the fire sprites disappears, we have our earth happy and smiling.
+Could we do an illustration to visualize this? 
+We will first create all the sprites. The earth sprite which looks sad, the fire sprite, the building and the car and a sprite of tree which is half cut.
+when we click on earth, we could plant trees by simply tapping or clicking on the stage. Let's see how we could achieve this.
+"

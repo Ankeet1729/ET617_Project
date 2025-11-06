@@ -1,61 +1,66 @@
 {
   "submodule_code": "L2.C2.v14",
-  "submodule_name": "Sound and Events in Scratch",
+  "submodule_name": "Sequencing & Algorithms - The wild edibles app demo",
   "concepts": [
     {
-      "concept_name": "Algorithm Definition",
-      "concept_description": "An algorithm is a step-by-step set of instructions to solve a problem or achieve a specific outcome. The video demonstrates this by creating instructions to draw a square, highlighting the importance of clear, ordered steps.",
+      "concept_name": "Algorithm",
+      "concept_description": "An algorithm is a set of clear, step-by-step instructions designed to solve a specific problem or complete a task. The video uses the example of drawing a square to illustrate how algorithms break down complex actions into simple, executable steps.",
       "grade_level": "3-7"
     },
     {
-      "concept_name": "Decomposition",
-      "concept_description": "Decomposition is the process of breaking down a complex problem or task into smaller, more manageable sub-tasks. This makes the overall problem easier to understand and solve, as demonstrated by dividing the wild edibles app development into categories like fruits, leaves, roots, and seeds.",
-      "grade_level": "5-9"
+      "concept_name": "Sequencing",
+      "concept_description": "Sequencing refers to the specific order in which instructions or steps in an algorithm are performed. For an algorithm to achieve its intended outcome, each step must be executed in the correct, predetermined sequence.",
+      "grade_level": "2-6"
     },
     {
       "concept_name": "Abstraction",
-      "concept_description": "Abstraction involves focusing on the essential details of a problem while ignoring or hiding unnecessary complexity. In the context of the wild edibles app, Yahya used abstraction by focusing only on wild edibles in Kashmir, ignoring those in other regions of India.",
-      "grade_level": "6-10"
-    },
-    {
-      "concept_name": "Pattern Recognition",
-      "concept_description": "Pattern recognition is the ability to identify recurring similarities or structures in data or problems. Yahya used pattern recognition to categorize wild edibles into fruits, leaves, roots, and seeds to organize his digital library.",
-      "grade_level": "4-8"
-    },
-    {
-      "concept_name": "Sequencing",
-      "concept_description": "Sequencing involves arranging instructions or events in a specific order to achieve a desired outcome. The algorithm for drawing a square demonstrates sequencing, with each step (draw a line, turn 90 degrees) needing to be executed in the correct order.",
-      "grade_level": "3-6"
+      "concept_description": "Abstraction is a computational thinking skill that involves simplifying a complex problem by focusing on essential details and ignoring unnecessary information. This process helps in managing complexity and creating more generalized and understandable solutions.",
+      "grade_level": "5-9"
     },
     {
       "concept_name": "Computational Thinking",
-      "concept_description": "Computational thinking is a problem-solving approach that involves breaking down complex problems, recognizing patterns, abstracting essential details, and designing algorithms. The development of the wild edibles app is a practical example of applying computational thinking skills.",
-      "grade_level": "6-10"
-    },
-    {
-      "concept_name": "Generalization",
-      "concept_description": "Generalization is the process of creating a solution that can be applied to a broader range of similar problems. Yahya's wild edibles app design can be generalized to create similar apps for other localities.",
-      "grade_level": "7-11"
-    },
-    {
-      "concept_name": "Algorithm for App Design",
-      "concept_description": "The algorithm for the wild edibles app outlines the steps for creating the app, including designing a home screen, adding buttons for categories, and creating pages for each category with relevant information. This provides a structured approach to app development.",
-      "grade_level": "6-9"
-    },
-    {
-      "concept_name": "Using Scratch for Coding",
-      "concept_description": "Scratch is a visual programming language that can be used to create interactive stories, games, and animations. Yahya used Scratch to code his wild edibles app, demonstrating its suitability for developing educational and practical applications.",
+      "concept_description": "Computational Thinking is a problem-solving approach that utilizes concepts fundamental to computer science. It encompasses skills like decomposition, pattern recognition, abstraction, and algorithm design to tackle complex problems efficiently.",
       "grade_level": "4-8"
     },
     {
-      "concept_name": "Design Thinking & Computational Thinking",
-      "concept_description": "Design thinking focuses on understanding user needs and creating a precise solution, while computational thinking formulates that solution so it can be effectively implemented on a computer. The video highlights that the wild edibles app required the integration of design thinking and computational thinking principles.",
-      "grade_level": "7-12"
+      "concept_name": "Digital Application (App)",
+      "concept_description": "A digital application, or 'app,' is a software program designed to run on electronic devices like smartphones or computers to perform specific functions. The example in the video is an app created to identify and provide information about wild edibles.",
+      "grade_level": "3-7"
     },
     {
-      "concept_name": "Abstraction of Details",
-      "concept_description": "When creating an algorithm for drawing a square, details such as the size and color of the square can be abstracted out. This allows the algorithm to focus on the essential steps of drawing a square, regardless of these specific details.",
+      "concept_name": "Pattern Recognition",
+      "concept_description": "Pattern recognition is a computational thinking skill that involves identifying similarities, trends, or recurring characteristics within data, problems, or systems. Recognizing these patterns helps in understanding underlying structures and developing efficient solutions.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Decomposition",
+      "concept_description": "Decomposition is a computational thinking technique where a complex problem is broken down into smaller, more manageable sub-problems or tasks. This makes the overall problem easier to understand, analyze, and solve step-by-step.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Coding/Programming",
+      "concept_description": "Coding, or programming, is the process of writing instructions for a computer using a specific programming language. These instructions translate an algorithm into a format that a computer can understand and execute to perform a desired task.",
       "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Scratch Programming Environment",
+      "concept_description": "Scratch is a visual, block-based programming language and online community developed for beginners, particularly children, to learn coding concepts. Yahya utilized Scratch to build the digital wild edibles app demonstrated in the lesson.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "App Design Algorithm",
+      "concept_description": "An App Design Algorithm outlines the structured steps required to plan and develop a digital application. This includes defining user interface elements like screens and buttons, as well as navigation and core functionalities.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Generalization",
+      "concept_description": "Generalization is the process of developing a solution that is flexible enough to be adapted and applied to a broader range of similar problems or situations. Yahya's wild edibles app design is generalized so others can reuse it for their localities.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Design Thinking",
+      "concept_description": "Design Thinking is an iterative, human-centered approach to problem-solving that focuses on understanding user needs, challenging assumptions, and creating innovative solutions. It is presented as a complementary methodology to computational thinking for developing effective solutions.",
+      "grade_level": "6-10"
     }
   ]
 }

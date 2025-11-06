@@ -1,66 +1,66 @@
 {
   "submodule_code": "L2.C1.v11",
-  "submodule_name": "Scratch Interface and Blocks",
+  "submodule_name": "Let's solve problems Big or Small - Design thinking approach",
   "concepts": [
     {
-      "concept_name": "Empathize in Design Thinking",
-      "concept_description": "Empathizing involves understanding the problem from the perspective of the person experiencing it. This includes listening to their feelings and observing their body language and emotions to acknowledge their experiences and needs.",
+      "concept_name": "Problem Solving Fundamentals",
+      "concept_description": "Introduces the idea that everyone can solve problems, whether big or small, emphasizing that it's a continuous human activity. This concept lays the groundwork for approaching challenges systematically.",
+      "grade_level": "1-5"
+    },
+    {
+      "concept_name": "Design Thinking Approach",
+      "concept_description": "Explains a structured, five-step methodology for problem-solving: Empathize, Sketch Q&A, Story Frames, Create, and Review & Recreate. It provides a roadmap for tackling problems effectively and creatively.",
+      "grade_level": "4-9"
+    },
+    {
+      "concept_name": "Empathy in Problem Solving",
+      "concept_description": "Highlights the crucial first step of understanding a problem from the perspective of those experiencing it. This involves listening, observing body language, facial expressions, and emotions to gain insight into their feelings and needs.",
       "grade_level": "3-8"
     },
     {
-      "concept_name": "Sketch Q&A in Design Thinking",
-      "concept_description": "Sketch Q&A involves researching the problem and sketching out questions and answers in the form of illustrations, drawings, and text. This step helps to understand the impact and context of the problem.",
+      "concept_name": "Information Gathering & Research",
+      "concept_description": "Teaches how to collect relevant data and facts about a problem after empathizing. This includes leveraging statistics, personal observations, notes, and digital search tools like Google to deepen understanding.",
       "grade_level": "4-9"
     },
     {
-      "concept_name": "Story Frames in Design Thinking",
-      "concept_description": "Story frames are different possible solutions or approaches to tackling the problem. This step involves writing out multiple story frames and selecting the one that can effectively solve the problem.",
-      "grade_level": "5-10"
-    },
-    {
-      "concept_name": "Creating a Model in Design Thinking",
-      "concept_description": "Creating a model involves choosing one of the story frames and building a prototype or model of the solution. This could involve using digital tools like Google Slides or physical materials to represent the proposed solution.",
-      "grade_level": "5-10"
-    },
-    {
-      "concept_name": "Review and Re-create in Design Thinking",
-      "concept_description": "Reviewing and recreating involves getting feedback on the model from the community or users and implementing changes as necessary. This iterative process helps refine the solution and address any caveats or specific needs.",
-      "grade_level": "6-11"
-    },
-    {
-      "concept_name": "Problem Solving with Design Thinking",
-      "concept_description": "Design Thinking is an approach to problem-solving that involves a series of steps, including empathizing with the user, defining the problem, brainstorming solutions, creating prototypes, and testing/iterating. This helps in developing user-centered solutions.",
-      "grade_level": "5-12"
-    },
-    {
-      "concept_name": "Importance of Addressing Malnutrition",
-      "concept_description": "Malnutrition has significant impact on child health and development leading to stunted growth, wasting, and intellectual impairments. Addressing malnutrition is crucial for children to reach their potential and lead fulfilling lives.",
-      "grade_level": "6-10"
-    },
-    {
-      "concept_name": "Impact of COVID-19 on Food Systems",
-      "concept_description": "The COVID-19 pandemic led to disruption of food systems, diversion of health workers, and school closures, which aggravated child malnutrition. These disruptions impacted access to food and healthcare for vulnerable populations.",
-      "grade_level": "7-12"
-    },
-    {
-      "concept_name": "Information Gathering Techniques",
-      "concept_description": "Information can be gathered through various techniques like observation, interviews, and using online tools like Google Search. Combining different techniques provides a comprehensive understanding of the problem.",
-      "grade_level": "5-9"
-    },
-    {
-      "concept_name": "Iterative Design Process",
-      "concept_description": "The design thinking process is iterative, meaning that it involves repeated cycles of prototyping, testing, and refining based on feedback. This ensures that the solution is continuously improved and better addresses the identified problem.",
-      "grade_level": "6-10"
-    },
-    {
-      "concept_name": "Community Involvement in Problem Solving",
-      "concept_description": "Involving the community in the problem-solving process through interviews and feedback is crucial for creating effective and sustainable solutions. Understanding the needs and perspectives of the affected individuals leads to better outcomes.",
+      "concept_name": "Defining the Problem (Sketch Q&A)",
+      "concept_description": "Focuses on formulating key questions and sketching answers about the problem, such as 'Why is it important?', 'What impact would solving it have?', and 'When/how was it created?'. This step helps to clearly articulate the problem's scope and significance.",
       "grade_level": "4-9"
     },
     {
-      "concept_name": "Prototype Creation",
-      "concept_description": "Creating a prototype allows for testing a potential solution in a tangible way. This might involve using simple materials like cardboard, or digital tools like presentation software, to visualize and experiment with the proposed idea.",
+      "concept_name": "Brainstorming Solutions (Story Frames)",
+      "concept_description": "Encourages generating multiple, diverse potential solutions or 'story frames' to address the defined problem. This phase emphasizes creative thinking and exploring various angles before committing to a single approach.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Prototyping and Model Creation",
+      "concept_description": "Explains the process of selecting one story frame and creating an initial 'model' or prototype of the chosen solution. This hands-on step allows for a tangible representation of the idea, whether physical or digital.",
+      "grade_level": "4-9"
+    },
+    {
+      "concept_name": "Digital Tools for Prototyping",
+      "concept_description": "Introduces the use of digital applications, such as Google Slides, to create models or presentations of solutions. This demonstrates how technology can be used to build and visualize prototypes effectively.",
       "grade_level": "5-10"
+    },
+    {
+      "concept_name": "Iterative Design (Review & Recreate)",
+      "concept_description": "Emphasizes the importance of reviewing the created model, gathering feedback from the community, and making necessary changes. This iterative process allows for continuous improvement and refinement of the solution.",
+      "grade_level": "4-9"
+    },
+    {
+      "concept_name": "User-Centered Feedback Integration",
+      "concept_description": "Highlights the critical role of obtaining reviews and feedback from the people who will be most affected by the solution. This ensures that the final solution truly meets their needs and is practical for them.",
+      "grade_level": "4-9"
+    },
+    {
+      "concept_name": "Considering Constraints and Caveats",
+      "concept_description": "Explains the need to consider specific conditions or limitations, such as medical caveats, when designing and implementing solutions. This ensures the solution is safe, appropriate, and effective for all users.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Collaborative Problem Solving",
+      "concept_description": "Illustrates how working with others, such as friends and community members, can lead to more comprehensive solutions. The example of Rani working with her sister and friends demonstrates the benefits of teamwork.",
+      "grade_level": "3-7"
     }
   ]
 }

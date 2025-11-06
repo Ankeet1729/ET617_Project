@@ -1,0 +1,71 @@
+{
+  "submodule_code": "L1.C2.v8",
+  "submodule_name": "Multi-factor Authentication",
+  "concepts": [
+    {
+      "concept_name": "Digital Wellbeing",
+      "concept_description": "Digital wellbeing refers to the overall impact of technology use on an individual's mental, physical, and social health. It encourages users to maintain a healthy balance with their digital devices and online activities.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Screen Time Management",
+      "concept_description": "Screen time management involves setting limits and creating strategies for how long and when individuals use digital devices. This practice helps prevent excessive use, promotes productivity, and encourages engagement in offline activities.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Technology Addiction/Compulsive Use",
+      "concept_description": "Technology addiction or compulsive use describes a behavioral pattern where individuals feel controlled by technology, using it excessively to the detriment of other aspects of their lives, such as health, relationships, or academic performance.",
+      "grade_level": "5-10"
+    },
+    {
+      "concept_name": "Digital Breaks",
+      "concept_description": "Digital breaks are intentional periods of time away from screens and digital devices. These breaks often involve physical activities like stretching, breathing exercises, or outdoor walks, aimed at reducing eye strain and improving focus and overall wellbeing.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Responsible Digital Citizenship",
+      "concept_description": "Responsible digital citizenship involves understanding and practicing safe, ethical, and legal behaviors when interacting with technology and the internet. It includes respecting others, protecting personal information, and being mindful of one's digital footprint.",
+      "grade_level": "5-10"
+    },
+    {
+      "concept_name": "Cybercrime Awareness",
+      "concept_description": "Cybercrime awareness is the understanding of various criminal activities conducted using computers and the internet. This includes recognizing common threats like online scams, data theft, and other malicious acts.",
+      "grade_level": "5-10"
+    },
+    {
+      "concept_name": "Phishing/Spam Identification",
+      "concept_description": "Phishing and spam identification involves recognizing fraudulent attempts, typically via email, to trick users into revealing sensitive information or clicking malicious links. Learning to identify suspicious messages is crucial for online security.",
+      "grade_level": "6-11"
+    },
+    {
+      "concept_name": "Cyberstalking",
+      "concept_description": "Cyberstalking refers to the use of the internet or other electronic means to harass, intimidate, or threaten an individual. It often involves repeated, unwanted contact or monitoring that causes fear or distress.",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "Sexting and Legal Implications",
+      "concept_description": "Sexting is the act of sending or receiving sexually explicit messages or images via digital devices. It carries significant legal implications, especially for minors, as it can be considered a legal offense and sexual harassment.",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "Multi-factor Authentication (MFA)",
+      "concept_description": "Multi-factor Authentication (MFA) is a security system that requires more than one method of verification to grant access to an account or system. It typically combines something the user knows (password) with something they have (phone/token) or something they are (fingerprint).",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "Age-Appropriate Media Consumption",
+      "concept_description": "Age-appropriate media consumption involves selecting and engaging with digital content, such as TV shows, games, and online videos, that is suitable for one's developmental stage and maturity level. This promotes healthy exposure to information and entertainment.",
+      "grade_level": "1-8"
+    },
+    {
+      "concept_name": "Online Harassment and Inappropriate Requests",
+      "concept_description": "Online harassment involves persistent and unwanted digital interactions that can cause distress or harm, while inappropriate requests refer to solicitations for personal information or content that is uncomfortable or sexual in nature. Recognizing and reporting such interactions is vital for online safety.",
+      "grade_level": "6-12"
+    },
+    {
+      "concept_name": "Spreading Digital Literacy and Awareness",
+      "concept_description": "Spreading digital literacy and awareness means sharing knowledge and best practices about responsible technology use, online safety, and digital wellbeing with peers, family, and the wider community. It empowers others to become informed and safe digital citizens.",
+      "grade_level": "5-10"
+    }
+  ]
+}

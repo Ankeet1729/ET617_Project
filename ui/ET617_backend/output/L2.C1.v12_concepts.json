@@ -1,0 +1,66 @@
+{
+  "submodule_code": "L2.C1.v12",
+  "submodule_name": "A sneak peak into the wild edibles digital library",
+  "concepts": [
+    {
+      "concept_name": "Problem Definition and Identification",
+      "concept_description": "This involves clearly recognizing and articulating a specific problem, such as malnutrition or overflowing waste, as the foundational step before attempting to design a solution. A well-defined problem guides the entire problem-solving process.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Data Collection Methods",
+      "concept_description": "The process of gathering relevant information from various sources to understand a problem comprehensively. Examples include conducting interviews with community members, family, and experts, or researching academic papers and existing documentation.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Design Thinking Methodology",
+      "concept_description": "A human-centered approach to problem-solving that emphasizes understanding user needs (empathize), defining the problem, generating ideas (ideate), building prototypes, and testing solutions. Yahya's creation of a digital library exemplifies this iterative process.",
+      "grade_level": "5-10"
+    },
+    {
+      "concept_name": "Model Creation and Prototyping",
+      "concept_description": "The act of building a simplified representation or an initial version of a solution to test concepts, gather feedback, and identify potential issues early on. This can range from a digital library model to a physical paper boat or a redesigned dustbin.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Iterative Design Process",
+      "concept_description": "This describes the cyclical process of refining a solution by repeatedly reviewing an existing model or prototype, identifying weaknesses or 'caveats', and making successive improvements to create a better version. It emphasizes continuous learning and improvement.",
+      "grade_level": "4-9"
+    },
+    {
+      "concept_name": "Sequential Instructions (Algorithms)",
+      "concept_description": "A set of ordered steps or commands that must be followed in a precise sequence to achieve a specific outcome. The origami instructions for folding a paper boat provide a clear visual example of an algorithm in action.",
+      "grade_level": "2-6"
+    },
+    {
+      "concept_name": "Geometric Composition",
+      "concept_description": "The skill of combining basic geometric shapes like triangles, rectangles, and pentagons to construct more complex figures or objects. This demonstrates spatial reasoning and the ability to build new structures from fundamental components.",
+      "grade_level": "1-5"
+    },
+    {
+      "concept_name": "Comparative Analysis in Design",
+      "concept_description": "The process of evaluating and contrasting different design options or prototypes based on specific criteria to determine the most effective solution. An example is comparing cylindrical and rectangular dustbin designs to reduce spills.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Importance of Referencing Data Sources",
+      "concept_description": "Acknowledging and citing the sources from which information, data, or images are obtained. This practice ensures academic integrity, validates the information presented, and allows others to verify or further explore the facts.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Empathy in Problem Solving",
+      "concept_description": "Understanding and considering the perspectives, needs, and feelings of the individuals or communities affected by a problem. This human-centered approach is crucial for designing solutions that are truly relevant and impactful for users.",
+      "grade_level": "3-8"
+    },
+    {
+      "concept_name": "Ideation and Story Framing",
+      "concept_description": "The creative process of generating diverse ideas and imagining different 'story frames' or scenarios to explore various potential solutions for a defined problem. This involves brainstorming, sketching questions, and envisioning outcomes.",
+      "grade_level": "4-9"
+    },
+    {
+      "concept_name": "Application of Problem-Solving Skills",
+      "concept_description": "Utilizing logical thinking and structured approaches to address a wide range of real-world challenges. This includes diverse scenarios from engineering a non-sinking boat to designing an efficient waste management system.",
+      "grade_level": "3-7"
+    }
+  ]
+}

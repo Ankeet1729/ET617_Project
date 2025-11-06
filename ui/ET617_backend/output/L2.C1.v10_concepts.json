@@ -1,0 +1,71 @@
+{
+  "submodule_code": "L2.C1.v10",
+  "submodule_name": "Little acts of kindness makes a huge difference",
+  "concepts": [
+    {
+      "concept_name": "Problem Identification (Food Waste)",
+      "concept_description": "Recognizing food waste as a significant problem, initially perceived on a personal level (loss of energy) but later understood to have broader implications. This involves identifying the core issue that needs to be addressed.",
+      "grade_level": "4-7"
+    },
+    {
+      "concept_name": "Societal Impact Analysis (Malnutrition)",
+      "concept_description": "Understanding how individual actions, such as wasting food, contribute to widespread societal issues like malnutrition and starvation, affecting a large population globally and locally (e.g., 33 lakh children in India).",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Data Interpretation for Social Issues",
+      "concept_description": "Learning to interpret quantitative data, such as statistics on malnourished children, to grasp the scale and urgency of a social problem. This concept emphasizes using factual information to understand a situation.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Influence of Global Events on Social Problems",
+      "concept_description": "Analyzing how major global events, like the COVID-19 pandemic, can exacerbate existing societal challenges such as food insecurity and malnutrition, worsening conditions for vulnerable populations.",
+      "grade_level": "7-10"
+    },
+    {
+      "concept_name": "Resource Management and Energy Footprint",
+      "concept_description": "Understanding that food production requires significant energy for growing, processing, and shipping. Wasting food therefore also wastes these embedded energy resources, highlighting inefficient resource allocation.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Causal Relationship (Food Waste to Climate Change)",
+      "concept_description": "Identifying the indirect but significant causal link where the energy wasted in food production and distribution contributes to climate change. This demonstrates a chain of cause-and-effect that can be modeled.",
+      "grade_level": "7-10"
+    },
+    {
+      "concept_name": "Environmental Impact of Consumption Choices",
+      "concept_description": "Recognizing that conscious daily choices, such as preferring seasonal fruits and vegetables, can lead to reduced environmental impact by minimizing the energy and resources required for out-of-season produce.",
+      "grade_level": "5-8"
+    },
+    {
+      "concept_name": "Risks and Consequences of Climate Change",
+      "concept_description": "Learning about the severe and tangible risks posed by climate change, including an increased frequency of extreme weather events like storms, flooding, and landslides, affecting human safety and stability.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "System Thinking (Interconnectedness of Actions)",
+      "concept_description": "Grasping that individual actions, like wasting food, are not isolated but are part of a complex system, impacting personal well-being, society, and the environment in interconnected ways. This encourages a holistic view of problems.",
+      "grade_level": "7-11"
+    },
+    {
+      "concept_name": "Ethical Decision-Making & Personal Responsibility",
+      "concept_description": "Developing an awareness of the broader ethical implications of one's actions, leading to a desire to act responsibly and contribute positively to societal and environmental well-being, exemplified by Yahya's shift in perspective.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Information Processing & Perspective Shift",
+      "concept_description": "Observing how receiving new information and understanding its context can lead to a significant change in perspective, moving from ignorance or indifference to anxiety and a desire to take action, similar to an 'alert' state.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Problem Decomposition for Understanding Impact",
+      "concept_description": "The mother's explanation implicitly decomposes the overarching problem of 'food waste' into distinct sub-problems: personal health, societal hunger, and environmental degradation, making the complex issue more understandable.",
+      "grade_level": "6-9"
+    },
+    {
+      "concept_name": "Developing Empathy and Prosocial Behavior",
+      "concept_description": "The lesson fosters empathy by highlighting the suffering of others due to food scarcity, motivating a desire to help and engage in prosocial behaviors to address the needs of the community and the world.",
+      "grade_level": "3-8"
+    }
+  ]
+}

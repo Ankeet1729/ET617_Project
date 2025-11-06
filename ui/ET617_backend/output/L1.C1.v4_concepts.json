@@ -1,0 +1,61 @@
+{
+  "submodule_code": "L1.C1.v4",
+  "submodule_name": "Do computers think, feel and learn like humans? A sneak peak into Machine Learning",
+  "concepts": [
+    {
+      "concept_name": "Human vs. Computer Capabilities",
+      "concept_description": "Computers excel at processing and remembering vast amounts of information and performing repetitive tasks quickly. Humans possess emotional intelligence, creativity, and the ability to identify complex patterns intuitively, highlighting their complementary strengths.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Artificial Intelligence (AI) Introduction",
+      "concept_description": "Artificial Intelligence (AI) refers to the capability of machines to simulate human-like intelligence, such as learning, problem-solving, and decision-making. The character AI.S.H.A is introduced as an example of an AI designed to learn and teach.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Real-world Applications of AI/Robotics",
+      "concept_description": "AI and robotics can address significant real-world challenges, such as automating apple harvesting to overcome adverse weather conditions, pandemics, or labor shortages. This demonstrates how technology can improve efficiency and resilience in industries like agriculture.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Computer Pattern Recognition",
+      "concept_description": "Computers learn to identify objects by observing and analyzing various images to recognize common characteristics and patterns. By detecting similarities and differences (e.g., color, shape, size), machines can distinguish between different objects.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Machine Training Process (Classification)",
+      "concept_description": "Training a machine involves showing it many examples and explicitly classifying or 'tagging' each example. For instance, images are labeled as 'apple' or 'not apple' so the computer learns to associate specific features with a category.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Training Data",
+      "concept_description": "Training data is the collection of information (like images with labels) fed to a machine to help it learn. The quality and quantity of this data are crucial for the machine to develop accurate and reliable decision-making abilities.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Iterative Learning in Machines",
+      "concept_description": "Machines, similar to humans, learn through an iterative process of trial and error. They make initial guesses, learn from their mistakes by processing more data, and continuously refine their understanding until they can perform tasks accurately.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Importance of Data Quantity and Accuracy",
+      "concept_description": "Effective machine training requires both a large volume of data and high accuracy in that data. The more diverse and precise the training data, the better the machine can generalize and correctly identify new, unseen examples.",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Human Bias in Machine Learning",
+      "concept_description": "Human bias can unintentionally be embedded into the training data used for machine learning models. This occurs when the data reflects existing prejudices, preferences, or imbalances from the human creators or the real world it represents.",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "Impact of Biased Training Data",
+      "concept_description": "If a machine is trained with biased data, its decisions and outcomes will reflect those biases, potentially leading to unfair or discriminatory results. For example, a system trained on one group's preferences might dissatisfy others.",
+      "grade_level": "7-12"
+    },
+    {
+      "concept_name": "Ethical Implications of AI Bias",
+      "concept_description": "The presence of bias in AI systems carries significant ethical risks, especially in critical applications like education or justice. Biased AI can lead to unjust outcomes, denying opportunities or unfairly penalizing individuals based on flawed learned patterns.",
+      "grade_level": "8-12"
+    }
+  ]
+}

@@ -1,0 +1,627 @@
+.
+├── bloom_taxonomy.jpg
+├── directory_structure_root.txt
+├── downloadVideos.py
+├── genQuiz.py
+├── genTranscript.py
+├── images
+│   └── placeholder.png
+├── index.html
+├── mydatabase.dump
+├── output.txt
+├── package.json
+├── package-lock.json
+├── README.md
+├── script.js
+├── server.log
+├── style.css
+├── submodules.csv
+├── supermodules.csv
+├── supermodule_submodules.csv
+├── transcript_official
+│   ├── Code_for_net_zero__concepts_annotatedByEla.concepts
+│   ├── extended_context_extraction
+│   │   ├── combine_images.py
+│   │   ├── extended_context.xlsx
+│   │   ├── extracted_content
+│   │   │   ├── Gantt chart
+│   │   │   ├── L3.C1
+│   │   │   │   ├── L3.C1-B10.png
+│   │   │   │   ├── L3.C1-B13.png
+│   │   │   │   ├── L3.C1-B15.png
+│   │   │   │   ├── L3.C1-B17.png
+│   │   │   │   ├── L3.C1-B19.png
+│   │   │   │   ├── L3.C1-B21.png
+│   │   │   │   ├── L3.C1-B23.png
+│   │   │   │   ├── L3.C1-B27.png
+│   │   │   │   ├── L3.C1-B29.png
+│   │   │   │   ├── L3.C1-B31.png
+│   │   │   │   ├── L3.C1-B33.png
+│   │   │   │   ├── L3.C1-B35.png
+│   │   │   │   ├── L3.C1-B36.png
+│   │   │   │   ├── L3.C1-B38.png
+│   │   │   │   ├── L3.C1-B39.png
+│   │   │   │   ├── L3.C1-B44.png
+│   │   │   │   ├── L3.C1-B48.png
+│   │   │   │   ├── L3.C1-B4.png
+│   │   │   │   ├── L3.C1-B55.png
+│   │   │   │   ├── L3.C1-B56.png
+│   │   │   │   ├── L3.C1-B57.png
+│   │   │   │   ├── L3.C1-B58.png
+│   │   │   │   ├── L3.C1-B59.png
+│   │   │   │   ├── L3.C1-B60.png
+│   │   │   │   ├── L3.C1-B62.png
+│   │   │   │   ├── L3.C1-B64.png
+│   │   │   │   ├── L3.C1-B65.png
+│   │   │   │   ├── L3.C1-B67.png
+│   │   │   │   ├── L3.C1-B68.png
+│   │   │   │   ├── L3.C1-B6.png
+│   │   │   │   ├── L3.C1-B70.png
+│   │   │   │   ├── L3.C1-B71.png
+│   │   │   │   ├── L3.C1-B74.png
+│   │   │   │   ├── L3.C1-B80.png
+│   │   │   │   ├── L3.C1-B82.png
+│   │   │   │   ├── L3.C1-B83.png
+│   │   │   │   └── mega_image_L3.C1.png
+│   │   │   ├── L3.C2
+│   │   │   │   ├── L3.C2-B10.png
+│   │   │   │   ├── L3.C2-B12.png
+│   │   │   │   ├── L3.C2-B13.png
+│   │   │   │   ├── L3.C2-B15.png
+│   │   │   │   ├── L3.C2-B17.png
+│   │   │   │   ├── L3.C2-B19.png
+│   │   │   │   ├── L3.C2-B21.png
+│   │   │   │   ├── L3.C2-B23.png
+│   │   │   │   ├── L3.C2-B24.png
+│   │   │   │   ├── L3.C2-B26.png
+│   │   │   │   ├── L3.C2-B29.png
+│   │   │   │   ├── L3.C2-B31.png
+│   │   │   │   ├── L3.C2-B32.png
+│   │   │   │   ├── L3.C2-B34.png
+│   │   │   │   ├── L3.C2-B35.png
+│   │   │   │   ├── L3.C2-B36.png
+│   │   │   │   ├── L3.C2-B39.png
+│   │   │   │   ├── L3.C2-B40.png
+│   │   │   │   ├── L3.C2-B41.png
+│   │   │   │   ├── L3.C2-B42.png
+│   │   │   │   ├── L3.C2-B44.png
+│   │   │   │   ├── L3.C2-B46.png
+│   │   │   │   ├── L3.C2-B48.png
+│   │   │   │   ├── L3.C2-B4.png
+│   │   │   │   ├── L3.C2-B50.png
+│   │   │   │   ├── L3.C2-B52.png
+│   │   │   │   ├── L3.C2-B54.png
+│   │   │   │   ├── L3.C2-B56.png
+│   │   │   │   ├── L3.C2-B58.png
+│   │   │   │   ├── L3.C2-B59.png
+│   │   │   │   └── mega_image_L3.C2.png
+│   │   │   ├── L3.C3
+│   │   │   │   ├── L3.C3-B10.png
+│   │   │   │   ├── L3.C3-B11.png
+│   │   │   │   ├── L3.C3-B12.png
+│   │   │   │   ├── L3.C3-B14.png
+│   │   │   │   ├── L3.C3-B15.png
+│   │   │   │   ├── L3.C3-B16.png
+│   │   │   │   ├── L3.C3-B17.png
+│   │   │   │   ├── L3.C3-B18.png
+│   │   │   │   ├── L3.C3-B19.png
+│   │   │   │   ├── L3.C3-B20.png
+│   │   │   │   ├── L3.C3-B21.png
+│   │   │   │   ├── L3.C3-B6.png
+│   │   │   │   ├── L3.C3-B7.png
+│   │   │   │   ├── L3.C3-B8.png
+│   │   │   │   └── mega_image_L3.C3.png
+│   │   │   ├── OverAll
+│   │   │   ├── Script DT and Problem Solving
+│   │   │   ├── Sheet8
+│   │   │   ├── Test sprint script1
+│   │   │   └── Timelines
+│   │   ├── extracted_content_by_video
+│   │   │   ├── Gantt chart
+│   │   │   │   ├── C1 - V1
+│   │   │   │   ├── C1 - V2 (MV)
+│   │   │   │   ├── C1 - V2 (SB & MVO)
+│   │   │   │   ├── C1 - V2 (VE & Anime)
+│   │   │   │   ├── C1 - V3 (I)
+│   │   │   │   ├── C1 - V3 (MV)
+│   │   │   │   ├── C1 - V3 (SB & MVO)
+│   │   │   │   ├── C1 - V3 (VE & Anime)
+│   │   │   │   ├── C1 - V4 (I)
+│   │   │   │   ├── C1 - V4 (MV)
+│   │   │   │   ├── C1 - V4 (SB & MVO)
+│   │   │   │   ├── C1 - V4 (VE & Anime)
+│   │   │   │   ├── C1 - V5 (I)
+│   │   │   │   ├── C1 - V5 (MV) + role models
+│   │   │   │   ├── C1 - V5 (SB & MVO)
+│   │   │   │   ├── C2 - V10 (MV+VO)
+│   │   │   │   ├── C2 - V10 (SB & MVO)
+│   │   │   │   ├── C2 - V11 (I)
+│   │   │   │   ├── C2 - V11 (MV+VO)
+│   │   │   │   ├── C2- V2 (VE & Anime)
+│   │   │   │   ├── C2- V3 (VE & Anime)
+│   │   │   │   ├── C2- V4 (VE & Anime)
+│   │   │   │   ├── C2 - V6 (I)
+│   │   │   │   ├── C2 - V6 (SB & MVO)
+│   │   │   │   ├── C2- V6 (VE & Anime)
+│   │   │   │   ├── C2 - V7 (I)
+│   │   │   │   ├── C2 - V7 (MV+VO)
+│   │   │   │   ├── C2 - V8 (MV+VO)
+│   │   │   │   ├── C2 - V8 (SB & MVO)
+│   │   │   │   ├── C2 - V8 (SR)
+│   │   │   │   ├── C2 - V 9(I)
+│   │   │   │   ├── C2 - V9 (MV+VO)
+│   │   │   │   ├── C2 - V9 (SB & MVO)
+│   │   │   │   ├── Level 1 C2
+│   │   │   │   ├── Level 2 C2
+│   │   │   │   ├── Level 2 C3
+│   │   │   │   ├── Level 3
+│   │   │   │   ├── Story Boarding, Master Voice Over, Illustration References
+│   │   │   │   ├── Video 12 & 13 (SB & MVO)
+│   │   │   │   ├── Video 15 (SB & MVO)
+│   │   │   │   ├── Video 16 (SB & MVO)
+│   │   │   │   ├── Video 1 (I)
+│   │   │   │   ├── Video 1 (VE & Anime)
+│   │   │   │   ├── Video 2 (I)
+│   │   │   │   └── Video 2 (VE & Anime)
+│   │   │   ├── L3.C1
+│   │   │   │   ├── Code Remix - Let's dance in the snow and clone some snowflakes
+│   │   │   │   │   ├── mega_image_Code Remix - Let's dance in the snow and clone some snowflakes.png
+│   │   │   │   │   ├── p1.png
+│   │   │   │   │   ├── p2.png
+│   │   │   │   │   ├── p3.png
+│   │   │   │   │   └── p4.png
+│   │   │   │   ├── Video 17 Infinite loops of anger and kindness
+│   │   │   │   │   ├── mega_image_Video 17 Infinite loops of anger and kindness.png
+│   │   │   │   │   ├── p1.png
+│   │   │   │   │   ├── p2.png
+│   │   │   │   │   └── p3.png
+│   │   │   │   ├── Video 18 Emotions are Variables
+│   │   │   │   │   ├── mega_image_Video 18 Emotions are Variables.png
+│   │   │   │   │   ├── p1.png
+│   │   │   │   │   ├── p2.png
+│   │   │   │   │   ├── p3.png
+│   │   │   │   │   ├── p4.png
+│   │   │   │   │   ├── p5.png
+│   │   │   │   │   └── p6.png
+│   │   │   │   ├── Video 19 Catch your thoughts with conditions
+│   │   │   │   │   ├── mega_image_Video 19 Catch your thoughts with conditions.png
+│   │   │   │   │   ├── p1.png
+│   │   │   │   │   ├── p2.png
+│   │   │   │   │   ├── p3.png
+│   │   │   │   │   ├── p4.png
+│   │   │   │   │   ├── p5.png
+│   │   │   │   │   ├── p6.png
+│   │   │   │   │   ├── p7.png
+│   │   │   │   │   ├── p8.png
+│   │   │   │   │   └── p9.png
+│   │   │   │   ├── Video 20 Binary thoughts and boolean logic
+│   │   │   │   │   ├── mega_image_Video 20 Binary thoughts and boolean logic.png
+│   │   │   │   │   └── p1.png
+│   │   │   │   └── When the machine learns thought-catching
+│   │   │   │       ├── mega_image_When the machine learns thought-catching.png
+│   │   │   │       ├── p10.png
+│   │   │   │       ├── p11.png
+│   │   │   │       ├── p12.png
+│   │   │   │       ├── p13.png
+│   │   │   │       ├── p1.png
+│   │   │   │       ├── p2.png
+│   │   │   │       ├── p3.png
+│   │   │   │       ├── p4.png
+│   │   │   │       ├── p5.png
+│   │   │   │       ├── p6.png
+│   │   │   │       ├── p7.png
+│   │   │   │       ├── p8.png
+│   │   │   │       └── p9.png
+│   │   │   ├── L3.C2
+│   │   │   │   ├── Code Remix - Let's dance in the snow and clone some snowflakes
+│   │   │   │   │   ├── mega_image_Code Remix - Let's dance in the snow and clone some snowflakes.png
+│   │   │   │   │   ├── p1.png
+│   │   │   │   │   ├── p2.png
+│   │   │   │   │   ├── p3.png
+│   │   │   │   │   └── p4.png
+│   │   │   │   ├── Video 21 Let's karaoke
+│   │   │   │   │   ├── mega_image_Video 21 Let's karaoke.png
+│   │   │   │   │   ├── p10.png
+│   │   │   │   │   ├── p11.png
+│   │   │   │   │   ├── p12.png
+│   │   │   │   │   ├── p13.png
+│   │   │   │   │   ├── p1.png
+│   │   │   │   │   ├── p2.png
+│   │   │   │   │   ├── p3.png
+│   │   │   │   │   ├── p4.png
+│   │   │   │   │   ├── p5.png
+│   │   │   │   │   ├── p6.png
+│   │   │   │   │   ├── p7.png
+│   │   │   │   │   ├── p8.png
+│   │   │   │   │   └── p9.png
+│   │   │   │   ├── Video 22 Funny face costumes
+│   │   │   │   │   ├── mega_image_Video 22 Funny face costumes.png
+│   │   │   │   │   ├── p1.png
+│   │   │   │   │   ├── p2.png
+│   │   │   │   │   ├── p3.png
+│   │   │   │   │   ├── p4.png
+│   │   │   │   │   ├── p5.png
+│   │   │   │   │   └── p6.png
+│   │   │   │   └── Video 23 \012Part 1 Let's create some patterns\012\012Part 2 Let's summon some magic patterns
+│   │   │   │       ├── mega_image_Video 23 \012Part 1 Let's create some patterns\012\012Part 2 Let's summon some magic patterns.png
+│   │   │   │       ├── p1.png
+│   │   │   │       ├── p2.png
+│   │   │   │       ├── p3.png
+│   │   │   │       ├── p4.png
+│   │   │   │       ├── p5.png
+│   │   │   │       ├── p6.png
+│   │   │   │       └── p7.png
+│   │   │   ├── L3.C3
+│   │   │   │   └── Video 24 Code for net zero blow the heat off planet earth & plant more trees
+│   │   │   │       ├── mega_image_Video 24 Code for net zero blow the heat off planet earth & plant more trees.png
+│   │   │   │       ├── p10.png
+│   │   │   │       ├── p11.png
+│   │   │   │       ├── p12.png
+│   │   │   │       ├── p13.png
+│   │   │   │       ├── p14.png
+│   │   │   │       ├── p1.png
+│   │   │   │       ├── p2.png
+│   │   │   │       ├── p3.png
+│   │   │   │       ├── p4.png
+│   │   │   │       ├── p5.png
+│   │   │   │       ├── p6.png
+│   │   │   │       ├── p7.png
+│   │   │   │       ├── p8.png
+│   │   │   │       └── p9.png
+│   │   │   ├── Script DT and Problem Solving
+│   │   │   │   └── Default_Video
+│   │   │   ├── Sheet8
+│   │   │   │   └── Default_Video
+│   │   │   └── Test sprint script1
+│   │   │       ├── Code.Org
+│   │   │       └── Default_Video
+│   │   ├── extract_images.py
+│   │   ├── requirements.txt
+│   │   └── summary.txt
+│   ├── extended_context.xlsx
+│   ├── extraction
+│   │   ├── extended_context.html
+│   │   ├── extended_context_html_186d0d4209d8a6b.png
+│   │   ├── extended_context_html_1a2c5b440ce952f5.png
+│   │   ├── extended_context_html_1cdfe12d25a5aade.png
+│   │   ├── extended_context_html_1df33a0b20703d48.png
+│   │   ├── extended_context_html_1eea4f167c0c7579.png
+│   │   ├── extended_context_html_21a9f6ecc71a1b5b.png
+│   │   ├── extended_context_html_2881fbe2bb1fe715.png
+│   │   ├── extended_context_html_2f5d0ad29ad22b52.png
+│   │   ├── extended_context_html_302ba70a9023d495.png
+│   │   ├── extended_context_html_3085fcfc83e04fe9.png
+│   │   ├── extended_context_html_35f90f8e1d5c6c69.png
+│   │   ├── extended_context_html_3895ed7b5a22186c.png
+│   │   ├── extended_context_html_39813f6dbe5cb4d6.png
+│   │   ├── extended_context_html_3dca989785a661fa.png
+│   │   ├── extended_context_html_40a110b92b74f662.png
+│   │   ├── extended_context_html_40c5f8baeee9d0b7.png
+│   │   ├── extended_context_html_4b90b85889160959.png
+│   │   ├── extended_context_html_4e6a89ee3063bdcd.png
+│   │   ├── extended_context_html_4e8a9e950b983e5e.png
+│   │   ├── extended_context_html_503bde865a369ab5.png
+│   │   ├── extended_context_html_5423504e68e49bd9.png
+│   │   ├── extended_context_html_56ca5b6aa23ff428.png
+│   │   ├── extended_context_html_580843678cfea8e1.png
+│   │   ├── extended_context_html_5815418c1a8d0695.png
+│   │   ├── extended_context_html_589b1b9a83630294.png
+│   │   ├── extended_context_html_5907dc6aab2fabfc.png
+│   │   ├── extended_context_html_5907fc7fa256781c.png
+│   │   ├── extended_context_html_5d3c5efbfebb3823.png
+│   │   ├── extended_context_html_5e544d21906ecfa7.png
+│   │   ├── extended_context_html_5fce51b9f5d496b7.png
+│   │   ├── extended_context_html_62019b28dc777e93.png
+│   │   ├── extended_context_html_66069b1ddca1fd2b.png
+│   │   ├── extended_context_html_687ef43c31c65e31.png
+│   │   ├── extended_context_html_6ff9842e01196405.png
+│   │   ├── extended_context_html_71ec3865f9a50b2f.png
+│   │   ├── extended_context_html_7418625163c7a31a.png
+│   │   ├── extended_context_html_760067b73ec517f0.png
+│   │   ├── extended_context_html_79d016ae349b6625.png
+│   │   ├── extended_context_html_7c726a1c8e05f2d2.png
+│   │   ├── extended_context_html_7e2dc78745c5bb73.png
+│   │   ├── extended_context_html_7f05123a15b0a8ad.png
+│   │   ├── extended_context_html_7fc1f58c86f4f912.png
+│   │   ├── extended_context_html_857055d0a24c665f.png
+│   │   ├── extended_context_html_89a763b503f35f8d.png
+│   │   ├── extended_context_html_89fedec448dd514e.png
+│   │   ├── extended_context_html_8cf883a7441e3617.png
+│   │   ├── extended_context_html_8d6e6c5ed956a574.png
+│   │   ├── extended_context_html_9287054b177d1b0c.png
+│   │   ├── extended_context_html_96c61dfb9c5dd6ce.png
+│   │   ├── extended_context_html_993c8a81cb14e546.png
+│   │   ├── extended_context_html_9ec37e723fda1572.png
+│   │   ├── extended_context_html_a06b69883b8db692.png
+│   │   ├── extended_context_html_a385358e81bcfce8.png
+│   │   ├── extended_context_html_aa5fe58daac1ba8b.png
+│   │   ├── extended_context_html_afc638a6d3dc1534.png
+│   │   ├── extended_context_html_b0dda0f120f2564e.png
+│   │   ├── extended_context_html_b42bd8922015dbbe.png
+│   │   ├── extended_context_html_b527337700b77b03.png
+│   │   ├── extended_context_html_c26038aaedf9cb83.png
+│   │   ├── extended_context_html_c4695c77c4c05406.png
+│   │   ├── extended_context_html_c4e95ed00589d549.png
+│   │   ├── extended_context_html_cd58ca7048294334.png
+│   │   ├── extended_context_html_d0aa5c456a5a9009.png
+│   │   ├── extended_context_html_d7e8d12dab7340c5.png
+│   │   ├── extended_context_html_d8890051615b13b4.png
+│   │   ├── extended_context_html_d9ce97c605319263.png
+│   │   ├── extended_context_html_da7602abf9d3ff81.png
+│   │   ├── extended_context_html_dbd31a84fd1e7f1e.png
+│   │   ├── extended_context_html_e3258b23ed92734e.png
+│   │   ├── extended_context_html_e96611091490bf76.png
+│   │   ├── extended_context_html_eb7a0908249ef886.png
+│   │   ├── extended_context_html_f01b4004f7052f96.png
+│   │   ├── extended_context_html_f249ec1420983f1e.png
+│   │   ├── extended_context_html_f4ea426b42c33814.png
+│   │   ├── extended_context_pdf.pdf
+│   │   ├── images
+│   │   │   └── transcript.jpg
+│   │   ├── L3.C3.1
+│   │   └── L3.C3.2.png
+│   ├── extractTranscript.py
+│   ├── genConcepts.py
+│   ├── generated_cat.jpg
+│   ├── genQuiz.py
+│   ├── genQuizWithImage.py
+│   ├── IMAGES
+│   │   ├── L1
+│   │   │   ├── 1
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 1.txt
+│   │   │   │   ├── 2.png
+│   │   │   │   ├── 2.txt
+│   │   │   │   ├── 3.png
+│   │   │   │   └── 3.txt
+│   │   │   ├── 2
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 1.txt
+│   │   │   │   ├── 2.png
+│   │   │   │   ├── 2.txt
+│   │   │   │   ├── 3.png
+│   │   │   │   ├── 3.txt
+│   │   │   │   ├── 4.png
+│   │   │   │   └── 4.txt
+│   │   │   ├── 3
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 1.txt
+│   │   │   │   ├── 2.png
+│   │   │   │   ├── 2.txt
+│   │   │   │   ├── 3.png
+│   │   │   │   └── 3.txt
+│   │   │   ├── 4
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 1.txt
+│   │   │   │   ├── 2.png
+│   │   │   │   ├── 2.txt
+│   │   │   │   ├── 3.png
+│   │   │   │   ├── 3.txt
+│   │   │   │   ├── 4.png
+│   │   │   │   └── 4.txt
+│   │   │   ├── 5
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 1.txt
+│   │   │   │   ├── 2.png
+│   │   │   │   └── 2.txt
+│   │   │   └── 6
+│   │   │       ├── 1.png
+│   │   │       ├── 1.txt
+│   │   │       └── 2.png
+│   │   ├── L2
+│   │   │   ├── 1
+│   │   │   │   └── 1.txt
+│   │   │   ├── 2
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 1.txt
+│   │   │   │   ├── 2.png
+│   │   │   │   ├── 2.txt
+│   │   │   │   ├── 3.png
+│   │   │   │   └── 3.txt
+│   │   │   ├── 3
+│   │   │   │   ├── 1.png
+│   │   │   │   └── 1.txt
+│   │   │   └── 4
+│   │   │       ├── 1.png
+│   │   │       ├── 1.txt
+│   │   │       ├── 2.png
+│   │   │       ├── 2.txt
+│   │   │       ├── 3.png
+│   │   │       ├── 3.txt
+│   │   │       ├── 4.png
+│   │   │       └── 4.txt
+│   │   └── L3
+│   │       ├── 1
+│   │       │   ├── 1.png
+│   │       │   └── 1.txt
+│   │       └── 2
+│   │           ├── 1.png
+│   │           ├── 1.txt
+│   │           ├── 2.png
+│   │           └── 2.txt
+│   ├── L3.C1
+│   │   ├── L3.C1_combined_transcript.txt
+│   │   ├── Video_17:_Infinite_loops_of_anger_and_kindness.txt
+│   │   ├── Video_18:_Emotions_are_Variables.txt
+│   │   ├── Video_19:_Catch_your_thoughts_with_conditions.txt
+│   │   ├── Video_20:_Binary_thoughts_and_boolean_logic.txt
+│   │   └── When_the_machine_learns_thought-catching.txt
+│   ├── L3.C2
+│   │   ├── Code_Remix_-_Let's_dance_in_the_snow_and_clone_some_snowflakes.txt
+│   │   ├── L3.C2_combined_transcript.txt
+│   │   ├── Video_21:_Let's_karaoke.txt
+│   │   ├── Video_22:_Funny_face_costumes.txt
+│   │   └── Video_23:_Part_1:_Let's_create_some_patternsPart_2:_Let's_summon_some_magic_patterns.txt
+│   ├── L3.C3
+│   │   ├── Code_for_net_zero:_Carbon_sequestration.txt
+│   │   ├── L3.C3_combined_transcript.txt
+│   │   └── Video_24:_Code_for_net_zero:_blow_the_heat_off_planet_earth_&_plant_more_trees.txt
+│   ├── module_quiz_with_images-2.json
+│   ├── module_quiz_with_images-3.json
+│   ├── prompt_engineering
+│   │   ├── DDL_new.sql
+│   │   ├── generate_concept_subsets.py
+│   │   ├── generated_quiz.json
+│   │   ├── generate_questions.py
+│   │   ├── L3.C1_combined_transcript.txt
+│   │   ├── L3.C2_combined_transcript.txt
+│   │   ├── L3.C3_combined_transcript.txt
+│   │   ├── output
+│   │   │   ├── L3.C1_concepts.json
+│   │   │   ├── L3.C2_concepts.json
+│   │   │   └── L3.C3_concepts.json
+│   │   ├── seed_database.py
+│   │   └── submodule_images
+│   │       ├── L3.C1_image.png
+│   │       ├── L3.C2_image.png
+│   │       └── L3.C3_image.png
+│   ├── quiz_images
+│   │   └── module_1_true_false_q2.png
+│   ├── requirements.txt
+│   ├── test2.py
+│   ├── test.py
+│   ├── transcript.xlsx
+│   └── transcript.zip
+├── ui
+│   ├── ET617
+│   │   ├── eslint.config.js
+│   │   ├── index.html
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   ├── public
+│   │   │   └── vite.svg
+│   │   ├── README.md
+│   │   ├── src
+│   │   │   ├── App.css
+│   │   │   ├── App.tsx
+│   │   │   ├── assets
+│   │   │   │   └── react.svg
+│   │   │   ├── components
+│   │   │   │   ├── AdminDashboard.tsx
+│   │   │   │   ├── AdminLogin.tsx
+│   │   │   │   ├── Dashboard.tsx
+│   │   │   │   ├── LoginForm.tsx
+│   │   │   │   ├── ManualSetCreator.tsx
+│   │   │   │   ├── QuestionEditor.tsx
+│   │   │   │   ├── QuestionSetViewer.tsx
+│   │   │   │   ├── QuizResults.tsx
+│   │   │   │   ├── QuizSetForm.tsx
+│   │   │   │   ├── QuizView.tsx
+│   │   │   │   ├── QuizzesPanel.tsx
+│   │   │   │   ├── RegisterForm.tsx
+│   │   │   │   ├── SetManager.tsx
+│   │   │   │   ├── StudentActivityPanel.tsx
+│   │   │   │   └── StudentsPanel.tsx
+│   │   │   ├── index.css
+│   │   │   └── main.tsx
+│   │   ├── tsconfig.app.json
+│   │   ├── tsconfig.json
+│   │   ├── tsconfig.node.json
+│   │   └── vite.config.ts
+│   └── ET617_backend
+│       ├── app.js
+│       ├── data.sql
+│       ├── db.js
+│       ├── DDL_new.sql
+│       ├── DDL.sql
+│       ├── fill_concepts_only.py
+│       ├── generate_concepts_selected.py
+│       ├── generate_concept_subsets.py
+│       ├── generated_quiz.json
+│       ├── generate_questions_all_grades.py
+│       ├── generate_single_question.py
+│       ├── L3.C1_combined_transcript.txt
+│       ├── L3.C2_combined_transcript.txt
+│       ├── L3.C3_combined_transcript.txt
+│       ├── mock_data.sql
+│       ├── output
+│       │   ├── L1.C1.v1_concepts.json
+│       │   ├── L1.C2.v6_concepts.json
+│       │   ├── L1.C2.v9_concepts.json
+│       │   ├── L2.C1.v11_concepts.json
+│       │   ├── L2.C2.v14_concepts.json
+│       │   ├── L3.C1.v17_concepts.json
+│       │   ├── L3.C1.v18_concepts.json
+│       │   ├── L3.C1.v19_concepts.json
+│       │   ├── L3.C1.v20_concepts.json
+│       │   ├── L3.C2.v21_concepts.json
+│       │   ├── L3.C2.v22_concepts.json
+│       │   ├── L3.C2.v23_concepts.json
+│       │   └── L3.C3.v24_concepts.json
+│       ├── package.json
+│       ├── package-lock.json
+│       ├── quiz_generation_clean.csv
+│       ├── README_GEMINI_SETUP.md
+│       ├── seed_database.py
+│       ├── server.log
+│       ├── submodule_images
+│       │   ├── L1.C1.v1.png
+│       │   ├── L1.C1.v2.png
+│       │   ├── L1.C1.v3.png
+│       │   ├── L1.C1.v4.png
+│       │   ├── L1.C1.v5.png
+│       │   ├── L1.C2.v6.png
+│       │   ├── L1.C2.v7.png
+│       │   ├── L1.C2.v8.png
+│       │   ├── L1.C2.v9.png
+│       │   ├── L2.C1.v10.png
+│       │   ├── L2.C1.v11.png
+│       │   ├── L2.C1.v12.png
+│       │   ├── L2.C2.v13.png
+│       │   ├── L2.C2.v14.png
+│       │   ├── L2.C3.v15.png
+│       │   ├── L2.C3.v16.png
+│       │   ├── L3.C1.v17.png
+│       │   ├── L3.C1.v18.png
+│       │   ├── L3.C1.v19.png
+│       │   ├── L3.C1.v20.png
+│       │   ├── L3.C2.v21.png
+│       │   ├── L3.C2.v22.png
+│       │   ├── L3.C2.v23.png
+│       │   └── L3.C3.v24.png
+│       ├── uploads
+│       │   ├── 1760786076989-676431080.png
+│       │   ├── 1761281283555-15739985.png
+│       │   ├── 1761281352406-396393970.png
+│       │   └── submodules
+│       │       ├── L3.C1.v17.png
+│       │       ├── L3.C1.v18.png
+│       │       ├── L3.C1.v19.png
+│       │       ├── L3.C1.v20.png
+│       │       ├── L3.C2.v21.png
+│       │       ├── L3.C2.v22.png
+│       │       ├── L3.C2.v23.png
+│       │       └── L3.C3.v24.png
+│       └── video_transcripts
+│           ├── L1.C1.v1.txt
+│           ├── L1.C1.v2.txt
+│           ├── L1.C1.v3.txt
+│           ├── L1.C1.v4.txt
+│           ├── L1.C1.v5.txt
+│           ├── L1.C2.v6.txt
+│           ├── L1.C2.v7.txt
+│           ├── L1.C2.v8.txt
+│           ├── L1.C2.v9.txt
+│           ├── L2.C1.v10.txt
+│           ├── L2.C1.v11.txt
+│           ├── L2.C1.v12.txt
+│           ├── L2.C2.v13.txt
+│           ├── L2.C2.v14.txt
+│           ├── L2.C3.v15.txt
+│           ├── L2.C3.v16.txt
+│           ├── L3.C1.v17.txt
+│           ├── L3.C1.v18.txt
+│           ├── L3.C1.v19.txt
+│           ├── L3.C1.v20.txt
+│           ├── L3.C2.v21.txt
+│           ├── L3.C2.v22.txt
+│           ├── L3.C2.v23.txt
+│           └── L3.C3.v24.txt
+├── videos
+│   ├── main_prompt
+│   └── yeah
+├── way_forward_2
+├── way_forward_3.txt
+└── way_forward.txt
+
+119 directories, 505 files

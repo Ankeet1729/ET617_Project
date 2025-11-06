@@ -1,0 +1,76 @@
+{
+  "submodule_code": "L2.C3.v15",
+  "submodule_name": "Introduction to the scratch coding platform - sprites, costumes and code",
+  "concepts": [
+    {
+      "concept_name": "Scratch Sprites",
+      "concept_description": "Sprites are interactive characters or objects used in Scratch programs. Each sprite can have unique code to dictate its behavior, allowing for multiple characters to act independently or interactively within a single project.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Scratch Backdrop",
+      "concept_description": "A backdrop serves as the background or stage setting for a Scratch project. It provides the visual environment against which sprites perform their actions and interact.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Sprite Positioning (X, Y Coordinates)",
+      "concept_description": "Sprites are positioned on the Scratch stage using a coordinate system. The X-coordinate determines the horizontal position, and the Y-coordinate determines the vertical position of a sprite.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Scratch Stage Coordinate System",
+      "concept_description": "The center of the Scratch stage is represented by the coordinates (X:0, Y:0). Positive X values move a sprite to the right, negative X to the left; positive Y values move up, and negative Y move down.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Events in Programming",
+      "concept_description": "Events are triggers that initiate actions or sequences of code in a program. In Scratch, common events include clicking the green flag to start, clicking on a sprite, or receiving a specific message.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Actions in Programming",
+      "concept_description": "Actions are the specific behaviors or tasks that a sprite or program performs in response to an event. Examples include making a sprite 'say' something, 'glide' to a new location, or 'broadcast' a message.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Event-Driven Programming",
+      "concept_description": "This is a programming paradigm where the flow of the program is determined by events and their corresponding actions. Users interact with the program (events), and the program responds accordingly (actions).",
+      "grade_level": "6-10"
+    },
+    {
+      "concept_name": "Inter-sprite Communication (Broadcast & Receive)",
+      "concept_description": "Sprites can communicate with each other using 'broadcast' and 'receive' blocks. One sprite can 'broadcast' a message, and another sprite can be programmed to perform an action 'when I receive' that specific message.",
+      "grade_level": "5-9"
+    },
+    {
+      "concept_name": "Code Sequencing",
+      "concept_description": "The order of blocks in a script dictates the order in which actions are executed. If blocks are arranged incorrectly, the program's behavior will not be as intended, highlighting the importance of correct sequencing.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Motion Blocks",
+      "concept_description": "Motion blocks control a sprite's movement and position on the stage. Examples include 'go to x y' to instantly set a sprite's location and 'glide to x y' for smooth movement over a specified duration.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Looks Blocks",
+      "concept_description": "Looks blocks control a sprite's appearance and visual communication. The 'say' block, for instance, makes a sprite display a speech bubble with text for a set amount of time.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Text-to-Speech Feature",
+      "concept_description": "Scratch allows sprites to 'speak' text out loud using 'set voice to' and 'speak' blocks. This feature converts written text into audible speech, often requiring an active internet connection for processing.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Scratch Library Assets",
+      "concept_description": "The Scratch platform provides a rich library of pre-designed sprites and backdrops. Users can select and incorporate these existing assets into their projects, simplifying the creation process.",
+      "grade_level": "3-6"
+    },
+    {
+      "concept_name": "Adjusting Sprite Properties",
+      "concept_description": "Users can modify various properties of a sprite, such as its size, directly within the Scratch interface. This allows for customization and proper scaling of characters on the stage.",
+      "grade_level": "3-6"
+    }
+  ]
+}

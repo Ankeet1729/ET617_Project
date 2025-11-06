@@ -1,81 +1,66 @@
 {
   "submodule_code": "L1.C2.v9",
-  "submodule_name": "Problem Solving with Computers",
+  "submodule_name": "BigData Poor Privacy",
   "concepts": [
     {
-      "concept_name": "Internet Cookies",
-      "concept_description": "Internet cookies are small pieces of data stored on a user's computer by websites. They contain a unique user ID and are used to track browsing activity and preferences, allowing websites to identify and remember users.",
-      "grade_level": "6-10"
+      "concept_name": "Internet Cookie Definition and Purpose",
+      "concept_description": "An internet cookie is a small piece of data containing a unique user ID, obtained from a specific website and stored on a user's computer. Its primary purpose is to help websites track and identify individual users, remembering their preferences and interactions.",
+      "grade_level": "5-8"
     },
     {
-      "concept_name": "First-party vs. Third-party Cookies",
-      "concept_description": "First-party cookies are set by the website a user is directly visiting, while third-party cookies are set by a different domain, often for advertising or tracking across multiple sites. Blocking third-party cookies can enhance user privacy.",
-      "grade_level": "7-11"
-    },
-    {
-      "concept_name": "Cookie Policies",
-      "concept_description": "Cookie policies are statements by websites that explain what types of cookies they use, why they use them, and how users can manage their cookie preferences. Users should review cookie policies before agreeing to allow a website to use cookies.",
-      "grade_level": "6-10"
-    },
-    {
-      "concept_name": "Browser Security Settings",
-      "concept_description": "Web browsers offer security settings that allow users to control how cookies are handled, including blocking third-party cookies or clearing existing cookies. These settings help users manage their online privacy.",
-      "grade_level": "7-10"
-    },
-    {
-      "concept_name": "Privacy Browser Extensions",
-      "concept_description": "Privacy browser extensions like Privacy Badger and Ghostery block trackers and third-party cookies that collect user data without explicit consent. These extensions can enhance online privacy and security.",
-      "grade_level": "7-11"
-    },
-    {
-      "concept_name": "Cookies for Login Information",
-      "concept_description": "Cookies can store login details for websites, allowing users to automatically log in without re-entering their credentials each time. This saves time and provides a more convenient browsing experience.",
+      "concept_name": "How Cookies Track Online Activity",
+      "concept_description": "Cookies enable websites to track user behavior, such as items viewed, shopping cart contents, or pages visited. This information is then used to personalize user experience, often by displaying related advertisements on other platforms.",
       "grade_level": "6-9"
     },
     {
-      "concept_name": "Big Data",
-      "concept_description": "Big data refers to extremely large and complex datasets that are analyzed to reveal patterns, trends, and associations. Examples include Google searches, social media posts, location data, and online shopping history.",
-      "grade_level": "8-12"
+      "concept_name": "Third-Party Cookies and Cross-Site Tracking",
+      "concept_description": "Third-party cookies are cookies set by a website other than the one currently being visited, often through embedded content like social media 'like' or 'share' buttons. These cookies can enable tracking of a user's activity across multiple unrelated websites, raising privacy concerns.",
+      "grade_level": "7-10"
     },
     {
-      "concept_name": "Data Monetization",
-      "concept_description": "Data monetization is the process of turning data into revenue. This can be achieved through targeted advertising, personalized recommendations, and other data-driven services.",
-      "grade_level": "9-12"
+      "concept_name": "Managing Online Privacy through Browser Settings",
+      "concept_description": "Users can enhance their online privacy by configuring browser security settings to block third-party cookies. This action prevents websites from collecting and sharing personal data for cross-site tracking purposes.",
+      "grade_level": "6-10"
     },
     {
-      "concept_name": "Algorithms for Pattern Recognition",
-      "concept_description": "Algorithms are used to analyze large datasets and identify patterns in user behavior and preferences. These patterns can then be used to predict future behavior and personalize user experiences.",
-      "grade_level": "9-12"
+      "concept_name": "Browser Extensions for Privacy Protection",
+      "concept_description": "Browser extensions like Privacy Badger and Ghostery are tools designed to help users block illegitimate trackers and unwanted data collection online. These extensions add an extra layer of protection beyond standard browser settings.",
+      "grade_level": "6-10"
     },
     {
-      "concept_name": "Potential Privacy Concerns with Big Data",
-      "concept_description": "The collection and analysis of big data raise privacy concerns, as it can reveal sensitive information about individuals and potentially lead to misuse or discrimination. Balancing the benefits of big data with the need for privacy is a critical challenge.",
-      "grade_level": "8-12"
-    },
-    {
-      "concept_name": "Phishing Detection",
-      "concept_description": "Phishing messages are deceptive attempts to acquire sensitive information like usernames, passwords, and credit card details by disguising as a trustworthy entity. These often use manipulative language and trigger a sense of urgency or fear.",
+      "concept_name": "Legitimate and Beneficial Uses of Cookies",
+      "concept_description": "Not all cookies are used for intrusive tracking; many serve useful functions to improve user experience. For example, cookies can remember login details for frequently visited websites, saving users time and effort from re-entering credentials.",
       "grade_level": "5-9"
     },
     {
-      "concept_name": "Spam Triggers in Emails",
-      "concept_description": "Certain words and phrases, such as 'unbelievable discounts' or language that creates a sense of urgency, can trigger spam filters. Spelling errors and bad formatting are also common spam triggers.",
-      "grade_level": "4-8"
+      "concept_name": "Definition and Sources of Big Data",
+      "concept_description": "Big data refers to extremely large datasets that may be analyzed computationally to reveal patterns, trends, and associations. It is collected from various online activities, including Google searches, social media posts, online shopping history, and location tracking.",
+      "grade_level": "5-9"
     },
     {
-      "concept_name": "Browser Cache",
-      "concept_description": "Browser cache is a storage location on a computer's hard drive that is used to store frequently accessed web page elements. This allows faster loading times on subsequent visits to the same site, improving browsing experience.",
-      "grade_level": "6-9"
+      "concept_name": "Predictive Analytics and AI with Big Data",
+      "concept_description": "Artificial intelligence (AI) and machine learning algorithms can be trained on vast amounts of big data to identify patterns and make predictions about user behavior, preferences, or future actions. This capability allows systems to anticipate needs or suggest relevant content.",
+      "grade_level": "7-12"
     },
     {
-      "concept_name": "Clearing Cookies vs. Clearing Cache",
-      "concept_description": "Clearing cookies removes website data used for tracking and preferences, requiring you to log in again. Clearing the cache removes temporary files used for faster loading, potentially slowing down initial page loads but freeing up disk space.",
-      "grade_level": "7-10"
+      "concept_name": "Big Data and Personal Privacy Concerns",
+      "concept_description": "The extensive collection, analysis, and monetization of big data raise significant questions about personal privacy. As more data is gathered and used to create detailed user profiles, individuals' privacy may feel compromised or 'obsolete'.",
+      "grade_level": "7-12"
     },
     {
-      "concept_name": "AI and Machine Learning Applications",
-      "concept_description": "Artificial intelligence (AI) and machine learning are being used in various applications, including assisting people with disabilities, helping with anxiety and depression, and improving computer science education. These technologies offer potential benefits for humanity.",
-      "grade_level": "8-12"
+      "concept_name": "Ethical and Beneficial Applications of Artificial Intelligence",
+      "concept_description": "Beyond data tracking, AI has numerous ethical applications that serve humanity, such as assisting in education, helping disabled individuals, and providing support for mental health. These applications demonstrate AI's potential for positive societal impact.",
+      "grade_level": "5-12"
+    },
+    {
+      "concept_name": "Identifying Phishing and Scam Messages",
+      "concept_description": "Phishing and scam messages often use manipulative language, trigger words creating urgency or fear, or offer unbelievable discounts to trick recipients. Learning to spot these characteristics is crucial for digital safety and protecting personal information.",
+      "grade_level": "6-12"
+    },
+    {
+      "concept_name": "Distinction Between Cookies and Cache",
+      "concept_description": "While both are stored by browsers, cookies save user-specific data for tracking and personalization, such as login states. Cache, on the other hand, stores website files like images and scripts to speed up future loading times of that site. Clearing each has different impacts on your browsing experience.",
+      "grade_level": "7-12"
     }
   ]
 }

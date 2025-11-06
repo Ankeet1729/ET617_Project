@@ -1,0 +1,66 @@
+{
+  "submodule_code": "L2.C3.v16",
+  "submodule_name": "Nature's best algorithms - coding for the metamorphosis",
+  "concepts": [
+    {
+      "concept_name": "Algorithms in Nature",
+      "concept_description": "An algorithm is a sequence of well-defined steps used to solve a problem or complete a task. Natural processes, like the metamorphosis of a butterfly, can be understood as algorithms because they follow distinct, ordered stages from beginning to end.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Computational Thinking: Decomposition",
+      "concept_description": "Decomposition is a computational thinking skill that involves breaking down a large, complex problem or project into smaller, more manageable sub-problems or tasks. This makes the overall problem easier to understand, design, and implement, as demonstrated by breaking the metamorphosis project into individual sprite behaviors.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Scratch Sprites and Stage",
+      "concept_description": "In Scratch, sprites are the interactive objects that perform actions and animations on the screen, while the stage is the background area where all the sprites interact. Projects begin by selecting or creating sprites and placing them in their initial positions on the stage.",
+      "grade_level": "2-6"
+    },
+    {
+      "concept_name": "Scratch Costumes",
+      "concept_description": "Costumes are different visual appearances for a single sprite in Scratch. Sprites can have multiple costumes, and these can be changed dynamically during a project to create animation, represent different states (like an egg changing to a caterpillar), or show variations of an object.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Creating Custom Sprites",
+      "concept_description": "When a desired sprite is not available in the Scratch library, users can create their own custom sprites using the built-in paint editor. This allows for personalized characters and objects, adding unique elements to projects, as shown by drawing the caterpillar and cocoon.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Event: 'When Green Flag Clicked'",
+      "concept_description": "The 'When Green Flag Clicked' block is a fundamental event block in Scratch that initiates scripts when the green flag icon is clicked, starting the project. It tells the associated sprite or stage to begin executing its code, setting the initial state of the project.",
+      "grade_level": "2-5"
+    },
+    {
+      "concept_name": "Event: 'When This Sprite Clicked'",
+      "concept_description": "The 'When This Sprite Clicked' block is an event that triggers a script when the user clicks on a specific sprite on the stage. This block allows for user interaction, making sprites responsive to input and driving changes in the project, such as an egg hatching when interacted with.",
+      "grade_level": "3-6"
+    },
+    {
+      "concept_name": "Sprite Communication (Broadcast/Receive Messages)",
+      "concept_description": "Broadcasting and receiving messages enable different sprites to communicate and coordinate actions with each other. One sprite can 'broadcast' a message, and any other sprite listening for that message can 'receive' it to trigger its own specific scripts, facilitating complex, synchronized interactions like stages of metamorphosis.",
+      "grade_level": "4-8"
+    },
+    {
+      "concept_name": "Controlling Sprite Visibility (Show/Hide)",
+      "concept_description": "The 'show' and 'hide' blocks control whether a sprite is visible on the stage at any given moment. These blocks are essential for managing the appearance and disappearance of sprites throughout a project, ensuring only relevant sprites are visible during specific stages.",
+      "grade_level": "2-5"
+    },
+    {
+      "concept_name": "Sprite Positioning (Go to X Y)",
+      "concept_description": "The 'go to x: _ y: _' block allows for precise positioning of a sprite on the Scratch stage using X and Y coordinates. This is crucial for setting a sprite's initial location or instantly moving it to a specific point on the screen.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Sprite Movement and Animation (Glide)",
+      "concept_description": "The 'glide _ secs to x: _ y: _' block makes a sprite move smoothly from its current position to a specified X and Y coordinate over a set duration. This block is key for creating animated movements, providing a fluid transition rather than an instantaneous jump.",
+      "grade_level": "3-7"
+    },
+    {
+      "concept_name": "Adjusting Sprite Size",
+      "concept_description": "The 'set size to _%' and 'change size by _' blocks allow control over a sprite's visual size. These blocks are used to make sprites appear smaller or larger, adding dynamic visual effects and animations, such as a caterpillar growing or a butterfly appearing larger.",
+      "grade_level": "3-7"
+    }
+  ]
+}
