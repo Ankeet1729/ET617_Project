@@ -20,17 +20,28 @@ const fsPromises = fs.promises;
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3000';
 
+// Determine if we're in production (Render sets NODE_ENV or RENDER env var)
+const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER;
+
+// Trust proxy (required for Render and other cloud platforms)
+app.set('trust proxy', 1);
+
 // ------------------ CORS (MUST BE BEFORE session & auth) ------------------
+// Normalize URLs by removing trailing slashes
+const normalizeUrl = (url) => url ? url.replace(/\/$/, '') : '';
 const allowedOrigins = new Set([
-  FRONTEND_URL,
-  BACKEND_URL
+  normalizeUrl(FRONTEND_URL),
+  normalizeUrl(BACKEND_URL)
   // add other dev origins here if needed
 ]);
 
 app.use(cors({
   origin: function (origin, callback) {
     // allow non-browser tools (curl, Postman) or same-origin requests having no origin header
-    if (!origin) return callback(null, true);
+    if (!origin) {
+      console.log('⚠️  CORS: No origin header (same-origin or non-browser request)');
+      return callback(null, true);
+    }
 
     // Normalize IPv6 loopback that some browsers use
     // Replace http://[::1]:5173 -> http://localhost:5173
@@ -43,19 +54,37 @@ app.use(cors({
     }
 
     // strip trailing slash for safe comparison
-    const normNoSlash = (u) => u && u.replace(/\/$/, '');
+    const normNoSlash = normalizeUrl(normalized);
 
-    if (allowedOrigins.has(normNoSlash(normalized))) {
+    // Log for debugging (especially useful on Render)
+    if (isProduction) {
+      console.log(`🔍 CORS check - Origin: ${origin}, Normalized: ${normNoSlash}, Allowed origins:`, Array.from(allowedOrigins));
+    }
+
+    if (allowedOrigins.has(normNoSlash)) {
       return callback(null, true);
     }
 
-    console.warn('CORS blocked origin:', origin, '-> normalized:', normalized);
+    // In production, also check if origin matches any allowed origin without protocol (for flexibility)
+    const originWithoutProtocol = normNoSlash.replace(/^https?:\/\//, '');
+    for (const allowed of allowedOrigins) {
+      const allowedWithoutProtocol = allowed.replace(/^https?:\/\//, '');
+      if (originWithoutProtocol === allowedWithoutProtocol) {
+        console.log(`✅ CORS: Matched origin without protocol: ${originWithoutProtocol}`);
+        return callback(null, true);
+      }
+    }
+
+    console.warn('❌ CORS blocked origin:', origin, '-> normalized:', normNoSlash);
+    console.warn('   Allowed origins:', Array.from(allowedOrigins));
     // Reject by returning false (not an Error) so express will send a proper CORS response
     return callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 200 // Support legacy browsers
 }));
 // A simple test endpoint
 app.get('/', (req, res) => {
@@ -83,21 +112,63 @@ app.use((req, res, next) => {
 // Session configuration (after CORS)
 // Use PostgreSQL store for session persistence
 const PgStore = pgSession(session);
-app.use(session({
-  store: new PgStore({
+
+// Configure session store with error handling
+let sessionStore;
+try {
+  sessionStore = new PgStore({
     pool: pool,
     tableName: 'session',
-    createTableIfMissing: false // We'll create the table manually
-  }),
-  secret: process.env.SESSION_SECRET || "your_secret_here",
+    createTableIfMissing: true, // Auto-create table if it doesn't exist
+    pruneSessionInterval: 60, // Prune expired sessions every 60 seconds
+    errorLog: (err) => {
+      console.error('Session store error:', err);
+    }
+  });
+} catch (err) {
+  console.error('Failed to initialize session store:', err);
+  // Fallback to memory store if PostgreSQL store fails
+  sessionStore = undefined;
+}
+
+app.use(session({
+  store: sessionStore,
+  name: 'sessionId', // Change default cookie name for security
+  secret: process.env.SESSION_SECRET || "your_secret_here_change_in_production",
   resave: false,
   saveUninitialized: false,
+  rolling: true, // Reset expiration on every request
   cookie: { 
-    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  }
+    secure: isProduction, // Use secure cookies in production (HTTPS only)
+    httpOnly: true, // Prevent XSS attacks
+    sameSite: isProduction ? 'none' : 'lax', // 'none' for cross-site in production, 'lax' for development
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    domain: process.env.COOKIE_DOMAIN || undefined, // Set domain if needed for subdomains
+    path: '/' // Cookie available for all paths
+  },
+  proxy: true // Trust proxy (required for Render)
 }));
+
+// Health check endpoint (useful for Render)
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    environment: isProduction ? 'production' : 'development',
+    sessionStore: sessionStore ? 'connected' : 'not available'
+  });
+});
+
+// Session check endpoint (for debugging)
+app.get('/api/session/check', (req, res) => {
+  res.json({
+    sessionId: req.sessionID,
+    hasSession: !!req.session,
+    isAdmin: req.session?.isAdmin || false,
+    username: req.session?.username || null,
+    grade: req.session?.grade || null
+  });
+});
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
