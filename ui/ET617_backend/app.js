@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
+import pgSession from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -80,11 +81,22 @@ app.use((req, res, next) => {
 });
 
 // Session configuration (after CORS)
+// Use PostgreSQL store for session persistence
+const PgStore = pgSession(session);
 app.use(session({
+  store: new PgStore({
+    pool: pool,
+    tableName: 'session',
+    createTableIfMissing: false // We'll create the table manually
+  }),
   secret: process.env.SESSION_SECRET || "your_secret_here",
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false }
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
 }));
 
 // Initialize Gemini AI
@@ -316,9 +328,18 @@ async function sendToGemini(promptText, imagePath) {
   }
 }
 
+// Middleware to check if user is logged in (student)
+const checkStudent = (req, res, next) => {
+  if (req.session && req.session.username && !req.session.isAdmin) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Student authentication required' });
+  }
+};
+
 // Middleware to check admin session
 const checkAdmin = (req, res, next) => {
-  if (req.session.isAdmin) {
+  if (req.session && req.session.isAdmin) {
     next();
   } else {
     res.status(401).json({ error: 'Admin access required' });
@@ -531,16 +552,31 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ error: "Invalid password." });
     }
     
-    req.session.username = user.username;
-    req.session.grade = user.grade;
-    
-    res.json({
-      message: "Login successful!",
-      user: {
-        username,
-        email: user.email,
-        grade: user.grade
+    // Clear any existing session data and set new student session
+    req.session.regenerate((err) => {
+      if (err) {
+        console.error('Session regeneration error:', err);
+        return res.status(500).json({ error: 'Failed to create session' });
       }
+      
+      req.session.username = user.username;
+      req.session.grade = user.grade;
+      req.session.isAdmin = false;
+      req.session.save((err) => {
+        if (err) {
+          console.error('Session save error:', err);
+          return res.status(500).json({ error: 'Failed to save session' });
+        }
+        
+        res.json({
+          message: "Login successful!",
+          user: {
+            username,
+            email: user.email,
+            grade: user.grade
+          }
+        });
+      });
     });
   } catch (err) {
     console.error('Login error:', err);
@@ -573,10 +609,25 @@ app.post('/admin/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid admin credentials' });
     }
     
-    req.session.isAdmin = true;
-    req.session.username = 'root';
-    
-    res.json({ success: true, message: 'Admin login successful' });
+    // Clear any existing session data and set new admin session
+    req.session.regenerate((err) => {
+      if (err) {
+        console.error('Session regeneration error:', err);
+        return res.status(500).json({ error: 'Failed to create session' });
+      }
+      
+      req.session.isAdmin = true;
+      req.session.username = 'root';
+      req.session.grade = null;
+      req.session.save((err) => {
+        if (err) {
+          console.error('Session save error:', err);
+          return res.status(500).json({ error: 'Failed to save session' });
+        }
+        
+        res.json({ success: true, message: 'Admin login successful' });
+      });
+    });
   } catch (error) {
     console.error('Admin login error:', error);
     res.status(500).json({ error: 'Server error' });
@@ -585,14 +636,20 @@ app.post('/admin/login', async (req, res) => {
 
 // Admin Logout
 app.post('/admin/logout', checkAdmin, (req, res) => {
-  req.session.destroy();
-  res.json({ success: true, message: 'Admin logged out' });
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying admin session:', err);
+      return res.status(500).json({ error: 'Failed to log out' });
+    }
+    res.clearCookie('connect.sid');
+    res.json({ success: true, message: 'Admin logged out' });
+  });
 });
 
 // ==================== STUDENT ROUTES ====================
 
 // Get available submodules for student's grade
-app.get('/api/student/modules/:grade', async (req, res) => {
+app.get('/api/student/modules/:grade', checkStudent, async (req, res) => {
   console.log('🔍 [/api/student/modules] Request for grade:', req.params.grade);
   const { grade } = req.params;
   
@@ -622,7 +679,7 @@ app.get('/api/student/modules/:grade', async (req, res) => {
 });
 
 // Get quiz sets for specific grade and submodule
-app.get('/api/student/quiz_sets/:grade/:submodule_code', async (req, res) => {
+app.get('/api/student/quiz_sets/:grade/:submodule_code', checkStudent, async (req, res) => {
   console.log('🔍 [/api/student/quiz_sets] Request:', req.params);
   const { grade, submodule_code } = req.params;
   
@@ -646,7 +703,7 @@ app.get('/api/student/quiz_sets/:grade/:submodule_code', async (req, res) => {
 });
 
 // Fetch specific quiz for student (now with scratch_text and options parsing)
-app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
+app.get('/api/fetch_quiz/:question_set_id', checkStudent, async (req, res) => {
   console.log('🔍 [/api/fetch_quiz] Request for set:', req.params.question_set_id);
   const { question_set_id } = req.params;
   
@@ -713,14 +770,10 @@ app.get('/api/fetch_quiz/:question_set_id', async (req, res) => {
   }
 });
 
-app.get('/api/get_last_result/:question_set_id', async (req, res) => {
+app.get('/api/get_last_result/:question_set_id', checkStudent, async (req, res) => {
   console.log("🔍 [GET /api/get_last_result] Request received");
   const { question_set_id } = req.params;
   const username = req.session.username;
-
-  if (!username) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
 
   try {
     // Get the latest attempt for this quiz set and user
@@ -758,8 +811,10 @@ app.get('/api/get_last_result/:question_set_id', async (req, res) => {
 
 // Evaluate quiz and save attempt
 // Evaluate quiz and save attempt - UPDATED FOR NEW SCHEMA
-app.post('/api/evaluate_quiz', async (req, res) => {
-  const { question_set_id, answers, username, grade } = req.body;
+app.post('/api/evaluate_quiz', checkStudent, async (req, res) => {
+  const { question_set_id, answers } = req.body;
+  const username = req.session.username;
+  const grade = req.session.grade;
   
   console.log('🔍 [/api/evaluate_quiz] Request received');
   console.log('🔍 Question Set ID:', question_set_id);
@@ -1561,14 +1616,11 @@ app.get('/api/supermodules/:code/children', async (req, res) => {
 });
 
 // GET /api/student/quiz-sets/:grade/:submodule_code - Get visible quiz sets for students
-app.get('/api/student/quiz-sets/:grade/:submodule_code', async (req, res) => {
+app.get('/api/student/quiz-sets/:grade/:submodule_code', checkStudent, async (req, res) => {
   console.log('📚 [GET /api/student/quiz-sets] Request:', req.params);
   const { grade, submodule_code } = req.params;
 
   const studentUsername = req.session.username;
-  if (!studentUsername) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
 
 
   
